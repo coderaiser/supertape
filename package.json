@@ -1,0 +1,51 @@
+{
+  "name": "supertape",
+  "version": "1.0.0",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "tape with superpowers",
+  "homepage": "http://github.com/coderaiser/supertape",
+  "main": "lib/supertape.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/supertape.git"
+  },
+  "scripts": {
+    "test": "tape 'test/*.js'",
+    "watch:test": "nodemon -w lib -w test -x \"npm test\"",
+    "lint": "eslint lib test",
+    "coverage": "nyc npm test",
+    "report": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "dependencies": {
+    "jest-diff": "^23.6.0",
+    "strip-ansi": "^5.0.0",
+    "try-to-tape": "^1.2.0"
+  },
+  "keywords": [
+    "function",
+    "promise",
+    "async",
+    "await",
+    "try-catch",
+    "then",
+    "tap",
+    "tape"
+  ],
+  "devDependencies": {
+    "@cloudcmd/stub": "^2.0.0",
+    "coveralls": "^3.0.0",
+    "eslint": "^5.6.0",
+    "mock-require": "^3.0.2",
+    "nodemon": "^1.14.12",
+    "nyc": "^13.0.1",
+    "redrun": "^7.0.2",
+    "tape": "^4.8.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
