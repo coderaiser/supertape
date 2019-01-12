@@ -19,6 +19,7 @@
   "dependencies": {
     "jest-diff": "^23.6.0",
     "strip-ansi": "^5.0.0",
+    "tape": "^4.9.2",
     "try-to-tape": "^1.2.0"
   },
   "keywords": [
@@ -38,8 +39,7 @@
     "mock-require": "^3.0.2",
     "nodemon": "^1.14.12",
     "nyc": "^13.0.1",
-    "redrun": "^7.0.2",
-    "tape": "^4.8.0"
+    "redrun": "^7.0.2"
   },
   "license": "MIT",
   "engines": {
