@@ -21,6 +21,11 @@ Tape with superpowers. Contains:
 npm i supertape -D
 ```
 
+## Codemod
+
+You can convert your codebase from `tape` to `supertape` with help of a [convert-tape-to-supertape](https://github.com/coderaiser/putout/tree/master/codemods/convert-tape-to-supertape) codemod.
+Here is [example of a result](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
+
 ## Example
 
 ```js
