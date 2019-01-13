@@ -13,7 +13,7 @@
 Tape with superpowers. Contains:
 
 - ability to `catch` exceptions and fail one test instead of all;
-- shows diff when test not `equals` or not `deepEquals`;
+- shows diff when test not `equal` or not `deepEqual`;
 
 ## Install
 
@@ -35,7 +35,7 @@ test('lib: arguments', async (t) => {
 });
 
 test('lib: diff', async (t) => {
-    t.equals({}, {hello: 'world'}, 'should equal');
+    t.equal({}, {hello: 'world'}, 'should equal');
     t.end();
 });
 

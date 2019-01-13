@@ -161,11 +161,11 @@ test('supertape: tape: resolves: end', async (t) => {
     t.end();
 });
 
-test('supertape: tape: equals', async (t) => {
-    const equals = stub();
+test('supertape: tape: equal', async (t) => {
+    const equal = stub();
     const tape = (str, fn) => {
         fn({
-            equals,
+            equal,
         });
     };
     
@@ -173,20 +173,20 @@ test('supertape: tape: equals', async (t) => {
     const supertape = reRequire('..');
     
     await supertape('hello world', (t) => {
-        t.equals(1, 2, 'should equal');
+        t.equal(1, 2, 'should equal');
     });
     
     stopAll();
     
-    t.ok(equals.calledWith(1, 2, 'should equal'), 'should call tape');
+    t.ok(equal.calledWith(1, 2, 'should equal'), 'should call tape');
     t.end();
 });
 
-test('supertape: tape: deepEquals: diff', async (t) => {
-    const deepEquals = stub();
+test('supertape: tape: deepEqual: diff', async (t) => {
+    const deepEqual = stub();
     const tape = (str, fn) => {
         fn({
-            deepEquals,
+            deepEqual,
         });
     };
     
@@ -194,12 +194,12 @@ test('supertape: tape: deepEquals: diff', async (t) => {
     const supertape = reRequire('..');
     
     await supertape('hello world', (t) => {
-        t.deepEquals({}, {hello: 'world'}, 'should equal');
+        t.deepEqual({}, {hello: 'world'}, 'should equal');
     });
     
     stopAll();
     
-    t.ok(deepEquals.calledWith({}, {hello: 'world'}, 'should equal'), 'should call tape');
+    t.ok(deepEqual.calledWith({}, {hello: 'world'}, 'should equal'), 'should call tape');
     t.end();
 });
 
