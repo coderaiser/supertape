@@ -1,3 +1,9 @@
+2019.01.13, v1.0.2
+
+fix:
+- (supertape) equals -> equal
+
+
 2019.01.12, v1.0.1
 
 fix:
