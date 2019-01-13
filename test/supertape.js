@@ -163,9 +163,11 @@ test('supertape: tape: resolves: end', async (t) => {
 
 test('supertape: tape: equal', async (t) => {
     const equal = stub();
+    const comment = stub();
     const tape = (str, fn) => {
         fn({
             equal,
+            comment,
         });
     };
     
@@ -184,8 +186,10 @@ test('supertape: tape: equal', async (t) => {
 
 test('supertape: tape: deepEqual: diff', async (t) => {
     const deepEqual = stub();
+    const comment = stub();
     const tape = (str, fn) => {
         fn({
+            comment,
             deepEqual,
         });
     };
@@ -203,3 +207,25 @@ test('supertape: tape: deepEqual: diff', async (t) => {
     t.end();
 });
 
+test('supertape: tape: deepEqual: diff: comment', async (t) => {
+    const deepEqual = stub();
+    const comment = stub();
+    const tape = (str, fn) => {
+        fn({
+            comment,
+            deepEqual,
+        });
+    };
+    
+    mockRequire('tape', tape);
+    const supertape = reRequire('..');
+    
+    await supertape('hello world', (t) => {
+        t.deepEqual({}, {hello: 'world'}, 'should equal');
+    });
+    
+    stopAll();
+    
+    t.ok(comment.called, 'should call comment');
+    t.end();
+});
