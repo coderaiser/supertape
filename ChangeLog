@@ -1,3 +1,9 @@
+2019.01.13, v1.0.3
+
+fix:
+- (supertape) show diff with help of t.comment
+
+
 2019.01.13, v1.0.2
 
 fix:
