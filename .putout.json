@@ -1,11 +1,13 @@
 {
     "match": {
         "lib/supertape.js": {
-            "remove-console": false
+            "remove-console": false,
+            "convert-tape-to-supertape": false
         },
         "test/supertape.js": {
             "remove-only": false,
-            "remove-skip": false
+            "remove-skip": false,
+            "convert-tape-to-supertape": false
         }
     }
 }

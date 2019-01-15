@@ -186,15 +186,17 @@ test('supertape: tape: equal', async (t) => {
 
 test('supertape: tape: deepEqual: diff', async (t) => {
     const deepEqual = stub();
+    const fail = stub();
     const comment = stub();
     const tape = (str, fn) => {
         fn({
             comment,
-            deepEqual,
+            fail,
         });
     };
     
     mockRequire('tape', tape);
+    mockRequire('deep-equal', deepEqual);
     const supertape = reRequire('..');
     
     await supertape('hello world', (t) => {
@@ -203,15 +205,40 @@ test('supertape: tape: deepEqual: diff', async (t) => {
     
     stopAll();
     
-    t.ok(deepEqual.calledWith({}, {hello: 'world'}, 'should equal'), 'should call tape');
+    t.ok(deepEqual.calledWith({}, {hello: 'world'}, {strict: true}), 'should call tape');
+    t.end();
+});
+
+test('supertape: tape: deepEqual: diff: pass', async (t) => {
+    const pass = stub();
+    const comment = stub();
+    const tape = (str, fn) => {
+        fn({
+            pass,
+            comment,
+        });
+    };
+    
+    mockRequire('tape', tape);
+    const supertape = reRequire('..');
+    
+    await supertape('hello world', (t) => {
+        t.deepEqual({hello: 'world'}, {hello: 'world'}, 'should equal');
+    });
+    
+    stopAll();
+    
+    t.ok(pass.calledWith('should equal'), 'should call tape');
     t.end();
 });
 
 test('supertape: tape: deepEqual: diff: comment', async (t) => {
     const deepEqual = stub();
+    const fail = stub();
     const comment = stub();
     const tape = (str, fn) => {
         fn({
+            fail,
             comment,
             deepEqual,
         });
@@ -229,3 +256,4 @@ test('supertape: tape: deepEqual: diff: comment', async (t) => {
     t.ok(comment.called, 'should call comment');
     t.end();
 });
+

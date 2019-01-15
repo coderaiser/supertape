@@ -17,6 +17,7 @@
     "report": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
+    "deep-equal": "^1.0.1",
     "jest-diff": "^23.6.0",
     "strip-ansi": "^5.0.0",
     "tape": "^4.9.2",
