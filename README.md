@@ -14,6 +14,7 @@ Tape with superpowers. Contains:
 
 - ability to `catch` exceptions and fail one test instead of all;
 - shows diff when test not `equal` or not `deepEqual`;
+- add `jsonEqual` that converts to `json` before checking isEqual
 
 ## Install
 

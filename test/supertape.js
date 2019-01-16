@@ -184,7 +184,30 @@ test('supertape: tape: equal', async (t) => {
     t.end();
 });
 
-test('supertape: tape: deepEqual: diff', async (t) => {
+test('supertape: tape: deepEqual', async (t) => {
+    const deepEqual = stub();
+    const comment = stub();
+    const tape = (str, fn) => {
+        fn({
+            deepEqual,
+            comment,
+        });
+    };
+    
+    mockRequire('tape', tape);
+    const supertape = reRequire('..');
+    
+    await supertape('hello world', (t) => {
+        t.deepEqual(1, 2, 'should equal');
+    });
+    
+    stopAll();
+    
+    t.ok(deepEqual.calledWith(1, 2, 'should equal'), 'should call tape');
+    t.end();
+});
+
+test('supertape: tape: jsonEqual: diff', async (t) => {
     const deepEqual = stub();
     const fail = stub();
     const comment = stub();
@@ -200,16 +223,16 @@ test('supertape: tape: deepEqual: diff', async (t) => {
     const supertape = reRequire('..');
     
     await supertape('hello world', (t) => {
-        t.deepEqual({}, {hello: 'world'}, 'should equal');
+        t.jsonEqual({}, {hello: 'world'}, 'should equal');
     });
     
     stopAll();
     
-    t.ok(deepEqual.calledWith({}, {hello: 'world'}, {strict: true}), 'should call tape');
+    t.ok(deepEqual.calledWith({}, {hello: 'world'}), 'should call tape');
     t.end();
 });
 
-test('supertape: tape: deepEqual: diff: pass', async (t) => {
+test('supertape: tape: jsonEqual: diff: pass', async (t) => {
     const pass = stub();
     const comment = stub();
     const tape = (str, fn) => {
@@ -223,7 +246,7 @@ test('supertape: tape: deepEqual: diff: pass', async (t) => {
     const supertape = reRequire('..');
     
     await supertape('hello world', (t) => {
-        t.deepEqual({hello: 'world'}, {hello: 'world'}, 'should equal');
+        t.jsonEqual({hello: 'world'}, {hello: 'world'}, 'should equal');
     });
     
     stopAll();
@@ -232,15 +255,15 @@ test('supertape: tape: deepEqual: diff: pass', async (t) => {
     t.end();
 });
 
-test('supertape: tape: deepEqual: diff: comment', async (t) => {
-    const deepEqual = stub();
+test('supertape: tape: jsonEqual: diff: comment', async (t) => {
+    const jsonEqual = stub();
     const fail = stub();
     const comment = stub();
     const tape = (str, fn) => {
         fn({
             fail,
             comment,
-            deepEqual,
+            jsonEqual,
         });
     };
     
@@ -248,7 +271,7 @@ test('supertape: tape: deepEqual: diff: comment', async (t) => {
     const supertape = reRequire('..');
     
     await supertape('hello world', (t) => {
-        t.deepEqual({}, {hello: 'world'}, 'should equal');
+        t.jsonEqual({}, {hello: 'world'}, 'should equal');
     });
     
     stopAll();
