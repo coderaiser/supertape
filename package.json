@@ -5,6 +5,9 @@
   "description": "tape with superpowers",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "lib/supertape.js",
+  "bin": {
+    "tape": "node_modules/tape/bin/tape.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/coderaiser/supertape.git"
