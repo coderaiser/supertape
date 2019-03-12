@@ -6,7 +6,7 @@
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "lib/supertape.js",
   "bin": {
-    "tape": "node_modules/tape/bin/tape.js"
+    "tape": "bin/supertape.js"
   },
   "repository": {
     "type": "git",
