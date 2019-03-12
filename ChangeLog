@@ -1,3 +1,12 @@
+2019.03.12, v1.2.2
+
+fix:
+- (supertape) bin
+
+feature:
+- (package) jest-diff v24.4.0
+
+
 2019.01.16, v1.2.1
 
 fix:
