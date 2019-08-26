@@ -39,7 +39,7 @@
   "devDependencies": {
     "@cloudcmd/stub": "^2.0.0",
     "coveralls": "^3.0.0",
-    "eslint": "^5.6.0",
+    "eslint": "^6.2.2",
     "mock-require": "^3.0.2",
     "nodemon": "^1.14.12",
     "nyc": "^14.1.1",
