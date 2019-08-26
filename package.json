@@ -13,11 +13,11 @@
     "url": "git://github.com/coderaiser/supertape.git"
   },
   "scripts": {
-    "test": "tape 'test/*.js'",
-    "watch:test": "nodemon -w lib -w test -x \"npm test\"",
-    "lint": "eslint lib test",
-    "coverage": "nyc npm test",
-    "report": "nyc report --reporter=text-lcov | coveralls"
+    "test": "madrun test",
+    "watch:test": "madrun watch:test",
+    "lint": "madrun lint",
+    "coverage": "madrun coverage",
+    "report": "madrun report"
   },
   "dependencies": {
     "deep-equal": "^1.0.1",
@@ -40,9 +40,12 @@
     "@cloudcmd/stub": "^2.0.0",
     "coveralls": "^3.0.0",
     "eslint": "^6.2.2",
+    "eslint-plugin-putout": "^2.0.0",
+    "madrun": "^2.5.0",
     "mock-require": "^3.0.2",
     "nodemon": "^1.14.12",
     "nyc": "^14.1.1",
+    "putout": "^5.8.0",
     "redrun": "^7.0.2"
   },
   "license": "MIT",
