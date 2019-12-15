@@ -22,7 +22,7 @@
   "dependencies": {
     "deep-equal": "^1.0.1",
     "jest-diff": "^24.4.0",
-    "strip-ansi": "^5.0.0",
+    "strip-ansi": "^6.0.0",
     "tape": "^4.9.2",
     "try-to-tape": "^1.2.0"
   },
