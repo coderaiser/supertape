@@ -1,3 +1,18 @@
+2019.12.15, v1.2.4
+
+feature:
+- (package) nodemon v2.0.2
+- (package) madrun v5.0.1
+- (package) eslint-plugin-putout v3.0.0
+- (package) putout v7.3.1
+- (package) strip-ansi v6.0.0
+- (package) madrun v3.0.6
+- (package) putout v6.12.1
+- (supertape) add madrun
+- (package) eslint v6.2.2
+- (package) nyc v14.1.1
+
+
 2019.03.12, v1.2.3
 
 fix:
