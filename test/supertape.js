@@ -232,6 +232,33 @@ test('supertape: tape: jsonEqual: diff', async (t) => {
     t.end();
 });
 
+test('supertape: tape: equal: no diff', async (t) => {
+    const pass = stub();
+    const fail = stub();
+    const equal = stub();
+    const comment = stub();
+    const tape = (str, fn) => {
+        fn({
+            pass,
+            fail,
+            equal,
+            comment,
+        });
+    };
+    
+    mockRequire('tape', tape);
+    const supertape = reRequire('..');
+    
+    await supertape('hello world', (t) => {
+        t.equal(1, 1, 'should equal');
+    });
+    
+    stopAll();
+    
+    t.ok(equal.calledWith(1, 1, 'should equal'), 'should call equal');
+    t.end();
+});
+
 test('supertape: tape: jsonEqual: diff: pass', async (t) => {
     const pass = stub();
     const comment = stub();
