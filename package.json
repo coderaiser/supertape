@@ -4,7 +4,9 @@
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "tape with superpowers",
   "homepage": "http://github.com/coderaiser/supertape",
-  "main": "lib/supertape.js",
+  "main": "./lib/supertape.js",
+  "exports": "./lib/supertape.js",
+  "type": "commonjs",
   "bin": {
     "tape": "bin/supertape.js"
   },
@@ -21,7 +23,11 @@
   },
   "dependencies": {
     "deep-equal": "^1.0.1",
+    "dotignore": "^0.1.2",
+    "esm": "^3.2.25",
+    "glob": "^7.1.6",
     "jest-diff": "^24.4.0",
+    "minimist": "^1.2.5",
     "strip-ansi": "^6.0.0",
     "tape": "^4.9.2",
     "try-to-tape": "^1.2.0"
@@ -38,8 +44,10 @@
   ],
   "devDependencies": {
     "@cloudcmd/stub": "^2.0.0",
+    "babel-eslint": "^10.1.0",
     "coveralls": "^3.0.0",
     "eslint": "^6.2.2",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-putout": "^3.0.0",
     "madrun": "^5.0.1",
     "mock-require": "^3.0.2",
