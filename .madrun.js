@@ -3,7 +3,7 @@
 const {run} = require('madrun');
 
 module.exports = {
-    'test': () => 'tape \'test/*.js\'',
+    'test': () => 'node bin/supertape \'test/*.js\'',
     'watch:test': () => 'nodemon -w lib -w test -x "npm test"',
     'lint': () => 'putout bin lib test .madrun.js',
     'fix:lint': () => run('lint', '--fix'),
