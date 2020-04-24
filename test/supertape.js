@@ -8,7 +8,7 @@ const {
     stopAll,
 } = mockRequire;
 
-test('supertape: tape', async (t) => {
+test('supertape: tape', (t) => {
     const tape = stub();
     
     mockRequire('tape', tape);

@@ -10,6 +10,12 @@
   "bin": {
     "tape": "bin/supertape.js"
   },
+  "nyc": {
+    "exclude": [
+      ".madrun.js",
+      "test"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/coderaiser/supertape.git"
@@ -29,8 +35,8 @@
     "jest-diff": "^25.4.0",
     "minimist": "^1.2.5",
     "resolve": "^1.17.0",
-    "strip-ansi": "^6.0.0",
     "tape": "^4.9.2",
+    "try-catch": "^3.0.0",
     "try-to-tape": "^1.2.0"
   },
   "keywords": [
