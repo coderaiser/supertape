@@ -38,6 +38,7 @@
     "strip-ansi": "^6.0.0",
     "tape": "https://github.com/coderaiser/tape/archive/5.0.1.tar.gz",
     "try-catch": "^3.0.0",
+    "try-to-catch": "^3.0.0",
     "try-to-tape": "^1.2.0"
   },
   "keywords": [
