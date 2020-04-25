@@ -1,3 +1,9 @@
+2020.04.25, v1.3.5
+
+fix:
+- (package) tape emitters in async (https://github.com/substack/tape/pull/503)
+
+
 2020.04.25, v1.3.4
 
 feature:
