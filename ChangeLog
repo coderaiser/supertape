@@ -1,3 +1,9 @@
+2020.04.25, v1.3.9
+
+fix:
+- (supertape) rm esm
+
+
 2020.04.25, v1.3.8
 
 feature:
