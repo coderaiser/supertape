@@ -60,60 +60,6 @@ test('supertape: tape: skip', async (t) => {
     t.end();
 });
 
-test('supertape: tape: rejects: fail', async (t) => {
-    const fail = stub();
-    const end = stub();
-    const tape = async (msg, promise) => {
-        const t = {
-            fail,
-            end,
-        };
-        
-        await promise(t);
-    };
-    
-    mockRequire('tape', tape);
-    
-    const test = reRequire('..');
-    
-    const promise = async () => {
-        throw Error('some error');
-    };
-    
-    await test('hello world', promise);
-    
-    stopAll();
-    
-    t.ok(fail.calledWith('some error'), 'should call fail');
-    t.end();
-});
-
-test('supertape: tape: rejects: end', async (t) => {
-    const fail = stub();
-    const end = stub();
-    const tape = async (msg, promise) => {
-        const t = {
-            fail,
-            end,
-        };
-        
-        await promise(t);
-    };
-    
-    mockRequire('tape', tape);
-    const test = reRequire('..');
-    const promise = async () => {
-        throw Error('some error');
-    };
-    
-    await test('hello world', promise);
-    
-    stopAll();
-    
-    t.ok(end.calledWith(), 'should call end');
-    t.end();
-});
-
 test('supertape: tape: resolves: fail', async (t) => {
     const fail = stub();
     const end = stub();
