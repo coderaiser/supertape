@@ -31,7 +31,6 @@
   "dependencies": {
     "deep-equal": "^2.0.3",
     "dotignore": "^0.1.2",
-    "esm": "^3.2.25",
     "glob": "^7.1.6",
     "jest-diff": "^25.4.0",
     "minimist": "^1.2.5",
