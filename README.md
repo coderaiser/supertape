@@ -12,7 +12,9 @@
 
 Tape with superpowers. Contains:
 
+- ability to work with `esm modules`;
 - ability to `catch` exceptions and fail one test instead of all;
+- handle double `end` errors (https://github.com/substack/tape/pull/503#issuecomment-619402717)
 - shows diff when test not `equal` or not `deepEqual`;
 - add `jsonEqual` that converts to `json` before checking isEqual
 
