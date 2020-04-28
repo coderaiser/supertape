@@ -14,7 +14,8 @@ Tape with superpowers. Contains:
 
 - ability to work with `esm modules`;
 - shows diff when test not `equal` or not `deepEqual`;
-- add `jsonEqual` that converts to `json` before checking isEqual
+- add `jsonEqual` that converts to `json` before checking isEqual;
+- produce deteiled stack traces for `async functions`;
 
 ## Install
 

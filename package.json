@@ -38,7 +38,8 @@
     "strip-ansi": "^6.0.0",
     "tape": "^5.0.0",
     "try-catch": "^3.0.0",
-    "try-to-catch": "^3.0.0"
+    "try-to-catch": "^3.0.0",
+    "try-to-tape": "^1.2.6"
   },
   "keywords": [
     "function",
