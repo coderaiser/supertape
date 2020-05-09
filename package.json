@@ -52,7 +52,7 @@
     "tape"
   ],
   "devDependencies": {
-    "@cloudcmd/stub": "^2.0.0",
+    "@cloudcmd/stub": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "coveralls": "^3.0.0",
     "eslint": "^7.0.0",
