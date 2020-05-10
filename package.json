@@ -5,7 +5,10 @@
   "description": "tape with superpowers",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/supertape.js",
-  "exports": "./lib/supertape.js",
+  "exports": {
+    ".": "./lib/supertape.js",
+    "./bin/supertape": "./bin/supertape.js"
+  },
   "type": "commonjs",
   "bin": {
     "tape": "bin/supertape.js"
