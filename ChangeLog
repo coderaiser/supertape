@@ -1,3 +1,9 @@
+2020.12.01, v3.0.1
+
+fix:
+- (package) exports: bin: js -> mjs
+
+
 2020.12.01, v3.0.0
 
 feature:
