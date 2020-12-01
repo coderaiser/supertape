@@ -62,7 +62,7 @@ for (const arg of opts._) {
     });
     
     for (const file of list) {
-        await import(resolvePath(cwd, file));
+        import(resolvePath(cwd, file));
     }
 }
 
