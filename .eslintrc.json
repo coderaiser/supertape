@@ -1,17 +1,25 @@
 {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "requireConfigFile": false
+    },
     "overrides": [{
-        "files": ["bin/*.js"],
+        "files": "bin/*.js",
         "rules": {
             "no-process-exit": "off"
         }
+    }, {
+        "files": "*.md{js}",
+        "rules": {
+            "no-unreachable": "off"
+        }
     }],
     "rules": {
-            "node/no-unsupported-features/es-syntax": "off"
+        "node/no-unsupported-features/es-syntax": "off"
     },
     "extends": [
-        "plugin:putout/recommended",
-        "plugin:node/recommended"
+        "plugin:node/recommended",
+        "plugin:putout/recommended"
     ],
     "plugins": [
         "node",
