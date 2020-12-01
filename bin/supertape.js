@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
-
 import {resolve as resolvePath} from 'path';
 import {readFileSync} from 'fs';
 

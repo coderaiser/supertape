@@ -1,18 +1,18 @@
-'use strict';
+import test from 'tape';
+import stub from '@cloudcmd/stub';
+import {createMockImport} from 'mock-import';
 
-const test = require('tape');
-const stub = require('@cloudcmd/stub');
-const mockRequire = require('mock-require');
 const {
-    reRequire,
+    reImportDefault,
+    mockImport,
     stopAll,
-} = mockRequire;
+} = createMockImport(import.meta.url);
 
-test('supertape: tape', (t) => {
+test('supertape: tape', async (t) => {
     const tape = stub();
     
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
+    mockImport('tape', tape);
+    const supertape = await reImportDefault('../lib/supertape.js');
     
     supertape('hello world', () => {
     });
@@ -27,9 +27,9 @@ test('supertape: tape: only', async (t) => {
     const tape = stub();
     tape.only = stub();
     
-    mockRequire('tape', tape);
+    mockImport('tape', tape);
     
-    const test = reRequire('..');
+    const test = await reImportDefault('..');
     const promise = async () => {
         throw Error('some error');
     };
@@ -46,8 +46,8 @@ test('supertape: tape: skip', async (t) => {
     const tape = stub();
     tape.skip = stub();
     
-    mockRequire('tape', tape);
-    const test = reRequire('..');
+    mockImport('tape', tape);
+    const test = await reImportDefault('..');
     const promise = async () => {
         throw Error('some error');
     };
@@ -72,8 +72,8 @@ test('supertape: tape: resolves: fail', async (t) => {
         await promise(t);
     };
     
-    mockRequire('tape', tape);
-    const test = reRequire('..');
+    mockImport('tape', tape);
+    const test = await reImportDefault('..');
     const promise = async () => {};
     
     await test('hello world', promise);
@@ -94,9 +94,9 @@ test('supertape: tape: resolves: end', async (t) => {
         await promise(t);
     };
     
-    mockRequire('tape', tape);
+    mockImport('tape', tape);
     
-    const test = reRequire('..');
+    const test = await reImportDefault('..');
     const promise = async () => {};
     
     await test('hello world', promise);
@@ -117,8 +117,8 @@ test('supertape: tape: equal', async (t) => {
         });
     };
     
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
+    mockImport('tape', tape);
+    const supertape = await reImportDefault('..');
     
     await supertape('hello world', (t) => {
         t.equal(1, 2, 'should equal');
@@ -140,8 +140,8 @@ test('supertape: tape: deepEqual', async (t) => {
         });
     };
     
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
+    mockImport('tape', tape);
+    const supertape = await reImportDefault('..');
     
     await supertape('hello world', (t) => {
         t.deepEqual(1, 2, 'should equal');
@@ -164,9 +164,9 @@ test('supertape: tape: jsonEqual: diff', async (t) => {
         });
     };
     
-    mockRequire('tape', tape);
-    mockRequire('deep-equal', deepEqual);
-    const supertape = reRequire('..');
+    mockImport('tape', tape);
+    mockImport('deep-equal', deepEqual);
+    const supertape = await reImportDefault('..');
     
     await supertape('hello world', (t) => {
         t.jsonEqual({}, {hello: 'world'}, 'should equal');
@@ -192,8 +192,8 @@ test('supertape: tape: equal: no diff', async (t) => {
         });
     };
     
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
+    mockImport('tape', tape);
+    const supertape = await reImportDefault('..');
     
     await supertape('hello world', (t) => {
         t.equal(1, 1, 'should equal');
@@ -215,8 +215,8 @@ test('supertape: tape: jsonEqual: diff: pass', async (t) => {
         });
     };
     
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
+    mockImport('tape', tape);
+    const supertape = await reImportDefault('..');
     
     await supertape('hello world', (t) => {
         t.jsonEqual({hello: 'world'}, {hello: 'world'}, 'should equal');
@@ -240,8 +240,8 @@ test('supertape: tape: jsonEqual: diff: comment', async (t) => {
         });
     };
     
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
+    mockImport('tape', tape);
+    const supertape = await reImportDefault('..');
     
     await supertape('hello world', (t) => {
         t.jsonEqual({}, {hello: 'world'}, 'should equal');
