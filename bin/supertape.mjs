@@ -2,16 +2,14 @@
 
 'use strict';
 
-const resolveModule = require('resolve').sync;
-const resolvePath = require('path').resolve;
-const {readFileSync} = require('fs');
+import {resolve as resolvePath} from 'path';
+import {readFileSync} from 'fs';
 
-const parseOpts = require('minimist');
-const glob = require('glob');
-const ignore = require('dotignore');
-const tryCatch = require('try-catch');
-
-const superImport = require('../lib/super-import');
+import parseOpts from 'minimist';
+import glob from 'glob';
+import ignore from 'dotignore';
+import tryCatch from 'try-catch';
+import {createRequire} from 'module';
 
 const {isArray} = Array;
 
@@ -32,7 +30,10 @@ for (const module of opts.require) {
         /* This check ensures we ignore `-r ""`, trailing `-r`, or
          * other silly things the user might (inadvertently) be doing.
          */
-        require(resolveModule(module, {basedir: cwd}));
+        const {resolve} = createRequire(import.meta.url);
+        await import(resolve(module, {
+            paths: [cwd],
+        }));
     }
 }
 
@@ -58,8 +59,12 @@ for (const arg of opts._) {
     if (!isArray(files))
         throw TypeError('unknown error: glob.sync did not return an array or throw. Please report this.');
     
-    files.filter((file) => { return !matcher || !matcher.shouldIgnore(file); }).forEach(async (file) => {
-        await superImport(resolvePath(cwd, file));
+    const list = files.filter((file) => {
+        return !matcher || !matcher.shouldIgnore(file);
     });
+    
+    for (const file of list) {
+        await import(resolvePath(cwd, file));
+    }
 }
 

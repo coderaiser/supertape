@@ -1,5 +1,8 @@
 {
     "match": {
+        "*.md": {
+            "remove-unreachable-code": "off"
+        },
         "lib/supertape.js": {
             "remove-console": "off"
         },

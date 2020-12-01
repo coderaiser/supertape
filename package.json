@@ -11,7 +11,7 @@
   },
   "type": "commonjs",
   "bin": {
-    "tape": "bin/supertape.js"
+    "tape": "bin/supertape.mjs"
   },
   "nyc": {
     "exclude": [
@@ -55,8 +55,9 @@
     "tape"
   ],
   "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.12.1",
     "@cloudcmd/stub": "^3.0.0",
-    "babel-eslint": "^10.1.0",
     "coveralls": "^3.0.0",
     "eslint": "^7.0.0",
     "eslint-plugin-node": "^11.1.0",
@@ -69,7 +70,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "publishConfig": {
     "access": "public"
