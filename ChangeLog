@@ -1,3 +1,9 @@
+2020.12.01, v3.0.2
+
+fix:
+- (supertape) rm strict mode
+
+
 2020.12.01, v3.0.1
 
 fix:
