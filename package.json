@@ -7,7 +7,7 @@
   "main": "./lib/supertape.js",
   "exports": {
     ".": "./lib/supertape.js",
-    "./bin/supertape": "./bin/supertape.js"
+    "./bin/supertape": "./bin/supertape.mjs"
   },
   "type": "commonjs",
   "bin": {
