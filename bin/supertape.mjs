@@ -2,12 +2,13 @@
 
 import {resolve as resolvePath} from 'path';
 import {readFileSync} from 'fs';
+import {createRequire} from 'module';
 
 import parseOpts from 'minimist';
 import glob from 'glob';
 import ignore from 'dotignore';
 import tryCatch from 'try-catch';
-import {createRequire} from 'module';
+import supertape from '../lib/supertape.js';
 
 const {isArray} = Array;
 
