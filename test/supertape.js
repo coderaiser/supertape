@@ -1,255 +1,191 @@
 'use strict';
 
-const test = require('tape');
+const {once} = require('events');
+
+const test = require('..');
 const stub = require('@cloudcmd/stub');
-const mockRequire = require('mock-require');
+const wait = require('@iocmd/wait');
+const montag = require('montag');
+const {reRequire} = require('mock-require');
+const pullout = require('pullout');
+
 const {
-    reRequire,
-    stopAll,
-} = mockRequire;
+    runTests,
+    createOutput,
+} = test;
 
-test('supertape: tape', (t) => {
-    const tape = stub();
+test('supertape: equal', async (t) => {
+    const fn = (t) => {
+        t.equal(1, 1);
+        t.end();
+    };
     
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
+    const message = 'hello';
+    const tests = [{
+        message,
+        fn,
+    }];
     
-    supertape('hello world', () => {
+    const emit = stub();
+    const out = createOutput({emit});
+    
+    await runTests(tests, {
+        out,
     });
+    const result = out();
     
-    stopAll();
+    const expected = montag`
+        TAP version 13
+        # hello
+        ok 1 should equal
+        
+        1..1
+        # tests 1
+        # pass 1
     
-    t.ok(tape.calledWith('hello world', () => {}), 'should call tape');
+    `;
+    
+    t.equal(result, expected);
     t.end();
 });
 
-test('supertape: tape: only', async (t) => {
-    const tape = stub();
-    tape.only = stub();
-    
-    mockRequire('tape', tape);
-    
-    const test = reRequire('..');
-    const promise = async () => {
-        throw Error('some error');
-    };
-    
-    test.only('hello world', promise);
-    
-    stopAll();
-    
-    t.ok(tape.only.calledWith('hello world', () => {}), 'should call tape');
-    t.end();
-});
-
-test('supertape: tape: skip', async (t) => {
-    const tape = stub();
-    tape.skip = stub();
-    
-    mockRequire('tape', tape);
-    const test = reRequire('..');
-    const promise = async () => {
-        throw Error('some error');
-    };
-    
-    test.skip('hello world', promise);
-    
-    stopAll();
-    
-    t.ok(tape.skip.calledWith('hello world', () => {}), 'should call tape');
-    t.end();
-});
-
-test('supertape: tape: resolves: fail', async (t) => {
-    const fail = stub();
-    const end = stub();
-    const tape = async (msg, promise) => {
-        const t = {
-            fail,
-            end,
+test('supertape: deepEqual', async (t) => {
+    const fn = (t) => {
+        const a = {
+            hello: 'world',
+        };
+        const b = {
+            hello: 'world',
         };
         
-        await promise(t);
+        t.deepEqual(a, b, 'hello message');
+        t.end();
     };
     
-    mockRequire('tape', tape);
-    const test = reRequire('..');
-    const promise = async () => {};
+    const message = 'hello';
+    const tests = [{
+        message,
+        fn,
+    }];
     
-    await test('hello world', promise);
+    const runTests = reRequire('../lib/run-tests');
+    const {createOutput} = reRequire('..');
     
-    t.notOk(fail.called, 'should not call fail');
-    t.end();
-});
-
-test('supertape: tape: resolves: end', async (t) => {
-    const fail = stub();
-    const end = stub();
-    const tape = async (msg, promise) => {
-        const t = {
-            fail,
-            end,
-        };
+    const emit = stub();
+    const out = createOutput({emit});
+    
+    await runTests(tests, {out});
+    const result = out();
+    
+    const expected = montag`
+        TAP version 13
+        # hello
+        ok 1 hello message
         
-        await promise(t);
-    };
+        1..1
+        # tests 1
+        # pass 1
     
-    mockRequire('tape', tape);
+    `;
     
-    const test = reRequire('..');
-    const promise = async () => {};
-    
-    await test('hello world', promise);
-    
-    stopAll();
-    
-    t.notOk(end.called, 'should not call fail');
+    t.equal(expected, result);
     t.end();
 });
 
-test('supertape: tape: equal', async (t) => {
-    const equal = stub();
-    const comment = stub();
-    const tape = (str, fn) => {
-        fn({
-            equal,
-            comment,
-        });
+test('supertape', async (t) => {
+    const fn = (t) => {
+        t.ok(true);
+        t.end();
     };
     
-    mockRequire('tape', tape);
+    const message = 'hello';
     const supertape = reRequire('..');
     
-    await supertape('hello world', (t) => {
-        t.equal(1, 2, 'should equal');
+    const emitter = supertape(message, fn, {
+        quiet: true,
     });
     
-    stopAll();
+    const [result] = await once(emitter, 'result');
     
-    t.ok(equal.calledWith(1, 2, 'should equal'), 'should call tape');
+    const expected = montag`
+        TAP version 13
+        # hello
+        ok 1 should be truthy
+        
+        1..1
+        # tests 1
+        # pass 1
+    
+    `;
+    
+    t.equal(expected, result);
     t.end();
 });
 
-test('supertape: tape: deepEqual', async (t) => {
-    const deepEqual = stub();
-    const comment = stub();
-    const tape = (str, fn) => {
-        fn({
-            deepEqual,
-            comment,
-        });
+test('supertape: createEmitter', async (t) => {
+    const fn = (t) => {
+        t.notOk(false);
+        t.end();
     };
     
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
+    const message = 'hello';
+    const {createEmitter} = reRequire('..');
+    const emitter = createEmitter();
+    const emit = emitter.emit.bind(emitter);
+        
+    emit('test', message, fn);
+    emit('run');
     
-    await supertape('hello world', (t) => {
-        t.deepEqual(1, 2, 'should equal');
-    });
+    const [result] = await once(emitter, 'result');
     
-    stopAll();
+    const expected = montag`
+        TAP version 13
+        # hello
+        ok 1 should be falsy
+        
+        1..1
+        # tests 1
+        # pass 1
     
-    t.ok(deepEqual.calledWith(1, 2, 'should equal'), 'should call tape');
+    `;
+    
+    t.equal(expected, result);
     t.end();
 });
 
-test('supertape: tape: jsonEqual: diff', async (t) => {
-    const deepEqual = stub();
-    const fail = stub();
-    const comment = stub();
-    const tape = (str, fn) => {
-        fn({
-            comment,
-            fail,
-        });
+test.only('supertape: createStream', async (t) => {
+    const fn = (t) => {
+        t.notOk(false);
+        t.end();
     };
     
-    mockRequire('tape', tape);
-    mockRequire('deep-equal', deepEqual);
-    const supertape = reRequire('..');
+    const message = 'hello';
+    const {createEmitter, createStream} = reRequire('..');
     
-    await supertape('hello world', (t) => {
-        t.jsonEqual({}, {hello: 'world'}, 'should equal');
-    });
+    const emitter = createEmitter();
+    const stream = createStream(emitter);
     
-    stopAll();
+    const emit = emitter.emit.bind(emitter);
+    emit('test', message, fn);
     
-    t.ok(deepEqual.calledWith({}, {hello: 'world'}), 'should call tape');
+    const [output] = await Promise.all([
+        pullout(stream, 'string'),
+        wait(emit, 'run'),
+    ]);
+    
+    const result = output.slice(0, -1);
+    
+    const expected = montag`
+        TAP version 13
+        # hello
+        ok 1 should be falsy
+        
+        1..1
+        # tests 1
+        # pass 1
+    
+    `;
+    
+    t.equal(expected, result);
     t.end();
 });
-
-test('supertape: tape: equal: no diff', async (t) => {
-    const pass = stub();
-    const fail = stub();
-    const equal = stub();
-    const comment = stub();
-    const tape = (str, fn) => {
-        fn({
-            pass,
-            fail,
-            equal,
-            comment,
-        });
-    };
-    
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
-    
-    await supertape('hello world', (t) => {
-        t.equal(1, 1, 'should equal');
-    });
-    
-    stopAll();
-    
-    t.ok(equal.calledWith(1, 1, 'should equal'), 'should call equal');
-    t.end();
-});
-
-test('supertape: tape: jsonEqual: diff: pass', async (t) => {
-    const pass = stub();
-    const comment = stub();
-    const tape = (str, fn) => {
-        fn({
-            pass,
-            comment,
-        });
-    };
-    
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
-    
-    await supertape('hello world', (t) => {
-        t.jsonEqual({hello: 'world'}, {hello: 'world'}, 'should equal');
-    });
-    
-    stopAll();
-    
-    t.ok(pass.calledWith('should equal'), 'should call tape');
-    t.end();
-});
-
-test('supertape: tape: jsonEqual: diff: comment', async (t) => {
-    const jsonEqual = stub();
-    const fail = stub();
-    const comment = stub();
-    const tape = (str, fn) => {
-        fn({
-            fail,
-            comment,
-            jsonEqual,
-        });
-    };
-    
-    mockRequire('tape', tape);
-    const supertape = reRequire('..');
-    
-    await supertape('hello world', (t) => {
-        t.jsonEqual({}, {hello: 'world'}, 'should equal');
-    });
-    
-    stopAll();
-    
-    t.ok(comment.called, 'should call comment');
-    t.end();
-});
-

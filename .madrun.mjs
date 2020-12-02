@@ -1,7 +1,7 @@
 import {run} from 'madrun';
 
 export default {
-    'test': () => `node bin/supertape.mjs 'test/*.js'`,
+    'test': () => `bin/supertape.mjs 'test/*.js'`,
     'watch:test': async () => `nodemon -w lib -w test -x "${await run('test')}"`,
     'lint': () => 'putout .',
     'fix:lint': () => run('lint', '--fix'),
