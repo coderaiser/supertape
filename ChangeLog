@@ -1,3 +1,9 @@
+2020.12.03, v3.1.1
+
+fix:
+- (supertape) rm ignore
+
+
 2020.12.03, v3.1.0
 
 feature:
