@@ -14,7 +14,8 @@
 - ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking).
 - shows colored diff when test not `equal` or not `deepEqual`;
 - `jsonEqual` that converts to `json` before checking isEqual;
-- produce deteiled stack traces for `async functions`;
+- produces deteiled stack traces for `async functions`;
+- as many `only` as you wish
 
 Doesn't contain: `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills).
 
