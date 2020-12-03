@@ -17,7 +17,11 @@
 - produces deteiled stack traces for `async functions`;
 - as many `only` as you wish
 
-Doesn't contain: `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills).
+Doesn't contain: 
+
+- `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills).
+- aliases, methods list much shorter;
+- `throws`, `doesNotThrows` - use [tryCatch](https://github.com/coderaiser/try-catch), [tryToCatch](https://github.com/coderaiser/try-to-catch) with `equal` instead.
 
 `Supertape` was written for scratch after messing a lot with `tape`, it inspired by `tape` and willing to be compatible with it.
 
