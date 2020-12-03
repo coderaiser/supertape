@@ -15,6 +15,7 @@
   },
   "nyc": {
     "exclude": [
+      "**/*.spec.js",
       ".madrun.js",
       "test"
     ]
