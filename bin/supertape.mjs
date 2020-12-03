@@ -8,7 +8,6 @@ import parseOpts from 'minimist';
 import glob from 'glob';
 import ignore from 'dotignore';
 import tryCatch from 'try-catch';
-import supertape from '../lib/supertape.js';
 
 const {isArray} = Array;
 

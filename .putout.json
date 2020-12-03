@@ -1,7 +1,4 @@
 {
-    "rules": {
-        "convert-esm-to-commonjs": "on"
-    },
     "match": {
         "*.md": {
             "remove-unreachable-code": "off"

@@ -1,6 +1,7 @@
 .*
+*.spec.js
 test
 yarn-error.log
 
-madrun.js
+.madrun.js
 

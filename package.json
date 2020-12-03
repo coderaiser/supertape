@@ -34,15 +34,15 @@
   "dependencies": {
     "deep-equal": "^2.0.3",
     "dotignore": "^0.1.2",
+    "fullstore": "^3.0.0",
     "glob": "^7.1.6",
     "jest-diff": "^26.0.1",
     "minimist": "^1.2.5",
+    "once": "^1.4.0",
     "resolve": "^1.17.0",
-    "strip-ansi": "^6.0.0",
-    "tape": "^5.0.0",
     "try-catch": "^3.0.0",
     "try-to-catch": "^3.0.0",
-    "try-to-tape": "^1.2.6"
+    "wraptile": "^3.0.0"
   },
   "keywords": [
     "function",

@@ -132,7 +132,7 @@ test('supertape: createEmitter', async (t) => {
     const {createEmitter} = reRequire('..');
     const emitter = createEmitter();
     const emit = emitter.emit.bind(emitter);
-        
+    
     emit('test', message, fn);
     emit('run');
     
@@ -153,7 +153,7 @@ test('supertape: createEmitter', async (t) => {
     t.end();
 });
 
-test.only('supertape: createStream', async (t) => {
+test('supertape: createStream', async (t) => {
     const fn = (t) => {
         t.notOk(false);
         t.end();
@@ -189,3 +189,65 @@ test.only('supertape: createStream', async (t) => {
     t.equal(expected, result);
     t.end();
 });
+
+test('supertape: skip', async (t) => {
+    const fn = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const message = 'hello';
+    const supertape = reRequire('..');
+    
+    const emitter = supertape.skip(message, fn, {
+        quiet: true,
+    });
+    
+    const [result] = await once(emitter, 'result');
+    
+    t.notOk(result);
+    t.end();
+});
+
+test('supertape: only', async (t) => {
+    const fn1 = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const fn2 = (t) => {
+        t.notOk(false);
+        t.end();
+    };
+    
+    const message1 = 'world';
+    const message2 = 'hello';
+    
+    reRequire('../lib/run-tests');
+    const supertape = reRequire('..');
+    
+    const emitter = supertape.only(message1, fn1, {
+        quiet: true,
+    });
+    
+    supertape(message2, fn2, {
+        quiet: true,
+    });
+    
+    const [result] = await once(emitter, 'result');
+    
+    const expected = montag`
+        TAP version 13
+        # world
+        ok 1 should be truthy
+        
+        1..1
+        # tests 1
+        # pass 1
+    
+    `;
+    
+    t.equal(expected, result);
+    t.end();
+});
+
