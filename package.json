@@ -42,7 +42,8 @@
     "resolve": "^1.17.0",
     "try-catch": "^3.0.0",
     "try-to-catch": "^3.0.0",
-    "wraptile": "^3.0.0"
+    "wraptile": "^3.0.0",
+    "yargs-parser": "^20.2.4"
   },
   "keywords": [
     "function",
