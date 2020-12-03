@@ -2,7 +2,7 @@
 
 import {resolve as resolvePath} from 'path';
 
-import yargsParser from 'yarser-parser';
+import yargsParser from 'yargs-parser';
 import parseOpts from 'minimist';
 import glob from 'glob';
 import ignore from 'dotignore';
@@ -43,11 +43,7 @@ for (const module of opts.require) {
 for (const arg of opts._) {
     const files = glob.sync(arg);
     
-    const list = files.filter((file) => {
-        return !matcher || !matcher.shouldIgnore(file);
-    });
-    
-    for (const file of list) {
+    for (const file of files) {
         import(resolvePath(cwd, file));
     }
 }
