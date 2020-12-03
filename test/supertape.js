@@ -42,7 +42,9 @@ test('supertape: equal', async (t) => {
         1..1
         # tests 1
         # pass 1
-    
+        
+        # ok
+        
     `;
     
     t.equal(result, expected);
@@ -85,7 +87,9 @@ test('supertape: deepEqual', async (t) => {
         1..1
         # tests 1
         # pass 1
-    
+        
+        # ok
+        
     `;
     
     t.equal(expected, result);
@@ -115,7 +119,9 @@ test('supertape', async (t) => {
         1..1
         # tests 1
         # pass 1
-    
+        
+        # ok
+        
     `;
     
     t.equal(expected, result);
@@ -146,7 +152,9 @@ test('supertape: createEmitter', async (t) => {
         1..1
         # tests 1
         # pass 1
-    
+        
+        # ok
+        
     `;
     
     t.equal(expected, result);
@@ -183,7 +191,9 @@ test('supertape: createStream', async (t) => {
         1..1
         # tests 1
         # pass 1
-    
+        
+        # ok
+        
     `;
     
     t.equal(expected, result);
@@ -244,7 +254,9 @@ test('supertape: only', async (t) => {
         1..1
         # tests 1
         # pass 1
-    
+        
+        # ok
+        
     `;
     
     t.equal(expected, result);
