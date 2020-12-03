@@ -1,29 +1,27 @@
 #!/usr/bin/env node
 
+import {createRequire} from 'module';
 import {resolve as resolvePath} from 'path';
 
 import yargsParser from 'yargs-parser';
-import parseOpts from 'minimist';
 import glob from 'glob';
-import ignore from 'dotignore';
-import tryCatch from 'try-catch';
 
 const {isArray} = Array;
-const maybeArray = (a) => isArray(a) ? a : [a];
+const require = (a) => isArray(a) ? a : [a];
 
 const opts = yargsParser(process.argv.slice(2), {
     coerce: {
-        require: maybeArray,
+        require,
     },
     string: [
         'require',
     ],
     alias: {
-        r: 'require'
+        r: 'require',
     },
     default: {
         require: [],
-    }
+    },
 });
 
 const cwd = process.cwd();
