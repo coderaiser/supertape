@@ -1,3 +1,9 @@
+2020.12.03, v3.1.2
+
+fix:
+- (supertape) yarser-parser -> yargs-parser
+
+
 2020.12.03, v3.1.1
 
 fix:
