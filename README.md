@@ -9,12 +9,16 @@
 [CoverageURL]: https://coveralls.io/github/coderaiser/supertape?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
 
-Tape with superpowers. Contains:
+[Tape](https://github.com/substack/tape) compatible [TAP](https://testanything.org/) test runner with superpowers. Contains:
 
-- ability to work with `esm modules`;
-- shows diff when test not `equal` or not `deepEqual`;
-- add `jsonEqual` that converts to `json` before checking isEqual;
+- ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking).
+- shows colored diff when test not `equal` or not `deepEqual`;
+- `jsonEqual` that converts to `json` before checking isEqual;
 - produce deteiled stack traces for `async functions`;
+
+Doesn't contain: `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills).
+
+`Supertape` was written for scratch after messing a lot with `tape`, it inspired by `tape` and willing to be compatible with it.
 
 ## Install
 

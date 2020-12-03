@@ -2,7 +2,7 @@
   "name": "supertape",
   "version": "3.0.3",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
-  "description": "tape with superpowers",
+  "description": "tape compatible test runner with superpowers",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/supertape.js",
   "exports": {
