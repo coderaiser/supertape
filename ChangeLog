@@ -1,3 +1,9 @@
+2020.12.04, v3.3.1
+
+fix:
+- (supertape) operators: equal, notEqual: actual, expected -> expected, actual
+
+
 2020.12.04, v3.3.0
 
 feature:
