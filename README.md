@@ -40,7 +40,7 @@ Here is [example of a result](https://github.com/coderaiser/cloudcmd/commit/74d5
 
 ### Methods
 
-The assertion methods in `tape` are heavily influenced or copied from the methods
+The assertion methods in `supertape` are heavily influenced or copied from the methods
 in [tape](https://github.com/substack/tape).
 
 ```js
@@ -52,6 +52,12 @@ const test = require('supertape');
 Create a new test with an optional `name` string and optional `opts` object.
 `cb(t)` fires with the new test object `t` once all preceding tests have
 finished. Tests execute serially.
+
+## test.only(name, cb)
+
+Like `test(name, cb)` except if you use `.only` this is the only test case
+that will run for the entire process, all other test cases using `tape` will
+be ignored.
 
 ## test.skip([name], [opts], cb)
 
@@ -102,12 +108,6 @@ with strict comparisons (`===`) on leaf nodes and an optional description of the
 ## t.comment(message)
 
 Print a message without breaking the tap output. (Useful when using e.g. `tap-colorize` where output is buffered & `console.log` will print in incorrect order vis-a-vis tap output.)
-
-## test.only(name, cb)
-
-Like `test(name, cb)` except if you use `.only` this is the only test case
-that will run for the entire process, all other test cases using `tape` will
-be ignored.
 
 ## Example
 
