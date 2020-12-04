@@ -17,7 +17,7 @@
 - produces deteiled stack traces for `async functions`;
 - as many `only` as you wish
 
-Doesn't contain: 
+Doesn't contain:
 
 - `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills).
 - aliases, methods list much shorter;
@@ -44,7 +44,7 @@ The assertion methods in `tape` are heavily influenced or copied from the method
 in [tape](https://github.com/substack/tape).
 
 ```js
-var test = require('tape')
+const test = require('supertape');
 ```
 
 ## test(name, cb)
@@ -59,7 +59,7 @@ Generate a new test that will be skipped over.
 
 ## t.end()
 
-Declare the end of a test explicitly. 
+Declare the end of a test explicitly.
 
 ## t.fail(msg)
 
