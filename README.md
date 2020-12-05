@@ -15,6 +15,12 @@
 - shows colored diff when test not `equal` or not `deepEqual`;
 - produces deteiled stack traces for `async functions`;
 - as many `only` as you wish
+- ability to extend
+- more natural assertions: `expected, result` -> `result, expected`, for example:
+
+```js
+t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
+```
 
 Doesn't contain:
 
