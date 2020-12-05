@@ -1,3 +1,12 @@
+2020.12.05, v3.4.2
+
+fix:
+- (supertape) -v, --version: add new line
+
+feature:
+- (package) bin: add supertape
+
+
 2020.12.05, v3.4.1
 
 feature:
