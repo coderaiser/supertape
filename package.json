@@ -12,7 +12,8 @@
   },
   "type": "commonjs",
   "bin": {
-    "tape": "bin/supertape.js"
+    "tape": "bin/supertape.js",
+    "supertape": "bin/supertape.js"
   },
   "nyc": {
     "exclude": [
