@@ -1,3 +1,10 @@
+2020.12.05, v3.4.0
+
+feature:
+- (supertape) move out cli from bin
+- (supertape) add -v, --version
+
+
 2020.12.04, v3.3.1
 
 fix:
