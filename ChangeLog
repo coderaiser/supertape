@@ -1,3 +1,9 @@
+2020.12.05, v3.4.3
+
+fix:
+- (supertape) diff: different types of values
+
+
 2020.12.05, v3.4.2
 
 fix:
