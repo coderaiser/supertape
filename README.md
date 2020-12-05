@@ -49,7 +49,7 @@ const test = require('supertape');
 
 ## test(name, cb)
 
-Create a new test with an optional `name` string and optional `opts` object.
+Create a new test with `name` string.
 `cb(t)` fires with the new test object `t` once all preceding tests have
 finished. Tests execute serially.
 
@@ -59,9 +59,31 @@ Like `test(name, cb)` except if you use `.only` this is the only test case
 that will run for the entire process, all other test cases using `tape` will
 be ignored.
 
-## test.skip([name], [opts], cb)
+## test.skip(name, cb)
 
 Generate a new test that will be skipped over.
+
+## test.extend(extensions)
+
+Extend base assertions with more:
+
+```js
+const {extend} = require('supertape');
+const test = extend({
+    transform: (operator) => (a, b, message = 'should transform') => {
+        const {is, output} = operator.equal(a + 1, b - 1);
+        return {
+            is,
+            output,
+        };
+    },
+});
+
+test('assertion', (t) => {
+    t.transform(1, 3);
+    t.end();
+});
+```
 
 ## t.end()
 
