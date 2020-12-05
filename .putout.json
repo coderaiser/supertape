@@ -1,17 +1,7 @@
 {
-    "rules": {
-        "convert-esm-to-commonjs": "on"
-    },
     "match": {
         "*.md": {
             "remove-unreachable-code": "off"
-        },
-        "lib/supertape.js": {
-            "remove-console": "off"
-        },
-        "test/supertape.js": {
-            "remove-only": "off",
-            "remove-skip": "off"
         }
     }
 }
