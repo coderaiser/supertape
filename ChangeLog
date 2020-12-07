@@ -1,3 +1,12 @@
+2020.12.07, v3.6.2
+
+fix:
+- (supertape) cli: a couple glob args
+
+feature:
+- (package) putout v12.0.1
+
+
 2020.12.06, v3.6.1
 
 fix:
