@@ -19,7 +19,7 @@
     "exclude": [
       "**/*.spec.js",
       ".madrun.*",
-      "test"
+      "**/fixture"
     ]
   },
   "repository": {
