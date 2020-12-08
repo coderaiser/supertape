@@ -1,3 +1,9 @@
+2020.12.08, v3.7.3
+
+fix:
+- (supertape) loop: no tests
+
+
 2020.12.07, v3.7.2
 
 fix:
