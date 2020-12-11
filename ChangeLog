@@ -1,3 +1,11 @@
+2020.12.11, v3.8.1
+
+fix:
+- (supertape) operators: notOk: expected: true -> false
+- (supertape) formatter -> format
+- (supertape) reporter: rm is
+
+
 2020.12.11, v3.8.0
 
 feature:
