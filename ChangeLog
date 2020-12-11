@@ -1,3 +1,9 @@
+2020.12.11, v3.8.2
+
+fix:
+- (supertape) reporters: harness: should proceed only when reporter return not zero length chunk
+
+
 2020.12.11, v3.8.1
 
 fix:
