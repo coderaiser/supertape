@@ -32,7 +32,8 @@
     "lint": "madrun lint",
     "fix:lint": "madrun fix:lint",
     "coverage": "madrun coverage",
-    "report": "madrun report"
+    "report": "madrun report",
+    "wisdom": "madrun wisdom"
   },
   "dependencies": {
     "deep-equal": "^2.0.3",
