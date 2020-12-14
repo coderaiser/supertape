@@ -56,7 +56,8 @@
     "try-catch",
     "then",
     "tap",
-    "tape"
+    "tape",
+    "testing"
   ],
   "devDependencies": {
     "@babel/core": "^7.12.9",
