@@ -1,0 +1,87 @@
+{
+  "name": "supertape",
+  "version": "3.8.2",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "tape compatible test runner with superpowers",
+  "homepage": "http://github.com/coderaiser/supertape",
+  "main": "./lib/supertape.js",
+  "exports": {
+    ".": "./lib/supertape.js",
+    "./bin/supertape": "./bin/supertape.js",
+    "./lib/cli": "./lib/cli.js"
+  },
+  "type": "commonjs",
+  "bin": {
+    "tape": "bin/supertape.js",
+    "supertape": "bin/supertape.js"
+  },
+  "nyc": {
+    "exclude": [
+      "**/*.spec.js",
+      ".madrun.*",
+      "**/fixture"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/supertape.git"
+  },
+  "scripts": {
+    "test": "madrun test",
+    "watch:test": "madrun watch:test",
+    "lint": "madrun lint",
+    "fix:lint": "madrun fix:lint",
+    "coverage": "madrun coverage",
+    "report": "madrun report",
+    "wisdom": "madrun wisdom"
+  },
+  "dependencies": {
+    "deep-equal": "^2.0.3",
+    "dotignore": "^0.1.2",
+    "fullstore": "^3.0.0",
+    "glob": "^7.1.6",
+    "jest-diff": "^26.0.1",
+    "once": "^1.4.0",
+    "resolve": "^1.17.0",
+    "try-catch": "^3.0.0",
+    "try-to-catch": "^3.0.0",
+    "wraptile": "^3.0.0",
+    "yargs-parser": "^20.2.4"
+  },
+  "keywords": [
+    "function",
+    "promise",
+    "async",
+    "await",
+    "try-catch",
+    "then",
+    "tap",
+    "tape",
+    "testing"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.12.1",
+    "@cloudcmd/stub": "^3.0.0",
+    "@iocmd/wait": "^1.0.0",
+    "coveralls": "^3.0.0",
+    "eslint": "^7.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-putout": "^6.8.1",
+    "madrun": "^8.0.0",
+    "mock-require": "^3.0.2",
+    "montag": "^1.0.0",
+    "nodemon": "^2.0.2",
+    "nyc": "^15.0.1",
+    "pullout": "^4.0.0",
+    "putout": "^12.0.1",
+    "runsome": "^1.0.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
