@@ -1,10 +1,9 @@
 'use strict';
 
 const {run} = require('madrun');
-const {workspaces} = require('./package');
-
-const cutStar = (a) => a.replace('/*', '');
-const dirs = getDirs(workspaces);
+const dirs = [
+    'packages',
+];
 
 module.exports = {
     'test': async () => `CI=1 FORCE_COLOR=3 ${await run('test:fast')}`,
@@ -15,7 +14,6 @@ module.exports = {
     'coverage': async () => `CI=1 FORCE_COLOR=3 nyc --skip-full --check-coverage ${await run('test:fast')}`,
     'coverage:slow': () => 'FORCE_COLOR=3 lerna run coverage',
     'lint:slow': () => 'FORCE_COLOR=3 lerna run --no-bail lint',
-    'lint:dot': () => 'putout .madrun.js',
     'lint-all': async () => `MADRUN_NAME=1 ${await run('lint:*')}`,
     'lint:frame': () => run('lint:ci', '-f codeframe'),
     'lint:fresh': () => run('lint', '--fresh'),
@@ -33,7 +31,3 @@ module.exports = {
     'report': () => `nyc report --reporter=text-lcov | coveralls`,
 };
 
-function getDirs(workspaces) {
-    const dirs = workspaces.map(cutStar);
-    return `{${dirs.join(',')}}`;
-}

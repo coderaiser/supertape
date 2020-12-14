@@ -35,8 +35,8 @@
   "nyc": {
     "exclude": [
       "**/*.spec.js",
-      "packages/*/bin",
-      "packages/*/test"
+      ".madrun.*",
+      "**/fixture"
     ]
   },
   "devDependencies": {
