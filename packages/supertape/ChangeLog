@@ -1,3 +1,10 @@
+2020.12.16, v3.9.0
+
+feature:
+- (supertape) add formatter progress-bar
+- (supertape) convert to monorepo
+
+
 2020.12.11, v3.8.2
 
 fix:
