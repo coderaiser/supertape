@@ -1,3 +1,10 @@
+2020.12.16, v3.9.1
+
+fix:
+- (supertape) reporter: progress bar: add tap header
+- (supertape) reporter: progress-bar: message
+
+
 2020.12.16, v3.9.0
 
 feature:
