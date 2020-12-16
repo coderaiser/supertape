@@ -36,6 +36,7 @@ function prepare(reporter) {
     assign(result, {
         start: stub,
         test: stub,
+        testEnd: stub,
         fail: stub,
         success: stub,
         comment: stub,
@@ -48,10 +49,13 @@ function prepare(reporter) {
 
 function process(reporter, type, data) {
     if (type === 'start')
-        return reporter.start();
+        return reporter.start(data);
     
     if (type === 'test')
         return reporter.test(data);
+    
+    if (type === 'test:end')
+        return reporter.testEnd(data);
     
     if (type === 'comment')
         return reporter.comment(data);

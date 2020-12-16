@@ -12,16 +12,26 @@ module.exports.createReporter = (name) => {
     const formatter = resolveFormatter(name);
     const harness = createHarness(formatter);
     
-    reporter.on('start', () => {
+    reporter.on('start', ({total}) => {
         harness.write({
             type: 'start',
+            total,
         });
     });
     
-    reporter.on('test', (message) => {
+    reporter.on('test', ({message}) => {
         harness.write({
             type: 'test',
             message,
+        });
+    });
+    
+    reporter.on('test:end', ({index, total, failed}) => {
+        harness.write({
+            type: 'test:end',
+            total,
+            index,
+            failed,
         });
     });
     

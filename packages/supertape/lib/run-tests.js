@@ -17,14 +17,27 @@ module.exports = async function runTests(tests, {reporter}) {
     const incFailed = inc(failed);
     const incPassed = inc(passed);
     
-    reporter.emit('start');
+    const total = tests.length;
     
-    for (const {fn, message, extensions} of tests) {
-        await runOneTest({
-            message,
+    reporter.emit('start', {
+        total,
+    });
+    
+    for (let index = 0; index < total; index++) {
+        const {
             fn,
+            message,
+            extensions,
+        } = tests[index];
+        
+        await runOneTest({
+            fn,
+            message,
+            index,
+            total,
             reporter,
             count,
+            failed,
             incCount,
             incFailed,
             incPassed,
@@ -45,8 +58,10 @@ module.exports = async function runTests(tests, {reporter}) {
     };
 };
 
-async function runOneTest({message, fn, extensions, reporter, count, incCount, incPassed, incFailed}) {
-    reporter.emit('test', message);
+async function runOneTest({message, fn, extensions, index, total, reporter, count, failed, incCount, incPassed, incFailed}) {
+    reporter.emit('test', {
+        message,
+    });
     
     const t = initOperators({
         reporter,
@@ -63,5 +78,11 @@ async function runOneTest({message, fn, extensions, reporter, count, incCount, i
         t.fail(error);
         t.end();
     }
+    
+    reporter.emit('test:end', {
+        index,
+        total,
+        failed: failed(),
+    });
 }
 

@@ -181,9 +181,14 @@ async function run(tests, {reporter}) {
     const notSkipedTests = tests.filter(notSkip);
     
     if (!notSkipedTests.length) {
-        reporter.emit('start');
+        const count = 0;
+        
+        reporter.emit('start', {
+            count,
+        });
+        
         reporter.emit('end', {
-            count: 0,
+            count,
             failed: 0,
             passed: 0,
         });
