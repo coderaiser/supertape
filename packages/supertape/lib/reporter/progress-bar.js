@@ -29,7 +29,7 @@ module.exports.start = ({total}) => {
     bar = createProgress({
         total,
         color,
-        messaage: '',
+        message: '',
     });
 };
 
@@ -37,10 +37,11 @@ module.exports.test = ({message}) => {
     store(`# ${message}`);
 };
 
-module.exports.testEnd = ({index, total, failed}) => {
+module.exports.testEnd = ({index, total, failed, message}) => {
     bar.increment({
         index,
         total,
+        message,
         failed: formatErrorsCount(failed),
     });
 };

@@ -82,6 +82,7 @@ async function runOneTest({message, fn, extensions, index, total, reporter, coun
     reporter.emit('test:end', {
         index,
         total,
+        message,
         failed: failed(),
     });
 }

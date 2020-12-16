@@ -26,12 +26,13 @@ module.exports.createReporter = (name) => {
         });
     });
     
-    reporter.on('test:end', ({index, total, failed}) => {
+    reporter.on('test:end', ({index, total, failed, message}) => {
         harness.write({
             type: 'test:end',
             total,
             index,
             failed,
+            message,
         });
     });
     
