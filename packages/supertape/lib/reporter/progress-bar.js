@@ -24,6 +24,8 @@ const {
 let bar;
 
 module.exports.start = ({total}) => {
+    out('TAP version 13');
+    
     const color = SUPERTAPE_PROGRESS_BAR_COLOR || '#f9d472';
     
     bar = createProgress({
@@ -47,6 +49,7 @@ module.exports.testEnd = ({index, total, failed, message}) => {
 };
 
 module.exports.fail = ({at, count, message, operator, actual, expected, output, errorStack}) => {
+    out('');
     out(store());
     out(`not ok ${count} ${message}`);
     out('  ---');

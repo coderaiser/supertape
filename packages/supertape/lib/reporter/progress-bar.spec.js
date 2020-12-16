@@ -50,13 +50,15 @@ test('supertape: format: progress bar', async (t) => {
     supertape(failMessage, failFn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 8),
+        pull(supertape.createStream(), 10),
         once(supertape.run(), 'end'),
     ]);
     
     delete process.env.SUPERTAPE_NO_PROGRESS_BAR;
     
     const expected = montag`
+        TAP version 13
+        
         # fail
         not ok 2 should be truthy
           ---
@@ -92,13 +94,15 @@ test('supertape: format: progress bar: diff', async (t) => {
     supertape(message, fn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 7),
+        pull(supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     
     delete process.env.SUPERTAPE_NO_PROGRESS_BAR;
     
     const expected = montag`
+        TAP version 13
+        
         # progress bar
         not ok 1 should equal
           ---
@@ -139,13 +143,15 @@ test('supertape: format: progress bar: success', async (t) => {
     
     delete process.env.SUPERTAPE_NO_PROGRESS_BAR;
     
-    const expected = '\n' + montag`
+    const expected = montag`
+      TAP version 13
+      
       1..1
       # tests 1
       # pass 1
       
       # ok
-    ` + '\n\n';
+    ` + '\n';
     
     t.equal(result, expected);
     t.end();
@@ -179,13 +185,15 @@ test('supertape: format: progress bar: color', async (t) => {
     
     env.SUPERTAPE_PROGRESS_BAR_COLOR = SUPERTAPE_PROGRESS_BAR_COLOR;
     
-    const expected = '\n' + montag`
+    const expected = montag`
+      TAP version 13
+      
       1..1
       # tests 1
       # pass 1
       
       # ok
-    ` + '\n\n';
+    ` + '\n';
     
     t.equal(result, expected);
     t.end();
