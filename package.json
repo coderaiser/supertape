@@ -33,11 +33,17 @@
     }
   },
   "nyc": {
+    "check-coverage": true,
+    "all": true,
     "exclude": [
       "**/*.spec.js",
-      ".madrun.*",
+      "**/*.madrun.*",
       "**/fixture"
-    ]
+    ],
+    "branches": 100,
+    "lines": 100,
+    "functions": 100,
+    "statements": 100
   },
   "devDependencies": {
     "eslint-plugin-node": "^11.1.0",
