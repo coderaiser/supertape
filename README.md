@@ -41,6 +41,16 @@ npm i supertape -D
 You can convert your codebase from `tape` to `supertape` with help of a [putout](https://github.com/coderaiser/putout) and built-in [@putout/plugin-tape](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape).
 Here is [example of a result](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
 
+### Operators
+
+To simplify `supertape` core some operators moved out into separate packages, called `operators`:
+
+Here is a list of built-int operators:
+
+| Package | Version | Dependencies |
+|--------|-------|------------|
+| [`@supertape/operator-stub`](/packages/operator-stub) | [![npm](https://img.shields.io/npm/v/@supertape/operator-stub.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-stub) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/operator-stub)](https://david-dm.org/coderaiser/supertape?path=packages/operator-stub) |
+
 ## API
 
 ### Methods
