@@ -1,11 +1,11 @@
 import {run} from 'madrun';
 
 export default {
-    'test': () => `bin/supertape.js '{bin,lib}/**/*.spec.js'`,
+    'test': () => `bin/supertape.js '{bin,lib}/**/*.spec.js' -f progress-bar`,
     'watch:test': async () => `nodemon -w lib -w test -x "${await run('test')}"`,
     'lint': () => 'putout .',
     'fix:lint': () => run('lint', '--fix'),
-    'coverage': () => 'nyc npm test --check-coverage',
+    'coverage': () => 'nyc npm test',
     'report': () => 'nyc report --reporter=text-lcov | coveralls',
     'wisdom': () => run(['lint', 'coverage']),
 };
