@@ -10,7 +10,7 @@ export default {
     'watch:test': async () => `nodemon -w lib -w test -x "${await run('test')}"`,
     'lint': () => 'putout .',
     'fix:lint': () => run('lint', '--fix'),
-    'coverage': () => `c8 ${C8_OPTIONS} npm test --check-coverage`,
+    'coverage': () => `c8 ${C8_OPTIONS} npm test`,
     'report': () => 'c8 report --reporter=text-lcov | coveralls',
     'wisdom': () => run(['lint', 'coverage']),
 };
