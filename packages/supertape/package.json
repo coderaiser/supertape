@@ -6,7 +6,13 @@
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/supertape.js",
   "exports": {
-    ".": "./lib/supertape.js",
+    ".": {
+      "node": {
+        "require": "./lib/supertape.js",
+        "import": "./lib/supertape.mjs"
+      },
+      "default": "./lib/supertape.js"
+    },
     "./bin/supertape": "./bin/supertape.js",
     "./lib/cli": "./lib/cli.js"
   },
@@ -14,19 +20,6 @@
   "bin": {
     "tape": "bin/supertape.js",
     "supertape": "bin/supertape.js"
-  },
-  "nyc": {
-    "check-coverage": true,
-    "all": true,
-    "exclude": [
-      "**/*.spec.js",
-      ".madrun.*",
-      "**/fixture"
-    ],
-    "branches": 100,
-    "lines": 100,
-    "functions": 100,
-    "statements": 100
   },
   "repository": {
     "type": "git",
@@ -42,6 +35,9 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
+    "@cloudcmd/stub": "^3.0.0",
+    "@supertape/engine-loader": "^1.0.0",
+    "@supertape/operator-stub": "^1.0.0",
     "chalk": "^4.1.0",
     "cli-progress": "^3.8.2",
     "deep-equal": "^2.0.3",
@@ -69,8 +65,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/eslint-parser": "^7.12.1",
-    "@cloudcmd/stub": "^3.0.0",
     "@iocmd/wait": "^1.0.0",
+    "c8": "^7.3.5",
     "coveralls": "^3.0.0",
     "eslint": "^7.0.0",
     "eslint-plugin-node": "^11.1.0",
@@ -79,7 +75,6 @@
     "mock-require": "^3.0.2",
     "montag": "^1.0.0",
     "nodemon": "^2.0.2",
-    "nyc": "^15.0.1",
     "pullout": "^4.0.0",
     "putout": "^12.0.1",
     "runsome": "^1.0.0"

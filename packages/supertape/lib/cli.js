@@ -42,10 +42,15 @@ module.exports = async ({argv, cwd, stdout, exit}) => {
     if (args.version)
         return stdout.write(`v${require('../package').version}\n`);
     
-    for (const module of args.require) {
+    for (const module of args.require)
         await import(resolve(module, {
             paths: [cwd],
         }));
+    
+    const allFiles = [];
+    for (const arg of args._) {
+        const files = glob.sync(arg);
+        allFiles.push(...files);
     }
     
     const {format} = args;
@@ -58,12 +63,6 @@ module.exports = async ({argv, cwd, stdout, exit}) => {
     
     supertape.createStream().pipe(stdout);
     
-    const allFiles = [];
-    for (const arg of args._) {
-        const files = glob.sync(arg);
-        allFiles.push(...files);
-    }
-    
     const promises = [];
     const files = removeDuplicates(allFiles);
     
@@ -75,12 +74,14 @@ module.exports = async ({argv, cwd, stdout, exit}) => {
     
     let code = 0;
     
-    if (promises.length) {
-        await Promise.all(promises);
-        const [{failed}] = await once(supertape.run(), 'end');
-        code = failed ? 1 : 0;
-    }
+    if (!promises.length)
+        return exit(code);
     
+    await Promise.all(promises);
+    
+    const [{failed}] = await once(supertape.run(), 'end');
+    
+    code = failed ? 1 : 0;
     exit(code);
 };
 

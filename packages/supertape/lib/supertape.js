@@ -3,15 +3,23 @@
 const {EventEmitter} = require('events');
 const once = require('once');
 
+const options = require('../supertape.json');
+
 const runTests = require('./run-tests');
 const reporter = require('./reporter');
 
 const createReporter = once(reporter.createReporter);
-
 const createEmitter = once(_createEmitter);
 
 const {assign} = Object;
 const {stdout} = process;
+
+const getOperators = once(async () => {
+    const {operators} = options;
+    const {loadOperators} = await import('@supertape/engine-loader');
+    
+    return await loadOperators(operators);
+});
 
 const defaultOptions = {
     skip: false,
@@ -20,9 +28,10 @@ const defaultOptions = {
     quiet: false,
     format: 'tap',
     run: true,
+    getOperators,
 };
 
-function _createEmitter({quiet, format}) {
+function _createEmitter({quiet, format, getOperators}) {
     const tests = [];
     const emitter = new EventEmitter();
     const {harness, reporter} = createReporter(format);
@@ -48,8 +57,11 @@ function _createEmitter({quiet, format}) {
     });
     
     emitter.on('run', async () => {
+        const operators = await getOperators();
+        
         const {failed} = await run(tests, {
             reporter,
+            operators,
         });
         
         emitter.emit('end', {failed});
@@ -85,6 +97,7 @@ function test(message, fn, options = {}) {
         only,
         skip,
         extensions,
+        getOperators,
     } = {
         ...defaultOptions,
         ...options,
@@ -94,6 +107,7 @@ function test(message, fn, options = {}) {
     const emitter = createEmitter({
         format,
         quiet,
+        getOperators,
     });
     
     emitter.emit('test', message, fn, {
@@ -129,6 +143,8 @@ const getExtend = (extensions, type) => (message, fn, options) => {
         ...type,
     });
 };
+
+test.stub = require('@cloudcmd/stub');
 
 test.extend = (extensions) => {
     const extendedTest = getExtend(extensions);
@@ -168,36 +184,23 @@ const loop = once(({emitter, tests}) => {
 module.exports.run = () => {
     const emitter = createEmitter();
     emitter.emit('loop');
-    
     return emitter;
 };
 
-async function run(tests, {reporter}) {
+async function run(tests, {reporter, operators}) {
     const onlyTests = tests.filter(isOnly);
     
     if (onlyTests.length)
-        return await runTests(onlyTests, {reporter});
+        return await runTests(onlyTests, {
+            reporter,
+            operators,
+        });
     
     const notSkipedTests = tests.filter(notSkip);
     
-    if (!notSkipedTests.length) {
-        const count = 0;
-        
-        reporter.emit('start', {
-            count,
-        });
-        
-        reporter.emit('end', {
-            count,
-            failed: 0,
-            passed: 0,
-        });
-        
-        return {
-            failed: 0,
-        };
-    }
-    
-    return await runTests(notSkipedTests, {reporter});
+    return await runTests(notSkipedTests, {
+        reporter,
+        operators,
+    });
 }
 

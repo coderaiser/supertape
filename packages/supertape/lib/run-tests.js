@@ -8,7 +8,7 @@ const {initOperators} = require('./operators');
 
 const inc = wraptile((store) => store(store() + 1));
 
-module.exports = async function runTests(tests, {reporter}) {
+module.exports = async function runTests(tests, {reporter, operators}) {
     const count = fullstore(0);
     const failed = fullstore(0);
     const passed = fullstore(0);
@@ -41,14 +41,17 @@ module.exports = async function runTests(tests, {reporter}) {
             incCount,
             incFailed,
             incPassed,
-            extensions,
+            extensions: {
+                ...operators,
+                ...extensions,
+            },
         });
     }
     
     reporter.emit('end', {
         count: count(),
-        passed: passed(),
         failed: failed(),
+        passed: passed(),
     });
     
     return {

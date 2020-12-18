@@ -164,9 +164,10 @@ test('supertape: format: progress bar: color', async (t) => {
     };
     
     const message = 'success';
-    
     const {SUPERTAPE_PROGRESS_BAR_COLOR} = env;
+    
     env.SUPERTAPE_PROGRESS_BAR_COLOR = 'red';
+    env.SUPERTAPE_NO_PROGRESS_BAR = 1;
     
     reRequire('./progress-bar');
     const supertape = reRequire('../..');
@@ -184,6 +185,7 @@ test('supertape: format: progress bar: color', async (t) => {
     ]);
     
     env.SUPERTAPE_PROGRESS_BAR_COLOR = SUPERTAPE_PROGRESS_BAR_COLOR;
+    delete process.env.SUPERTAPE_NO_PROGRESS_BAR;
     
     const expected = montag`
       TAP version 13

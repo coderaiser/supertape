@@ -1,6 +1,8 @@
-node_modules
 .nyc_output
-yarn-error.log
 .*.swp
-
 .putoutcache
+
+coverage
+node_modules
+yarn-error.log
+

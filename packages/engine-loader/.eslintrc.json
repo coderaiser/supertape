@@ -1,0 +1,28 @@
+{
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "requireConfigFile": false
+    },
+    "overrides": [{
+        "files": "bin/*.js",
+        "rules": {
+            "no-process-exit": "off"
+        }
+    }, {
+        "files": "*.md{js}",
+        "rules": {
+            "no-unreachable": "off"
+        }
+    }],
+    "rules": {
+        "node/no-unsupported-features/es-syntax": "off"
+    },
+    "extends": [
+        "plugin:node/recommended",
+        "plugin:putout/recommended"
+    ],
+    "plugins": [
+        "node",
+        "putout"
+    ]
+}

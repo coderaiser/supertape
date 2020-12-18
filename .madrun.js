@@ -5,15 +5,19 @@ const dirs = [
     'packages',
 ];
 
+const C8_OPTIONS = [
+    '--exclude="**/lib/**/{fixture,*.spec.js}"',
+    '--check-coverage --lines 100 --functions 100 --branches 100',
+].join(' ');
+
 module.exports = {
-    'test': async () => `CI=1 FORCE_COLOR=3 ${await run('test:fast')}`,
+    'test': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/lib/**/*.spec.js' -f progress-bar`,
     'test:fail': async () => `${await run('test')} -f fail`,
-    'test:fast': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/lib/**/*.spec.js'`,
-    'test:slow': () => 'FORCE_COLOR=3 lerna run test',
-    'coverage:long': async () => `FORCE_COLOR=3 nyc --check-coverage ${await run('test:fast')}`,
-    'coverage': async () => `CI=1 FORCE_COLOR=3 nyc --skip-full --check-coverage ${await run('test:fast')}`,
-    'coverage:slow': () => 'FORCE_COLOR=3 lerna run coverage',
-    'lint:slow': () => 'FORCE_COLOR=3 lerna run --no-bail lint',
+    'test:slow': () => 'lerna run test',
+    'coverage:long': async () => `c8 ${await run('test')}`,
+    'coverage': async () => `c8 ${C8_OPTIONS} ${await run('test')}`,
+    'coverage:slow': () => 'lerna run coverage',
+    'lint:slow': () => 'lerna run --no-bail lint',
     'lint-all': async () => `MADRUN_NAME=1 ${await run('lint:*')}`,
     'lint:frame': () => run('lint:ci', '-f codeframe'),
     'lint:fresh': () => run('lint', '--fresh'),
