@@ -1,6 +1,5 @@
-'use strict';
+import {run} from 'madrun';
 
-const {run} = require('madrun');
 const dirs = [
     'packages',
 ];
@@ -10,12 +9,14 @@ const C8_OPTIONS = [
     '--check-coverage --lines 100 --functions 100 --branches 100',
 ].join(' ');
 
-module.exports = {
+export default {
     'test': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/lib/**/*.spec.js' -f progress-bar`,
+    'test:tap': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/lib/**/*.spec.js'`,
     'test:fail': async () => `${await run('test')} -f fail`,
     'test:slow': () => 'lerna run test',
     'coverage:long': async () => `c8 ${await run('test')}`,
     'coverage': async () => `c8 ${C8_OPTIONS} ${await run('test')}`,
+    'coverage:tap': async () => `c8 ${C8_OPTIONS} ${await run('test:tap')}`,
     'coverage:slow': () => 'lerna run coverage',
     'lint:slow': () => 'lerna run --no-bail lint',
     'lint-all': async () => `MADRUN_NAME=1 ${await run('lint:*')}`,
