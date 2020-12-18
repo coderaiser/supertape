@@ -1,3 +1,9 @@
+2020.12.18, v3.9.2
+
+fix:
+- (supertape) rm dotignore
+
+
 2020.12.16, v3.9.1
 
 fix:
