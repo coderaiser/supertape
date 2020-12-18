@@ -7,7 +7,9 @@ export const notCalled = (operator) => (fn, message = 'should not be called') =>
 };
 
 export const calledWith = (operator) => (fn, args, message = 'should be called with arguments') => {
-    const [calledArgs] = fn.args;
+    const {length} = fn.args;
+    const calledArgs = fn.args[length - 1];
+    
     return operator.deepEqual(calledArgs, args, message);
 };
 

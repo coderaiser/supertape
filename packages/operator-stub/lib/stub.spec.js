@@ -68,3 +68,12 @@ test('supertape: operator: stub: called twice', (t) => {
     t.end();
 });
 
+test('supertape: operator: stub: calledWith: last', (t) => {
+    const fn = stub();
+    
+    fn('hello');
+    fn('world');
+    
+    t.calledWith(fn, ['world']);
+    t.end();
+});
