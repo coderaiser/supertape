@@ -36,6 +36,7 @@ test('function call', (t) => {
 ```
 ### t.notCalled(fn [, message])
 ### t.calledWith(fn, args[, message])
+### t.calledWithNoArguments(fn[, message])
 ### t.calledCount(fn, count[, message])
 ### t.calledOnce(fn, count[, message])
 ### t.calledTwice(fn, count[, message])

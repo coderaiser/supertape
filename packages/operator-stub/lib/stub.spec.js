@@ -1,5 +1,4 @@
-import {extend} from 'supertape';
-import stub from '@cloudcmd/stub';
+import {stub, extend} from 'supertape';
 
 import * as operator from './stub.js';
 
@@ -62,7 +61,7 @@ test('supertape: operator: stub: called twice', (t) => {
 test('supertape: operator: stub: called twice', (t) => {
     const fn = stub();
     
-    new fn('hello');
+    new fn();
     
     t.calledWithNew(fn);
     t.end();
@@ -77,3 +76,56 @@ test('supertape: operator: stub: calledWith: last', (t) => {
     t.calledWith(fn, ['world']);
     t.end();
 });
+
+test('supertape: operator: stub: calledWith called with no args', (t) => {
+    const fn = stub();
+    const fail = stub();
+    
+    const calledWith = operator.calledWith({
+        fail,
+    });
+    
+    fn();
+    calledWith(fn);
+    
+    t.calledWith(fail, [`You haven't provided 'arguments', looks like you need 't.calledWithNoArgs()'`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledWith: not called', (t) => {
+    const fn = stub();
+    const fail = stub();
+    
+    const calledWith = operator.calledWith({
+        fail,
+    });
+    
+    calledWith(fn, [1, 2]);
+    
+    t.calledWith(fail, [`Expected function to be called with arguments '[1,2]', but not called at all`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledWith called with no args', (t) => {
+    const fn = stub();
+    const fail = stub();
+    
+    const calledWithNoArgs = operator.calledWithNoArgs({
+        fail,
+    });
+    
+    calledWithNoArgs(fn);
+    
+    t.calledWith(fail, [`Expected function to be called with no arguments, but not called at all`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledWithNoArgs', (t) => {
+    const fn = stub();
+    
+    fn();
+    
+    t.calledWithNoArgs(fn);
+    t.end();
+});
+
