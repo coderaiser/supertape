@@ -200,3 +200,11 @@ test('supertape: format: progress bar: color', async (t) => {
     t.equal(result, expected);
     t.end();
 });
+
+test('supertape: format: progress bar: getStream', (t) => {
+    const {_getStream} = reRequire('./progress-bar');
+    const stream = _getStream();
+    
+    t.equal(stream, process.stderr);
+    t.end();
+});

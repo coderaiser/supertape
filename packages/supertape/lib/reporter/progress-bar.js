@@ -117,6 +117,7 @@ const getColorFn = (color) => {
     return chalk[color];
 };
 
+/* c8 ignore next */
 const getStream = () => SUPERTAPE_NO_PROGRESS_BAR ? new Writable() : stderr;
 module.exports._getStream = getStream;
 
