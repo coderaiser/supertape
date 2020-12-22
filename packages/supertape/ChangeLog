@@ -1,3 +1,15 @@
+2020.12.22, v3.11.0
+
+fix:
+- (@supertape/operator-stub) calledWith: do not show arguments when not called
+- (@supertape/operator-stub) calledWith: first args -> last args
+
+feature:
+- (@supertape/operator-stub) add ability to check if provided fn is stub
+- (@supertape/operator-stub) t.called - marked with fail as it is a bad practice
+- (@putout/operator-stub) add calledWithNoArgs
+
+
 2020.12.18, v3.10.0
 
 feature:
