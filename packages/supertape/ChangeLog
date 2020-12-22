@@ -1,3 +1,9 @@
+2020.12.22, v3.13.1
+
+fix:
+- (npmignore) add *.spec.*
+
+
 2020.12.22, v3.13.0
 
 feature:
