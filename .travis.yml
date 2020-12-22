@@ -3,6 +3,7 @@ node_js:
   - 15
   - 14
 script:
+  - npm run bootstrap
   - npm run lint
   - npm run coverage:tap && npm run report
 notifications:
