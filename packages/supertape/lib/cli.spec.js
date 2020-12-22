@@ -58,7 +58,7 @@ test('supertape: bin: cli: glob', async (t) => {
     
     stopAll();
     
-    t.ok(sync.calledWith('hello'));
+    t.calledWith(sync, ['hello']);
     t.end();
 });
 
@@ -169,7 +169,7 @@ test('supertape: bin: cli: successs', async (t) => {
     
     stopAll();
     
-    t.ok(exit.calledWith(0), 'should call exit with 0');
+    t.calledWith(exit, [0], 'should call exit with 0');
     t.end();
 });
 
@@ -205,7 +205,7 @@ test('supertape: bin: cli: fail', async (t) => {
     
     stopAll();
     
-    t.ok(exit.calledWith(1), 'should call exit with 1');
+    t.calledWith(exit, [1], 'should call exit with 1');
     t.end();
 });
 
