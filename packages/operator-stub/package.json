@@ -29,7 +29,9 @@
     "report": "madrun report",
     "wisdom": "madrun wisdom"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@cloudcmd/stub": "^3.3.0"
+  },
   "keywords": [
     "operator",
     "stub",
