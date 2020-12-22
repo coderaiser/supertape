@@ -58,7 +58,7 @@ test('supertape: operator: stub: called twice', (t) => {
     t.end();
 });
 
-test('supertape: operator: stub: called twice', (t) => {
+test('supertape: operator: stub: called with new', (t) => {
     const fn = stub();
     
     new fn();
