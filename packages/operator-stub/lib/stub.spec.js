@@ -13,10 +13,15 @@ test('supertape: operator: stub: not called', (t) => {
 
 test('supertape: operator: stub: called', (t) => {
     const fn = stub();
+    const fail = stub();
     
-    fn();
+    const called = operator.called({
+        fail,
+    });
     
-    t.called(fn);
+    called(fn);
+    
+    t.calledWith(fail, [`'t.called' is to general, looks like you need 't.calledWith' or 't.calledWithNoArgs'`]);
     t.end();
 });
 

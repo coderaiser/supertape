@@ -1,7 +1,7 @@
 const {stringify} = JSON;
 
-export const called = (operator) => (fn, message = 'should be called') => {
-    return operator.ok(fn.called, message);
+export const called = (operator) => () => {
+    return operator.fail(`'t.called' is to general, looks like you need 't.calledWith' or 't.calledWithNoArgs'`);
 };
 
 export const notCalled = (operator) => (fn, message = 'should not be called') => {
