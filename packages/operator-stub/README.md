@@ -35,12 +35,102 @@ test('function call', (t) => {
 });
 ```
 ### t.notCalled(fn [, message])
+```js
+import test, {stub} from 'supertape';
+
+test('function not called', (t) => {
+    const fn = stub();
+    
+    t.notCalled(fn);
+    t.end();
+});
+```
 ### t.calledWith(fn, args[, message])
+```js
+import test, {stub} from 'supertape';
+
+test('function called with args', (t) => {
+    const fn = stub();
+    
+    fn('hello');
+    
+    t.calledWith(fn, ['hello']);
+    t.end();
+});
+```
 ### t.calledWithNoArguments(fn[, message])
+```js
+import test, {stub} from 'supertape';
+
+test('function called with no args', (t) => {
+    const fn = stub();
+    const fail = stub();
+    
+    const calledWith = operator.calledWith({
+        fail,
+    });
+    
+    fn();
+    calledWith(fn);
+    
+    t.calledWith(fail, [`You haven't provided 'arguments', looks like you need 't.calledWithNoArgs()'`]);
+    t.end();
+});
+```
 ### t.calledCount(fn, count[, message])
+```js
+import test, {stub} from 'supertape';
+
+test('function called count', (t) => {
+    const fn = stub();
+    
+    fn();
+    fn();
+    
+    t.calledCount(fn, 2);
+    t.end();
+});
+```
 ### t.calledOnce(fn, count[, message])
+```js
+import test, {stub} from 'supertape';
+
+test('function called once', (t) => {
+    const fn = stub();
+    
+    fn('hello');
+    
+    t.calledOnce(fn);
+    t.end();
+});
+```
 ### t.calledTwice(fn, count[, message])
+```js
+import test, {stub} from 'supertape';
+
+test('function called twice', (t) => {
+    const fn = stub();
+    
+    fn('hello');
+    fn('world');
+    
+    t.calledTwice(fn);
+    t.end();
+});
+```
 ### t.calledWithNew(fn, count[, message])
+```js
+import test, {stub} from 'supertape';
+
+test('function called with new', (t) => {
+    const fn = stub();
+    
+    new fn();
+    
+    t.calledWithNew(fn);
+    t.end();
+});
+```
 
 ## License
 
