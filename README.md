@@ -184,11 +184,6 @@ test('lib: diff', (t) => {
 `;
 ```
 
-## Related
-
-- [try-to-tape](https://github.com/coderaiser/try-to-tape "try-to-tape") - wrap `tape` async functions and show error on reject;
-- [@cloudcmd/stub](https://github.com/cloudcmd/stub "Stub") - simplest sinon.stub alternative with diff support;
-
 ## License
 
 MIT
