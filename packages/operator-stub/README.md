@@ -21,7 +21,8 @@ npm i @supertape/operator-stub -D
 
 Adds next operators to work with:
 
-### t.called(fn [, message])
+### t.calledWith(fn [, message])
+
 ```js
 import test, {stub} from 'supertape';
 
@@ -34,50 +35,23 @@ test('function call', (t) => {
     t.end();
 });
 ```
-### t.notCalled(fn [, message])
-```js
-import test, {stub} from 'supertape';
 
-test('function not called', (t) => {
-    const fn = stub();
-    
-    t.notCalled(fn);
-    t.end();
-});
-```
-### t.calledWith(fn, args[, message])
-```js
-import test, {stub} from 'supertape';
+### t.calledWithNoArgs(fn[, message])
 
-test('function called with args', (t) => {
-    const fn = stub();
-    
-    fn('hello');
-    
-    t.calledWith(fn, ['hello']);
-    t.end();
-});
-```
-### t.calledWithNoArguments(fn[, message])
 ```js
 import test, {stub} from 'supertape';
 
 test('function called with no args', (t) => {
     const fn = stub();
-    const fail = stub();
-    
-    const calledWith = operator.calledWith({
-        fail,
-    });
     
     fn();
-    calledWith(fn);
     
-    t.calledWith(fail, [`You haven't provided 'arguments', looks like you need 't.calledWithNoArgs()'`]);
+    t.calledWithNoArgs(fn);
     t.end();
 });
 ```
 ### t.calledCount(fn, count[, message])
+
 ```js
 import test, {stub} from 'supertape';
 
@@ -91,7 +65,9 @@ test('function called count', (t) => {
     t.end();
 });
 ```
+
 ### t.calledOnce(fn, count[, message])
+
 ```js
 import test, {stub} from 'supertape';
 
@@ -105,6 +81,7 @@ test('function called once', (t) => {
 });
 ```
 ### t.calledTwice(fn, count[, message])
+
 ```js
 import test, {stub} from 'supertape';
 
@@ -119,6 +96,7 @@ test('function called twice', (t) => {
 });
 ```
 ### t.calledWithNew(fn, count[, message])
+
 ```js
 import test, {stub} from 'supertape';
 
