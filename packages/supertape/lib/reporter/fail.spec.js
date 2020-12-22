@@ -62,3 +62,45 @@ test('supertape: format: fail', async (t) => {
     t.end();
 });
 
+test('supertape: format: fail: skip', async (t) => {
+    const fn = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const message = 'success';
+    
+    process.env.SUPERTAPE_NO_PROGRESS_BAR = 1;
+    
+    reRequire('./fail');
+    const supertape = reRequire('../..');
+    
+    supertape.init({
+        quiet: true,
+        format: 'fail',
+    });
+    
+    supertape.skip(message, fn);
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), 8),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    delete process.env.SUPERTAPE_NO_PROGRESS_BAR;
+    
+    const expected = montag`
+      TAP version 13
+      
+      1..0
+      # tests 0
+      # pass 0
+      # skip 1
+      
+      # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+

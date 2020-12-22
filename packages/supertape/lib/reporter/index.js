@@ -65,12 +65,13 @@ module.exports.createReporter = (name) => {
         });
     });
     
-    reporter.on('end', ({count, passed, failed}) => {
+    reporter.on('end', ({count, passed, failed, skiped}) => {
         harness.write({
             type: 'end',
             count,
             passed,
             failed,
+            skiped,
         });
     });
     

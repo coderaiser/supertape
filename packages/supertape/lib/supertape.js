@@ -58,8 +58,7 @@ function _createEmitter({quiet, format, getOperators}) {
     
     emitter.on('run', async () => {
         const operators = await getOperators();
-        
-        const {failed} = await run(tests, {
+        const {failed} = await runTests(tests, {
             reporter,
             operators,
         });
@@ -160,9 +159,6 @@ test.extend = (extensions) => {
     return extendedTest;
 };
 
-const isOnly = ({only}) => only;
-const notSkip = ({skip}) => !skip;
-
 const loop = once(({emitter, tests}) => {
     let runned = false;
     let previousCount = 0;
@@ -186,21 +182,4 @@ module.exports.run = () => {
     emitter.emit('loop');
     return emitter;
 };
-
-async function run(tests, {reporter, operators}) {
-    const onlyTests = tests.filter(isOnly);
-    
-    if (onlyTests.length)
-        return await runTests(onlyTests, {
-            reporter,
-            operators,
-        });
-    
-    const notSkipedTests = tests.filter(notSkip);
-    
-    return await runTests(notSkipedTests, {
-        reporter,
-        operators,
-    });
-}
 

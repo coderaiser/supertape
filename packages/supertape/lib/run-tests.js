@@ -7,8 +7,31 @@ const tryToCatch = require('try-to-catch');
 const {initOperators} = require('./operators');
 
 const inc = wraptile((store) => store(store() + 1));
+const isOnly = ({only}) => only;
+const isSkip = ({skip}) => skip;
+const notSkip = ({skip}) => !skip;
 
-module.exports = async function runTests(tests, {reporter, operators}) {
+module.exports = async (tests, {reporter, operators}) => {
+    const onlyTests = tests.filter(isOnly);
+    const skiped = tests.filter(isSkip).length;
+    
+    if (onlyTests.length)
+        return await runTests(onlyTests, {
+            reporter,
+            operators,
+            skiped,
+        });
+    
+    const notSkipedTests = tests.filter(notSkip);
+    
+    return await runTests(notSkipedTests, {
+        reporter,
+        operators,
+        skiped,
+    });
+};
+
+async function runTests(tests, {reporter, operators, skiped}) {
     const count = fullstore(0);
     const failed = fullstore(0);
     const passed = fullstore(0);
@@ -52,14 +75,16 @@ module.exports = async function runTests(tests, {reporter, operators}) {
         count: count(),
         failed: failed(),
         passed: passed(),
+        skiped,
     });
     
     return {
         count: count(),
         failed: failed(),
         passed: passed(),
+        skiped,
     };
-};
+}
 
 async function runOneTest({message, fn, extensions, index, total, reporter, count, failed, incCount, incPassed, incFailed}) {
     reporter.emit('test', {

@@ -44,7 +44,7 @@ module.exports.fail = ({at, count, message, operator, actual, expected, output, 
     return out();
 };
 
-module.exports.end = ({count, passed, failed}) => {
+module.exports.end = ({count, passed, failed, skiped}) => {
     const out = createOutput();
     
     out('');
@@ -52,6 +52,10 @@ module.exports.end = ({count, passed, failed}) => {
     out(`1..${count}`);
     out(`# tests ${count}`);
     out(`# pass ${passed}`);
+    
+    if (skiped) {
+        out(`# skip ${skiped}`);
+    }
     
     if (failed) {
         out(`# fail ${failed}`);

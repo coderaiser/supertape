@@ -72,7 +72,7 @@ module.exports.fail = ({at, count, message, operator, actual, expected, output, 
     out('');
 };
 
-module.exports.end = ({count, passed, failed}) => {
+module.exports.end = ({count, passed, failed, skiped}) => {
     bar.stop();
     
     out('');
@@ -80,6 +80,10 @@ module.exports.end = ({count, passed, failed}) => {
     out(`1..${count}`);
     out(`# tests ${count}`);
     out(`# pass ${passed}`);
+    
+    if (skiped) {
+        out(`# skip ${skiped}`);
+    }
     
     if (failed) {
         out(`# fail ${failed}`);

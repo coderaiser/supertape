@@ -162,6 +162,7 @@ test('supertape: skip', async (t) => {
         1..0
         # tests 0
         # pass 0
+        # skip 1
         
         # ok
     `;
@@ -374,6 +375,7 @@ test('supertape: extensions: extend: skip', async (t) => {
         1..0
         # tests 0
         # pass 0
+        # skip 1
         
         # ok
     `;
@@ -425,6 +427,7 @@ test('supertape: quiet: false', async (t) => {
         1..0
         # tests 0
         # pass 0
+        # skip 1
         
         # ok
     `;
