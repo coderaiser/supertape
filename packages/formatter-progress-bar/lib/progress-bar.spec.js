@@ -6,7 +6,7 @@ const montag = require('montag');
 const {reRequire} = require('mock-require');
 const pullout = require('pullout');
 
-const test = require('../..');
+const test = require('supertape');
 
 const {env} = process;
 
@@ -39,7 +39,7 @@ test('supertape: format: progress bar', async (t) => {
     process.env.SUPERTAPE_NO_PROGRESS_BAR = 1;
     
     reRequire('./progress-bar');
-    const supertape = reRequire('../..');
+    const supertape = reRequire('supertape');
     
     supertape.init({
         quiet: true,
@@ -84,7 +84,7 @@ test('supertape: format: progress bar: diff', async (t) => {
     process.env.SUPERTAPE_NO_PROGRESS_BAR = 1;
     
     reRequire('./progress-bar');
-    const supertape = reRequire('../..');
+    const supertape = reRequire('supertape');
     
     supertape.init({
         quiet: true,
@@ -127,7 +127,7 @@ test('supertape: format: progress bar: success', async (t) => {
     process.env.SUPERTAPE_NO_PROGRESS_BAR = 1;
     
     reRequire('./progress-bar');
-    const supertape = reRequire('../..');
+    const supertape = reRequire('supertape');
     
     supertape.init({
         quiet: true,
@@ -168,7 +168,7 @@ test('supertape: format: progress bar: skip', async (t) => {
     process.env.SUPERTAPE_NO_PROGRESS_BAR = 1;
     
     reRequire('./progress-bar');
-    const supertape = reRequire('../..');
+    const supertape = reRequire('supertape');
     
     supertape.init({
         quiet: true,
@@ -212,7 +212,7 @@ test('supertape: format: progress bar: color', async (t) => {
     env.SUPERTAPE_NO_PROGRESS_BAR = 1;
     
     reRequire('./progress-bar');
-    const supertape = reRequire('../..');
+    const supertape = reRequire('supertape');
     
     supertape.init({
         quiet: true,

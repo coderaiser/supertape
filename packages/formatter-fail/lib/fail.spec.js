@@ -6,7 +6,7 @@ const montag = require('montag');
 const {reRequire} = require('mock-require');
 const pullout = require('pullout');
 
-const test = require('../..');
+const test = require('supertape');
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(stream);
@@ -31,7 +31,7 @@ test('supertape: format: fail', async (t) => {
     
     const failMessage = 'fail';
     
-    const supertape = reRequire('../..');
+    const supertape = reRequire('supertape');
     
     supertape.init({
         quiet: true,
@@ -72,8 +72,7 @@ test('supertape: format: fail: skip', async (t) => {
     
     process.env.SUPERTAPE_NO_PROGRESS_BAR = 1;
     
-    reRequire('./fail');
-    const supertape = reRequire('../..');
+    const supertape = reRequire('supertape');
     
     supertape.init({
         quiet: true,

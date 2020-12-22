@@ -4,7 +4,7 @@ const {EventEmitter} = require('events');
 const {createHarness} = require('./harness');
 
 const resolveFormatter = (name) => {
-    return require(`${__dirname}/${name}`);
+    return require(`@supertape/formatter-${name}`);
 };
 
 module.exports.createReporter = (name) => {

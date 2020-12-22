@@ -37,6 +37,9 @@
   "dependencies": {
     "@cloudcmd/stub": "^3.0.0",
     "@supertape/engine-loader": "^1.0.0",
+    "@supertape/formatter-fail": "^1.0.0",
+    "@supertape/formatter-progress-bar": "^1.0.0",
+    "@supertape/formatter-tap": "^1.0.0",
     "@supertape/operator-stub": "^1.0.0",
     "chalk": "^4.1.0",
     "cli-progress": "^3.8.2",

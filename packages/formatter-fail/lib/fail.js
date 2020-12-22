@@ -1,6 +1,6 @@
 'use strict';
 
-const tap = require('./tap');
+const tap = require('@supertape/formatter-tap');
 const {
     start,
     comment,
