@@ -27,11 +27,13 @@ module.exports = async ({argv, cwd, stdout, exit}) => {
         ],
         boolean: [
             'version',
+            'help',
         ],
         alias: {
             r: 'require',
             v: 'version',
             f: 'format',
+            h: 'help',
         },
         default: {
             require: [],
@@ -41,6 +43,11 @@ module.exports = async ({argv, cwd, stdout, exit}) => {
     
     if (args.version)
         return stdout.write(`v${require('../package').version}\n`);
+    
+    if (args.help) {
+        const {default: help} = await import('./help.js');
+        return stdout.write(help());
+    }
     
     for (const module of args.require)
         await import(resolve(module, {

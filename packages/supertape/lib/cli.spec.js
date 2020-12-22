@@ -3,6 +3,7 @@
 const {join} = require('path');
 const {Transform} = require('stream');
 const {EventEmitter} = require('events');
+const {readFile} = require('fs/promises');
 
 const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
@@ -206,6 +207,42 @@ test('supertape: bin: cli: fail', async (t) => {
     stopAll();
     
     t.calledWith(exit, [1], 'should call exit with 1');
+    t.end();
+});
+
+test('supertape: cli: --help', async (t) => {
+    const write = stub();
+    const stdout = {
+        write,
+    };
+    
+    const helpPath = join(__dirname, 'fixture', 'help');
+    const helpFixture = await readFile(helpPath, 'utf8');
+    
+    await runCli({
+        argv: ['--help'],
+        stdout,
+    });
+    
+    t.calledWith(write, [helpFixture]);
+    t.end();
+});
+
+test('supertape: cli: -h', async (t) => {
+    const write = stub();
+    const stdout = {
+        write,
+    };
+    
+    const helpPath = join(__dirname, 'fixture', 'help');
+    const helpFixture = await readFile(helpPath, 'utf8');
+    
+    await runCli({
+        argv: ['-h'],
+        stdout,
+    });
+    
+    t.calledWith(write, [helpFixture]);
     t.end();
 });
 

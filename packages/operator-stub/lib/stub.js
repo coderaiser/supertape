@@ -1,5 +1,4 @@
 import {isStub} from '@cloudcmd/stub';
-const {stringify} = JSON;
 
 const getExpectedStubMessage = (fn) => `Expected stub, but received ${fn.toString()}`;
 
@@ -22,7 +21,7 @@ export const calledWith = (operator) => (fn, args, message = 'should be called w
         return operator.fail(getExpectedStubMessage(fn));
     
     if (!fn.called)
-        return operator.fail(`Expected function to be called with arguments '${stringify(args)}', but not called at all`);
+        return operator.fail(`Expected function to be called with arguments, but not called at all`);
     
     if (!args)
         return operator.fail(`You haven't provided 'arguments', looks like you need 't.calledWithNoArgs()'`);

@@ -176,7 +176,7 @@ test('supertape: operator: stub: calledWith: not called', (t) => {
     
     calledWith(fn, [1, 2]);
     
-    t.calledWith(fail, [`Expected function to be called with arguments '[1,2]', but not called at all`]);
+    t.calledWith(fail, [`Expected function to be called with arguments, but not called at all`]);
     t.end();
 });
 

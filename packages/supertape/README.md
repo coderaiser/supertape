@@ -36,6 +36,17 @@ Doesn't contain:
 npm i supertape -D
 ```
 
+## Usage
+
+```
+Usage: supertape [options] [path]
+Options
+   -h, --help                  display this help and exit
+   -v, --version               output version information and exit
+   -f, --format                use a specific output format - default: progress-bar/tap on CI
+   -r, --require               require module
+```
+
 ## Codemod
 
 You can convert your codebase from `tape` to `supertape` with help of a [putout](https://github.com/coderaiser/putout) and built-in [@putout/plugin-tape](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape).
