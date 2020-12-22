@@ -12,7 +12,7 @@ module.exports.createHarness = (reporter) => {
         
         transform(chunk, encoding, callback) {
             const {type, ...data} = chunk;
-            const result = process(prepared, type, data);
+            const result = run(prepared, type, data);
             
             if (result)
                 this.push(result);
@@ -46,7 +46,7 @@ function prepare(reporter) {
     return result;
 }
 
-function process(reporter, type, data) {
+function run(reporter, type, data) {
     if (type === 'start')
         return reporter.start(data);
     

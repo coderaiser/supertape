@@ -4,14 +4,12 @@
         "requireConfigFile": false
     },
     "overrides": [{
-        "files": "bin/*.js",
-        "rules": {
-            "no-process-exit": "off"
-        }
-    }, {
-        "files": "*.md{js}",
-        "rules": {
-            "no-unreachable": "off"
+        "files": "./packages/supertape/**/*.js",
+        "parserOptions": {
+            "sourceType": "script",
+            "babelOptions": {
+                "sourceType": "unambiguous"
+            }
         }
     }],
     "rules": {
