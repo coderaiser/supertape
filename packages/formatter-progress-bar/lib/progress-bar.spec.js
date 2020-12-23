@@ -39,6 +39,7 @@ test('supertape: format: progress bar', async (t) => {
     const {CI} = env;
     env.CI = 1;
     
+    reRequire('ci-info');
     reRequire('./progress-bar');
     const supertape = reRequire('supertape');
     
@@ -85,6 +86,7 @@ test('supertape: format: progress bar: diff', async (t) => {
     const {CI} = env;
     env.CI = 1;
     
+    reRequire('ci-info');
     reRequire('./progress-bar');
     const supertape = reRequire('supertape');
     
@@ -128,6 +130,7 @@ test('supertape: format: progress bar: success', async (t) => {
     
     env.CI = 1;
     
+    reRequire('ci-info');
     reRequire('./progress-bar');
     const supertape = reRequire('supertape');
     
@@ -170,6 +173,7 @@ test('supertape: format: progress bar: skip', async (t) => {
     const {CI} = env;
     env.CI = 1;
     
+    reRequire('ci-info');
     reRequire('./progress-bar');
     const supertape = reRequire('supertape');
     
@@ -217,6 +221,7 @@ test('supertape: format: progress bar: color', async (t) => {
     env.CI = 1;
     env.SUPERTAPE_PROGRESS_BAR_COLOR = 'red';
     
+    reRequire('ci-info');
     reRequire('./progress-bar');
     const supertape = reRequire('supertape');
     
@@ -250,10 +255,11 @@ test('supertape: format: progress bar: color', async (t) => {
 });
 
 test('supertape: format: progress bar: getStream', (t) => {
+    delete env.CI;
+    reRequire('ci-info');
     const {_getStream} = reRequire('./progress-bar');
     const stream = _getStream();
     
-    reRequire('ci-info');
     t.equal(stream, process.stderr);
     t.end();
 });
