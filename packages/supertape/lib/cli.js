@@ -37,7 +37,7 @@ module.exports = async ({argv, cwd, stdout, exit}) => {
         },
         default: {
             require: [],
-            format: 'tap',
+            format: 'progress-bar',
         },
     });
     

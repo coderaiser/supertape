@@ -6,7 +6,7 @@ const C8_OPTIONS = [
 ].join(' ');
 
 export default {
-    'test': () => `bin/supertape.js '{bin,lib}/**/*.spec.{js,mjs}' -f progress-bar`,
+    'test': () => `bin/supertape.js '{bin,lib}/**/*.spec.{js,mjs}'`,
     'watch:test': async () => `nodemon -w lib -w test -x "${await run('test')}"`,
     'lint': () => 'putout .',
     'fix:lint': () => run('lint', '--fix'),

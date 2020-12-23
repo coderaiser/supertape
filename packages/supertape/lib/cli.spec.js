@@ -148,16 +148,10 @@ test('supertape: bin: cli: files count', async (t) => {
 
 test('supertape: bin: cli: successs', async (t) => {
     const name = join(__dirname, 'fixture/cli-success.js');
-    const argv = [name, name];
+    const argv = [name, name, '-f', 'tap'];
     
     const supertape = reRequire('./supertape');
-    const init = stub();
     const exit = stub();
-    
-    mockRequire('supertape', {
-        ...supertape,
-        init,
-    });
     
     supertape.init({
         quiet: true,
