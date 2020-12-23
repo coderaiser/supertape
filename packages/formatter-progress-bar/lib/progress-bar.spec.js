@@ -60,7 +60,7 @@ test('supertape: format: progress bar', async (t) => {
         TAP version 13
         
         # fail
-        not ok 2 should be truthy
+        ❌ not ok 2 should be truthy
           ---
             operator: ok
             expected: |-
@@ -104,7 +104,7 @@ test('supertape: format: progress bar: diff', async (t) => {
         TAP version 13
         
         # progress bar
-        not ok 1 should equal
+        ❌ not ok 1 should equal
           ---
             operator: equal
               diff: |-
@@ -148,7 +148,7 @@ test('supertape: format: progress bar: success', async (t) => {
       
       1..1
       # tests 1
-      # pass 1
+      # ✅ pass 1
       
       # ok
     ` + '\n';
@@ -189,8 +189,8 @@ test('supertape: format: progress bar: skip', async (t) => {
       
       1..0
       # tests 0
-      # pass 0
-      # skip 1
+      # ✅ pass 0
+      # ⚠️  skip 1
       
       # ok
     `;
@@ -234,7 +234,7 @@ test('supertape: format: progress bar: color', async (t) => {
       
       1..1
       # tests 1
-      # pass 1
+      # ✅ pass 1
       
       # ok
     ` + '\n';

@@ -51,7 +51,7 @@ module.exports.testEnd = ({index, total, failed, message}) => {
 module.exports.fail = ({at, count, message, operator, actual, expected, output, errorStack}) => {
     out('');
     out(store());
-    out(`not ok ${count} ${message}`);
+    out(`❌ not ok ${count} ${message}`);
     out('  ---');
     out(`    operator: ${operator}`);
     
@@ -79,14 +79,14 @@ module.exports.end = ({count, passed, failed, skiped}) => {
     
     out(`1..${count}`);
     out(`# tests ${count}`);
-    out(`# pass ${passed}`);
+    out(`# ✅ pass ${passed}`);
     
     if (skiped) {
-        out(`# skip ${skiped}`);
+        out(`# ⚠️  skip ${skiped}`);
     }
     
     if (failed) {
-        out(`# fail ${failed}`);
+        out(`# ❌ fail ${failed}`);
     }
     
     out('');
