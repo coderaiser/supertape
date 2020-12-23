@@ -1,3 +1,12 @@
+2020.12.23, v4.0.0
+
+feature:
+- (@supertape/formatter-progress-bar) add min count to show progress bar
+- (@supertape/formatter-progress-bar) add ability to disable progress bar on CI
+- (supertape) set progress-bar default formatter
+- (@supertape/formatter-progress-bar) add emoji
+
+
 2020.12.22, v3.13.1
 
 fix:
