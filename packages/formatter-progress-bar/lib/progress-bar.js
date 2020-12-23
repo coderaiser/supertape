@@ -19,6 +19,7 @@ const store = fullstore();
 const {stderr} = process;
 const {
     SUPERTAPE_PROGRESS_BAR,
+    SUPERTAPE_PROGRESS_BAR_MIN = 100,
     SUPERTAPE_PROGRESS_BAR_COLOR,
 } = process.env;
 
@@ -122,8 +123,14 @@ const getColorFn = (color) => {
     return chalk[color];
 };
 
-const getStream = () => {
-    if (!isCI || SUPERTAPE_PROGRESS_BAR)
+const defaultStreamOptions = {
+    total: Infinity,
+};
+
+const getStream = ({total} = defaultStreamOptions) => {
+    const is = total >= SUPERTAPE_PROGRESS_BAR_MIN;
+    
+    if (is && !isCI || SUPERTAPE_PROGRESS_BAR)
         return stderr;
     
     return new Writable();
@@ -139,7 +146,9 @@ const createProgress = once(({total, color, message}) => {
         barIncompleteChar: '\u2591',
         clearOnComplete: true,
         stopOnComplete: true,
-        stream: getStream(),
+        stream: getStream({
+            total,
+        }),
     }, cliProgress.Presets.react);
     
     bar.start(total, 0, {

@@ -24,6 +24,7 @@ supertape --format progress-bar lib
 
 `CI=1` - disable progress bar
 `SUPERTAPE_PROGRESS_BAR=1` - force enable progress bar
+`SUPERTAPE_PROGRESS_BAR_MIN=100` - count of tests to show progress bar
 
 ## License
 
