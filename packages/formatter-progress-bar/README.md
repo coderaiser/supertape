@@ -20,6 +20,11 @@ npm i supertape @supertape/formatter-progress-bar
 supertape --format progress-bar lib
 ```
 
+## Env Variables
+
+`CI=1` - disable progress bar
+`SUPERTAPE_PROGRESS_BAR=1` - force enable progress bar
+
 ## License
 
 MIT

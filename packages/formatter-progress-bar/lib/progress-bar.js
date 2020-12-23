@@ -6,6 +6,7 @@ const cliProgress = require('cli-progress');
 const chalk = require('chalk');
 const once = require('once');
 const fullstore = require('fullstore');
+const {isCI} = require('ci-info');
 
 const OK = '👌';
 const {red} = chalk;
@@ -17,7 +18,7 @@ const store = fullstore();
 
 const {stderr} = process;
 const {
-    SUPERTAPE_NO_PROGRESS_BAR,
+    SUPERTAPE_PROGRESS_BAR,
     SUPERTAPE_PROGRESS_BAR_COLOR,
 } = process.env;
 
@@ -121,7 +122,13 @@ const getColorFn = (color) => {
     return chalk[color];
 };
 
-const getStream = () => SUPERTAPE_NO_PROGRESS_BAR ? new Writable() : stderr;
+const getStream = () => {
+    if (!isCI || SUPERTAPE_PROGRESS_BAR)
+        return stderr;
+    
+    return new Writable();
+};
+
 module.exports._getStream = getStream;
 
 const createProgress = once(({total, color, message}) => {
