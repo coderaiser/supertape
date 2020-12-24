@@ -436,6 +436,127 @@ test('supertape: quiet: false', async (t) => {
     t.end();
 });
 
+test('supertape: destructuring test', async (t) => {
+    const fn = (t) => {
+        t.equal(1, 1);
+        t.end();
+    };
+    
+    const message = 'hello';
+    
+    const supertape = reRequire('..');
+    
+    supertape.init({
+        run: false,
+        quiet: true,
+    });
+    
+    supertape.test(message, fn);
+    const stream = supertape.createStream();
+    
+    const [result] = await Promise.all([
+        pull(stream),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello
+        ok 1 should equal
+        
+        1..1
+        # tests 1
+        # pass 1
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: destructuring test: only', async (t) => {
+    const fn1 = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const fn2 = (t) => {
+        t.notOk(false);
+        t.end();
+    };
+    
+    const message1 = 'world';
+    const message2 = 'hello';
+    
+    reRequire('./run-tests');
+    const supertape = reRequire('..');
+    
+    const emitter = supertape.test.only(message1, fn1, {
+        quiet: true,
+    });
+    
+    supertape.test(message2, fn2, {
+        quiet: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream()),
+        once(emitter, 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # world
+        ok 1 should be truthy
+        
+        1..1
+        # tests 1
+        # pass 1
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: destructuring test: skip', async (t) => {
+    const fn = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const message = 'hello';
+    const supertape = reRequire('..');
+    
+    const emitter = supertape.test.skip(message, fn, {
+        quiet: true,
+    });
+    
+    const stream = supertape.createStream();
+    
+    const [result] = await Promise.all([
+        pull(stream),
+        once(emitter, 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        
+        1..0
+        # tests 0
+        # pass 0
+        # skip 1
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    
+    t.end();
+});
+
 function createStream() {
     return new Transform({
         transform(chunk, encoding, callback) {

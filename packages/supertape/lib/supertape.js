@@ -148,6 +148,7 @@ const getExtend = (extensions, type) => (message, fn, options) => {
 };
 
 test.stub = require('@cloudcmd/stub');
+test.test = test;
 
 test.extend = (extensions) => {
     const extendedTest = getExtend(extensions);
