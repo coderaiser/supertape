@@ -56,7 +56,7 @@
     "nyc": "^15.0.1",
     "pullout": "^4.0.0",
     "putout": "^12.0.1",
-    "supertape": "^3.9.1"
+    "supertape": "^4.0.0"
   },
   "license": "MIT",
   "engines": {
