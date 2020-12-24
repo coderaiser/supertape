@@ -1,3 +1,9 @@
+2020.12.24, v4.0.1
+
+fix:
+- (supertape) add ability to handle case when there is no tests in fed file
+
+
 2020.12.23, v4.0.0
 
 feature:
