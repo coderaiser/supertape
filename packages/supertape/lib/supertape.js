@@ -14,6 +14,8 @@ const createEmitter = once(_createEmitter);
 const {assign} = Object;
 const {stdout} = process;
 
+let mainEmitter;
+
 const getOperators = once(async () => {
     const {operators} = options;
     const {loadOperators} = await import('@supertape/engine-loader');
@@ -109,6 +111,8 @@ function test(message, fn, options = {}) {
         getOperators,
     });
     
+    mainEmitter = emitter;
+    
     emitter.emit('test', message, fn, {
         skip,
         only,
@@ -178,8 +182,24 @@ const loop = once(({emitter, tests}) => {
 });
 
 module.exports.run = () => {
-    const emitter = createEmitter();
-    emitter.emit('loop');
-    return emitter;
+    if (!mainEmitter) {
+        return fakeEmitter();
+    }
+    
+    mainEmitter.emit('loop');
+    
+    return mainEmitter;
 };
+
+function fakeEmitter() {
+    const emitter = new EventEmitter();
+    
+    process.nextTick(() => {
+        emitter.emit('end', {
+            failed: 0,
+        });
+    });
+    
+    return emitter;
+}
 

@@ -111,6 +111,21 @@ test('supertape: bin: cli: run', async (t) => {
     t.end();
 });
 
+test('supertape: bin: cli: run: not test', async (t) => {
+    const name = join(__dirname, 'fixture/not-test.js');
+    const argv = [name];
+    
+    reRequire('./supertape');
+    const [error] = await runCli({
+        argv,
+    });
+    
+    stopAll();
+    
+    t.notOk(error, 'should not be an error');
+    t.end();
+});
+
 test('supertape: bin: cli: files count', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
     const argv = [name, name];
