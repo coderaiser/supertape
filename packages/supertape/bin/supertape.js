@@ -13,3 +13,4 @@ module.exports = cli({
     argv: process.argv.slice(2),
 });
 
+process.on('unhandledRejection', console.error);
