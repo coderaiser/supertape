@@ -16,11 +16,11 @@ test('supertape: operators: extendOperators', async (t) => {
         },
     };
     
-    const reporter = new EventEmitter();
-    const {transformCode} = initOperators(getStubs({reporter, extensions}));
+    const formatter = new EventEmitter();
+    const {transformCode} = initOperators(getStubs({formatter, extensions}));
     
     const [[result]] = await Promise.all([
-        once(reporter, 'test:success'),
+        once(formatter, 'test:success'),
         transformCode('a', 'a'),
     ]);
     
@@ -34,11 +34,11 @@ test('supertape: operators: extendOperators', async (t) => {
 });
 
 test('supertape: operators: initOperators: notEqual', async (t) => {
-    const reporter = new EventEmitter();
-    const {notEqual} = initOperators(getStubs({reporter}));
+    const formatter = new EventEmitter();
+    const {notEqual} = initOperators(getStubs({formatter}));
     
     const [[result]] = await Promise.all([
-        once(reporter, 'test:success'),
+        once(formatter, 'test:success'),
         notEqual(+0, -0),
     ]);
     
@@ -52,11 +52,11 @@ test('supertape: operators: initOperators: notEqual', async (t) => {
 });
 
 test('supertape: operators: initOperators: notDeepEqual: true', async (t) => {
-    const reporter = new EventEmitter();
-    const {notDeepEqual} = initOperators(getStubs({reporter}));
+    const formatter = new EventEmitter();
+    const {notDeepEqual} = initOperators(getStubs({formatter}));
     
     const [[result]] = await Promise.all([
-        once(reporter, 'test:success'),
+        once(formatter, 'test:success'),
         notDeepEqual({a: 'b'}, {b: 'a'}),
     ]);
     
@@ -119,7 +119,7 @@ test('supertape: operators: notOk: false', (t) => {
 
 function getStubs(stubs = {}) {
     const {
-        reporter = new EventEmitter(),
+        formatter = new EventEmitter(),
         count = stub().returns(1),
         incCount = stub(),
         incPassed = stub(),
@@ -128,7 +128,7 @@ function getStubs(stubs = {}) {
     } = stubs;
     
     return {
-        reporter,
+        formatter,
         count,
         incCount,
         incPassed,

@@ -7,7 +7,7 @@ const diff = require('./diff');
 
 const {entries} = Object;
 
-// backward compatibility or maybe reporters support
+// backward compatibility or maybe formatters support
 const end = () => {};
 
 const ok = (actual, message = 'should be truthy') => {
@@ -97,7 +97,7 @@ const notDeepEqual = (actual, expected, message = 'should not deep equal') => {
     };
 };
 
-const comment = ({reporter}) => (message) => {
+const comment = ({formatter}) => (message) => {
     const messages = message.trim().split('\n');
     
     for (const current of messages) {
@@ -105,7 +105,7 @@ const comment = ({reporter}) => (message) => {
             .trim()
             .replace(/^#\s*/, '');
         
-        reporter.emit('comment', line);
+        formatter.emit('comment', line);
     }
 };
 
@@ -121,7 +121,7 @@ const operators = {
     end,
 };
 
-const initOperator = ({reporter, count, incCount, incPassed, incFailed}) => (name) => (...a) => {
+const initOperator = ({formatter, count, incCount, incPassed, incFailed}) => (name) => (...a) => {
     const {
         is,
         message,
@@ -135,7 +135,7 @@ const initOperator = ({reporter, count, incCount, incPassed, incFailed}) => (nam
     
     if (is) {
         incPassed();
-        reporter.emit('test:success', {
+        formatter.emit('test:success', {
             count: count(),
             message,
         });
@@ -147,7 +147,7 @@ const initOperator = ({reporter, count, incCount, incPassed, incFailed}) => (nam
     const errorStack = stack || Error(message).stack;
     const reason = stack ? 'user' : 'assert';
     
-    reporter.emit('test:fail', {
+    formatter.emit('test:fail', {
         count: count(),
         message,
         operator: name,
@@ -161,9 +161,9 @@ const initOperator = ({reporter, count, incCount, incPassed, incFailed}) => (nam
 
 module.exports.operators = operators;
 
-module.exports.initOperators = ({reporter, count, incCount, incPassed, incFailed, extensions}) => {
+module.exports.initOperators = ({formatter, count, incCount, incPassed, incFailed, extensions}) => {
     const operator = initOperator({
-        reporter,
+        formatter,
         count,
         incCount,
         incPassed,
@@ -186,7 +186,7 @@ module.exports.initOperators = ({reporter, count, incCount, incPassed, incFailed
         notOk: operator('notOk'),
         pass: operator('pass'),
         fail: operator('fail'),
-        comment: comment({reporter}),
+        comment: comment({formatter}),
         end,
         
         ...extendedOperators,

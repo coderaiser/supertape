@@ -1,49 +1,49 @@
 'use strict';
 
 const {EventEmitter} = require('events');
+
 const {createHarness} = require('./harness');
 
 const resolveFormatter = (name) => {
     return require(`@supertape/formatter-${name}`);
 };
 
-module.exports.createReporter = (name) => {
-    const reporter = new EventEmitter();
-    const formatter = resolveFormatter(name);
-    const harness = createHarness(formatter);
+module.exports.createFormatter = (name) => {
+    const formatter = new EventEmitter();
+    const harness = createHarness(resolveFormatter(name));
     
-    reporter.on('start', ({total}) => {
+    formatter.on('start', ({total}) => {
         harness.write({
             type: 'start',
             total,
         });
     });
     
-    reporter.on('test', ({message}) => {
+    formatter.on('test', ({test}) => {
         harness.write({
             type: 'test',
-            message,
+            test,
         });
     });
     
-    reporter.on('test:end', ({index, total, failed, message}) => {
+    formatter.on('test:end', ({count, total, failed, test}) => {
         harness.write({
             type: 'test:end',
             total,
-            index,
+            count,
             failed,
-            message,
+            test,
         });
     });
     
-    reporter.on('comment', (message) => {
+    formatter.on('comment', (message) => {
         harness.write({
             type: 'comment',
             message,
         });
     });
     
-    reporter.on('test:success', ({count, message}) => {
+    formatter.on('test:success', ({count, message}) => {
         harness.write({
             type: 'success',
             count,
@@ -51,7 +51,7 @@ module.exports.createReporter = (name) => {
         });
     });
     
-    reporter.on('test:fail', ({at, count, message, operator, actual, expected, output, errorStack}) => {
+    formatter.on('test:fail', ({at, count, message, operator, actual, expected, output, errorStack}) => {
         harness.write({
             type: 'fail',
             at,
@@ -65,7 +65,7 @@ module.exports.createReporter = (name) => {
         });
     });
     
-    reporter.on('end', ({count, passed, failed, skiped}) => {
+    formatter.on('end', ({count, passed, failed, skiped}) => {
         harness.write({
             type: 'end',
             count,
@@ -76,7 +76,7 @@ module.exports.createReporter = (name) => {
     });
     
     return {
-        reporter,
+        formatter,
         harness,
     };
 };

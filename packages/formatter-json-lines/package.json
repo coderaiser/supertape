@@ -1,0 +1,57 @@
+{
+  "name": "@supertape/formatter-json-lines",
+  "version": "1.0.0",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "supertape formatter progress bar",
+  "homepage": "http://github.com/coderaiser/supertape",
+  "main": "./lib/json-lines.js",
+  "release": false,
+  "tag": false,
+  "changelog": false,
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/supertape.git"
+  },
+  "scripts": {
+    "test": "madrun test",
+    "watch:test": "madrun watch:test",
+    "lint": "madrun lint",
+    "fix:lint": "madrun fix:lint",
+    "coverage": "madrun coverage",
+    "report": "madrun report",
+    "wisdom": "madrun wisdom"
+  },
+  "dependencies": {
+    "fullstore": "^3.0.0"
+  },
+  "keywords": [
+    "formatter",
+    "json-lines",
+    "supertape"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.12.1",
+    "c8": "^7.3.5",
+    "coveralls": "^3.0.0",
+    "eslint": "^7.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-putout": "^6.8.1",
+    "madrun": "^8.0.0",
+    "mock-require": "^3.0.2",
+    "montag": "^1.0.0",
+    "nodemon": "^2.0.2",
+    "nyc": "^15.0.1",
+    "pullout": "^4.0.0",
+    "putout": "^12.0.1",
+    "supertape": "^4.0.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

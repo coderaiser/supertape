@@ -62,7 +62,7 @@ There is a list of built-int `formatters` to customize output:
 | [`@supertape/formatter-tap`](/packages/formatter-tap) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-tap.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-tap) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-tap)](https://david-dm.org/coderaiser/supertape?path=packages/formatter-tap) |
 | [`@supertape/formatter-fail`](/packages/formatter-fail) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-fail.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-fail) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-fail)](https://david-dm.org/coderaiser/supertape?path=packages/formatter-fail) |
 | [`@supertape/formatter-progress-bar`](/packages/formatter-progress-bar) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-progress-bar.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-progress-bar) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-progress-bar)](https://david-dm.org/coderaiser/supertape?path=packages/formatter-progress-bar) |
-
+| [`@supertape/formatter-json-lines`](/packages/formatter-json-lines) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-json-lines.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-json-lines) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-json-lines)](https://david-dm.org/coderaiser/supertape?path=packages/formatter-json-lines) |
 ## API
 
 ### Methods

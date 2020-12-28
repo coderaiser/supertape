@@ -6,9 +6,8 @@ const once = require('once');
 const options = require('../supertape.json');
 
 const runTests = require('./run-tests');
-const reporter = require('./reporter');
+const createFormatter = once(require('./formatter').createFormatter);
 
-const createReporter = once(reporter.createReporter);
 const createEmitter = once(_createEmitter);
 
 const {assign} = Object;
@@ -36,10 +35,6 @@ const defaultOptions = {
 function _createEmitter({quiet, format, getOperators}) {
     const tests = [];
     const emitter = new EventEmitter();
-    const {harness, reporter} = createReporter(format);
-    
-    if (!quiet)
-        harness.pipe(stdout);
     
     emitter.on('test', (message, fn, {skip, only, extensions}) => {
         tests.push({
@@ -59,9 +54,14 @@ function _createEmitter({quiet, format, getOperators}) {
     });
     
     emitter.on('run', async () => {
+        const {harness, formatter} = createFormatter(format);
+        
+        if (!quiet)
+            harness.pipe(stdout);
+        
         const operators = await getOperators();
         const {failed} = await runTests(tests, {
-            reporter,
+            formatter,
             operators,
         });
         
@@ -83,7 +83,7 @@ module.exports.init = (options) => {
 
 const createStream = () => {
     const {format} = initedOptions;
-    const {harness} = createReporter(format);
+    const {harness} = createFormatter(format);
     
     return harness;
 };

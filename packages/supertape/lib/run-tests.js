@@ -11,13 +11,13 @@ const isOnly = ({only}) => only;
 const isSkip = ({skip}) => skip;
 const notSkip = ({skip}) => !skip;
 
-module.exports = async (tests, {reporter, operators}) => {
+module.exports = async (tests, {formatter, operators}) => {
     const onlyTests = tests.filter(isOnly);
     const skiped = tests.filter(isSkip).length;
     
     if (onlyTests.length)
         return await runTests(onlyTests, {
-            reporter,
+            formatter,
             operators,
             skiped,
         });
@@ -25,13 +25,13 @@ module.exports = async (tests, {reporter, operators}) => {
     const notSkipedTests = tests.filter(notSkip);
     
     return await runTests(notSkipedTests, {
-        reporter,
+        formatter,
         operators,
         skiped,
     });
 };
 
-async function runTests(tests, {reporter, operators, skiped}) {
+async function runTests(tests, {formatter, operators, skiped}) {
     const count = fullstore(0);
     const failed = fullstore(0);
     const passed = fullstore(0);
@@ -42,7 +42,7 @@ async function runTests(tests, {reporter, operators, skiped}) {
     
     const total = tests.length;
     
-    reporter.emit('start', {
+    formatter.emit('start', {
         total,
     });
     
@@ -56,14 +56,14 @@ async function runTests(tests, {reporter, operators, skiped}) {
         await runOneTest({
             fn,
             message,
-            index,
             total,
-            reporter,
+            formatter,
             count,
             failed,
             incCount,
             incFailed,
             incPassed,
+            
             extensions: {
                 ...operators,
                 ...extensions,
@@ -71,7 +71,7 @@ async function runTests(tests, {reporter, operators, skiped}) {
         });
     }
     
-    reporter.emit('end', {
+    formatter.emit('end', {
         count: count(),
         failed: failed(),
         passed: passed(),
@@ -86,13 +86,13 @@ async function runTests(tests, {reporter, operators, skiped}) {
     };
 }
 
-async function runOneTest({message, fn, extensions, index, total, reporter, count, failed, incCount, incPassed, incFailed}) {
-    reporter.emit('test', {
-        message,
+async function runOneTest({message, fn, extensions, total, formatter, count, failed, incCount, incPassed, incFailed}) {
+    formatter.emit('test', {
+        test: message,
     });
     
     const t = initOperators({
-        reporter,
+        formatter,
         count,
         incCount,
         incPassed,
@@ -107,10 +107,10 @@ async function runOneTest({message, fn, extensions, index, total, reporter, coun
         t.end();
     }
     
-    reporter.emit('test:end', {
-        index,
+    formatter.emit('test:end', {
+        count: count(),
         total,
-        message,
+        test: message,
         failed: failed(),
     });
 }
