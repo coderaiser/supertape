@@ -6,7 +6,7 @@ feature:
 - (package) @supertape/formatter-fail v2.0.0
 - (package) @supertape/formatter-tap v2.0.0
 - (supertape) test: message -> test
-- (supertape) add @supertape/formatter-tap
+- (supertape) add @supertape/formatter-json-lines
 
 
 2020.12.28, v4.2.0
