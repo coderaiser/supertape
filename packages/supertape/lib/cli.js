@@ -12,7 +12,9 @@ const supertape = require('..');
 const {resolve} = require;
 const {isArray} = Array;
 
+const maybeFirst = (a) => isArray(a) ? a.pop() : a;
 const maybeArray = (a) => isArray(a) ? a : [a];
+
 const removeDuplicates = (a) => Array.from(new Set(a));
 const filesCount = fullstore(0);
 
@@ -20,6 +22,7 @@ module.exports = async ({argv, cwd, stdout, exit}) => {
     const args = yargsParser(argv, {
         coerce: {
             require: maybeArray,
+            format: maybeFirst,
         },
         string: [
             'require',

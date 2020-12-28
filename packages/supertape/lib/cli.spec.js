@@ -255,6 +255,45 @@ test('supertape: cli: -h', async (t) => {
     t.end();
 });
 
+test('supertape: bin: cli: format: apply last', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [
+        name,
+        '-f',
+        'tap',
+        '-f',
+        'fail',
+    ];
+    
+    const test = stub();
+    const init = stub();
+    const run = stub();
+    
+    const {createStream} = reRequire('..');
+    
+    assign(test, {
+        init,
+        run,
+        createStream,
+    });
+    
+    mockRequire('..', test);
+    
+    await runCli({
+        argv,
+    });
+    
+    stopAll();
+    const expected = [{
+        format: 'fail',
+        quiet: true,
+        run: false,
+    }];
+    
+    t.calledWith(init, expected);
+    t.end();
+});
+
 function createStream() {
     return new Transform({
         transform(chunk, encoding, callback) {
