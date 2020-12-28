@@ -41,9 +41,9 @@ module.exports.test = ({test}) => {
     store(`# ${test}`);
 };
 
-module.exports.testEnd = ({index, total, failed, message}) => {
+module.exports.testEnd = ({count, total, failed, message}) => {
     bar.increment({
-        index,
+        count,
         total,
         message,
         failed: formatErrorsCount(failed),
@@ -141,7 +141,7 @@ module.exports._getStream = getStream;
 const createProgress = once(({total, color, message}) => {
     const colorFn = getColorFn(color);
     const bar = new cliProgress.SingleBar({
-        format: `${colorFn('{bar}')} {percentage}% | {failed} | {index}/{total} | {message}`,
+        format: `${colorFn('{bar}')} {percentage}% | {failed} | {count}/{total} | {message}`,
         barCompleteChar: '\u2588',
         barIncompleteChar: '\u2591',
         clearOnComplete: true,
@@ -154,7 +154,7 @@ const createProgress = once(({total, color, message}) => {
     bar.start(total, 0, {
         message,
         total,
-        index: 0,
+        count: 0,
         failed: OK,
     });
     
