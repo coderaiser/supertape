@@ -37,8 +37,8 @@ module.exports.start = ({total}) => {
     });
 };
 
-module.exports.test = ({message}) => {
-    store(`# ${message}`);
+module.exports.test = ({test}) => {
+    store(`# ${test}`);
 };
 
 module.exports.testEnd = ({index, total, failed, message}) => {

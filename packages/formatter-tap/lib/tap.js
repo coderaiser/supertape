@@ -6,8 +6,8 @@ module.exports.start = () => {
     return 'TAP version 13\n';
 };
 
-module.exports.test = ({message}) => {
-    return `# ${message}\n`;
+module.exports.test = ({test}) => {
+    return `# ${test}\n`;
 };
 
 module.exports.comment = ({message}) => {

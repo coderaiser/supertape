@@ -10,8 +10,8 @@ const {
 const fullstore = require('fullstore');
 const testStore = fullstore();
 
-function test({message}) {
-    testStore(message);
+function test({test}) {
+    testStore(test);
     return '';
 }
 
