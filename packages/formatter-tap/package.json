@@ -1,6 +1,6 @@
 {
   "name": "@supertape/formatter-tap",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "supertape formatter tap",
   "homepage": "http://github.com/coderaiser/supertape",
@@ -9,13 +9,6 @@
   "tag": false,
   "changelog": false,
   "type": "commonjs",
-  "nyc": {
-    "exclude": [
-      "**/*.spec.js",
-      ".madrun.*",
-      "**/fixture"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/coderaiser/supertape.git"
