@@ -33,7 +33,7 @@ module.exports.start = ({total}) => {
     bar = createProgress({
         total,
         color,
-        message: '',
+        test: '',
     });
 };
 
@@ -41,11 +41,11 @@ module.exports.test = ({test}) => {
     store(`# ${test}`);
 };
 
-module.exports.testEnd = ({count, total, failed, message}) => {
+module.exports.testEnd = ({count, total, failed, test}) => {
     bar.increment({
         count,
         total,
-        message,
+        test,
         failed: formatErrorsCount(failed),
     });
 };
@@ -138,10 +138,10 @@ const getStream = ({total} = defaultStreamOptions) => {
 
 module.exports._getStream = getStream;
 
-const createProgress = once(({total, color, message}) => {
+const createProgress = once(({total, color, test}) => {
     const colorFn = getColorFn(color);
     const bar = new cliProgress.SingleBar({
-        format: `${colorFn('{bar}')} {percentage}% | {failed} | {count}/{total} | {message}`,
+        format: `${colorFn('{bar}')} {percentage}% | {failed} | {count}/{total} | {test}`,
         barCompleteChar: '\u2588',
         barIncompleteChar: '\u2591',
         clearOnComplete: true,
@@ -152,7 +152,7 @@ const createProgress = once(({total, color, message}) => {
     }, cliProgress.Presets.react);
     
     bar.start(total, 0, {
-        message,
+        test,
         total,
         count: 0,
         failed: OK,

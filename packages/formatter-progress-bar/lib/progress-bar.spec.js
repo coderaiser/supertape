@@ -330,13 +330,13 @@ test('supertape: format: progress bar: testEnd', (t) => {
     const count = 1;
     const total = 10;
     const failed = 0;
-    const message = 'hi';
+    const test = 'hi';
     
     testEnd({
         count,
         total,
         failed,
-        message,
+        test,
     });
     
     stopAll();
@@ -345,7 +345,7 @@ test('supertape: format: progress bar: testEnd', (t) => {
         count,
         total,
         failed: '👌',
-        message,
+        test,
     }];
     
     t.calledWith(increment, expected);
