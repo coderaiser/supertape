@@ -3,10 +3,11 @@
 const {once} = require('events');
 
 const montag = require('montag');
-const {reRequire} = require('mock-require');
+const mockRequire = require('mock-require');
+const {reRequire, stopAll} = mockRequire;
 const pullout = require('pullout');
 
-const test = require('supertape');
+const {test, stub} = require('supertape');
 
 const {env} = process;
 
@@ -213,10 +214,7 @@ test('supertape: format: progress bar: color', async (t) => {
     };
     
     const message = 'success';
-    const {
-        CI,
-        SUPERTAPE_PROGRESS_BAR_COLOR,
-    } = env;
+    const {CI} = env;
     
     env.CI = 1;
     env.SUPERTAPE_PROGRESS_BAR_COLOR = 'red';
@@ -237,7 +235,7 @@ test('supertape: format: progress bar: color', async (t) => {
         once(supertape.run(), 'end'),
     ]);
     
-    env.SUPERTAPE_PROGRESS_BAR_COLOR = SUPERTAPE_PROGRESS_BAR_COLOR;
+    delete env.SUPERTAPE_PROGRESS_BAR_COLOR;
     env.CI = CI;
     
     const expected = montag`
@@ -311,3 +309,45 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR, no CI'
     t.end();
 });
 
+test('supertape: format: progress bar: testEnd', (t) => {
+    const increment = stub();
+    const SingleBar = stub().returns({
+        start: stub(),
+        increment,
+    });
+    
+    mockRequire('cli-progress', {
+        SingleBar,
+        Presets: {
+            React: {},
+        },
+    });
+    
+    reRequire('once');
+    const {start, testEnd} = reRequire('./progress-bar');
+    start({total: 10});
+    
+    const count = 1;
+    const total = 10;
+    const failed = 0;
+    const message = 'hi';
+    
+    testEnd({
+        count,
+        total,
+        failed,
+        message,
+    });
+    
+    stopAll();
+    
+    const expected = [{
+        count,
+        total,
+        failed: '👌',
+        message,
+    }];
+    
+    t.calledWith(increment, expected);
+    t.end();
+});
