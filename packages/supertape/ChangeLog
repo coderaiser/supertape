@@ -1,3 +1,10 @@
+2020.12.29, v4.4.0
+
+feature:
+- (supertape) putout v13.1.1
+- (supertape) add ability to show failed on ctrl+c
+
+
 2020.12.29, v4.3.1
 
 fix:
