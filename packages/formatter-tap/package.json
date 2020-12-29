@@ -42,7 +42,7 @@
     "nodemon": "^2.0.2",
     "nyc": "^15.0.1",
     "pullout": "^4.0.0",
-    "putout": "^12.0.1",
+    "putout": "^13.1.1",
     "supertape": "^4.0.0"
   },
   "license": "MIT",
