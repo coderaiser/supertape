@@ -81,7 +81,7 @@ module.exports.end = ({count, passed, failed, skiped}) => {
     
     out(`1..${count}`);
     out(`# tests ${count}`);
-    out(`# ✅ pass ${passed}`);
+    out(`# pass ${passed}`);
     
     if (skiped) {
         out(`# ⚠️  skip ${skiped}`);
@@ -94,7 +94,7 @@ module.exports.end = ({count, passed, failed, skiped}) => {
     out('');
     
     if (!failed) {
-        out('# ok');
+        out('# ✅ ok');
         out('');
     }
     
