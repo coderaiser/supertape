@@ -1,3 +1,11 @@
+2020.12.29, v4.3.1
+
+fix:
+- (supertape) rm unhandled promise rejections handler
+- (@supertape/formatter-progress-bar) message -> test
+- (@supertape/formatter-progress-bar) index -> count
+
+
 2020.12.28, v4.3.0
 
 feature:
