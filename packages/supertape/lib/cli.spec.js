@@ -12,19 +12,31 @@ const pullout = require('pullout');
 const wait = require('@iocmd/wait');
 
 const test = require('./supertape.js');
-const cli = require('./cli');
+const {exitCodes} = require('./exit');
+
+const {
+    OK,
+    WAS_STOP,
+} = exitCodes;
 
 const {reRequire, stopAll} = mockRequire;
 const {assign} = Object;
 
 test('supertape: cli: -r', async (t) => {
     const argv = ['-r', 'hello'];
+    const write = stub();
+    const stderr = {
+        write,
+    };
     
-    const [error] = await runCli({
+    await runCli({
         argv,
+        stderr,
     });
     
-    t.ok(error.message.includes(`Cannot find module 'hello'`));
+    const [[message]] = write.args;
+    
+    t.ok(message.includes(`Cannot find module 'hello'`));
     t.end();
 });
 
@@ -33,7 +45,7 @@ test('supertape: cli: -v', async (t) => {
     const argv = ['-v'];
     const stdout = createStream();
     
-    await cli({
+    await runCli({
         argv,
         stdout,
     });
@@ -161,7 +173,7 @@ test('supertape: bin: cli: files count', async (t) => {
     t.end();
 });
 
-test('supertape: bin: cli: successs', async (t) => {
+test('supertape: cli: successs', async (t) => {
     const name = join(__dirname, 'fixture/cli-success.js');
     const argv = [name, name, '-f', 'tap'];
     
@@ -179,11 +191,11 @@ test('supertape: bin: cli: successs', async (t) => {
     
     stopAll();
     
-    t.calledWith(exit, [0], 'should call exit with 0');
+    t.calledWith(exit, [OK], 'should call exit with 0');
     t.end();
 });
 
-test('supertape: bin: cli: fail', async (t) => {
+test('supertape: cli: fail', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
     const argv = [name, name];
     
@@ -268,8 +280,12 @@ test('supertape: bin: cli: format: apply last', async (t) => {
     const test = stub();
     const init = stub();
     const run = stub();
+    const isStop = stub();
     
     const {createStream} = reRequire('..');
+    mockRequire('@putout/keypress', stub().returns({
+        isStop,
+    }));
     
     assign(test, {
         init,
@@ -288,9 +304,38 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         format: 'fail',
         quiet: true,
         run: false,
+        isStop,
     }];
     
     t.calledWith(init, expected);
+    t.end();
+});
+
+test('supertape: cli: isStop', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [
+        name,
+        '-f',
+        'json-lines',
+    ];
+    
+    const exit = stub();
+    const isStop = stub().returns(true);
+    
+    mockRequire('@putout/keypress', stub().returns({
+        isStop,
+    }));
+    
+    reRequire('./supertape.js');
+    
+    await runCli({
+        exit,
+        argv,
+    });
+    
+    stopAll();
+    
+    t.calledWith(exit, [WAS_STOP]);
     t.end();
 });
 
@@ -307,6 +352,7 @@ async function runCli(options) {
     const {
         argv = [],
         stdout = createStream(),
+        stderr = createStream(),
         cwd = __dirname,
         exit = stub(),
     } = options;
@@ -316,6 +362,7 @@ async function runCli(options) {
     const [error] = await tryToCatch(cli, {
         argv,
         stdout,
+        stderr,
         cwd,
         exit,
     });

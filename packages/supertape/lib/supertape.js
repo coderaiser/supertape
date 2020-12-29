@@ -30,9 +30,10 @@ const defaultOptions = {
     format: 'tap',
     run: true,
     getOperators,
+    isStop: () => false,
 };
 
-function _createEmitter({quiet, format, getOperators}) {
+function _createEmitter({quiet, format, getOperators, isStop}) {
     const tests = [];
     const emitter = new EventEmitter();
     
@@ -63,6 +64,7 @@ function _createEmitter({quiet, format, getOperators}) {
         const {failed} = await runTests(tests, {
             formatter,
             operators,
+            isStop,
         });
         
         emitter.emit('end', {failed});
@@ -99,6 +101,7 @@ function test(message, fn, options = {}) {
         skip,
         extensions,
         getOperators,
+        isStop,
     } = {
         ...defaultOptions,
         ...options,
@@ -109,6 +112,7 @@ function test(message, fn, options = {}) {
         format,
         quiet,
         getOperators,
+        isStop,
     });
     
     mainEmitter = emitter;

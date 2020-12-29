@@ -1,7 +1,6 @@
 'use strict';
 
 const {EventEmitter} = require('events');
-
 const {createHarness} = require('./harness');
 
 const resolveFormatter = (name) => {

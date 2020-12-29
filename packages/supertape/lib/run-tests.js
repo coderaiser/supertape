@@ -11,7 +11,7 @@ const isOnly = ({only}) => only;
 const isSkip = ({skip}) => skip;
 const notSkip = ({skip}) => !skip;
 
-module.exports = async (tests, {formatter, operators}) => {
+module.exports = async (tests, {formatter, operators, isStop}) => {
     const onlyTests = tests.filter(isOnly);
     const skiped = tests.filter(isSkip).length;
     
@@ -20,6 +20,7 @@ module.exports = async (tests, {formatter, operators}) => {
             formatter,
             operators,
             skiped,
+            isStop,
         });
     
     const notSkipedTests = tests.filter(notSkip);
@@ -28,10 +29,11 @@ module.exports = async (tests, {formatter, operators}) => {
         formatter,
         operators,
         skiped,
+        isStop,
     });
 };
 
-async function runTests(tests, {formatter, operators, skiped}) {
+async function runTests(tests, {formatter, operators, skiped, isStop}) {
     const count = fullstore(0);
     const failed = fullstore(0);
     const passed = fullstore(0);
@@ -46,12 +48,16 @@ async function runTests(tests, {formatter, operators, skiped}) {
         total,
     });
     
-    for (let index = 0; index < total; index++) {
-        const {
-            fn,
-            message,
-            extensions,
-        } = tests[index];
+    const wasStop = fullstore();
+    
+    for (const {fn, message, extensions} of tests) {
+        if (wasStop())
+            break;
+        
+        if (isStop()) {
+            wasStop(true);
+            count(total - 1);
+        }
         
         await runOneTest({
             fn,

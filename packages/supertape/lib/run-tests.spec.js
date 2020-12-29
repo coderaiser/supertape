@@ -6,7 +6,7 @@ const montag = require('montag');
 const {reRequire} = require('mock-require');
 const pullout = require('pullout');
 
-const test = require('..');
+const {test, stub} = require('..');
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(stream);
@@ -298,6 +298,50 @@ test('supertape: runTests: pass: unnamed', async (t) => {
         
         1..1
         # tests 1
+        # pass 1
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: runTests: isStop', async (t) => {
+    const fn1 = (t) => {
+        t.pass();
+        t.end();
+    };
+    
+    const fn2 = (t) => {
+        t.pass();
+        t.end();
+    };
+    
+    const message1 = 'hello world';
+    const message2 = 'bye world';
+    const isStop = stub().returns(true);
+    
+    const supertape = reRequire('..');
+    await supertape(message1, fn1, {
+        quiet: true,
+        isStop,
+    });
+    
+    await supertape(message2, fn2);
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream()),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello world
+        ok 2 (unnamed assert)
+        
+        1..2
+        # tests 2
         # pass 1
         
         # ok
