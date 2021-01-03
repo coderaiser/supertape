@@ -5,7 +5,7 @@
 [DependencyStatusIMGURL]: https://img.shields.io/david/coderaiser/supertape.svg?style=flat&longCache=true
 [NPMURL]: https://npmjs.org/package/supertape "npm"
 [BuildStatusURL]: https://travis-ci.org/coderaiser/supertape "Build Status"
-[DependencyStatusURL]: https://david-dm.org/coderaiser/supertape "Dependency Status"
+[DependencyStatusURL]: https://david-dm.org/coderaiser/supertape?path=packages/operator-stub "Dependency Status"
 [CoverageURL]: https://coveralls.io/github/coderaiser/supertape?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
 
