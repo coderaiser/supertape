@@ -257,7 +257,8 @@ test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t
         CI,
         SUPERTAPE_PROGRESS_BAR,
     } = env;
-    delete env.SUPERTAPE_PROGRESS_BAR;
+    
+    env.SUPERTAPE_PROGRESS_BAR = 0;
     env.CI = 1;
     
     reRequire('ci-info');

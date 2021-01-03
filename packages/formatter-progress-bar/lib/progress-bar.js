@@ -130,7 +130,7 @@ const defaultStreamOptions = {
 const getStream = ({total} = defaultStreamOptions) => {
     const is = total >= SUPERTAPE_PROGRESS_BAR_MIN;
     
-    if (is && !isCI || SUPERTAPE_PROGRESS_BAR)
+    if (is && !isCI || SUPERTAPE_PROGRESS_BAR === '1')
         return stderr;
     
     return new Writable();
