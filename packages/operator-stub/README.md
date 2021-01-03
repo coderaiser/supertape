@@ -2,7 +2,7 @@
 
 [NPMIMGURL]: https://img.shields.io/npm/v/supertape.svg?style=flat&longCache=true
 [BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/supertape/master.svg?style=flat&longCache=true
-[DependencyStatusIMGURL]: https://img.shields.io/david/coderaiser/supertape.svg?style=flat&longCache=true
+[DependencyStatusIMGURL]: https://img.shields.io/david/coderaiser/supertape.svg?path=packages/operator-stub&style=flat&longCache=true
 [NPMURL]: https://npmjs.org/package/supertape "npm"
 [BuildStatusURL]: https://travis-ci.org/coderaiser/supertape "Build Status"
 [DependencyStatusURL]: https://david-dm.org/coderaiser/supertape?path=packages/operator-stub "Dependency Status"
