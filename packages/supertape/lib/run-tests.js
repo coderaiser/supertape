@@ -1,5 +1,7 @@
 'use strict';
 
+const {promisify} = require('util');
+
 const fullstore = require('fullstore');
 const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
@@ -10,6 +12,19 @@ const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
 const isSkip = ({skip}) => skip;
 const notSkip = ({skip}) => !skip;
+
+const timeout = promisify((time, fn) => {
+    setTimeout(fn, time);
+});
+
+const wait = async (time, message) => {
+    await timeout(time);
+    return [message];
+};
+
+const {
+    SUPERTAPE_TIMEOUT = 3000,
+} = process.env;
 
 module.exports = async (tests, {formatter, operators, isStop}) => {
     const onlyTests = tests.filter(isOnly);
@@ -106,7 +121,10 @@ async function runOneTest({message, fn, extensions, total, formatter, count, fai
         extensions,
     });
     
-    const [error] = await tryToCatch(fn, t);
+    const [error] = await Promise.race([
+        tryToCatch(fn, t),
+        wait(SUPERTAPE_TIMEOUT, 'timeout'),
+    ]);
     
     if (error) {
         t.fail(error);

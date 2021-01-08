@@ -1,6 +1,6 @@
 'use strict';
 
-const {once} = require('events');
+const {once, EventEmitter} = require('events');
 
 const montag = require('montag');
 const {reRequire} = require('mock-require');
@@ -75,6 +75,42 @@ test('supertape: runTests: fail', async (t) => {
           ---
             operator: fail
     `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: runTests: fail: timeout', async (t) => {
+    const fn = async (t) => {
+        await once(new EventEmitter(), 'end');
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    const {SUPERTAPE_TIMEOUT} = process.env;
+    process.env.SUPERTAPE_TIMEOUT = 1;
+    
+    reRequire('./run-tests');
+    const supertape = reRequire('..');
+    await supertape(message, fn, {
+        quiet: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), 5),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello world
+        not ok 1 timeout
+          ---
+            operator: fail
+    `;
+    
+    process.env.SUPERTAPE_TIMEOUT = SUPERTAPE_TIMEOUT;
     
     t.equal(result, expected);
     t.end();

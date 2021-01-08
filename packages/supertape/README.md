@@ -17,6 +17,7 @@
 - as many `only` as you wish
 - ability to extend
 - more natural assertions: `expected, result` -> `result, expected`, for example:
+- smart timeouts (configured with `SUPERTAPE_TIMEOUT`)
 
 ```js
 t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
