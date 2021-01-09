@@ -27,17 +27,17 @@ const timeout = (time, value) => {
 
 module.exports = async (tests, {formatter, operators, isStop}) => {
     const onlyTests = tests.filter(isOnly);
-    const skiped = tests.filter(isSkip).length;
     
     if (onlyTests.length)
         return await runTests(onlyTests, {
             formatter,
             operators,
-            skiped,
+            skiped: tests.length - onlyTests.length,
             isStop,
         });
     
     const notSkipedTests = tests.filter(notSkip);
+    const skiped = tests.filter(isSkip).length;
     
     return await runTests(notSkipedTests, {
         formatter,

@@ -210,6 +210,7 @@ test('supertape: only', async (t) => {
         1..1
         # tests 1
         # pass 1
+        # skip 1
         
         # ok
     `;
@@ -513,6 +514,7 @@ test('supertape: destructuring test: only', async (t) => {
         1..1
         # tests 1
         # pass 1
+        # skip 1
         
         # ok
     `;
