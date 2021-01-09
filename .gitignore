@@ -1,3 +1,4 @@
+*.swp
 .nyc_output
 .*.swp
 .putoutcache
