@@ -13,18 +13,19 @@ const isOnly = ({only}) => only;
 const isSkip = ({skip}) => skip;
 const notSkip = ({skip}) => !skip;
 
-const timeout = promisify((time, fn) => {
-    setTimeout(fn, time);
-});
-
-const wait = async (time, message) => {
-    await timeout(time);
-    return [message];
-};
-
 const {
     SUPERTAPE_TIMEOUT = 3000,
 } = process.env;
+
+const timeout = (time, value) => {
+    let stop;
+    const promise = new Promise((resolve) => {
+        let id = setTimeout(resolve, time, value);
+        stop = clearTimeout.bind(null, id);
+    });
+    
+    return [promise, stop];
+}
 
 module.exports = async (tests, {formatter, operators, isStop}) => {
     const onlyTests = tests.filter(isOnly);
@@ -121,10 +122,14 @@ async function runOneTest({message, fn, extensions, total, formatter, count, fai
         extensions,
     });
     
+    const [timer, stopTimer] = timeout(SUPERTAPE_TIMEOUT, ['timeout']);
+    
     const [error] = await Promise.race([
         tryToCatch(fn, t),
-        wait(SUPERTAPE_TIMEOUT, 'timeout'),
+        timer,
     ]);
+    
+    stopTimer();
     
     if (error) {
         t.fail(error);
@@ -138,4 +143,3 @@ async function runOneTest({message, fn, extensions, total, formatter, count, fai
         failed: failed(),
     });
 }
-
