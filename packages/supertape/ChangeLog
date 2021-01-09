@@ -1,3 +1,10 @@
+2021.01.09, v4.5.1
+
+fix:
+- (supertape) run-tests: delay after end of tests
+- (supertape) run-tests: delay after end of tests
+
+
 2021.01.08, v4.5.0
 
 fix:
