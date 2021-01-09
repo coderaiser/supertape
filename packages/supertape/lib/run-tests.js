@@ -1,7 +1,5 @@
 'use strict';
 
-const {promisify} = require('util');
-
 const fullstore = require('fullstore');
 const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
@@ -20,12 +18,12 @@ const {
 const timeout = (time, value) => {
     let stop;
     const promise = new Promise((resolve) => {
-        let id = setTimeout(resolve, time, value);
+        const id = setTimeout(resolve, time, value);
         stop = clearTimeout.bind(null, id);
     });
     
     return [promise, stop];
-}
+};
 
 module.exports = async (tests, {formatter, operators, isStop}) => {
     const onlyTests = tests.filter(isOnly);

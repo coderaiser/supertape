@@ -2,5 +2,5 @@
     "-h, --help                 ": "display this help and exit",
     "-v, --version              ": "output version information and exit",
     "-f, --format               ": "use a specific output format - default: progress-bar/tap on CI",
-    "-r, --require              ":  "require module"
+    "-r, --require              ": "require module"
 }
