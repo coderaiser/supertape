@@ -151,6 +151,20 @@ test('supertape: operator: stub: calledWith: last', (t) => {
     t.end();
 });
 
+test('supertape: operator: stub: calledWith: deep equals', (t) => {
+    const fn = stub();
+    
+    const obj = {
+        hello: 'world',
+        f: () => {},
+    };
+    
+    fn(obj);
+    
+    t.calledWith(fn, [{hello: 'world', f: () => {}}]);
+    t.end();
+});
+
 test('supertape: operator: stub: calledWith called with no args', (t) => {
     const fn = stub();
     const fail = stub();

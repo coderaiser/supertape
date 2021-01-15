@@ -69,6 +69,31 @@ test('supertape: operators: initOperators: notDeepEqual: true', async (t) => {
     t.end();
 });
 
+test('supertape: operators: deepEqual: no visual differences', async (t) => {
+    const formatter = new EventEmitter();
+    const {deepEqual} = initOperators(getStubs({formatter}));
+    
+    const a = {
+        fn: () => {},
+    };
+    
+    const b = {
+        fn: () => {},
+    };
+    const [[result]] = await Promise.all([
+        once(formatter, 'test:success'),
+        deepEqual(a, b),
+    ]);
+    
+    const expected = {
+        count: 1,
+        message: 'should deep equal',
+    };
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
 test('supertape: operators: equal', (t) => {
     const {equal} = operators;
     const {is} = equal(+0, -0);

@@ -76,7 +76,7 @@ const deepEqual = (actual, expected, message = 'should deep equal') => {
     const output = is ? '' : diff(expected, actual);
     
     return {
-        is,
+        is: is || !output,
         actual,
         expected,
         message,

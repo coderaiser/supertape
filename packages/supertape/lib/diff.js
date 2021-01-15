@@ -1,6 +1,8 @@
 'use strict';
 
 const diff = require('jest-diff').default;
+const strip = require('strip-ansi');
+
 const {formatOutput, addSpaces} = require('./format');
 
 module.exports = (a, b) => {
@@ -13,6 +15,9 @@ module.exports = (a, b) => {
             .split('\n')
             .slice(3)
             .join('\n');
+    
+    if (strip(diffed) === 'Compared values have no visual difference.')
+        return '';
     
     const output = [
         addSpaces('diff: |-'),

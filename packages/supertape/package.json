@@ -51,6 +51,7 @@
     "jest-diff": "^26.0.1",
     "once": "^1.4.0",
     "resolve": "^1.17.0",
+    "strip-ansi": "^6.0.0",
     "try-catch": "^3.0.0",
     "try-to-catch": "^3.0.0",
     "wraptile": "^3.0.0",

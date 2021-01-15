@@ -12,3 +12,18 @@ test('supertape: diff', (t) => {
     t.end();
 });
 
+test('supertape: diff: no diff', (t) => {
+    const a = {
+        fn: () => {},
+    };
+    
+    const b = {
+        fn: () => {},
+    };
+    
+    const diffed = diff(a, b);
+    
+    t.notOk(diffed);
+    t.end();
+});
+
