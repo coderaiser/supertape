@@ -1,3 +1,9 @@
+2021.01.20, v4.8.0
+
+feature:
+- (supertape) equal but not deepEqual: empty diff -> result information
+
+
 2021.01.16, v4.7.0
 
 feature:
