@@ -29,8 +29,11 @@ const notOk = (actual, message = 'should be falsy') => {
 };
 
 function equal(actual, expected, message = 'should equal') {
+    let output = '';
     const is = Object.is(actual, expected);
-    const output = is ? '' : diff(expected, actual);
+    
+    if (!is)
+        output = diff(expected, actual) || '    result: values not equal, but deepEqual';
     
     return {
         is,

@@ -387,3 +387,42 @@ test('supertape: runTests: isStop', async (t) => {
     t.end();
 });
 
+test('supertape: runTests: not equal, but deepEqual', async (t) => {
+    const a = {
+        hello: 'world',
+    };
+    
+    const b = {
+        hello: 'world',
+    };
+    
+    const fn = (t) => {
+        t.equal(a, b);
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    const supertape = reRequire('..');
+    await supertape(message, fn, {
+        quiet: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), 6),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello world
+        not ok 1 should equal
+          ---
+            operator: equal
+            result: values not equal, but deepEqual
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
