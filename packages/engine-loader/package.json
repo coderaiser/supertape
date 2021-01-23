@@ -23,6 +23,7 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
+    "simport": "^1.1.1",
     "try-catch": "^3.0.0"
   },
   "keywords": [
