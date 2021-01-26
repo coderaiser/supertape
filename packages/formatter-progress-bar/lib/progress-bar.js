@@ -146,6 +146,7 @@ const createProgress = once(({total, color, test}) => {
         barIncompleteChar: '\u2591',
         clearOnComplete: true,
         stopOnComplete: true,
+        hideCursor: true,
         stream: getStream({
             total,
         }),
