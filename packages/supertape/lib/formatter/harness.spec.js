@@ -28,3 +28,30 @@ test('supertape: harness: proceed condition', (t) => {
     t.end();
 });
 
+test('supertape: harness: Error: stream.push() after EOF', (t) => {
+    const reporter = {
+        test: () => 'hello world',
+    };
+    
+    const push = () => {
+        throw Error('x');
+    };
+    
+    const input = createHarness(reporter, {push});
+    const output = new Transform({
+        transform(chunk, enc, callback) {
+            callback();
+        },
+    });
+    
+    input.pipe(output);
+    
+    input.write({
+        type: 'test',
+        test: 'hello',
+    });
+    
+    t.pass('should not throw');
+    t.end();
+});
+
