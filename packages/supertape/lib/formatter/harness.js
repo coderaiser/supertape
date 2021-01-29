@@ -1,10 +1,9 @@
 'use strict';
 
-const tryCatch = require('try-catch');
 const {Transform} = require('stream');
 const {assign} = Object;
 
-module.exports.createHarness = (reporter, {push} = {}) => {
+module.exports.createHarness = (reporter) => {
     const prepared = prepare(reporter);
     
     const stream = new Transform({
@@ -12,15 +11,11 @@ module.exports.createHarness = (reporter, {push} = {}) => {
         writableObjectMode: true,
         
         transform(chunk, encoding, callback) {
-            const superPush = push || this.push.bind(this);
-            
-            let {type, ...data} = chunk;
+            const {type, ...data} = chunk;
             const result = run(prepared, type, data);
             
-            if (result) {
-                const [error] = tryCatch(superPush, result);
-                type = !error ? type : 'end';
-            }
+            if (result)
+                this.push(result);
             
             if (type === 'end')
                 this.push(null);
