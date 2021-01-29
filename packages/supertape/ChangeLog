@@ -1,3 +1,9 @@
+2021.01.29, v4.9.0
+
+feature:
+- (supertape) improve debugging experience: make timers bigger when under debug
+
+
 2021.01.28, v4.8.2
 
 fix:
