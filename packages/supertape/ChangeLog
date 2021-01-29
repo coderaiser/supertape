@@ -1,3 +1,9 @@
+2021.01.29, v4.9.1
+
+fix:
+- (supertape) harness: rm useless try-catch wrapper
+
+
 2021.01.29, v4.9.0
 
 feature:
