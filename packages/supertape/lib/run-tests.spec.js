@@ -3,7 +3,8 @@
 const {once, EventEmitter} = require('events');
 
 const montag = require('montag');
-const {reRequire} = require('mock-require');
+const mockRequire = require('mock-require');
+const {reRequire, stopAll} = mockRequire;
 const pullout = require('pullout');
 
 const {test, stub} = require('..');
@@ -426,3 +427,40 @@ test('supertape: runTests: not equal, but deepEqual', async (t) => {
     t.end();
 });
 
+test('supertape: runTests: is debug', async (t) => {
+    const fn = (t) => {
+        t.pass();
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    mockRequire('./is-debug', true);
+    reRequire('./run-tests');
+    const supertape = reRequire('..');
+    await supertape(message, fn, {
+        quiet: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream()),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    stopAll();
+    
+    const expected = montag`
+        TAP version 13
+        # hello world
+        ok 1 (unnamed assert)
+        
+        1..1
+        # tests 1
+        # pass 1
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});

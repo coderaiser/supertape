@@ -5,6 +5,7 @@ const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
 
 const {initOperators} = require('./operators');
+const isDebug = require('./is-debug');
 
 const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
@@ -15,8 +16,14 @@ const {
     SUPERTAPE_TIMEOUT = 3000,
 } = process.env;
 
+const DEBUG_TIME = 3000 * 1000;
+
 const timeout = (time, value) => {
     let stop;
+    
+    if (isDebug)
+        time = DEBUG_TIME;
+    
     const promise = new Promise((resolve) => {
         const id = setTimeout(resolve, time, value);
         stop = clearTimeout.bind(null, id);
