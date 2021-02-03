@@ -81,7 +81,7 @@
     "montag": "^1.0.0",
     "nodemon": "^2.0.2",
     "pullout": "^4.0.0",
-    "putout": "^13.1.1",
+    "putout": "^14.0.3",
     "runsome": "^1.0.0"
   },
   "license": "MIT",
