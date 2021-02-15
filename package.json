@@ -28,23 +28,19 @@
     "bootstrap": "madrun bootstrap",
     "report": "madrun report"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "putout --staged -f progress --cache"
-    }
-  },
   "devDependencies": {
     "c8": "^7.3.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-putout": "^7.1.1",
     "husky": "^4.2.1",
+    "husky": "^5.0.9",
     "lerna": "^3.8.5",
     "madrun": "^8.0.1",
     "putout": "^14.0.3",
     "supertape": "^4.0.0"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "workspaces": [
     "packages/*"

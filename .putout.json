@@ -3,5 +3,8 @@
         "*.md": {
             "remove-unreachable-code": "off"
         }
-    }
+    },
+    "ignore": [
+        ".husky"
+    ]
 }
