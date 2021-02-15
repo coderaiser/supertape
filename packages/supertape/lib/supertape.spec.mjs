@@ -1,4 +1,7 @@
-import test, {extend, stub} from './supertape.mjs';
+import test, {
+    extend,
+    stub,
+} from './supertape.mjs';
 
 const extendedTest = extend({
     superOk: (operator) => (a) => {

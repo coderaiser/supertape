@@ -24,7 +24,9 @@ Adds next operators to work with:
 ### t.calledWith(fn [, message])
 
 ```js
-import test, {stub} from 'supertape';
+import test, {
+    stub,
+} from 'supertape';
 
 test('function call', (t) => {
     const fn = stub();
@@ -39,7 +41,9 @@ test('function call', (t) => {
 ### t.calledWithNoArgs(fn[, message])
 
 ```js
-import test, {stub} from 'supertape';
+import test, {
+    stub,
+} from 'supertape';
 
 test('function called with no args', (t) => {
     const fn = stub();
@@ -50,10 +54,13 @@ test('function called with no args', (t) => {
     t.end();
 });
 ```
+
 ### t.calledCount(fn, count[, message])
 
 ```js
-import test, {stub} from 'supertape';
+import test, {
+    stub,
+} from 'supertape';
 
 test('function called count', (t) => {
     const fn = stub();
@@ -69,7 +76,9 @@ test('function called count', (t) => {
 ### t.calledOnce(fn, count[, message])
 
 ```js
-import test, {stub} from 'supertape';
+import test, {
+    stub,
+} from 'supertape';
 
 test('function called once', (t) => {
     const fn = stub();
@@ -80,10 +89,13 @@ test('function called once', (t) => {
     t.end();
 });
 ```
+
 ### t.calledTwice(fn, count[, message])
 
 ```js
-import test, {stub} from 'supertape';
+import test, {
+    stub,
+} from 'supertape';
 
 test('function called twice', (t) => {
     const fn = stub();
@@ -95,10 +107,13 @@ test('function called twice', (t) => {
     t.end();
 });
 ```
+
 ### t.calledWithNew(fn, count[, message])
 
 ```js
-import test, {stub} from 'supertape';
+import test, {
+    stub,
+} from 'supertape';
 
 test('function called with new', (t) => {
     const fn = stub();

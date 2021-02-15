@@ -1,7 +1,6 @@
 *.swp
 .nyc_output
 .*.swp
-.putoutcache
 
 coverage
 node_modules

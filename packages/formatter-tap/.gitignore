@@ -4,4 +4,4 @@ node_modules
 yarn-error.log
 .*.swp
 
-.putoutcache
+coverage

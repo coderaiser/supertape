@@ -26,7 +26,8 @@
     "fix:lint:cache": "madrun fix:lint:cache",
     "fix:lint:slow": "madrun fix:lint:slow",
     "bootstrap": "madrun bootstrap",
-    "report": "madrun report"
+    "report": "madrun report",
+    "postinstall": "madrun postinstall"
   },
   "devDependencies": {
     "c8": "^7.3.5",
