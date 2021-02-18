@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
-    "ci-info": "^2.0.0",
+    "ci-info": "^3.1.1",
     "cli-progress": "^3.8.2",
     "fullstore": "^3.0.0",
     "once": "^1.4.0"

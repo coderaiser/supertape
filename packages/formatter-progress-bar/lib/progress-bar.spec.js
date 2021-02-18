@@ -6,7 +6,6 @@ const montag = require('montag');
 const mockRequire = require('mock-require');
 const {reRequire, stopAll} = mockRequire;
 const pullout = require('pullout');
-
 const {test, stub} = require('supertape');
 
 const {env} = process;
@@ -263,7 +262,9 @@ test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t
     
     reRequire('ci-info');
     const {_getStream} = reRequire('./progress-bar');
-    const stream = _getStream();
+    const stream = _getStream({
+        total: 1,
+    });
     
     env.CI = CI;
     env.SUPERTAPE_PROGRESS_BAR = SUPERTAPE_PROGRESS_BAR;
@@ -282,7 +283,9 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR', (t) =
     
     reRequire('ci-info');
     const {_getStream} = reRequire('./progress-bar');
-    const stream = _getStream();
+    const stream = _getStream({
+        total: 100,
+    });
     
     env.CI = CI;
     env.SUPERTAPE_PROGRESS_BAR = SUPERTAPE_PROGRESS_BAR;
@@ -296,6 +299,7 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR, no CI'
         CI,
         SUPERTAPE_PROGRESS_BAR,
     } = env;
+    
     env.SUPERTAPE_PROGRESS_BAR = 1;
     delete env.CI;
     
