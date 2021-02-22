@@ -283,7 +283,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
     const isStop = stub();
     
     const {createStream} = reRequire('..');
-    mockRequire('@putout/keypress', stub().returns({
+    mockRequire('@putout/cli-keypress', stub().returns({
         isStop,
     }));
     
@@ -322,7 +322,7 @@ test('supertape: cli: isStop', async (t) => {
     const exit = stub();
     const isStop = stub().returns(true);
     
-    mockRequire('@putout/keypress', stub().returns({
+    mockRequire('@putout/cli-keypress', stub().returns({
         isStop,
     }));
     

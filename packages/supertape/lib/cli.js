@@ -7,7 +7,7 @@ const yargsParser = require('yargs-parser');
 const glob = require('glob');
 const fullstore = require('fullstore');
 const tryToCatch = require('try-to-catch');
-const keypress = require('@putout/keypress');
+const keypress = require('@putout/cli-keypress');
 const {createSimport} = require('simport');
 
 const simport = createSimport(__filename);
