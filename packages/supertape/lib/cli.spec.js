@@ -12,12 +12,10 @@ const pullout = require('pullout');
 const wait = require('@iocmd/wait');
 
 const test = require('./supertape.js');
-const {exitCodes} = require('./exit');
-
 const {
     OK,
     WAS_STOP,
-} = exitCodes;
+} = require('./exit-codes');
 
 const {reRequire, stopAll} = mockRequire;
 const {assign} = Object;
@@ -336,6 +334,30 @@ test('supertape: cli: isStop', async (t) => {
     stopAll();
     
     t.calledWith(exit, [WAS_STOP]);
+    t.end();
+});
+
+test('supertape: cli: validation', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [
+        name,
+        '--forma',
+        'json-lines',
+    ];
+    
+    const write = stub();
+    const stderr = {
+        write,
+    };
+    
+    await runCli({
+        argv,
+        stderr,
+    });
+    
+    const [[message]] = write.args;
+    
+    t.equal(message, `Invalid option '--forma'. Perhaps you meant '--format'\n`);
     t.end();
 });
 

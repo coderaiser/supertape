@@ -13,9 +13,13 @@ const {createSimport} = require('simport');
 const simport = createSimport(__filename);
 
 const supertape = require('..');
-const {exitCodes, getExitCode} = require('./exit');
-
-const {OK} = exitCodes;
+const {
+    OK,
+    FAIL,
+    WAS_STOP,
+    UNHANDLED,
+    INVALID_OPTION,
+} = require('./exit-codes');
 
 const {resolve} = require;
 const {isArray} = Array;
@@ -28,7 +32,7 @@ const filesCount = fullstore(0);
 
 module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
     const {isStop} = keypress();
-    const [error, failed] = await tryToCatch(cli, {
+    const [error, result] = await tryToCatch(cli, {
         argv,
         cwd,
         stdout,
@@ -36,41 +40,63 @@ module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
         isStop,
     });
     
-    if (error)
+    if (error) {
         stderr.write(error.stack);
+        return exit(UNHANDLED);
+    }
     
-    exit(getExitCode({
-        error,
+    const {
         failed,
-        isStop,
-    }));
+        code,
+        message,
+    } = result;
+    
+    if (failed) {
+        return exit(FAIL);
+    }
+    
+    if (code === INVALID_OPTION) {
+        stderr.write(`${message}\n`);
+        return exit(code);
+    }
+    
+    if (isStop())
+        return exit(WAS_STOP);
+    
+    return exit(OK);
+};
+
+const yargsOptions = {
+    configuration: {
+        'strip-aliased': true,
+        'strip-dashed': true,
+    },
+    coerce: {
+        require: maybeArray,
+        format: maybeFirst,
+    },
+    string: [
+        'format',
+        'require',
+    ],
+    boolean: [
+        'version',
+        'help',
+    ],
+    alias: {
+        version: 'v',
+        format: 'f',
+        help: 'h',
+        require: 'r',
+    },
+    default: {
+        format: 'progress-bar',
+        require: [],
+    },
 };
 
 async function cli({argv, cwd, stdout, isStop}) {
-    const args = yargsParser(argv, {
-        coerce: {
-            require: maybeArray,
-            format: maybeFirst,
-        },
-        string: [
-            'require',
-            'format',
-        ],
-        boolean: [
-            'version',
-            'help',
-        ],
-        alias: {
-            r: 'require',
-            v: 'version',
-            f: 'format',
-            h: 'help',
-        },
-        default: {
-            require: [],
-            format: 'progress-bar',
-        },
-    });
+    const args = yargsParser(argv, yargsOptions);
     
     if (args.version) {
         stdout.write(`v${require('../package').version}\n`);
@@ -82,6 +108,19 @@ async function cli({argv, cwd, stdout, isStop}) {
         stdout.write(help());
         return OK;
     }
+    
+    const validateArgs = require('@putout/cli-validate-args');
+    
+    const error = await validateArgs(args, [
+        ...yargsOptions.boolean,
+        ...yargsOptions.string,
+    ]);
+    
+    if (error)
+        return {
+            code: INVALID_OPTION,
+            message: error.message,
+        };
     
     for (const module of args.require)
         await simport(resolve(module, {
@@ -120,7 +159,9 @@ async function cli({argv, cwd, stdout, isStop}) {
     await Promise.all(promises);
     const [{failed}] = await once(supertape.run(), 'end');
     
-    return failed;
+    return {
+        failed,
+    };
 }
 
 module.exports._filesCount = filesCount;
