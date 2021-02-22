@@ -1,3 +1,16 @@
+2021.02.22, v4.9.2
+
+feature:
+- (package) putout v15.2.0
+- (supertape) @putout/keypress -> @putout/cli-keypress
+- (package) ci-info v3.1.1
+- (package) eslint-plugin-putout v7.1.1
+- (package) husky v5.0.9
+- (package) putout v15.1.1
+- (package) putout v14.0.3
+- (package) eslint-plugin-putout v7.1.1
+
+
 2021.01.29, v4.9.1
 
 fix:
