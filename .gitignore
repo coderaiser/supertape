@@ -1,8 +1,7 @@
-*.swp
-.nyc_output
 .*.swp
 
 coverage
 node_modules
 yarn-error.log
 
+*.swp

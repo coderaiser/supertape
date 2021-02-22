@@ -40,7 +40,6 @@
     "@cloudcmd/stub": "^3.1.0",
     "@supertape/operator-stub": "^1.0.0",
     "c8": "^7.3.5",
-    "coveralls": "^3.0.0",
     "eslint": "^7.0.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-putout": "^7.1.1",
