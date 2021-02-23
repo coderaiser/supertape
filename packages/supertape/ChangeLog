@@ -1,3 +1,11 @@
+2021.02.23, v5.0.0
+
+feature:
+- feature(supertape) bin: convert to ESM
+- feature(supertape) add ability to guess command line option
+
+
+
 2021.02.22, v4.9.2
 
 feature:
