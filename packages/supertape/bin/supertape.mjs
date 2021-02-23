@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
-'use strict';
-
-const cli = require('../lib/cli.js');
+import cli from '../lib/cli.js';
 
 const {
     stdout,
@@ -10,7 +8,7 @@ const {
     exit,
 } = process;
 
-module.exports = cli({
+export default cli({
     stdout,
     stderr,
     exit,

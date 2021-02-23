@@ -13,13 +13,13 @@
       },
       "default": "./lib/supertape.js"
     },
-    "./bin/supertape": "./bin/supertape.js",
-    "./lib/cli": "./lib/cli.js"
+    "./bin/supertape": "./bin/supertape.mjs",
+    "./cli": "./lib/cli.js"
   },
   "type": "commonjs",
   "bin": {
-    "tape": "bin/supertape.js",
-    "supertape": "bin/supertape.js"
+    "tape": "bin/supertape.mjs",
+    "supertape": "bin/supertape.mjs"
   },
   "repository": {
     "type": "git",
