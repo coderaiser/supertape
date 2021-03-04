@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NAME: supertape
+      FORCE_COLOR: 3
 
     strategy:
       matrix:
