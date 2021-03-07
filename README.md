@@ -17,8 +17,9 @@
 - ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking).
 - shows colored diff when test not `equal` or not `deepEqual`;
 - produces deteiled stack traces for `async functions`;
-- as many `only` as you wish
-- ability to extend
+- as many `only` as you wish;
+- ability to extend;
+- smart timeouts for long running tests 🏃‍♂️(configured with `SUPERTAPE_TIMEOUT`);
 - more natural assertions: `expected, result` -> `result, expected`, for example:
 
 ```js

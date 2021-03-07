@@ -16,8 +16,8 @@
 - produces deteiled stack traces for `async functions`;
 - as many `only` as you wish
 - ability to extend
+- smart timeouts for long running tests 🏃‍♂️(configured with `SUPERTAPE_TIMEOUT`);
 - more natural assertions: `expected, result` -> `result, expected`, for example:
-- smart timeouts (configured with `SUPERTAPE_TIMEOUT`)
 
 ```js
 t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
@@ -29,7 +29,7 @@ Doesn't contain:
 - aliases, methods list much shorter;
 - `throws`, `doesNotThrows` - use [tryCatch](https://github.com/coderaiser/try-catch), [tryToCatch](https://github.com/coderaiser/try-to-catch) with `equal` instead.
 
-`Supertape` was written for scratch after messing a lot with `tape`, it inspired by `tape` and willing to be compatible with it.
+`Supertape` was written from scratch after messing a lot with `tape`, it inspired by `tape` and willing to be compatible with it.
 
 ## Install
 
