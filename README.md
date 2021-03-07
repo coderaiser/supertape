@@ -31,7 +31,7 @@ Doesn't contain:
 - aliases, methods list much shorter;
 - `throws`, `doesNotThrows` - use [tryCatch](https://github.com/coderaiser/try-catch), [tryToCatch](https://github.com/coderaiser/try-to-catch) with `equal` instead.
 
-`Supertape` was written for scratch after messing a lot with `tape`, it inspired by `tape` and willing to be compatible with it.
+`Supertape` was written from scratch after messing a lot with `tape`, it inspired by `tape` and willing to be compatible with it.
 
 ## Install
 
