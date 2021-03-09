@@ -28,6 +28,20 @@ const notOk = (actual, message = 'should be falsy') => {
     };
 };
 
+function match(actual, regexp, message = 'should match') {
+    if (typeof regexp !== 'object')
+        return fail(Error('regexp should be RegExp'));
+    
+    const is = regexp.test(actual);
+    
+    return {
+        is,
+        actual,
+        expected: regexp,
+        message,
+    };
+}
+
 function equal(actual, expected, message = 'should equal') {
     let output = '';
     const is = Object.is(actual, expected);
@@ -122,6 +136,7 @@ const operators = {
     pass,
     fail,
     end,
+    match,
 };
 
 const initOperator = ({formatter, count, incCount, incPassed, incFailed}) => (name) => (...a) => {
@@ -190,6 +205,7 @@ module.exports.initOperators = ({formatter, count, incCount, incPassed, incFaile
         pass: operator('pass'),
         fail: operator('fail'),
         comment: comment({formatter}),
+        match: operator('match'),
         end,
         
         ...extendedOperators,

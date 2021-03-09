@@ -142,6 +142,30 @@ test('supertape: operators: notOk: false', (t) => {
     t.end();
 });
 
+test('supertape: operators: match: no regexp', (t) => {
+    const {match} = operators;
+    const {message} = match('hello', 'world');
+    
+    t.equal(message.message, 'regexp should be RegExp');
+    t.end();
+});
+
+test('supertape: operators: match: not', (t) => {
+    const {match} = operators;
+    const {is} = match('hello', /world/);
+    
+    t.notOk(is);
+    t.end();
+});
+
+test('supertape: operators: match', (t) => {
+    const {match} = operators;
+    const {is} = match('hello', /hello/);
+    
+    t.ok(is);
+    t.end();
+});
+
 function getStubs(stubs = {}) {
     const {
         formatter = new EventEmitter(),
