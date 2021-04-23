@@ -1,9 +1,10 @@
-'use strict';
+import deepEqualCheck from 'deep-equal';
 
-const deepEqualCheck = require('deep-equal');
-
-const {formatOutput, parseAt} = require('./format');
-const diff = require('./diff');
+import diff from './diff.mjs';
+import {
+    formatOutput,
+    parseAt,
+} from './format.js';
 
 const {entries} = Object;
 
@@ -126,7 +127,7 @@ const comment = ({formatter}) => (message) => {
     }
 };
 
-const operators = {
+export const operators = {
     equal,
     notEqual,
     deepEqual,
@@ -177,9 +178,7 @@ const initOperator = ({formatter, count, incCount, incPassed, incFailed}) => (na
     });
 };
 
-module.exports.operators = operators;
-
-module.exports.initOperators = ({formatter, count, incCount, incPassed, incFailed, extensions}) => {
+export const initOperators = ({formatter, count, incCount, incPassed, incFailed, extensions}) => {
     const operator = initOperator({
         formatter,
         count,

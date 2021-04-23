@@ -3,14 +3,19 @@
 const fullstore = require('fullstore');
 const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
+const once = require('once');
 
-const {initOperators} = require('./operators');
 const isDebug = require('./is-debug');
 
 const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
 const isSkip = ({skip}) => skip;
 const notSkip = ({skip}) => !skip;
+
+const getInitOperators = once(async () => {
+    const {initOperators} = await import('./operators.mjs');
+    return initOperators;
+});
 
 const {
     SUPERTAPE_TIMEOUT = 3000,
@@ -118,6 +123,7 @@ async function runOneTest({message, fn, extensions, total, formatter, count, fai
         test: message,
     });
     
+    const initOperators = await getInitOperators();
     const t = initOperators({
         formatter,
         count,

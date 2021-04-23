@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('..');
-const diff = require('./diff');
+import test from './supertape.js';
+import diff from './diff.mjs';
 
 test('supertape: diff', (t) => {
     const diffed = diff(undefined, 'hello');

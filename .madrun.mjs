@@ -5,8 +5,8 @@ const dirs = [
 ];
 
 export default {
-    'test': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/lib/**/*.spec.js'`,
-    'test:tap': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/lib/**/*.spec.js'`,
+    'test': () => `tape '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
+    'test:tap': () => `tape '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
     'test:fail': async () => `${await run('test')} -f fail`,
     'test:slow': () => 'lerna run test',
     'coverage:long': async () => `c8 ${await run('test')}`,

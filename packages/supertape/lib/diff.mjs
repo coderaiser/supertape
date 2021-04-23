@@ -1,11 +1,14 @@
-'use strict';
+import _diff from 'jest-diff';
+import strip from 'strip-ansi';
 
-const diff = require('jest-diff').default;
-const strip = require('strip-ansi');
+import {
+    formatOutput,
+    addSpaces,
+} from './format.js';
 
-const {formatOutput, addSpaces} = require('./format');
+const diff = _diff.default;
 
-module.exports = (a, b) => {
+export default (a, b) => {
     const diffed = diff(a, b);
     
     let striped = diffed;

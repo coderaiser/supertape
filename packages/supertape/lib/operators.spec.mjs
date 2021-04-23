@@ -1,13 +1,15 @@
-'use strict';
+import {
+    once,
+    EventEmitter,
+} from 'events';
 
-const {once, EventEmitter} = require('events');
-const stub = require('@cloudcmd/stub');
-const test = require('..');
+import stub from '@cloudcmd/stub';
 
-const {
+import test from './supertape.js';
+import {
     initOperators,
     operators,
-} = require('./operators');
+} from './operators.mjs';
 
 test('supertape: operators: extendOperators', async (t) => {
     const extensions = {

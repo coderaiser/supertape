@@ -53,7 +53,7 @@
     "once": "^1.4.0",
     "resolve": "^1.17.0",
     "simport": "^1.1.1",
-    "strip-ansi": "^6.0.0",
+    "strip-ansi": "^7.0.0",
     "try-to-catch": "^3.0.0",
     "wraptile": "^3.0.0",
     "yargs-parser": "^20.2.4"
