@@ -33,7 +33,7 @@
     "c8": "^7.3.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-putout": "^7.1.1",
-    "husky": "^5.0.9",
+    "husky": "^6.0.0",
     "lerna": "^4.0.0",
     "madrun": "^8.0.1",
     "putout": "^16.10.1",
