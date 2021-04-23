@@ -36,7 +36,7 @@
     "husky": "^5.0.9",
     "lerna": "^4.0.0",
     "madrun": "^8.0.1",
-    "putout": "^15.2.0",
+    "putout": "^16.10.1",
     "supertape": "^5.0.0"
   },
   "engines": {
