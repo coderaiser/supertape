@@ -302,6 +302,48 @@ test('supertape: extensions: extend', async (t) => {
     t.end();
 });
 
+test('supertape: extensions: extend: async', async (t) => {
+    const extensions = {
+        transformCode: (t) => async (a, b) => {
+            return t.equal(a + 1, b, 'should transform code');
+        },
+    };
+    
+    const fn = async (t) => {
+        await t.transformCode(0, 1);
+        t.end();
+    };
+    
+    const message = 'hello';
+    const supertape = reRequire('..');
+    
+    const extendedTape = supertape.extend(extensions);
+    
+    const emitter = extendedTape(message, fn, {
+        quiet: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream()),
+        once(emitter, 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello
+        ok 1 should transform code
+        
+        1..1
+        # tests 1
+        # pass 1
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: extensions: extend: only', async (t) => {
     const extensions = {
         transformCode: (t) => (a, b) => {

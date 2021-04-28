@@ -7,6 +7,7 @@ import {
 } from './format.js';
 
 const {entries} = Object;
+const isAsync = (a) => a[Symbol.toStringTag] === 'AsyncFunction';
 
 // backward compatibility or maybe formatters support
 const end = () => {};
@@ -140,16 +141,22 @@ export const operators = {
     match,
 };
 
-const initOperator = ({formatter, count, incCount, incPassed, incFailed}) => (name) => (...a) => {
-    const {
-        is,
-        message,
-        expected,
-        actual,
-        output,
-        stack,
-    } = operators[name](...a);
+const initOperator = (runnerState) => (name) => {
+    const fn = operators[name];
     
+    if (isAsync(fn))
+        return async (...a) => {
+            const testState = await fn(...a);
+            return run(name, runnerState, testState);
+        };
+    
+    return (...a) => {
+        const testState = fn(...a);
+        return run(name, runnerState, testState);
+    };
+};
+
+function run(name, {formatter, count, incCount, incPassed, incFailed}, {is, message, expected, actual, output, stack}) {
     incCount();
     
     if (is) {
@@ -176,7 +183,7 @@ const initOperator = ({formatter, count, incCount, incPassed, incFailed}) => (na
         errorStack: formatOutput(errorStack),
         at: parseAt(errorStack, {reason}),
     });
-};
+}
 
 export const initOperators = ({formatter, count, incCount, incPassed, incFailed, extensions}) => {
     const operator = initOperator({
