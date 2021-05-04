@@ -27,7 +27,7 @@
     "fix:lint:slow": "madrun fix:lint:slow",
     "bootstrap": "madrun bootstrap",
     "report": "madrun report",
-    "postinstall": "madrun postinstall"
+    "prepare": "madrun prepare"
   },
   "devDependencies": {
     "c8": "^7.3.5",
