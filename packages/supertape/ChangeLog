@@ -1,3 +1,11 @@
+2021.05.08, v5.4.0
+
+feature:
+- (supertape) improve error message when operator returns nothing
+- (package) putout v17.0.0
+
+
+
 2021.04.28, v5.3.0
 
 feature:
