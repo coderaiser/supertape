@@ -8,9 +8,9 @@ const montag = require('montag');
 const {reRequire} = require('mock-require');
 const pullout = require('pullout');
 
-const pull = async (stream) => {
+const pull = async (stream, end = -2) => {
     const output = await pullout(stream);
-    return output.slice(0, -2);
+    return output.slice(0, end);
 };
 
 test('supertape: equal', async (t) => {
@@ -297,6 +297,42 @@ test('supertape: extensions: extend', async (t) => {
         
         # ok
     `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: extensions: extend: no return', async (t) => {
+    const extensions = {
+        transformCode: (t) => (a, b) => {
+            t.equal(a + 1, b, 'should transform code');
+        },
+    };
+    
+    const fn = (t) => {
+        t.transformCode(0, 1);
+        t.end();
+    };
+    
+    const message = 'hello';
+    const supertape = reRequire('..');
+    
+    const extendedTape = supertape.extend(extensions);
+    
+    const emitter = extendedTape(message, fn, {
+        quiet: true,
+    });
+    
+    const expected = montag`
+        TAP version 13
+        # hello
+        not ok 1 looks like operator returns nothing, it will always fail
+    `;
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), expected.length),
+        once(emitter, 'end'),
+    ]);
     
     t.equal(result, expected);
     t.end();

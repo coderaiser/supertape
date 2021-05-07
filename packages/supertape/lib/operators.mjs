@@ -156,7 +156,9 @@ const initOperator = (runnerState) => (name) => {
     };
 };
 
-function run(name, {formatter, count, incCount, incPassed, incFailed}, {is, message, expected, actual, output, stack}) {
+const returnMissing = () => fail('looks like operator returns nothing, it will always fail');
+
+function run(name, {formatter, count, incCount, incPassed, incFailed}, {is, message, expected, actual, output, stack} = returnMissing()) {
     incCount();
     
     if (is) {
