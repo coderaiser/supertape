@@ -1,3 +1,11 @@
+2021.05.28, v5.4.1
+
+feature:
+- (package) jest-diff v27.0.1
+- (package) eslint-plugin-putout v8.0.1
+- (package) putout v18.0.0
+
+
 2021.05.08, v5.4.0
 
 feature:
