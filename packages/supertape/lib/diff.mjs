@@ -1,12 +1,10 @@
-import _diff from 'jest-diff';
+import {diff} from 'jest-diff';
 import strip from 'strip-ansi';
 
 import {
     formatOutput,
     addSpaces,
 } from './format.js';
-
-const diff = _diff.default;
 
 export default (a, b) => {
     const diffed = diff(a, b);
