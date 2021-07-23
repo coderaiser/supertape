@@ -1,3 +1,10 @@
+2021.07.23, v5.5.0
+
+feature:
+- (supertape) operators: add handling of function returned as operator result
+
+
+
 2021.05.28, v5.4.1
 
 feature:
