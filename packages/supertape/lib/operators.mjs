@@ -8,6 +8,7 @@ import {
 
 const {entries} = Object;
 const isAsync = (a) => a[Symbol.toStringTag] === 'AsyncFunction';
+const isFn = (a) => typeof a === 'function';
 
 // backward compatibility or maybe formatters support
 const end = () => {};
@@ -156,9 +157,25 @@ const initOperator = (runnerState) => (name) => {
     };
 };
 
+const validate = (a) => {
+    if (isFn(a))
+        return fail('looks like operator returns function, it will always fail');
+    
+    return a;
+};
+
 const returnMissing = () => fail('looks like operator returns nothing, it will always fail');
 
-function run(name, {formatter, count, incCount, incPassed, incFailed}, {is, message, expected, actual, output, stack} = returnMissing()) {
+function run(name, {formatter, count, incCount, incPassed, incFailed}, testState = returnMissing()) {
+    const {
+        is,
+        message,
+        expected,
+        actual,
+        output,
+        stack,
+    } = validate(testState);
+    
     incCount();
     
     if (is) {

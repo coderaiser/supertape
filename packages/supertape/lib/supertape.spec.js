@@ -338,6 +338,42 @@ test('supertape: extensions: extend: no return', async (t) => {
     t.end();
 });
 
+test('supertape: extensions: extend: return function', async (t) => {
+    const extensions = {
+        transformCode: (t) => (a, b) => () => {
+            t.equal(a + 1, b, 'should transform code');
+        },
+    };
+    
+    const fn = (t) => {
+        t.transformCode(0, 1);
+        t.end();
+    };
+    
+    const message = 'hello';
+    const supertape = reRequire('..');
+    
+    const extendedTape = supertape.extend(extensions);
+    
+    const emitter = extendedTape(message, fn, {
+        quiet: true,
+    });
+    
+    const expected = montag`
+        TAP version 13
+        # hello
+        not ok 1 looks like operator returns function, it will always fail
+    `;
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), expected.length),
+        once(emitter, 'end'),
+    ]);
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: extensions: extend: async', async (t) => {
     const extensions = {
         transformCode: (t) => async (a, b) => {
