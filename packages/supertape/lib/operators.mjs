@@ -8,7 +8,11 @@ import {
 
 const {entries} = Object;
 const isAsync = (a) => a[Symbol.toStringTag] === 'AsyncFunction';
+const maybeRegExp = (a) => isStr(a) ? RegExp(a) : a;
+
 const isFn = (a) => typeof a === 'function';
+const isStr = (a) => typeof a === 'string';
+const isObj = (a) => typeof a === 'object';
 
 // backward compatibility or maybe formatters support
 const end = () => {};
@@ -31,11 +35,20 @@ const notOk = (actual, message = 'should be falsy') => {
     };
 };
 
-function match(actual, regexp, message = 'should match') {
-    if (typeof regexp !== 'object')
-        return fail(Error('regexp should be RegExp'));
+const validateRegExp = (regexp) => {
+    if (!isObj(regexp) && !isStr(regexp))
+        return Error('regexp should be RegExp or String');
     
-    const is = regexp.test(actual);
+    return null;
+};
+
+function match(actual, regexp, message = 'should match') {
+    const error = validateRegExp(regexp);
+    
+    if (error)
+        return fail(error);
+    
+    const is = maybeRegExp(regexp).test(actual);
     
     return {
         is,
@@ -46,13 +59,10 @@ function match(actual, regexp, message = 'should match') {
 }
 
 function notMatch(actual, regexp, message = 'should match') {
-    if (typeof regexp !== 'object')
-        return fail(Error('regexp should be RegExp'));
-    
-    const is = !regexp.test(actual);
+    const {is} = match(actual, regexp, message);
     
     return {
-        is,
+        is: !is,
         actual,
         expected: regexp,
         message,

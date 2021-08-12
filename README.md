@@ -134,13 +134,13 @@ Assert that `value` is truthy with an optional description of the assertion `msg
 
 Assert that `value` is falsy with an optional description of the assertion `msg`.
 
-## t.match(actual, regexp [, msg])
+## t.match(actual, pattern[, msg])
 
-Assert that `regexp.test` matches `actual` with an optional description of the assertion `msg`.
+Assert that `pattern: string | regexp` matches `actual` with an optional description of the assertion `msg`.
 
-## t.notMatch(actual, regexp [, msg])
+## t.notMatch(actual, pattern[, msg])
 
-Assert that `regexp.test` not matches `actual` with an optional description of the assertion `msg`.
+Assert that `pattern: string | regexp`  not matches `actual` with an optional description of the assertion `msg`.
 
 ## t.equal(actual, expected, msg)
 

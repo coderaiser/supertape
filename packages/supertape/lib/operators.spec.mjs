@@ -144,19 +144,27 @@ test('supertape: operators: notOk: false', (t) => {
     t.end();
 });
 
-test('supertape: operators: match: no regexp', (t) => {
+test('supertape: operators: match: not RegExp and String', (t) => {
     const {match} = operators;
-    const {message} = match('hello', 'world');
+    const {message} = match('hello', 5);
     
-    t.equal(message.message, 'regexp should be RegExp');
+    t.equal(message.message, 'regexp should be RegExp or String');
     t.end();
 });
 
-test('supertape: operators: not match: no regexp', (t) => {
-    const {notMatch} = operators;
-    const {message} = notMatch('hello', 'world');
+test('supertape: operators: match: string', (t) => {
+    const {match} = operators;
+    const {is} = match('hello', 'world');
     
-    t.equal(message.message, 'regexp should be RegExp');
+    t.notOk(is);
+    t.end();
+});
+
+test('supertape: operators: not match: string', (t) => {
+    const {notMatch} = operators;
+    const {is} = notMatch('hello', 'world');
+    
+    t.ok(is);
     t.end();
 });
 
