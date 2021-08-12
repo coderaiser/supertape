@@ -3,6 +3,7 @@
 const {EventEmitter} = require('events');
 const once = require('once');
 const {createSimport} = require('simport');
+const StackTracey = require('stacktracey');
 
 const options = require('../supertape.json');
 
@@ -39,13 +40,14 @@ function _createEmitter({quiet, format, getOperators, isStop}) {
     const tests = [];
     const emitter = new EventEmitter();
     
-    emitter.on('test', (message, fn, {skip, only, extensions}) => {
+    emitter.on('test', (message, fn, {skip, only, extensions, fileName}) => {
         tests.push({
             message,
             fn,
             skip,
             only,
             extensions,
+            fileName,
         });
     });
     
@@ -94,7 +96,24 @@ const createStream = () => {
 
 module.exports.createStream = createStream;
 
+// update when refactore
+const messages = [];
+const INDEX_OF_FILE = 3;
+const getFileName = (message) => {
+    if (!messages.includes(message)) {
+        messages.push(message);
+        return '';
+    }
+    
+    const {items} = new StackTracey(Error());
+    const {beforeParse} = items[INDEX_OF_FILE];
+    
+    return `Duplicate found: "${message}" ${beforeParse}`;
+};
+
 function test(message, fn, options = {}) {
+    const fileName = getFileName(message);
+    
     const {
         run,
         quiet,
@@ -123,6 +142,7 @@ function test(message, fn, options = {}) {
         skip,
         only,
         extensions,
+        fileName,
     });
     
     if (run)

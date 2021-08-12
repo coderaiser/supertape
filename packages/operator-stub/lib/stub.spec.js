@@ -211,7 +211,7 @@ test('supertape: operator: stub: calledWithNoArgs', (t) => {
     t.end();
 });
 
-test('supertape: operator: stub: calledWithNoArgs', (t) => {
+test('supertape: operator: stub: t.calledWithNoArgs', (t) => {
     const fn = stub();
     
     fn();

@@ -6,6 +6,7 @@ const tryToCatch = require('try-to-catch');
 const once = require('once');
 
 const isDebug = require('./is-debug');
+const duplicator = require('./duplicator');
 
 const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
@@ -75,6 +76,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     });
     
     const wasStop = fullstore();
+    const getDuplicateMessage = duplicator(tests);
     
     for (const {fn, message, extensions} of tests) {
         if (wasStop())
@@ -88,13 +90,14 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
         await runOneTest({
             fn,
             message,
-            total,
             formatter,
             count,
+            total,
             failed,
             incCount,
             incFailed,
             incPassed,
+            getDuplicateMessage,
             
             extensions: {
                 ...operators,
@@ -118,7 +121,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     };
 }
 
-async function runOneTest({message, fn, extensions, total, formatter, count, failed, incCount, incPassed, incFailed}) {
+async function runOneTest({message, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getDuplicateMessage}) {
     formatter.emit('test', {
         test: message,
     });
@@ -153,4 +156,11 @@ async function runOneTest({message, fn, extensions, total, formatter, count, fai
         test: message,
         failed: failed(),
     });
+    
+    const duplicateMessage = getDuplicateMessage(message);
+    
+    if (duplicateMessage) {
+        t.fail(duplicateMessage);
+        t.end();
+    }
 }

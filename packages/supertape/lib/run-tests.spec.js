@@ -51,6 +51,32 @@ test('supertape: runTests', async (t) => {
     t.end();
 });
 
+test('supertape: runTests: duplicates', async (t) => {
+    const fn = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    const supertape = reRequire('..');
+    await supertape(message, fn, {
+        quiet: true,
+    });
+    
+    await supertape(message, fn, {
+        quiet: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream()),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    t.match(result, /Error: Duplicate found: "hello world" at/);
+    t.end();
+});
+
 test('supertape: runTests: fail', async (t) => {
     const fn = (t) => {
         t.fail('hello');

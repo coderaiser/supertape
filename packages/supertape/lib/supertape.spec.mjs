@@ -9,12 +9,12 @@ const extendedTest = extend({
     },
 });
 
-test('supertape: mjs: default', (t) => {
+test('supertape: mjs: default: equal', (t) => {
     t.equal(1, 1);
     t.end();
 });
 
-test('supertape: mjs: default', (t) => {
+test('supertape: mjs: default: calledWith', (t) => {
     const fn = stub();
     
     fn('hello');
