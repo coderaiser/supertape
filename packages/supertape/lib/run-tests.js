@@ -38,7 +38,7 @@ const timeout = (time, value) => {
     return [promise, stop];
 };
 
-module.exports = async (tests, {formatter, operators, isStop}) => {
+module.exports = async (tests, {formatter, operators, isStop, checkDuplicates}) => {
     const onlyTests = tests.filter(isOnly);
     
     if (onlyTests.length)
@@ -47,6 +47,7 @@ module.exports = async (tests, {formatter, operators, isStop}) => {
             operators,
             skiped: tests.length - onlyTests.length,
             isStop,
+            checkDuplicates,
         });
     
     const notSkipedTests = tests.filter(notSkip);
@@ -57,10 +58,11 @@ module.exports = async (tests, {formatter, operators, isStop}) => {
         operators,
         skiped,
         isStop,
+        checkDuplicates,
     });
 };
 
-async function runTests(tests, {formatter, operators, skiped, isStop}) {
+async function runTests(tests, {formatter, operators, skiped, isStop, checkDuplicates}) {
     const count = fullstore(0);
     const failed = fullstore(0);
     const passed = fullstore(0);
@@ -76,7 +78,10 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     });
     
     const wasStop = fullstore();
-    const getDuplicateMessage = duplicator(tests);
+    const getDuplicatesMessage = duplicator({
+        tests,
+        checkDuplicates,
+    });
     
     for (const {fn, message, extensions} of tests) {
         if (wasStop())
@@ -97,7 +102,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
             incCount,
             incFailed,
             incPassed,
-            getDuplicateMessage,
+            getDuplicatesMessage,
             
             extensions: {
                 ...operators,
@@ -121,7 +126,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     };
 }
 
-async function runOneTest({message, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getDuplicateMessage}) {
+async function runOneTest({message, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getDuplicatesMessage}) {
     formatter.emit('test', {
         test: message,
     });
@@ -157,10 +162,10 @@ async function runOneTest({message, fn, extensions, formatter, count, total, fai
         failed: failed(),
     });
     
-    const duplicateMessage = getDuplicateMessage(message);
+    const duplicatesMessage = getDuplicatesMessage(message);
     
-    if (duplicateMessage) {
-        t.fail(duplicateMessage);
+    if (duplicatesMessage) {
+        t.fail(duplicatesMessage);
         t.end();
     }
 }

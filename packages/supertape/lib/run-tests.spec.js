@@ -62,10 +62,12 @@ test('supertape: runTests: duplicates', async (t) => {
     const supertape = reRequire('..');
     await supertape(message, fn, {
         quiet: true,
+        checkDuplicates: true,
     });
     
     await supertape(message, fn, {
         quiet: true,
+        checkDuplicates: true,
     });
     
     const [result] = await Promise.all([
@@ -73,7 +75,35 @@ test('supertape: runTests: duplicates', async (t) => {
         once(supertape.run(), 'end'),
     ]);
     
-    t.match(result, /Error: Duplicate found: "hello world" at/);
+    t.match(result, /Duplicate message at/);
+    t.end();
+});
+
+test('supertape: runTests: no duplicates', async (t) => {
+    const fn = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    const supertape = reRequire('..');
+    await supertape(message, fn, {
+        quiet: true,
+        checkDuplicates: true,
+    });
+    
+    await supertape('something else', fn, {
+        quiet: true,
+        checkDuplicates: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream()),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    t.notOk(result.includes('Duplicate message at'));
     t.end();
 });
 

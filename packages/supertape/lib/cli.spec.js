@@ -265,6 +265,90 @@ test('supertape: cli: -h', async (t) => {
     t.end();
 });
 
+test('supertape: bin: cli: --check-duplicates', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [
+        name,
+        '-d',
+    ];
+    
+    const test = stub();
+    const init = stub();
+    const run = stub();
+    const isStop = stub();
+    
+    const {createStream} = reRequire('..');
+    mockRequire('@putout/cli-keypress', stub().returns({
+        isStop,
+    }));
+    
+    assign(test, {
+        init,
+        run,
+        createStream,
+    });
+    
+    mockRequire('..', test);
+    
+    await runCli({
+        argv,
+    });
+    
+    stopAll();
+    const expected = [{
+        format: 'progress-bar',
+        quiet: true,
+        run: false,
+        checkDuplicates: true,
+        isStop,
+    }];
+    
+    t.calledWith(init, expected);
+    t.end();
+});
+
+test('supertape: bin: cli: check-duplicates: -d', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [
+        name,
+        '-d',
+    ];
+    
+    const test = stub();
+    const init = stub();
+    const run = stub();
+    const isStop = stub();
+    
+    const {createStream} = reRequire('..');
+    mockRequire('@putout/cli-keypress', stub().returns({
+        isStop,
+    }));
+    
+    assign(test, {
+        init,
+        run,
+        createStream,
+    });
+    
+    mockRequire('..', test);
+    
+    await runCli({
+        argv,
+    });
+    
+    stopAll();
+    const expected = [{
+        format: 'progress-bar',
+        quiet: true,
+        run: false,
+        checkDuplicates: true,
+        isStop,
+    }];
+    
+    t.calledWith(init, expected);
+    t.end();
+});
+
 test('supertape: bin: cli: format: apply last', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
     const argv = [
@@ -302,6 +386,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         format: 'fail',
         quiet: true,
         run: false,
+        checkDuplicates: false,
         isStop,
     }];
     

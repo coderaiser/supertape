@@ -46,6 +46,7 @@ Options
    -v, --version               output version information and exit
    -f, --format                use a specific output format - default: progress-bar/tap on CI
    -r, --require               require module
+   -d, --check-duplicates      check messages for duplicates
 ```
 
 ## Codemod

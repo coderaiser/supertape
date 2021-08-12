@@ -34,20 +34,21 @@ const defaultOptions = {
     run: true,
     getOperators,
     isStop: () => false,
+    checkDuplicates: false,
 };
 
-function _createEmitter({quiet, format, getOperators, isStop}) {
+function _createEmitter({quiet, format, getOperators, isStop, checkDuplicates}) {
     const tests = [];
     const emitter = new EventEmitter();
     
-    emitter.on('test', (message, fn, {skip, only, extensions, fileName}) => {
+    emitter.on('test', (message, fn, {skip, only, extensions, duplicatesMessage}) => {
         tests.push({
             message,
             fn,
             skip,
             only,
             extensions,
-            fileName,
+            duplicatesMessage,
         });
     });
     
@@ -69,6 +70,7 @@ function _createEmitter({quiet, format, getOperators, isStop}) {
             formatter,
             operators,
             isStop,
+            checkDuplicates,
         });
         
         emitter.emit('end', {failed});
@@ -98,8 +100,11 @@ module.exports.createStream = createStream;
 
 // update when refactore
 const messages = [];
-const INDEX_OF_FILE = 3;
-const getFileName = (message) => {
+const INDEX_OF_FILE = 2;
+const getDuplicatesMessage = ({message, checkDuplicates}) => {
+    if (!checkDuplicates)
+        return '';
+    
     if (!messages.includes(message)) {
         messages.push(message);
         return '';
@@ -108,12 +113,10 @@ const getFileName = (message) => {
     const {items} = new StackTracey(Error());
     const {beforeParse} = items[INDEX_OF_FILE];
     
-    return `Duplicate found: "${message}" ${beforeParse}`;
+    return `Duplicate message ${beforeParse}`;
 };
 
 function test(message, fn, options = {}) {
-    const fileName = getFileName(message);
-    
     const {
         run,
         quiet,
@@ -123,17 +126,24 @@ function test(message, fn, options = {}) {
         extensions,
         getOperators,
         isStop,
+        checkDuplicates,
     } = {
         ...defaultOptions,
         ...options,
         ...initedOptions,
     };
     
+    const duplicatesMessage = getDuplicatesMessage({
+        message,
+        checkDuplicates,
+    });
+    
     const emitter = createEmitter({
         format,
         quiet,
         getOperators,
         isStop,
+        checkDuplicates,
     });
     
     mainEmitter = emitter;
@@ -142,7 +152,7 @@ function test(message, fn, options = {}) {
         skip,
         only,
         extensions,
-        fileName,
+        duplicatesMessage,
     });
     
     if (run)

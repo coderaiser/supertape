@@ -82,16 +82,19 @@ const yargsOptions = {
     boolean: [
         'version',
         'help',
+        'check-duplicates',
     ],
     alias: {
         version: 'v',
         format: 'f',
         help: 'h',
         require: 'r',
+        checkDuplicates: 'd',
     },
     default: {
         format: 'progress-bar',
         require: [],
+        checkDuplicates: false,
     },
 };
 
@@ -133,13 +136,17 @@ async function cli({argv, cwd, stdout, isStop}) {
         allFiles.push(...files);
     }
     
-    const {format} = args;
+    const {
+        format,
+        checkDuplicates,
+    } = args;
     
     supertape.init({
         run: false,
         quiet: true,
         format,
         isStop,
+        checkDuplicates,
     });
     
     supertape.createStream().pipe(stdout);
