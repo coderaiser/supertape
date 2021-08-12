@@ -1,3 +1,13 @@
+2021.08.12, v5.6.0
+
+feature:
+- (supertape) match/notMatch: add ability to match string
+- (supertape) operators: add notMatch
+- (supertape) add ability to check fo duplicates messages with -d, --check-duplicates
+- (supertape) add ability to check for duplicate test messages
+
+
+
 2021.07.23, v5.5.0
 
 feature:
