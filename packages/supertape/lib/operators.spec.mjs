@@ -152,6 +152,22 @@ test('supertape: operators: match: no regexp', (t) => {
     t.end();
 });
 
+test('supertape: operators: not match: no regexp', (t) => {
+    const {notMatch} = operators;
+    const {message} = notMatch('hello', 'world');
+    
+    t.equal(message.message, 'regexp should be RegExp');
+    t.end();
+});
+
+test('supertape: operators: not match', (t) => {
+    const {notMatch} = operators;
+    const {is} = notMatch('hello', /world/);
+    
+    t.ok(is);
+    t.end();
+});
+
 test('supertape: operators: match: not', (t) => {
     const {match} = operators;
     const {is} = match('hello', /world/);

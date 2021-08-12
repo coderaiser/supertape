@@ -127,6 +127,10 @@ Assert that `value` is falsy with an optional description of the assertion `msg`
 
 Assert that `regexp.test` matches `actual` with an optional description of the assertion `msg`.
 
+## t.notMatch(actual, regexp [, msg])
+
+Assert that `regexp.test` not matches `actual` with an optional description of the assertion `msg`.
+
 ## t.equal(actual, expected, msg)
 
 Assert that `Object.is(actual, expected)` with an optional description of the assertion `msg`.

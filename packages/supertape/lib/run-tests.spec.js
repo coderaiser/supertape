@@ -103,7 +103,7 @@ test('supertape: runTests: no duplicates', async (t) => {
         once(supertape.run(), 'end'),
     ]);
     
-    t.notOk(result.includes('Duplicate message at'));
+    t.notMatch(result, /Duplicate message at/);
     t.end();
 });
 

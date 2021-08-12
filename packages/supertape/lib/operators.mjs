@@ -45,6 +45,20 @@ function match(actual, regexp, message = 'should match') {
     };
 }
 
+function notMatch(actual, regexp, message = 'should match') {
+    if (typeof regexp !== 'object')
+        return fail(Error('regexp should be RegExp'));
+    
+    const is = !regexp.test(actual);
+    
+    return {
+        is,
+        actual,
+        expected: regexp,
+        message,
+    };
+}
+
 function equal(actual, expected, message = 'should equal') {
     let output = '';
     const is = Object.is(actual, expected);
@@ -140,6 +154,7 @@ export const operators = {
     fail,
     end,
     match,
+    notMatch,
 };
 
 const initOperator = (runnerState) => (name) => {
@@ -231,6 +246,7 @@ export const initOperators = ({formatter, count, incCount, incPassed, incFailed,
         fail: operator('fail'),
         comment: comment({formatter}),
         match: operator('match'),
+        notMatch: operator('notMatch'),
         end,
         
         ...extendedOperators,
