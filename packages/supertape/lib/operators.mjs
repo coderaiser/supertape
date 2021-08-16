@@ -58,7 +58,7 @@ function match(actual, regexp, message = 'should match') {
     };
 }
 
-function notMatch(actual, regexp, message = 'should match') {
+function notMatch(actual, regexp, message = 'should not match') {
     const {is} = match(actual, regexp, message);
     
     return {

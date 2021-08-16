@@ -168,6 +168,14 @@ test('supertape: operators: not match: string', (t) => {
     t.end();
 });
 
+test('supertape: operators: not match: message', (t) => {
+    const {notMatch} = operators;
+    const {message} = notMatch('hello', 'world');
+    
+    t.equal(message, 'should not match');
+    t.end();
+});
+
 test('supertape: operators: not match', (t) => {
     const {notMatch} = operators;
     const {is} = notMatch('hello', /world/);
