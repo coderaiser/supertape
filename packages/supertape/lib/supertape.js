@@ -99,14 +99,14 @@ const createStream = () => {
 module.exports.createStream = createStream;
 
 // update when refactore
-const messages = [];
+const messages = new Set();
 const INDEX_OF_FILE = 2;
 const getDuplicatesMessage = ({message, checkDuplicates}) => {
     if (!checkDuplicates)
         return '';
     
-    if (!messages.includes(message)) {
-        messages.push(message);
+    if (!messages.has(message)) {
+        messages.add(message);
         return '';
     }
     

@@ -52,30 +52,70 @@ test('supertape: runTests', async (t) => {
 });
 
 test('supertape: runTests: duplicates', async (t) => {
-    const fn = (t) => {
+    const fn1 = (t) => {
         t.ok(true);
+        t.end();
+    };
+    
+    const fn2 = (t) => {
+        t.notOk(false);
         t.end();
     };
     
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    supertape(message, fn, {
+    supertape(message, fn1, {
         quiet: true,
         checkDuplicates: true,
     });
     
-    supertape(message, fn, {
+    supertape(message, fn2, {
         quiet: true,
         checkDuplicates: true,
     });
     
+    const FOUR_TESTS = 30;
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
     ]);
     
-    t.match(result, 'Duplicate message at');
+    t.match(result, 'not ok 2 Duplicate');
+    t.end();
+});
+
+test('supertape: runTests: duplicates: not match', async (t) => {
+    const fn1 = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const fn2 = (t) => {
+        t.notOk(false);
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    const supertape = reRequire('..');
+    supertape(message, fn1, {
+        quiet: true,
+        checkDuplicates: true,
+    });
+    
+    supertape(message, fn2, {
+        quiet: true,
+        checkDuplicates: true,
+    });
+    
+    const FOUR_TESTS = 30;
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), FOUR_TESTS),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    t.notMatch(result, 'not ok 4 Duplicate');
     t.end();
 });
 
