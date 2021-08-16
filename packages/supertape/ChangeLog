@@ -1,3 +1,14 @@
+2021.08.16, v5.7.0
+
+fix:
+- (supertape) operators: notMatch: should match -> should not match
+
+
+feature:
+- (supertape) add ability to show duplication test only once
+
+
+
 2021.08.12, v5.6.0
 
 feature:
