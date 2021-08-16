@@ -26,7 +26,7 @@ test('supertape: runTests', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -60,12 +60,12 @@ test('supertape: runTests: duplicates', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
         checkDuplicates: true,
     });
     
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
         checkDuplicates: true,
     });
@@ -88,12 +88,12 @@ test('supertape: runTests: no duplicates', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
         checkDuplicates: true,
     });
     
-    await supertape('something else', fn, {
+    supertape('something else', fn, {
         quiet: true,
         checkDuplicates: true,
     });
@@ -116,7 +116,7 @@ test('supertape: runTests: fail', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -150,7 +150,7 @@ test('supertape: runTests: fail: timeout', async (t) => {
     
     reRequire('./run-tests');
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -182,7 +182,7 @@ test('supertape: runTests: equal', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -216,7 +216,7 @@ test('supertape: runTests: not equal', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -248,7 +248,7 @@ test('supertape: runTests: not deepEqual', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -280,7 +280,7 @@ test('supertape: runTests: comment', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -313,7 +313,7 @@ test('supertape: runTests: crash', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -341,7 +341,7 @@ test('supertape: runTests: pass', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -375,7 +375,7 @@ test('supertape: runTests: pass: unnamed', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -416,12 +416,12 @@ test('supertape: runTests: isStop', async (t) => {
     const isStop = stub().returns(true);
     
     const supertape = reRequire('..');
-    await supertape(message1, fn1, {
+    supertape(message1, fn1, {
         quiet: true,
         isStop,
     });
     
-    await supertape(message2, fn2);
+    supertape(message2, fn2);
     
     const [result] = await Promise.all([
         pull(supertape.createStream()),
@@ -461,7 +461,7 @@ test('supertape: runTests: not equal, but deepEqual', async (t) => {
     const message = 'hello world';
     
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
@@ -494,7 +494,7 @@ test('supertape: runTests: is debug', async (t) => {
     mockRequire('./is-debug', true);
     reRequire('./run-tests');
     const supertape = reRequire('..');
-    await supertape(message, fn, {
+    supertape(message, fn, {
         quiet: true,
     });
     
