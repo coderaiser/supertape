@@ -6,7 +6,7 @@ export const called = (operator) => (fn) => {
     if (!isStub(fn))
         return operator.fail(getExpectedStubMessage(fn));
     
-    return operator.fail(`'t.called' is to general, looks like you need 't.calledWith' or 't.calledWithNoArgs'`);
+    return operator.fail(`'t.called' is too general, looks like you need 't.calledWith' or 't.calledWithNoArgs'`);
 };
 
 export const notCalled = (operator) => (fn, message = 'should not be called') => {

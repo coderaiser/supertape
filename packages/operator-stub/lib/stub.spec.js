@@ -37,7 +37,7 @@ test('supertape: operator: stub: called', (t) => {
     
     called(fn);
     
-    t.calledWith(fail, [`'t.called' is to general, looks like you need 't.calledWith' or 't.calledWithNoArgs'`]);
+    t.calledWith(fail, [`'t.called' is too general, looks like you need 't.calledWith' or 't.calledWithNoArgs'`]);
     t.end();
 });
 
