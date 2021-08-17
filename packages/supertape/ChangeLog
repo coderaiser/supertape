@@ -1,3 +1,10 @@
+2021.08.17, v5.8.1
+
+fix:
+- (supertape) options passed into test should override init
+
+
+
 2021.08.17, v5.8.0
 
 fix:
