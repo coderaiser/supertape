@@ -3,10 +3,10 @@
 const {EventEmitter} = require('events');
 const once = require('once');
 const {createSimport} = require('simport');
-const StackTracey = require('stacktracey');
 
 const options = require('../supertape.json');
 
+const {getDuplicatesMessage} = require('./duplicator');
 const runTests = require('./run-tests');
 const createFormatter = once(require('./formatter').createFormatter);
 
@@ -97,24 +97,6 @@ const createStream = () => {
 };
 
 module.exports.createStream = createStream;
-
-// update when refactore
-const messages = new Set();
-const INDEX_OF_FILE = 2;
-const getDuplicatesMessage = ({message, checkDuplicates}) => {
-    if (!checkDuplicates)
-        return '';
-    
-    if (!messages.has(message)) {
-        messages.add(message);
-        return '';
-    }
-    
-    const {items} = new StackTracey(Error());
-    const {beforeParse} = items[INDEX_OF_FILE];
-    
-    return `Duplicate message ${beforeParse}`;
-};
 
 function test(message, fn, options = {}) {
     const {

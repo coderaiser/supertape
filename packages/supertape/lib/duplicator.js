@@ -1,6 +1,7 @@
 'use strict';
 
 const once = require('once');
+const StackTracey = require('stacktracey');
 
 const getMessage = ({message, duplicatesMessage}) => [message, duplicatesMessage];
 const getMessagesList = (tests) => tests.map(getMessage);
@@ -24,5 +25,29 @@ module.exports = ({tests, checkDuplicates}) => (msg) => {
     
     processedList.add(duplicatesMessage);
     return duplicatesMessage;
+};
+
+const messages = new Set();
+const CALLS_FROM_TEST = 2;
+
+module.exports.getDuplicatesMessage = ({message, checkDuplicates}) => {
+    if (!checkDuplicates)
+        return '';
+    
+    if (!messages.has(message)) {
+        messages.add(message);
+        return '';
+    }
+    
+    const {items} = new StackTracey(Error());
+    
+    for (const {beforeParse, file} of items.slice(CALLS_FROM_TEST)) {
+        if (file.includes('node_modules'))
+            continue;
+        
+        return `Duplicate message ${beforeParse}`;
+    }
+    
+    return '';
 };
 
