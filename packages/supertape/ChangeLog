@@ -1,3 +1,14 @@
+2021.08.17, v5.8.0
+
+fix:
+- (@putout/operator-stub) to general -> too general
+
+
+feature:
+- (supertape) duplicates: improve determine of file path
+
+
+
 2021.08.16, v5.7.0
 
 fix:
