@@ -111,8 +111,8 @@ function test(message, fn, options = {}) {
         checkDuplicates,
     } = {
         ...defaultOptions,
-        ...options,
         ...initedOptions,
+        ...options,
     };
     
     const duplicatesMessage = getDuplicatesMessage({

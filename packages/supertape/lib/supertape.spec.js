@@ -52,6 +52,55 @@ test('supertape: equal', async (t) => {
     t.end();
 });
 
+test('supertape: checkDuplicates: override', async (t) => {
+    const fn = (t) => {
+        t.equal(1, 1);
+        t.end();
+    };
+    
+    const message = 'hello';
+    
+    const supertape = reRequire('..');
+    
+    supertape.init({
+        run: false,
+        quiet: true,
+        checkDuplicates: true,
+    });
+    
+    supertape(message, fn, {
+        checkDuplicates: false,
+    });
+    
+    supertape(message, fn, {
+        checkDuplicates: false,
+    });
+    
+    const stream = supertape.createStream();
+    
+    const [result] = await Promise.all([
+        pull(stream),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello
+        ok 1 should equal
+        # hello
+        ok 2 should equal
+        
+        1..2
+        # tests 2
+        # pass 2
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: deepEqual', async (t) => {
     const fn = (t) => {
         const a = {
