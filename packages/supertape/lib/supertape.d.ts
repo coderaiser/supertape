@@ -1,8 +1,13 @@
+import {Stub} from '@supertape/operator-stub';
+
 type Result = {
     is: boolean,
+    expected: any,
+    actual: any,
+    message: string,
 }
 
-export interface Test {
+export type Test = Stub & {
     equal: (from: unknown, to: unknown, message?: string) => Result;
     notEqual: (from: unknown, to: unknown, message?: string) => Result;
     deepEqual: (from: unknown, to: unknown, message?: string) => Result;
@@ -10,11 +15,18 @@ export interface Test {
     fail: (message: string) => Result;
     pass: (message: string) => Result;
     ok: (result: boolean | unknown, message?: string) => Result;
-    commoent: (message: string);
+    comment: (message: string) => Result;
     notOk: (result: boolean | unknown, message?: string) => Result;
-    match: (result: string, pattern: string | regexp, message?: string) => Result;
-    notMatch: (result: string, pattern: string | regexp, message?: string) => Result;
+    match: (result: string, pattern: string | RegExp, message?: string) => Result;
+    notMatch: (result: string, pattern: string | RegExp, message?: string) => Result;
     end: () => void;
 }
 
-export function test(message: string, fn: (t: Test) => void): void;
+declare function test(message: string, fn: (t: Test) => void): void;
+
+export default test;
+
+export {
+    test,
+};
+
