@@ -1,3 +1,13 @@
+2021.08.18, v6.0.0
+
+feature:
+- (supertape) add typescript types
+- (package) eslint-plugin-putout v9
+- (supertape) add type
+- (supertape) enable duplicates check by default
+
+
+
 2021.08.17, v5.8.1
 
 fix:
