@@ -386,7 +386,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         format: 'fail',
         quiet: true,
         run: false,
-        checkDuplicates: false,
+        checkDuplicates: true,
         isStop,
     }];
     

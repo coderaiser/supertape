@@ -94,7 +94,7 @@ const yargsOptions = {
     default: {
         format: 'progress-bar',
         require: [],
-        checkDuplicates: false,
+        checkDuplicates: true,
     },
 };
 
