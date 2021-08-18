@@ -21,7 +21,7 @@ npm i @supertape/operator-stub -D
 
 Adds next operators to work with:
 
-### t.calledWith(fn [, message])
+### t.calledWith(fn, args [, message])
 
 ```js
 import test, {
@@ -73,7 +73,7 @@ test('function called count', (t) => {
 });
 ```
 
-### t.calledOnce(fn, count[, message])
+### t.calledOnce(fn [, message])
 
 ```js
 import test, {
