@@ -6,6 +6,7 @@ const dirs = [
 
 export default {
     'test': () => `tape -d '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
+    'test:dts': () => 'cd packages/supertape && check-dts',
     'test:tap': () => `tape '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
     'test:fail': async () => `${await run('test')} -f fail`,
     'test:slow': () => 'lerna run test',
