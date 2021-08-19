@@ -1,19 +1,21 @@
+import {Stub} from '@cloudcmd/stub';
+
 type Result = {
     is: boolean,
     expected: any,
     actual: any,
     message: string,
 }
+export function stub(arg?: unknown): Stub;
 
-export interface Stub {
-    called: (fn: Function, message?: string) => Result
-    notCalled: (fn: Function, message?: string) => Result
-    calledWith: (fn: Function, args: unknown[], message?: string) => Result;
-    calledWithNoArgs: (fn: Function, message?: string) => Result;
-    calledCount: (fn: Function, count: number, message?: string) => Result;
-    calledOnce: (fn: Function, message?: string) => Result;
-    calledTwice: (fn: Function, message?: string) => Result;
-    calledWithNew: (fn: Function, message?: string) => Result;
+export interface OperatorStub {
+    called: (fn: Stub, message?: string) => Result
+    notCalled: (fn: Stub, message?: string) => Result
+    calledWith: (fn: Stub, args: unknown[], message?: string) => Result;
+    calledWithNoArgs: (fn: Stub, message?: string) => Result;
+    calledCount: (fn: Stub, count: number, message?: string) => Result;
+    calledOnce: (fn: Stub, message?: string) => Result;
+    calledTwice: (fn: Stub, message?: string) => Result;
+    calledWithNew: (fn: Stub, message?: string) => Result;
 }
 
-export function stub(arg?: unknown): Function;
