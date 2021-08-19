@@ -8,7 +8,7 @@ type Result = {
 export interface Stub {
     called: (fn: Function, message?: string) => Result
     notCalled: (fn: Function, message?: string) => Result
-    calledWith: (fn: Function, args: [], message?: string) => Result;
+    calledWith: (fn: Function, args: unknown[], message?: string) => Result;
     calledWithNoArgs: (fn: Function, message?: string) => Result;
     calledCount: (fn: Function, count: number, message?: string) => Result;
     calledOnce: (fn: Function, message?: string) => Result;
