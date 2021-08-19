@@ -1,3 +1,15 @@
+2021.08.19, v6.0.3
+
+fix:
+- (@putout/operator-stub) types: calledWith: args
+
+
+feature:
+- (supertape) add Stub
+- (@putout/operator-stub) add Stub
+
+
+
 2021.08.19, v6.0.2
 
 feature:
