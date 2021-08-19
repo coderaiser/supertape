@@ -1,3 +1,10 @@
+2021.08.19, v6.0.2
+
+feature:
+- (@putout/operator-stub) types: add stub
+
+
+
 2021.08.18, v6.0.1
 
 fix:
