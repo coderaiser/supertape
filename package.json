@@ -39,7 +39,7 @@
     "lerna": "^4.0.0",
     "madrun": "^8.0.1",
     "putout": "^18.0.0",
-    "supertape": "^5.0.0"
+    "supertape": "^6.0.3"
   },
   "engines": {
     "node": ">=14"
