@@ -2,6 +2,7 @@ import test, {
     test as superTest,
     Test,
     stub,
+    Stub,
 } from '..';
 
 // THROWS Expected 2 arguments, but got 0
@@ -18,7 +19,7 @@ superTest('hello', (t: Test) => {
 });
 
 test('stub should be a function', (t) => {
-    const fn = stub();
+    const fn: Stub = stub();
     fn();
     
     t.calledWithNoArgs(fn);

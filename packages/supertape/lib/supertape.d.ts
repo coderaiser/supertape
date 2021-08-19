@@ -1,7 +1,9 @@
+import {OperatorStub} from '@supertape/operator-stub';
+
 import {
-    Stub,
     stub,
-} from '@supertape/operator-stub';
+    Stub,
+} from '@cloudcmd/stub';
 
 type Result = {
     is: boolean,
@@ -10,7 +12,7 @@ type Result = {
     message: string,
 }
 
-export type Test = Stub & {
+type Test = OperatorStub & {
     equal: (from: unknown, to: unknown, message?: string) => Result;
     notEqual: (from: unknown, to: unknown, message?: string) => Result;
     deepEqual: (from: unknown, to: unknown, message?: string) => Result;
@@ -31,6 +33,8 @@ export default test;
 
 export {
     test,
+    Test,
     stub,
+    Stub,
 };
 
