@@ -15,3 +15,5 @@ export interface Stub {
     calledTwice: (fn: Function, message?: string) => Result;
     calledWithNew: (fn: Function, message?: string) => Result;
 }
+
+export function stub(arg?: unknown): Function;

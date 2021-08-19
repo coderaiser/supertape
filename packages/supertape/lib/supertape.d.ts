@@ -1,4 +1,7 @@
-import {Stub} from '@supertape/operator-stub';
+import {
+    Stub,
+    stub,
+} from '@supertape/operator-stub';
 
 type Result = {
     is: boolean,
@@ -28,5 +31,6 @@ export default test;
 
 export {
     test,
+    stub,
 };
 
