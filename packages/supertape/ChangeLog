@@ -1,3 +1,15 @@
+2021.08.24, v6.0.4
+
+fix:
+- (supertape) checkDuplicates enabled by default when running without runtime
+
+
+feature:
+- (package) putout v19.0.0
+- (package) supertape v6.0.3
+
+
+
 2021.08.19, v6.0.3
 
 fix:
