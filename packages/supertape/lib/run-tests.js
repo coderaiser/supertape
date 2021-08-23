@@ -38,7 +38,7 @@ const timeout = (time, value) => {
     return [promise, stop];
 };
 
-module.exports = async (tests, {formatter, operators, isStop, checkDuplicates}) => {
+module.exports = async (tests, {formatter, operators, isStop}) => {
     const onlyTests = tests.filter(isOnly);
     
     if (onlyTests.length)
@@ -47,7 +47,6 @@ module.exports = async (tests, {formatter, operators, isStop, checkDuplicates}) 
             operators,
             skiped: tests.length - onlyTests.length,
             isStop,
-            checkDuplicates,
         });
     
     const notSkipedTests = tests.filter(notSkip);
@@ -58,11 +57,10 @@ module.exports = async (tests, {formatter, operators, isStop, checkDuplicates}) 
         operators,
         skiped,
         isStop,
-        checkDuplicates,
     });
 };
 
-async function runTests(tests, {formatter, operators, skiped, isStop, checkDuplicates}) {
+async function runTests(tests, {formatter, operators, skiped, isStop}) {
     const count = fullstore(0);
     const failed = fullstore(0);
     const passed = fullstore(0);
@@ -80,7 +78,6 @@ async function runTests(tests, {formatter, operators, skiped, isStop, checkDupli
     const wasStop = fullstore();
     const getDuplicatesMessage = duplicator({
         tests,
-        checkDuplicates,
     });
     
     for (const {fn, message, extensions} of tests) {

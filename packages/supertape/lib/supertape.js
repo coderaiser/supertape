@@ -37,7 +37,7 @@ const defaultOptions = {
     checkDuplicates: true,
 };
 
-function _createEmitter({quiet, format, getOperators, isStop, checkDuplicates}) {
+function _createEmitter({quiet, format, getOperators, isStop}) {
     const tests = [];
     const emitter = new EventEmitter();
     
@@ -70,7 +70,6 @@ function _createEmitter({quiet, format, getOperators, isStop, checkDuplicates}) 
             formatter,
             operators,
             isStop,
-            checkDuplicates,
         });
         
         emitter.emit('end', {failed});
@@ -125,7 +124,6 @@ function test(message, fn, options = {}) {
         quiet,
         getOperators,
         isStop,
-        checkDuplicates,
     });
     
     mainEmitter = emitter;
