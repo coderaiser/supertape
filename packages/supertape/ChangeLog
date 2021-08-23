@@ -1,3 +1,10 @@
+2021.08.24, v6.0.5
+
+fix:
+- (supertape) duplicator: rm useless cache
+
+
+
 2021.08.24, v6.0.4
 
 fix:
