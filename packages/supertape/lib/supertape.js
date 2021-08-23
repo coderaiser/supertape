@@ -34,7 +34,7 @@ const defaultOptions = {
     run: true,
     getOperators,
     isStop: () => false,
-    checkDuplicates: false,
+    checkDuplicates: true,
 };
 
 function _createEmitter({quiet, format, getOperators, isStop, checkDuplicates}) {
