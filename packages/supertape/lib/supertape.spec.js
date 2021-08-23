@@ -311,8 +311,8 @@ test('supertape: extensions', async (t) => {
 
 test('supertape: extensions: extend', async (t) => {
     const extensions = {
-        transformCode: (t) => (a, b) => {
-            return t.equal(a + 1, b, 'should transform code');
+        transformCode: (t) => async (a, b) => {
+            return await t.equal(a + 1, b, 'should transform code');
         },
     };
     
@@ -425,7 +425,7 @@ test('supertape: extensions: extend: return function', async (t) => {
 
 test('supertape: extensions: extend: async', async (t) => {
     const extensions = {
-        transformCode: (t) => async (a, b) => {
+        transformCode: (t) => (a, b) => {
             return t.equal(a + 1, b, 'should transform code');
         },
     };
