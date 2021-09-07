@@ -1,4 +1,10 @@
 {
+    "overrides": [{
+        "files": "*.d.ts",
+        "rules": {
+            "no-var": "off"
+        }
+    }],
     "extends": [
         "plugin:node/recommended",
         "plugin:putout/recommended"

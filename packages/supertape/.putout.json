@@ -2,6 +2,10 @@
     "match": {
         "*.md": {
             "remove-unreachable-code": "off"
+        },
+        "test/errors.ts": {
+            "remove-only": "off",
+            "remove-skip": "off"
         }
     }
 }

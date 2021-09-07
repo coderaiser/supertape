@@ -25,3 +25,11 @@ test('stub should be a function', (t) => {
     t.calledWithNoArgs(fn);
 });
 
+test.only('hello', (t: Test) => {
+    t.end();
+});
+
+test.skip('hello', (t: Test) => {
+    t.end();
+});
+

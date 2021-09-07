@@ -28,6 +28,10 @@ type Test = OperatorStub & {
 }
 
 declare function test(message: string, fn: (t: Test) => void): void;
+declare namespace test {
+    export var only: typeof test;
+    export var skip: typeof test;
+}
 
 export default test;
 
