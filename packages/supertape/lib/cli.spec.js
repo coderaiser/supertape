@@ -442,7 +442,7 @@ test('supertape: cli: validation', async (t) => {
     
     const [[message]] = write.args;
     
-    t.equal(message, `Invalid option '--forma'. Perhaps you meant '--format'\n`);
+    t.equal(message, 'Invalid option `--forma`. Perhaps you meant `--format`\n');
     t.end();
 });
 
