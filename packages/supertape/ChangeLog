@@ -1,3 +1,11 @@
+2021.09.07, v6.1.0
+
+feature:
+- (@supertape/operator-stub) calledWithNoArgs: add support of message not string
+- (package) putout v19.7.1
+- (supertape) types: add support of skip, only
+
+
 2021.08.24, v6.0.5
 
 fix:
