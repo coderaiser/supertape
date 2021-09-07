@@ -17,23 +17,19 @@ const isObj = (a) => typeof a === 'object';
 // backward compatibility or maybe formatters support
 const end = () => {};
 
-const ok = (actual, message = 'should be truthy') => {
-    return {
-        is: Boolean(actual),
-        expected: true,
-        actual,
-        message,
-    };
-};
+const ok = (actual, message = 'should be truthy') => ({
+    is: Boolean(actual),
+    expected: true,
+    actual,
+    message,
+});
 
-const notOk = (actual, message = 'should be falsy') => {
-    return {
-        is: !actual,
-        expected: false,
-        actual,
-        message,
-    };
-};
+const notOk = (actual, message = 'should be falsy') => ({
+    is: !actual,
+    expected: false,
+    actual,
+    message,
+});
 
 const validateRegExp = (regexp) => {
     if (!isObj(regexp) && !isStr(regexp))
@@ -98,22 +94,18 @@ function notEqual(actual, expected, message = 'should not equal') {
     };
 }
 
-const pass = (message = '(unnamed assert)') => {
-    return {
-        is: true,
-        output: '',
-        message,
-    };
-};
+const pass = (message = '(unnamed assert)') => ({
+    is: true,
+    output: '',
+    message,
+});
 
-const fail = (error) => {
-    return {
-        is: false,
-        stack: error.stack,
-        output: '',
-        message: error,
-    };
-};
+const fail = (error) => ({
+    is: false,
+    stack: error.stack,
+    output: '',
+    message: error,
+});
 
 const deepEqual = (actual, expected, message = 'should deep equal') => {
     const is = deepEqualCheck(actual, expected);

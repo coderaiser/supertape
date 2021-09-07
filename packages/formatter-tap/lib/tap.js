@@ -2,9 +2,7 @@
 
 const isStr = (a) => typeof a === 'string';
 
-module.exports.start = () => {
-    return 'TAP version 13\n';
-};
+module.exports.start = () => 'TAP version 13\n';
 
 module.exports.test = ({test}) => {
     return `# ${test}\n`;
