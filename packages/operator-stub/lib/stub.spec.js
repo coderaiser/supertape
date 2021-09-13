@@ -89,7 +89,7 @@ test('supertape: operator: stub: calledWith: not array', (t) => {
     fn();
     calledWith(fn, 'hello');
     
-    t.calledWith(fail, [`Expected 'arguments' to be 'array' but received: "hello"`]);
+    t.calledWith(fail, [`Expected 'args' to be 'array' but received: "hello"`]);
     t.end();
 });
 
@@ -194,7 +194,7 @@ test('supertape: operator: stub: calledWith called with no args', (t) => {
     fn();
     calledWith(fn);
     
-    t.calledWith(fail, [`You haven't provided 'arguments', looks like you need 't.calledWithNoArgs()'`]);
+    t.calledWith(fail, [`You haven't provided 'args', looks like you need 't.calledWithNoArgs()'`]);
     t.end();
 });
 

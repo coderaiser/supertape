@@ -20,7 +20,7 @@ export const notCalled = (operator) => (fn, message = 'should not be called') =>
     return operator.notOk(fn.called, message);
 };
 
-export const calledWith = (operator) => (fn, args, message = 'should be called with arguments') => {
+export const calledWith = (operator) => (fn, args, message = `should be called with 'args'`) => {
     if (!isStub(fn))
         return operator.fail(getExpectedStubMessage(fn));
     
@@ -28,10 +28,10 @@ export const calledWith = (operator) => (fn, args, message = 'should be called w
         return operator.fail(`Expected function to be called with arguments, but not called at all`);
     
     if (!args)
-        return operator.fail(`You haven't provided 'arguments', looks like you need 't.calledWithNoArgs()'`);
+        return operator.fail(`You haven't provided 'args', looks like you need 't.calledWithNoArgs()'`);
     
     if (!isArray(args))
-        return operator.fail(`Expected 'arguments' to be 'array' but received: ${stringify(args)}`);
+        return operator.fail(`Expected 'args' to be 'array' but received: ${stringify(args)}`);
     
     const {length} = fn.args;
     const calledArgs = fn.args[length - 1];
