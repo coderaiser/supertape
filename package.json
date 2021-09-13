@@ -34,7 +34,7 @@
     "c8": "^7.3.5",
     "check-dts": "^0.5.5",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-putout": "^9.0.2",
+    "eslint-plugin-putout": "^10.0.1",
     "husky": "^6.0.0",
     "lerna": "^4.0.0",
     "madrun": "^8.0.1",
