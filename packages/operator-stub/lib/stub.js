@@ -1,9 +1,10 @@
 import {isStub} from '@cloudcmd/stub';
 
 const isString = (a) => typeof a === 'string';
-const getExpectedStubMessage = (fn) => `Expected stub, but received ${fn.toString()}`;
+const getExpectedStubMessage = (fn) => `Expected stub, but received: ${fn.toString()}`;
 
 const {stringify} = JSON;
+const {isArray} = Array;
 
 export const called = (operator) => (fn) => {
     if (!isStub(fn))
@@ -29,6 +30,9 @@ export const calledWith = (operator) => (fn, args, message = 'should be called w
     if (!args)
         return operator.fail(`You haven't provided 'arguments', looks like you need 't.calledWithNoArgs()'`);
     
+    if (!isArray(args))
+        return operator.fail(`Expected 'arguments' to be 'array' but received: ${stringify(args)}`);
+    
     const {length} = fn.args;
     const calledArgs = fn.args[length - 1];
     
@@ -43,7 +47,7 @@ export const calledWithNoArgs = (operator) => (fn, message = 'should be called w
         return operator.fail('Expected function to be called with no arguments, but not called at all');
     
     if (!isString(message))
-        return operator.fail(`'t.calledWithNoArgs' expects message to be string, received: '${stringify(message)}', looks like you need 't.calledWith'`);
+        return operator.fail(`'t.calledWithNoArgs' expects message to be string, but received: '${stringify(message)}', looks like you need 't.calledWith'`);
     
     const {length} = fn.args;
     const calledArgs = fn.args[length - 1];

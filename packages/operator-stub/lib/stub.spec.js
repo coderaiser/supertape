@@ -23,7 +23,7 @@ test('supertape: operator: stub: not called: not stub', (t) => {
     
     notCalled(fn);
     
-    t.calledWith(fail, [`Expected stub, but received ${fn.toString()}`]);
+    t.calledWith(fail, [`Expected stub, but received: ${fn.toString()}`]);
     t.end();
 });
 
@@ -51,7 +51,7 @@ test('supertape: operator: stub: called: not stub', (t) => {
     
     called(fn);
     
-    t.calledWith(fail, [`Expected stub, but received ${fn.toString()}`]);
+    t.calledWith(fail, [`Expected stub, but received: ${fn.toString()}`]);
     t.end();
 });
 
@@ -74,7 +74,22 @@ test('supertape: operator: stub: calledWith: not stub', (t) => {
     
     calledWith(fn, []);
     
-    t.calledWith(fail, [`Expected stub, but received ${fn.toString()}`]);
+    t.calledWith(fail, [`Expected stub, but received: ${fn.toString()}`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledWith: not array', (t) => {
+    const fn = stub();
+    const fail = stub();
+    
+    const calledWith = operator.calledWith({
+        fail,
+    });
+    
+    fn();
+    calledWith(fn, 'hello');
+    
+    t.calledWith(fail, [`Expected 'arguments' to be 'array' but received: "hello"`]);
     t.end();
 });
 
@@ -98,7 +113,7 @@ test('supertape: operator: stub: calledCount: not stub', (t) => {
     
     calledCount(fn, 1);
     
-    t.calledWith(fail, [`Expected stub, but received ${fn.toString()}`]);
+    t.calledWith(fail, [`Expected stub, but received: ${fn.toString()}`]);
     t.end();
 });
 
@@ -121,7 +136,7 @@ test('supertape: operator: stub: calledOnce: not stub', (t) => {
     
     calledOnce(fn);
     
-    t.calledWith(fail, [`Expected stub, but received ${fn.toString()}`]);
+    t.calledWith(fail, [`Expected stub, but received: ${fn.toString()}`]);
     t.end();
 });
 
@@ -230,7 +245,7 @@ test('supertape: operator: stub: calledWithNoArgs: not stub', (t) => {
     
     calledWithNoArgs(fn);
     
-    t.calledWith(fail, [`Expected stub, but received ${fn.toString()}`]);
+    t.calledWith(fail, [`Expected stub, but received: ${fn.toString()}`]);
     t.end();
 });
 
@@ -245,7 +260,7 @@ test('supertape: operator: stub: calledWithNoArgs: more then one argument', (t) 
     fn();
     calledWithNoArgs(fn, []);
     
-    t.calledWith(fail, [`'t.calledWithNoArgs' expects message to be string, received: '[]', looks like you need 't.calledWith'`]);
+    t.calledWith(fail, [`'t.calledWithNoArgs' expects message to be string, but received: '[]', looks like you need 't.calledWith'`]);
     t.end();
 });
 
@@ -259,7 +274,7 @@ test('supertape: operator: stub: calledWithNew: not stub', (t) => {
     
     calledWithNew(fn);
     
-    t.calledWith(fail, [`Expected stub, but received ${fn.toString()}`]);
+    t.calledWith(fail, [`Expected stub, but received: ${fn.toString()}`]);
     t.end();
 });
 
