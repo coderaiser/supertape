@@ -207,7 +207,7 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
     incFailed();
     
     const errorStack = stack || Error(message).stack;
-    const reason = stack ? 'user' : 'assert';
+    const reason = stack ? 'exception' : 'user';
     
     formatter.emit('test:fail', {
         count: count(),

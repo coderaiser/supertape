@@ -2,8 +2,8 @@
 
 const addSpaces = (a) => `      ${a}`;
 
-const REASON_USER = 1;
-const REASON_ASSERT = 2;
+const REASON_USER = 3;
+const REASON_EXCEPTION = 1;
 
 module.exports.parseAt = (stack, {reason}) => {
     const lines = stack.split('\n');
@@ -11,7 +11,7 @@ module.exports.parseAt = (stack, {reason}) => {
     if (lines.length === 1)
         return stack;
     
-    const line = lines[reason === 'user' ? REASON_USER : REASON_ASSERT];
+    const line = lines[reason === 'user' ? REASON_USER : REASON_EXCEPTION];
     
     return line.trim().replace('at', 'at:');
 };
