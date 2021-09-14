@@ -23,8 +23,10 @@ supertape --format progress-bar lib
 ## Env Variables
 
 - `CI=1` - disable progress bar
-- `SUPERTAPE_PROGRESS_BAR=1` - force enable/disable progress bar
-- `SUPERTAPE_PROGRESS_BAR_MIN=100` - count of tests to show progress bar
+- `SUPERTAPE_PROGRESS_BAR=1` - force enable/disable progress bar;
+- `SUPERTAPE_PROGRESS_BAR_COLOR` - set color of progress bar;
+- `SUPERTAPE_PROGRESS_BAR_MIN=100` - count of tests to show progress bar;
+- `SUPERTAPE_PROGRESS_BAR_STACK=1` - force show/hide stack on fail;
 
 ## License
 
