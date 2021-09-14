@@ -356,3 +356,61 @@ test('supertape: format: progress bar: testEnd', (t) => {
     t.calledWith(increment, expected);
     t.end();
 });
+
+test('supertape: format: progress bar: no stack', async (t) => {
+    const fn = (t) => {
+        t.ok(false);
+        t.end();
+    };
+    
+    const message = 'success';
+    const {CI} = env;
+    
+    env.CI = 1;
+    env.SUPERTAPE_PROGRESS_BAR_STACK = 0;
+    
+    reRequire('ci-info');
+    reRequire('./progress-bar');
+    const supertape = reRequire('supertape');
+    
+    supertape.init({
+        quiet: true,
+        format: 'progress-bar',
+    });
+    
+    supertape(message, fn);
+    
+    const [output] = await Promise.all([
+        pull(supertape.createStream(), 18),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const result = output.replace(/at:.+\n/, 'at: xxx\n');
+    
+    delete env.SUPERTAPE_PROGRESS_BAR_STACK;
+    env.CI = CI;
+    
+    const expected = montag`
+      TAP version 13
+      
+      # success
+      ❌ not ok 1 should be truthy
+        ---
+          operator: ok
+          expected: |-
+            true
+          actual: |-
+            false
+          at: xxx
+        ...
+      
+      
+      1..1
+      # tests 1
+      # pass 0
+      # ❌ fail 1
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});

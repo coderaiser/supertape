@@ -21,6 +21,7 @@ const {
     SUPERTAPE_PROGRESS_BAR,
     SUPERTAPE_PROGRESS_BAR_MIN = 100,
     SUPERTAPE_PROGRESS_BAR_COLOR,
+    SUPERTAPE_PROGRESS_BAR_STACK = 1,
 } = process.env;
 
 let bar;
@@ -68,8 +69,12 @@ module.exports.fail = ({at, count, message, operator, actual, expected, output, 
     }
     
     out(`    ${at}`);
-    out('    stack: |-');
-    out(errorStack);
+    
+    if (SUPERTAPE_PROGRESS_BAR_STACK !== '0') {
+        out('    stack: |-');
+        out(errorStack);
+    }
+    
     out('  ...');
     out('');
 };
@@ -96,9 +101,8 @@ module.exports.end = ({count, passed, failed, skiped}) => {
     if (!failed) {
         out('# ✅ ok');
         out('');
+        out('');
     }
-    
-    out('');
     
     return `\r${out()}`;
 };
