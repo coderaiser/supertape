@@ -1,0 +1,53 @@
+{
+  "name": "@supertape/formatter-short",
+  "version": "1.0.0",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "supertape formatter with short output (without callstack)",
+  "homepage": "http://github.com/coderaiser/supertape",
+  "main": "./lib/short.js",
+  "release": false,
+  "tag": false,
+  "changelog": false,
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/supertape.git"
+  },
+  "scripts": {
+    "test": "madrun test",
+    "watch:test": "madrun watch:test",
+    "lint": "madrun lint",
+    "fix:lint": "madrun fix:lint",
+    "coverage": "madrun coverage",
+    "report": "madrun report",
+    "wisdom": "madrun wisdom"
+  },
+  "dependencies": {},
+  "keywords": [
+    "formatter",
+    "tap",
+    "supertape"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.12.1",
+    "c8": "^7.3.5",
+    "eslint": "^8.0.0-beta.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-putout": "^10.0.1",
+    "madrun": "^8.0.0",
+    "mock-require": "^3.0.2",
+    "montag": "^1.0.0",
+    "nodemon": "^2.0.2",
+    "pullout": "^4.0.0",
+    "putout": "^20.0.1",
+    "supertape": "^6.0.1"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

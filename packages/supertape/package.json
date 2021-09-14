@@ -45,6 +45,7 @@
     "@supertape/formatter-fail": "^2.0.0",
     "@supertape/formatter-json-lines": "^1.0.0",
     "@supertape/formatter-progress-bar": "^2.0.0",
+    "@supertape/formatter-short": "^1.0.0",
     "@supertape/formatter-tap": "^2.0.0",
     "@supertape/operator-stub": "^1.0.0",
     "chalk": "^4.1.0",
