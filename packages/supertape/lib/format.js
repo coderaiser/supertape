@@ -6,7 +6,7 @@ const REASON_USER = 3;
 const REASON_EXCEPTION = 1;
 
 module.exports.parseAt = (stack, {reason}) => {
-    const lines = stack.split('\n');
+    const lines = cutMockImport(stack).split('\n');
     
     if (lines.length === 1)
         return stack;
@@ -23,4 +23,8 @@ module.exports.formatOutput = (str) => {
         .map(addSpaces)
         .join('\n');
 };
+
+function cutMockImport(str) {
+    return str.replace(/\?mock-import-count=\d+/g, '');
+}
 
