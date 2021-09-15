@@ -49,6 +49,11 @@ Options
    --no-check-duplicates       do not check messages for duplicates
 ```
 
+## Environment variables
+
+- `SUPERTAPE_TIMEOUT` - timeout for long running processes;
+- `SUPERTAPE_CHECK_DUPLICATES` - toggle check duplicates;
+
 ## Codemod
 
 You can convert your codebase from `tape` to `supertape` with help of a [putout](https://github.com/coderaiser/putout) and built-in [@putout/plugin-tape](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape).

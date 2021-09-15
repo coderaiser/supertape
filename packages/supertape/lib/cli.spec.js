@@ -307,6 +307,93 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
     t.end();
 });
 
+test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [
+        name,
+    ];
+    
+    const test = stub();
+    const init = stub();
+    const run = stub();
+    const isStop = stub();
+    
+    const {createStream} = reRequire('..');
+    mockRequire('@putout/cli-keypress', stub().returns({
+        isStop,
+    }));
+    
+    assign(test, {
+        init,
+        run,
+        createStream,
+    });
+    
+    mockRequire('..', test);
+    
+    process.env.SUPERTAPE_CHECK_DUPLICATES = '0';
+    await runCli({
+        argv,
+    });
+    delete process.env.SUPERTAPE_CHECK_DUPLICATES;
+    
+    stopAll();
+    const expected = [{
+        format: 'progress-bar',
+        quiet: true,
+        run: false,
+        checkDuplicates: false,
+        isStop,
+    }];
+    
+    t.calledWith(init, expected);
+    t.end();
+});
+
+test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [
+        name,
+        '--no-check-duplicates',
+    ];
+    
+    const test = stub();
+    const init = stub();
+    const run = stub();
+    const isStop = stub();
+    
+    const {createStream} = reRequire('..');
+    mockRequire('@putout/cli-keypress', stub().returns({
+        isStop,
+    }));
+    
+    assign(test, {
+        init,
+        run,
+        createStream,
+    });
+    
+    mockRequire('..', test);
+    
+    process.env.SUPERTAPE_CHECK_DUPLICATES = '1';
+    await runCli({
+        argv,
+    });
+    delete process.env.SUPERTAPE_CHECK_DUPLICATES;
+    
+    stopAll();
+    const expected = [{
+        format: 'progress-bar',
+        quiet: true,
+        run: false,
+        checkDuplicates: false,
+        isStop,
+    }];
+    
+    t.calledWith(init, expected);
+    t.end();
+});
+
 test('supertape: bin: cli: check-duplicates: -d', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
     const argv = [

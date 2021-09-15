@@ -30,6 +30,8 @@ const maybeArray = (a) => isArray(a) ? a : [a];
 const removeDuplicates = (a) => Array.from(new Set(a));
 const filesCount = fullstore(0);
 
+const {SUPERTAPE_CHECK_DUPLICATES} = process.env;
+
 module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
     const {isStop} = keypress();
     const [error, result] = await tryToCatch(cli, {
@@ -94,7 +96,7 @@ const yargsOptions = {
     default: {
         format: 'progress-bar',
         require: [],
-        checkDuplicates: true,
+        checkDuplicates: SUPERTAPE_CHECK_DUPLICATES !== '0',
     },
 };
 
