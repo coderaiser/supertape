@@ -13,7 +13,7 @@ module.exports.parseAt = (stack, {reason}) => {
     
     const line = lines[reason === 'user' ? REASON_USER : REASON_EXCEPTION];
     
-    return line.trim().replace('at', 'at:');
+    return line.trim();
 };
 
 module.exports.addSpaces = addSpaces;

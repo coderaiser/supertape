@@ -219,7 +219,7 @@ test('supertape: format: short: no stack trace', async (t) => {
         once(supertape.run(), 'end'),
     ]);
     
-    const result = output.replace(/at: .+\n/, 'at: xxx\n');
+    const result = output.replace(/at .+\n/, 'at xxx\n');
     
     const expected = montag`
         TAP version 13
@@ -233,7 +233,7 @@ test('supertape: format: short: no stack trace', async (t) => {
               true
             actual: |-
               false
-            at: xxx
+            at xxx
           ...
         
         1..2

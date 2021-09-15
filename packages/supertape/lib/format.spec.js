@@ -22,7 +22,7 @@ test('supertape: format: reason: exception', (t) => {
       `;
     
     const result = parseAt(stack, {reason: 'exception'});
-    const expected = 'at: file:///Users/coderaiser/estrace/lib/estrace.spec.js:57:11';
+    const expected = 'at file:///Users/coderaiser/estrace/lib/estrace.spec.js:57:11';
     
     t.equal(result, expected);
     t.end();
@@ -39,7 +39,7 @@ test('supertape: format: mock-import: ', (t) => {
       `;
     
     const result = parseAt(stack, {reason: 'exception'});
-    const expected = 'at: file:///Users/coderaiser/estrace/lib/estrace.spec.js:57:11';
+    const expected = 'at file:///Users/coderaiser/estrace/lib/estrace.spec.js:57:11';
     
     t.equal(result, expected);
     t.end();

@@ -385,7 +385,7 @@ test('supertape: format: progress bar: no stack', async (t) => {
         once(supertape.run(), 'end'),
     ]);
     
-    const result = output.replace(/at:.+\n/, 'at: xxx\n');
+    const result = output.replace(/at .+\n/, 'at  xxx\n');
     
     delete env.SUPERTAPE_PROGRESS_BAR_STACK;
     env.CI = CI;
@@ -401,7 +401,7 @@ test('supertape: format: progress bar: no stack', async (t) => {
             true
           actual: |-
             false
-          at: xxx
+          at  xxx
         ...
       
       

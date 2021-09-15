@@ -52,7 +52,7 @@ test('supertape: equal', async (t) => {
     t.end();
 });
 
-test('supertape: stack strace', async (t) => {
+test('supertape: stack trace', async (t) => {
     const fn = (t) => {
         t.equal(1, 2);
         t.end();
@@ -78,8 +78,8 @@ test('supertape: stack strace', async (t) => {
     const AT = 8;
     const CURRENT = 13;
     
-    const at = lines[AT].trim().replace('at: ', '');
-    const current = lines[CURRENT].trim().replace('at ', '');
+    const at = lines[AT].trim();
+    const current = lines[CURRENT].trim();
     
     t.equal(at, current);
     t.end();
@@ -111,7 +111,7 @@ test('supertape: stack strace: exception', async (t) => {
     const CURRENT = 8;
     
     const at = lines[AT].trim().replace('at: ', '');
-    const current = lines[CURRENT].trim().replace('at ', '');
+    const current = lines[CURRENT].trim().replace('at:', '');
     
     t.equal(at, current);
     t.end();

@@ -50,7 +50,7 @@ test('supertape: getDuplicatesMessage: duplicate', (t) => {
         checkDuplicates,
     });
     
-    t.match(result, 'at:');
+    t.match(result, 'at');
     t.end();
 });
 
