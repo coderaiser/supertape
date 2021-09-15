@@ -1,3 +1,13 @@
+2021.09.15, v6.4.0
+
+fix:
+- (supertape) improve at when found duplicates
+
+feature:
+- (supertape) add ability to toggle check duplicates with env variables SUPERTAPE_CHECK_DUPLICATES
+- (@supertape/formatter-progress-bar) add support of SUPERTAPE_PROGRESS_BAR_STACK'
+
+
 2021.09.15, v6.3.1
 
 fix:
