@@ -100,11 +100,12 @@ const pass = (message = '(unnamed assert)') => ({
     message,
 });
 
-const fail = (error) => ({
+const fail = (error, at) => ({
     is: false,
     stack: error.stack,
     output: '',
     message: error,
+    at,
 });
 
 const deepEqual = (actual, expected, message = 'should deep equal') => {
@@ -191,6 +192,7 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
         actual,
         output,
         stack,
+        at,
     } = validate(testState);
     
     incCount();
@@ -217,7 +219,7 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
         expected,
         output,
         errorStack: formatOutput(errorStack),
-        at: parseAt(errorStack, {reason}),
+        at: at || parseAt(errorStack, {reason}),
     });
 }
 

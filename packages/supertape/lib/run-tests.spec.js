@@ -269,6 +269,37 @@ test('supertape: runTests: fail', async (t) => {
     t.end();
 });
 
+test('supertape: runTests: fail: at', async (t) => {
+    const fn = (t) => {
+        t.fail('hello', 'at: xxxx');
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    const supertape = reRequire('..');
+    supertape(message, fn, {
+        quiet: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), 6),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello world
+        not ok 1 hello
+          ---
+            operator: fail
+            at: xxxx
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: runTests: fail: timeout', async (t) => {
     const fn = async (t) => {
         await once(new EventEmitter(), 'end');

@@ -42,7 +42,7 @@ module.exports.getDuplicatesMessage = ({message, checkDuplicates}) => {
         if (file.includes('node_modules'))
             continue;
         
-        return `Duplicate message ${beforeParse}`;
+        return beforeParse.replace('at', 'at: ');
     }
     
     return '';
