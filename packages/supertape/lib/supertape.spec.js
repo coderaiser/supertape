@@ -787,6 +787,41 @@ test('supertape: destructuring test: skip', async (t) => {
     t.end();
 });
 
+test('supertape: duplicate', async (t) => {
+    const fn = (t) => {
+        t.equal(1, 1);
+        t.end();
+    };
+    
+    const message = 'hello';
+    const supertape = reRequire('..');
+    
+    supertape.init({
+        run: false,
+        quiet: true,
+    });
+    
+    supertape(message, fn);
+    supertape(message, fn);
+    
+    const stream = supertape.createStream();
+    
+    const [result] = await Promise.all([
+        pull(stream, 62),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello
+        ok 1 should equal
+        not ok 2 Duplicate at
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 function createStream() {
     return new Transform({
         transform(chunk, encoding, callback) {

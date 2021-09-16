@@ -159,10 +159,10 @@ async function runOneTest({message, fn, extensions, formatter, count, total, fai
         failed: failed(),
     });
     
-    const duplicateAt = getDuplicatesMessage(message);
+    const [duplicateMessage, duplicateAt] = getDuplicatesMessage(message);
     
     if (duplicateAt) {
-        t.fail('Duplicate message', duplicateAt);
+        t.fail(duplicateMessage, duplicateAt);
         t.end();
     }
 }

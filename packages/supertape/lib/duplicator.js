@@ -6,6 +6,8 @@ const StackTracey = require('stacktracey');
 const getMessage = ({message, duplicatesMessage}) => [message, duplicatesMessage];
 const getMessagesList = (tests) => tests.map(getMessage);
 const compareMessage = (a) => ([b]) => a === b;
+const getDuplicatesMessage = ([, a]) => a;
+
 const processedList = new Set();
 
 module.exports = ({tests}) => (msg) => {
@@ -13,29 +15,27 @@ module.exports = ({tests}) => (msg) => {
     const duplicates = getMessages(tests).filter(compareMessage(msg));
     
     if (duplicates.length < 2)
-        return '';
+        return [];
     
-    const [, duplicatesMessage] = duplicates.pop();
+    const [duplicatesMessage, duplicateAt] = duplicates.map(getDuplicatesMessage);
     
     if (processedList.has(duplicatesMessage))
-        return '';
+        return [];
     
     processedList.add(duplicatesMessage);
-    return duplicatesMessage;
+    return [`Duplicate ${duplicatesMessage}`, duplicateAt];
 };
 
-const messages = new Set();
-const CALLS_FROM_TEST = 2;
-
-module.exports.getDuplicatesMessage = ({message, checkDuplicates}) => {
+module.exports.getDuplicatesMessage = ({checkDuplicates}) => {
     if (!checkDuplicates)
         return '';
     
-    if (!messages.has(message)) {
-        messages.add(message);
-        return '';
-    }
-    
+    return getFileName();
+};
+
+const CALLS_FROM_TEST = 3;
+
+function getFileName() {
     const {items} = new StackTracey(Error());
     
     for (const {beforeParse, file} of items.slice(CALLS_FROM_TEST)) {
@@ -46,5 +46,4 @@ module.exports.getDuplicatesMessage = ({message, checkDuplicates}) => {
     }
     
     return '';
-};
-
+}

@@ -44,3 +44,4 @@ test('supertape: format: mock-import: ', (t) => {
     t.equal(result, expected);
     t.end();
 });
+
