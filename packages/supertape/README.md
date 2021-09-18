@@ -53,6 +53,14 @@ Options
 
 - `SUPERTAPE_TIMEOUT` - timeout for long running processes;
 - `SUPERTAPE_CHECK_DUPLICATES` - toggle check duplicates;
+- `SUPERTAPE_CHECK_SCOPES` - check that test message has a scope: `scope: subject`
+
+```js
+test('tape: error', (t) => {
+    t.equal(error.code, 'ENOENT');
+    t.end();
+});
+```
 
 ## Codemod
 

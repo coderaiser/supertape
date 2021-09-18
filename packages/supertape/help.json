@@ -3,5 +3,6 @@
     "-v, --version              ": "output version information and exit",
     "-f, --format               ": "use a specific output format - default: progress-bar/tap on CI",
     "-r, --require              ": "require module",
+    "--check-scopes             ": "check that messages contains scope: 'scope: message'",
     "--no-check-duplicates      ": "do not check messages for duplicates"
 }

@@ -1,4 +1,4 @@
-import {OperatorStub} from '..';
+import {OperatorStub} from '../lib/stub.js';
 import {
     stub,
     Stub,

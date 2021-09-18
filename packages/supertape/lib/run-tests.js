@@ -6,7 +6,7 @@ const tryToCatch = require('try-to-catch');
 const once = require('once');
 
 const isDebug = require('./is-debug');
-const duplicator = require('./duplicator');
+const {createValidator} = require('./validator');
 
 const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
@@ -76,7 +76,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     });
     
     const wasStop = fullstore();
-    const getDuplicatesMessage = duplicator({
+    const getValidationMessage = createValidator({
         tests,
     });
     
@@ -99,7 +99,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
             incCount,
             incFailed,
             incPassed,
-            getDuplicatesMessage,
+            getValidationMessage,
             
             extensions: {
                 ...operators,
@@ -123,7 +123,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     };
 }
 
-async function runOneTest({message, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getDuplicatesMessage}) {
+async function runOneTest({message, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getValidationMessage}) {
     formatter.emit('test', {
         test: message,
     });
@@ -159,10 +159,10 @@ async function runOneTest({message, fn, extensions, formatter, count, total, fai
         failed: failed(),
     });
     
-    const [duplicateMessage, duplicateAt] = getDuplicatesMessage(message);
+    const [validationMessage, at] = getValidationMessage(message);
     
-    if (duplicateAt) {
-        t.fail(duplicateMessage, duplicateAt);
+    if (at) {
+        t.fail(validationMessage, at);
         t.end();
     }
 }

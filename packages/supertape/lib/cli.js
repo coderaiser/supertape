@@ -30,7 +30,10 @@ const maybeArray = (a) => isArray(a) ? a : [a];
 const removeDuplicates = (a) => Array.from(new Set(a));
 const filesCount = fullstore(0);
 
-const {SUPERTAPE_CHECK_DUPLICATES} = process.env;
+const {
+    SUPERTAPE_CHECK_DUPLICATES = '1',
+    SUPERTAPE_CHECK_SCOPES = '0',
+} = process.env;
 
 module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
     const {isStop} = keypress();
@@ -85,6 +88,7 @@ const yargsOptions = {
         'version',
         'help',
         'check-duplicates',
+        'check-scopes',
     ],
     alias: {
         version: 'v',
@@ -92,11 +96,13 @@ const yargsOptions = {
         help: 'h',
         require: 'r',
         checkDuplicates: 'd',
+        checkScopes: 's',
     },
     default: {
         format: 'progress-bar',
         require: [],
         checkDuplicates: SUPERTAPE_CHECK_DUPLICATES !== '0',
+        checkScopes: SUPERTAPE_CHECK_SCOPES === '1',
     },
 };
 
@@ -141,6 +147,7 @@ async function cli({argv, cwd, stdout, isStop}) {
     const {
         format,
         checkDuplicates,
+        checkScopes,
     } = args;
     
     supertape.init({
@@ -149,6 +156,7 @@ async function cli({argv, cwd, stdout, isStop}) {
         format,
         isStop,
         checkDuplicates,
+        checkScopes,
     });
     
     supertape.createStream().pipe(stdout);

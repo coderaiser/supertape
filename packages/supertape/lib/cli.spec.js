@@ -300,6 +300,7 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: true,
+        checkScopes: false,
         isStop,
     }];
     
@@ -343,6 +344,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: false,
+        checkScopes: false,
         isStop,
     }];
     
@@ -387,6 +389,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: false,
+        checkScopes: false,
         isStop,
     }];
     
@@ -429,6 +432,7 @@ test('supertape: bin: cli: check-duplicates: -d', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: true,
+        checkScopes: false,
         isStop,
     }];
     
@@ -474,6 +478,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: true,
+        checkScopes: false,
         isStop,
     }];
     

@@ -122,7 +122,7 @@ test('supertape: runTests: duplicates', async (t) => {
     
     const message = 'hello world';
     
-    reRequire('./duplicator');
+    reRequire('./validator');
     const supertape = reRequire('..');
     supertape(message, fn1, {
         quiet: true,
@@ -157,7 +157,7 @@ test('supertape: runTests: duplicates: defaults', async (t) => {
     
     const message = 'hello world';
     
-    reRequire('./duplicator');
+    reRequire('./validator');
     const supertape = reRequire('..');
     supertape(message, fn1, {
         quiet: true,

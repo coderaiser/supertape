@@ -87,7 +87,8 @@
     "nodemon": "^2.0.2",
     "pullout": "^4.0.0",
     "putout": "^20.0.1",
-    "runsome": "^1.0.0"
+    "runsome": "^1.0.0",
+    "try-catch": "^3.0.0"
   },
   "license": "MIT",
   "engines": {

@@ -6,7 +6,7 @@ const {createSimport} = require('simport');
 
 const options = require('../supertape.json');
 
-const {getDuplicatesMessage} = require('./duplicator');
+const {getAt, setValidations} = require('./validator');
 const runTests = require('./run-tests');
 const createFormatter = once(require('./formatter').createFormatter);
 
@@ -35,20 +35,21 @@ const defaultOptions = {
     getOperators,
     isStop: () => false,
     checkDuplicates: true,
+    checkScopes: false,
 };
 
 function _createEmitter({quiet, format, getOperators, isStop}) {
     const tests = [];
     const emitter = new EventEmitter();
     
-    emitter.on('test', (message, fn, {skip, only, extensions, duplicatesMessage}) => {
+    emitter.on('test', (message, fn, {skip, only, extensions, at}) => {
         tests.push({
             message,
             fn,
             skip,
             only,
             extensions,
-            duplicatesMessage,
+            at,
         });
     });
     
@@ -108,16 +109,19 @@ function test(message, fn, options = {}) {
         getOperators,
         isStop,
         checkDuplicates,
+        checkScopes,
     } = {
         ...defaultOptions,
         ...initedOptions,
         ...options,
     };
     
-    const duplicatesMessage = getDuplicatesMessage({
-        message,
+    setValidations({
         checkDuplicates,
+        checkScopes,
     });
+    
+    const at = getAt();
     
     const emitter = createEmitter({
         format,
@@ -132,7 +136,7 @@ function test(message, fn, options = {}) {
         skip,
         only,
         extensions,
-        duplicatesMessage,
+        at,
     });
     
     if (run)
