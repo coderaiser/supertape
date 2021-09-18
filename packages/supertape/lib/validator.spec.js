@@ -111,6 +111,35 @@ test('supertape: validator: checkScopes: valid', (t) => {
     t.end();
 });
 
+test('supertape: validator: checkScopes: nested: valid', (t) => {
+    const {
+        createValidator,
+        setValidations,
+    } = reRequire('./validator');
+    
+    const message = 'hello: world: and: more';
+    const current = {
+        message,
+        at: 'at',
+    };
+    
+    const tests = [current];
+    
+    setValidations({
+        checkScopes: true,
+    });
+    
+    const validate = createValidator({
+        tests,
+    });
+    
+    const result = validate(message);
+    const expected = [];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
 test('supertape: validator: checkScopes: cannot find message', (t) => {
     const {
         createValidator,
@@ -133,7 +162,7 @@ test('supertape: validator: checkScopes: cannot find message', (t) => {
     });
     
     const [error] = tryCatch(validate, 'hello  world');
-    const expected = '☝️Looks like message cannot be fined in tests, this should never happen';
+    const expected = '☝️Looks like message cannot be find in tests, this should never happen';
     
     t.equal(error.message, expected);
     t.end();

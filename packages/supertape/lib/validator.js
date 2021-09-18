@@ -8,7 +8,7 @@ const getMessage = ({message, at}) => [message, at];
 const getMessagesList = (tests) => tests.map(getMessage);
 const compareMessage = (a) => ([b]) => a === b;
 
-const SCOPE_DEFINED = /^\w+:/;
+const SCOPE_DEFINED = /^[\w-\d\s]+:.*/;
 const processedList = new Set();
 
 const validations = {
@@ -54,7 +54,7 @@ module.exports.createValidator = ({tests}) => (msg) => {
         const filtered = findByMessage(msg, tests);
         
         if (!filtered.length)
-            throw Error('☝️Looks like message cannot be fined in tests, this should never happen');
+            throw Error('☝️Looks like message cannot be find in tests, this should never happen');
         
         const [message, at] = validators[name](msg, filtered);
         
