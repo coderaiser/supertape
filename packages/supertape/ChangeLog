@@ -1,3 +1,9 @@
+2021.09.19, v6.7.2
+
+fix:
+- (supertape) validator: check scope: add support of slash
+
+
 2021.09.18, v6.7.1
 
 fix:
