@@ -140,6 +140,35 @@ test('supertape: validator: checkScopes: nested: valid', (t) => {
     t.end();
 });
 
+test('supertape: validator: checkScopes: nested: slash', (t) => {
+    const {
+        createValidator,
+        setValidations,
+    } = reRequire('./validator');
+    
+    const message = 'travis/set-node-versions: report: is function';
+    const current = {
+        message,
+        at: 'at',
+    };
+    
+    const tests = [current];
+    
+    setValidations({
+        checkScopes: true,
+    });
+    
+    const validate = createValidator({
+        tests,
+    });
+    
+    const result = validate(message);
+    const expected = [];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
 test('supertape: validator: checkScopes: cannot find message', (t) => {
     const {
         createValidator,

@@ -8,7 +8,7 @@ const getMessage = ({message, at}) => [message, at];
 const getMessagesList = (tests) => tests.map(getMessage);
 const compareMessage = (a) => ([b]) => a === b;
 
-const SCOPE_DEFINED = /^[\w-\d\s]+:.*/;
+const SCOPE_DEFINED = /^[\w-/\d\s]+:.*/;
 const processedList = new Set();
 
 const validations = {
