@@ -1,3 +1,9 @@
+2021.09.18, v6.7.1
+
+fix:
+- (supertape) validator: check scopes: nested
+
+
 2021.09.18, v6.7.0
 
 feature:
