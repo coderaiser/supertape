@@ -1,3 +1,9 @@
+2021.09.18, v6.7.0
+
+feature:
+- (supertape) add --check-scopes flag that checks that test message contains scope
+
+
 2021.09.16, v6.6.0
 
 feature:
