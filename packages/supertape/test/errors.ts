@@ -3,7 +3,7 @@ import test, {
     Test,
     stub,
     Stub,
-} from '..';
+} from '../lib/supertape.js';
 
 // THROWS Expected 2 arguments, but got 0
 test();
