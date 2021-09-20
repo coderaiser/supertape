@@ -1,3 +1,9 @@
+2021.09.20, v6.7.3
+
+fix:
+- (supertape) test should have ability to override validations, like checkDuplicates
+
+
 2021.09.19, v6.7.2
 
 fix:
