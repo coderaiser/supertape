@@ -144,6 +144,41 @@ test('supertape: runTests: duplicates', async (t) => {
     t.end();
 });
 
+test('supertape: runTests: duplicates: false', async (t) => {
+    const fn1 = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const fn2 = (t) => {
+        t.notOk(false);
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    reRequire('./validator');
+    const supertape = reRequire('..');
+    supertape(message, fn1, {
+        quiet: true,
+        checkDuplicates: false,
+    });
+    
+    supertape(message, fn2, {
+        quiet: true,
+        checkDuplicates: false,
+    });
+    
+    const FOUR_TESTS = 30;
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), FOUR_TESTS),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    t.notMatch(result, 'not ok 2 Duplicate');
+    t.end();
+});
+
 test('supertape: runTests: duplicates: defaults', async (t) => {
     const fn1 = (t) => {
         t.ok(true);

@@ -42,7 +42,7 @@ function _createEmitter({quiet, format, getOperators, isStop}) {
     const tests = [];
     const emitter = new EventEmitter();
     
-    emitter.on('test', (message, fn, {skip, only, extensions, at}) => {
+    emitter.on('test', (message, fn, {skip, only, extensions, at, validations}) => {
         tests.push({
             message,
             fn,
@@ -50,6 +50,7 @@ function _createEmitter({quiet, format, getOperators, isStop}) {
             only,
             extensions,
             at,
+            validations,
         });
     });
     
@@ -116,10 +117,12 @@ function test(message, fn, options = {}) {
         ...options,
     };
     
-    setValidations({
+    const validations = {
         checkDuplicates,
         checkScopes,
-    });
+    };
+    
+    setValidations(validations);
     
     const at = getAt();
     
@@ -137,6 +140,7 @@ function test(message, fn, options = {}) {
         only,
         extensions,
         at,
+        validations,
     });
     
     if (run)

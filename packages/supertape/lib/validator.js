@@ -2,12 +2,12 @@
 
 const once = require('once');
 const StackTracey = require('stacktracey');
-
 const getDuplicatesMessage = ([, a]) => a;
-const getMessage = ({message, at}) => [message, at];
+
+const getMessage = ({message, at, validations}) => [message, at, validations];
+
 const getMessagesList = (tests) => tests.map(getMessage);
 const compareMessage = (a) => ([b]) => a === b;
-
 const SCOPE_DEFINED = /^[\w-/\d\s]+:.*/;
 const processedList = new Set();
 
@@ -30,7 +30,6 @@ const {
 const findByMessage = (msg, tests) => {
     const getMessages = once(getMessagesList);
     const filtered = getMessages(tests).filter(compareMessage(msg));
-    
     return filtered;
 };
 
@@ -101,8 +100,21 @@ function checkScopes(msg, filtered) {
     return [];
 }
 
+const isEnabled = (tests, name) => {
+    for (const [,, validations] of tests) {
+        if (!validations[name]) {
+            return false;
+        }
+    }
+    
+    return true;
+};
+
 function checkDuplicates(msg, filtered) {
     if (filtered.length < 2)
+        return [];
+    
+    if (!isEnabled(filtered, 'checkDuplicates'))
         return [];
     
     const [first, second] = filtered.map(getDuplicatesMessage);
@@ -111,7 +123,6 @@ function checkDuplicates(msg, filtered) {
         return [];
     
     processedList.add(first);
-    
     return [`Duplicate ${first}`, second];
 }
 
