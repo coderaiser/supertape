@@ -83,7 +83,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
         tests,
     });
     
-    for (const {fn, message, extensions} of tests) {
+    for (const {fn, message, extensions, at} of tests) {
         if (wasStop())
             break;
         
@@ -93,6 +93,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
         }
         
         await runOneTest({
+            at,
             fn,
             message,
             formatter,
@@ -126,7 +127,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     };
 }
 
-async function runOneTest({message, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getValidationMessage}) {
+async function runOneTest({message, at, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getValidationMessage}) {
     formatter.emit('test', {
         test: message,
     });
@@ -147,7 +148,7 @@ async function runOneTest({message, fn, extensions, formatter, count, total, fai
     stopTimer();
     
     if (error) {
-        t.fail(error);
+        t.fail(error, at);
         t.end();
     }
     
@@ -158,10 +159,10 @@ async function runOneTest({message, fn, extensions, formatter, count, total, fai
         failed: failed(),
     });
     
-    const [validationMessage, at] = getValidationMessage(message);
+    const [validationMessage, atLine] = getValidationMessage(message);
     
-    if (at) {
-        t.fail(validationMessage, at);
+    if (atLine) {
+        t.fail(validationMessage, atLine);
         t.end();
     }
 }

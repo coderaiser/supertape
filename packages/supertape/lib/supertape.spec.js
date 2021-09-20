@@ -98,22 +98,30 @@ test('supertape: stack strace: exception', async (t) => {
         quiet: true,
     });
     
-    supertape(message, fn);
+    supertape(message, (t) => {
+        fn();
+        t.end();
+    });
     const stream = supertape.createStream();
     
-    const [result] = await Promise.all([
+    const [output] = await Promise.all([
         pull(stream, -3),
         once(supertape.run(), 'end'),
     ]);
     
-    const lines = result.split('\n');
+    const lines = output.split('\n');
     const AT = 5;
     const CURRENT = 8;
     
-    const at = lines[AT].trim().replace('at: ', '');
-    const current = lines[CURRENT].trim().replace('at:', '');
+    const at = lines[AT].trim();
+    const current = lines[CURRENT].trim();
+    const [, lineAt] = at.split(':');
+    const [, lineCurrent] = current.split(':');
     
-    t.equal(at, current);
+    const result = Number(lineAt);
+    const expected = Number(lineCurrent) + 11;
+    
+    t.equal(result, expected, 'line numbers should equal');
     t.end();
 });
 
@@ -124,7 +132,6 @@ test('supertape: checkDuplicates: override', async (t) => {
     };
     
     const message = 'hello';
-    
     const supertape = reRequire('..');
     
     supertape.init({
