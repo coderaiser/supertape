@@ -1,3 +1,9 @@
+2021.09.20, v6.7.4
+
+fix:
+- (supertape) line number when tested function throws
+
+
 2021.09.20, v6.7.3
 
 fix:
