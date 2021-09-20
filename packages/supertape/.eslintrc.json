@@ -1,4 +1,7 @@
 {
+    "rules": {
+        "putout/align-spaces": "error"
+    },
     "overrides": [{
         "files": "*.d.ts",
         "rules": {
@@ -7,7 +10,7 @@
     }],
     "extends": [
         "plugin:node/recommended",
-        "plugin:putout/recommended"
+        "plugin:putout/safe"
     ],
     "plugins": [
         "node",

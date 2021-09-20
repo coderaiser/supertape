@@ -4,17 +4,21 @@ const fullstore = require('fullstore');
 const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
 const once = require('once');
-
 const isDebug = require('./is-debug');
+
 const {createValidator} = require('./validator');
 
 const inc = wraptile((store) => store(store() + 1));
+
 const isOnly = ({only}) => only;
+
 const isSkip = ({skip}) => skip;
+
 const notSkip = ({skip}) => !skip;
 
 const getInitOperators = once(async () => {
     const {initOperators} = await import('./operators.mjs');
+    
     return initOperators;
 });
 
@@ -64,11 +68,9 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     const count = fullstore(0);
     const failed = fullstore(0);
     const passed = fullstore(0);
-    
     const incCount = inc(count);
     const incFailed = inc(failed);
     const incPassed = inc(passed);
-    
     const total = tests.length;
     
     formatter.emit('start', {
@@ -76,6 +78,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     });
     
     const wasStop = fullstore();
+    
     const getValidationMessage = createValidator({
         tests,
     });
@@ -129,6 +132,7 @@ async function runOneTest({message, fn, extensions, formatter, count, total, fai
     });
     
     const initOperators = await getInitOperators();
+    
     const t = initOperators({
         formatter,
         count,
@@ -139,12 +143,7 @@ async function runOneTest({message, fn, extensions, formatter, count, total, fai
     });
     
     const [timer, stopTimer] = timeout(SUPERTAPE_TIMEOUT, ['timeout']);
-    
-    const [error] = await Promise.race([
-        tryToCatch(fn, t),
-        timer,
-    ]);
-    
+    const [error] = await Promise.race([tryToCatch(fn, t), timer]);
     stopTimer();
     
     if (error) {

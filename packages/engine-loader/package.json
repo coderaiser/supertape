@@ -36,7 +36,6 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@babel/eslint-parser": "^7.12.1",
     "@cloudcmd/stub": "^3.1.0",
     "@supertape/operator-stub": "^1.0.0",
     "c8": "^7.3.5",

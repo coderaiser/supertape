@@ -1,17 +1,4 @@
 {
-    "parser": "@babel/eslint-parser",
-    "parserOptions": {
-        "requireConfigFile": false
-    },
-    "overrides": [{
-        "files": "./packages/supertape/**/*.js",
-        "parserOptions": {
-            "sourceType": "script",
-            "babelOptions": {
-                "sourceType": "unambiguous"
-            }
-        }
-    }],
     "rules": {
         "node/no-unsupported-features/es-syntax": "off",
         "putout/align-spaces": "error"
