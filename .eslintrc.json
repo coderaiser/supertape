@@ -13,11 +13,12 @@
         }
     }],
     "rules": {
-        "node/no-unsupported-features/es-syntax": "off"
+        "node/no-unsupported-features/es-syntax": "off",
+        "putout/align-spaces": "error"
     },
     "extends": [
         "plugin:node/recommended",
-        "plugin:putout/recommended"
+        "plugin:putout/safe"
     ],
     "plugins": [
         "node",
