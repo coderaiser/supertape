@@ -17,6 +17,9 @@ export const notCalled = (operator) => (fn, message = 'should not be called') =>
     if (!isStub(fn))
         return operator.fail(getExpectedStubMessage(fn));
     
+    if (!isString(message))
+        return operator.fail(`'t.notCalled' expects message to be string, but received: '${stringify(message)}', looks like you need 't.notCalledWith'`);
+    
     return operator.notOk(fn.called, message);
 };
 

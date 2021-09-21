@@ -264,6 +264,21 @@ test('supertape: operator: stub: calledWithNoArgs: more then one argument', (t) 
     t.end();
 });
 
+test('supertape: operator: stub: notCalled: more then one argument', (t) => {
+    const fn = stub();
+    const fail = stub();
+    
+    const notCalled = operator.notCalled({
+        fail,
+    });
+    
+    fn();
+    notCalled(fn, []);
+    
+    t.calledWith(fail, [`'t.notCalled' expects message to be string, but received: '[]', looks like you need 't.notCalledWith'`]);
+    t.end();
+});
+
 test('supertape: operator: stub: calledWithNew: not stub', (t) => {
     const fn = () => {};
     const fail = stub();
