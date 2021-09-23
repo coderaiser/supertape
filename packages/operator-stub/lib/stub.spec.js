@@ -293,3 +293,374 @@ test('supertape: operator: stub: calledWithNew: not stub', (t) => {
     t.end();
 });
 
+test('supertape: operator: stub: calledBefore', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    t.calledBefore(init, show);
+    t.end();
+});
+
+test('supertape: operator: stub: calledBefore: message', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    const ok = stub();
+    const calledBefore = operator.calledBefore({
+        ok,
+    });
+    
+    calledBefore(init, show);
+    
+    t.calledWith(ok, [true, `should call 'init' before 'show'`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledBefore: custom message', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    const ok = stub();
+    const calledBefore = operator.calledBefore({
+        ok,
+    });
+    
+    calledBefore(init, show, 'should call');
+    
+    t.calledWith(ok, [true, `should call`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledAfter', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    t.calledAfter(show, init);
+    t.end();
+});
+
+test('supertape: operator: stub: calledAfter: message', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    const ok = stub();
+    const calledBefore = operator.calledBefore({
+        ok,
+    });
+    
+    calledBefore(init, show);
+    
+    t.calledWith(ok, [true, `should call 'init' before 'show'`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledAfter: custom message', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    const ok = stub();
+    const calledBefore = operator.calledBefore({
+        ok,
+    });
+    
+    calledBefore(init, show, 'should call');
+    
+    t.calledWith(ok, [true, `should call`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledAfter: fn1 not stub', (t) => {
+    const init = () => {};
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    const fail = stub();
+    const calledAfter = operator.calledAfter({
+        fail,
+    });
+    
+    calledAfter(init, show);
+    
+    t.calledWith(fail, [`Expected stub, but received: () => {}`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledAfter: fn2 not stub', (t) => {
+    const init = stub().withName('init');
+    const show = () => {};
+    
+    init();
+    show();
+    
+    const fail = stub();
+    const calledAfter = operator.calledAfter({
+        fail,
+    });
+    
+    calledAfter(init, show);
+    
+    t.calledWith(fail, [`Expected stub, but received: () => {}`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledBefore: fn1 not stub', (t) => {
+    const init = () => {};
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    const fail = stub();
+    const calledBefore = operator.calledBefore({
+        fail,
+    });
+    
+    calledBefore(init, show);
+    
+    t.calledWith(fail, [`Expected stub, but received: () => {}`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledBefore: fn2 not stub', (t) => {
+    const init = stub();
+    const show = () => {};
+    
+    init();
+    show();
+    
+    const fail = stub();
+    const calledBefore = operator.calledBefore({
+        fail,
+    });
+    
+    calledBefore(init, show);
+    
+    t.calledWith(fail, [`Expected stub, but received: () => {}`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledBefore: fn1 not called', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    show();
+    
+    const fail = stub();
+    const calledBefore = operator.calledBefore({
+        fail,
+    });
+    
+    calledBefore(init, show);
+    
+    t.calledWith(fail, [`Expected function 'init' to be called before 'show' but 'init' not called at all`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledBefore: fn2 not called', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    
+    const fail = stub();
+    const calledBefore = operator.calledBefore({
+        fail,
+    });
+    
+    calledBefore(init, show);
+    
+    t.calledWith(fail, [`Expected function 'init' to be called before 'show' but 'show' not called at all`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledAfter: fn1 not called', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    show();
+    
+    const fail = stub();
+    const calledAfter = operator.calledAfter({
+        fail,
+    });
+    
+    calledAfter(init, show);
+    
+    t.calledWith(fail, [`Expected function 'init' to be called after 'show' but 'init' not called at all`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledAfter: fn2 not called', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    
+    const fail = stub();
+    const calledAfter = operator.calledAfter({
+        fail,
+    });
+    
+    calledAfter(init, show);
+    
+    t.calledWith(fail, [`Expected function 'init' to be called after 'show' but 'show' not called at all`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledAfter: no name for fn1', (t) => {
+    const init = stub();
+    const show = stub();
+    
+    init();
+    show();
+    
+    const fail = stub();
+    const calledAfter = operator.calledAfter({
+        fail,
+    });
+    
+    calledAfter(init, show);
+    
+    t.calledWith(fail, [`Looks like you forget to define name of a stub, use: stub().withName('functionName')`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledAfter: no name for fn2', (t) => {
+    const init = stub().withName('init');
+    const show = stub();
+    
+    init();
+    show();
+    
+    const fail = stub();
+    const calledAfter = operator.calledAfter({
+        fail,
+    });
+    
+    calledAfter(init, show);
+    
+    t.calledWith(fail, [`Looks like you forget to define name of a stub, use: stub().withName('functionName')`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledBefore: no name for fn1', (t) => {
+    const init = stub();
+    const show = stub();
+    
+    init();
+    show();
+    
+    const fail = stub();
+    const calledBefore = operator.calledBefore({
+        fail,
+    });
+    
+    calledBefore(init, show);
+    
+    t.calledWith(fail, [`Looks like you forget to define name of a stub, use: stub().withName('functionName')`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledBefore: no name for fn2', (t) => {
+    const init = stub().withName('init');
+    const show = stub();
+    
+    init();
+    show();
+    
+    const fail = stub();
+    const calledBefore = operator.calledBefore({
+        fail,
+    });
+    
+    calledBefore(init, show);
+    
+    t.calledWith(fail, [`Looks like you forget to define name of a stub, use: stub().withName('functionName')`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledInOrder', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    t.calledInOrder([init, show]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledInOrder: wrong order', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    show();
+    init();
+    
+    const fail = stub();
+    const calledInOrder = operator.calledInOrder({
+        fail,
+    });
+    
+    calledInOrder([init, show]);
+    
+    t.calledWith(fail, [`should call 'init' before 'show'`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledInOrder: not stub', (t) => {
+    const init = () => {};
+    const show = stub().withName('show');
+    
+    show();
+    init();
+    
+    const fail = stub();
+    const calledInOrder = operator.calledInOrder({
+        fail,
+    });
+    
+    calledInOrder([init, show]);
+    
+    t.calledWith(fail, [`Expected stub, but received: () => {}`]);
+    t.end();
+});
+
+test('supertape: operator: stub: calledInOrder: not array', (t) => {
+    const init = () => {};
+    const show = stub().withName('show');
+    
+    show();
+    init();
+    
+    const fail = stub();
+    const calledInOrder = operator.calledInOrder({
+        fail,
+    });
+    
+    calledInOrder(init);
+    
+    t.calledWith(fail, [`Expected 'fns' to be 'array' but received: () => {}`]);
+    t.end();
+});
+

@@ -125,6 +125,72 @@ test('function called with new', (t) => {
 });
 ```
 
+### t.calledBefore(fn1, fn2[, message])
+
+Check that `fn1` called before `fn2`.
+Do not forget to set names of stubs.
+
+```js
+import test, {
+    stub,
+} from 'supertape';
+
+test('function called with new', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    t.calledBefore(show, init);
+    t.end();
+});
+```
+
+### t.calledAfter(fn1, fn2[, message])
+
+Check that `fn1` called after `fn2`.
+Do not forget to set names of stubs.
+
+```js
+import test, {
+    stub,
+} from 'supertape';
+
+test('function called with new', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    t.calledAfter(init, show);
+    t.end();
+});
+```
+
+### t.calledInOrder([fn1, fn2, fnN][, message])
+
+Check that array of stubs `fns` called in order;
+Do not forget to set names of stubs.
+
+```js
+import test, {
+    stub,
+} from 'supertape';
+
+test('function called with new', (t) => {
+    const init = stub().withName('init');
+    const show = stub().withName('show');
+    
+    init();
+    show();
+    
+    t.calledInOrder([init, show]);
+    t.end();
+});
+```
+
 ## License
 
 MIT

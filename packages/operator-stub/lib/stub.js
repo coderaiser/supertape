@@ -80,3 +80,76 @@ export const calledWithNew = (operator) => (fn, message = 'should be called with
     return operator.ok(fn.calledWithNew(), message);
 };
 
+const noName = ({name}) => name === 'anonymous';
+
+export const calledBefore = (operator) => (fn1, fn2, message) => {
+    message = message || `should call '${fn1.name}' before '${fn2.name}'`;
+    
+    if (!isStub(fn1))
+        return operator.fail(getExpectedStubMessage(fn1));
+    
+    if (!isStub(fn2))
+        return operator.fail(getExpectedStubMessage(fn2));
+    
+    if (noName(fn1) || noName(fn2))
+        return operator.fail(`Looks like you forget to define name of a stub, use: stub().withName('functionName')`);
+    
+    if (!fn1.called)
+        return operator.fail(`Expected function '${fn1.name}' to be called before '${fn2.name}' but '${fn1.name}' not called at all`);
+    
+    if (!fn2.called)
+        return operator.fail(`Expected function '${fn1.name}' to be called before '${fn2.name}' but '${fn2.name}' not called at all`);
+    
+    return operator.ok(fn1.calledBefore(fn2), message);
+};
+
+export const calledAfter = (operator) => (fn1, fn2, message) => {
+    message = message || `should call '${fn1.name}' after '${fn2.name}'`;
+    
+    if (!isStub(fn1))
+        return operator.fail(getExpectedStubMessage(fn1));
+    
+    if (!isStub(fn2))
+        return operator.fail(getExpectedStubMessage(fn2));
+    
+    if (noName(fn1) || noName(fn2))
+        return operator.fail(`Looks like you forget to define name of a stub, use: stub().withName('functionName')`);
+    
+    if (!fn1.called)
+        return operator.fail(`Expected function '${fn1.name}' to be called after '${fn2.name}' but '${fn1.name}' not called at all`);
+    
+    if (!fn2.called)
+        return operator.fail(`Expected function '${fn1.name}' to be called after '${fn2.name}' but '${fn2.name}' not called at all`);
+    
+    return operator.ok(fn1.calledAfter(fn2), message);
+};
+
+export const calledInOrder = (operator) => (fns, message = 'should call in order') => {
+    if (!isArray(fns))
+        return operator.fail(`Expected 'fns' to be 'array' but received: ${fns}`);
+    
+    let failMessage = '';
+    const fail = (message) => failMessage = message;
+    const ok = (result, message) => {
+        if (!result)
+            failMessage = message;
+    };
+    
+    const check = calledBefore({
+        fail,
+        ok,
+    });
+    
+    for (let i = 0; i < fns.length - 1; i++) {
+        const fn1 = fns[i];
+        const fn2 = fns[i + 1];
+        
+        check(fn1, fn2);
+        
+        if (failMessage)
+            return operator.fail(failMessage);
+    }
+    
+    return operator.pass(message);
+};
+

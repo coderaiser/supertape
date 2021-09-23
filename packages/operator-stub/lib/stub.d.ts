@@ -17,5 +17,8 @@ export interface OperatorStub {
     calledOnce: (fn: Stub, message?: string) => Result;
     calledTwice: (fn: Stub, message?: string) => Result;
     calledWithNew: (fn: Stub, message?: string) => Result;
+    calledBefore: (fn1: Stub, fn2: Stub, message?: string) => Result;
+    calledAfter: (fn1: Stub, fn2: Stub, message?: string) => Result;
+    calledInOrder: (fns: Stub[], message?: string) => Result;
 }
 
