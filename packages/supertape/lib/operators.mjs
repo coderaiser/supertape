@@ -160,6 +160,8 @@ export const operators = {
     notMatch,
 };
 
+const noop = () => {};
+
 const initOperator = (runnerState) => (name) => {
     const fn = operators[name];
     
@@ -170,6 +172,16 @@ const initOperator = (runnerState) => (name) => {
         };
     
     return (...a) => {
+        if (name === 'end') {
+            runnerState.ended = true;
+            return noop;
+        }
+        
+        if (runnerState.ended) {
+            const testState = fail(`Cannot run assertions after 't.end()' called`);
+            return run('fail', runnerState, testState);
+        }
+        
         const testState = fn(...a);
         return run(name, runnerState, testState);
     };
@@ -251,7 +263,7 @@ export const initOperators = ({formatter, count, incCount, incPassed, incFailed,
         comment: comment({formatter}),
         match: operator('match'),
         notMatch: operator('notMatch'),
-        end,
+        end: operator('end'),
         
         ...extendedOperators,
     };

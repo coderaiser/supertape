@@ -304,6 +304,36 @@ test('supertape: runTests: fail', async (t) => {
     t.end();
 });
 
+test('supertape: runTests: assertions after t.end()', async (t) => {
+    const fn = (t) => {
+        t.end();
+        t.fail('hello');
+    };
+    
+    const message = 'hello world';
+    
+    const supertape = reRequire('..');
+    supertape(message, fn, {
+        quiet: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), 5),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello world
+        not ok 1 Cannot run assertions after 't.end()' called
+          ---
+            operator: fail
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: runTests: fail: at', async (t) => {
     const fn = (t) => {
         t.fail('hello', 'at: xxxx');
