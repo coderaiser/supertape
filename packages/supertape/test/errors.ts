@@ -11,6 +11,7 @@ test();
 test('hello', (t: Test) => {
     // THROWS Property 'abc' does not exist on type 'Test'
     t.abc();
+    t.end();
 });
 
 superTest('hello', (t: Test) => {
@@ -23,6 +24,7 @@ test('stub should be a function', (t) => {
     fn();
     
     t.calledWithNoArgs(fn);
+    t.end();
 });
 
 test.only('hello', (t: Test) => {
