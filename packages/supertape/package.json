@@ -1,6 +1,6 @@
 {
   "name": "supertape",
-  "version": "6.7.4",
+  "version": "6.8.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "tape compatible test runner with superpowers",
   "homepage": "http://github.com/coderaiser/supertape",

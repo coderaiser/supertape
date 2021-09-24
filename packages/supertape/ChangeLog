@@ -1,3 +1,14 @@
+2021.09.24, v6.8.0
+
+fix:
+- (supertape) check that no assertions called after t.end()
+
+feature:
+- (supertape) add support of check assertions count
+- (@supertape/operator-stub) add calledBefore, calledAfter
+- (@supertape/operator-stub) notCalled: add additional check: called with args
+
+
 2021.09.20, v6.7.4
 
 fix:
