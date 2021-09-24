@@ -1,3 +1,9 @@
+2021.09.24, v6.8.1
+
+fix:
+- (supertape) ability to disable check-assertions-count per test
+
+
 2021.09.24, v6.8.0
 
 fix:
