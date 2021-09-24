@@ -90,6 +90,9 @@ function checkAssertionsCount(msg, filtered, options) {
     const {assertionsCount} = options;
     const [, at] = filtered[0];
     
+    if (!isEnabled(filtered, 'checkAssertionsCount'))
+        return [];
+    
     if (assertionsCount > 1)
         return [`Only one assertion per test allowed, looks like you have more`, at];
     

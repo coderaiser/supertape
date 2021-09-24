@@ -91,6 +91,9 @@ test('supertape: validator: checkAssertionsCount', (t) => {
     const current = {
         message: 'hello world',
         at: 'at',
+        validations: {
+            checkAssertionsCount: true,
+        },
     };
     
     const tests = [current];
@@ -113,6 +116,39 @@ test('supertape: validator: checkAssertionsCount', (t) => {
     t.end();
 });
 
+test('supertape: validator: checkAssertionsCount: disabled', (t) => {
+    const {
+        createValidator,
+        setValidations,
+    } = reRequire('./validator');
+    const current = {
+        message: 'hello world',
+        at: 'at',
+        validations: {
+            checkAssertionsCount: false,
+        },
+    };
+    
+    const tests = [current];
+    
+    setValidations({
+        checkAssertionsCount: true,
+    });
+    
+    const validate = createValidator({
+        tests,
+    });
+    
+    const result = validate('hello world', {
+        assertionsCount: 2,
+    });
+    
+    const expected = [];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
 test('supertape: validator: checkAssertionsCount: ok', (t) => {
     const {
         createValidator,
@@ -121,6 +157,9 @@ test('supertape: validator: checkAssertionsCount: ok', (t) => {
     const current = {
         message: 'hello world',
         at: 'at',
+        validations: {
+            checkAssertionsCount: true,
+        },
     };
     
     const tests = [current];
