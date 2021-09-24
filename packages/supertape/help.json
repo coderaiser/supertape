@@ -4,5 +4,6 @@
     "-f, --format               ": "use a specific output format - default: progress-bar/tap on CI",
     "-r, --require              ": "require module",
     "--check-scopes             ": "check that messages contains scope: 'scope: message'",
+    "--check-assertions-count   ": "check that assertion count is no more then 1",
     "--no-check-duplicates      ": "do not check messages for duplicates"
 }

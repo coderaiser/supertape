@@ -123,15 +123,18 @@ test('supertape: runTests: duplicates', async (t) => {
     const message = 'hello world';
     
     reRequire('./validator');
+    
     const supertape = reRequire('..');
     supertape(message, fn1, {
         quiet: true,
         checkDuplicates: true,
+        checkIfEnded: false,
     });
     
     supertape(message, fn2, {
         quiet: true,
         checkDuplicates: true,
+        checkIfEnded: false,
     });
     
     const FOUR_TESTS = 30;
@@ -196,10 +199,12 @@ test('supertape: runTests: duplicates: defaults', async (t) => {
     const supertape = reRequire('..');
     supertape(message, fn1, {
         quiet: true,
+        checkIfEnded: false,
     });
     
     supertape(message, fn2, {
         quiet: true,
+        checkIfEnded: false,
     });
     
     const FOUR_TESTS = 30;
@@ -312,9 +317,11 @@ test('supertape: runTests: assertions after t.end()', async (t) => {
     
     const message = 'hello world';
     
+    reRequire('once');
     const supertape = reRequire('..');
     supertape(message, fn, {
         quiet: true,
+        checkIfEnded: true,
     });
     
     const [result] = await Promise.all([

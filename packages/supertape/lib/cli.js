@@ -33,6 +33,7 @@ const filesCount = fullstore(0);
 const {
     SUPERTAPE_CHECK_DUPLICATES = '1',
     SUPERTAPE_CHECK_SCOPES = '0',
+    SUPERTAPE_CHECK_ASSERTIONS_COUNT = '0',
 } = process.env;
 
 module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
@@ -89,6 +90,7 @@ const yargsOptions = {
         'help',
         'check-duplicates',
         'check-scopes',
+        'check-assertions-count',
     ],
     alias: {
         version: 'v',
@@ -97,12 +99,14 @@ const yargsOptions = {
         require: 'r',
         checkDuplicates: 'd',
         checkScopes: 's',
+        checkAssertionsCount: 'a',
     },
     default: {
         format: 'progress-bar',
         require: [],
         checkDuplicates: SUPERTAPE_CHECK_DUPLICATES !== '0',
         checkScopes: SUPERTAPE_CHECK_SCOPES === '1',
+        checkAssertionsCount: SUPERTAPE_CHECK_ASSERTIONS_COUNT === '1',
     },
 };
 
@@ -148,6 +152,7 @@ async function cli({argv, cwd, stdout, isStop}) {
         format,
         checkDuplicates,
         checkScopes,
+        checkAssertionsCount,
     } = args;
     
     supertape.init({
@@ -157,6 +162,7 @@ async function cli({argv, cwd, stdout, isStop}) {
         isStop,
         checkDuplicates,
         checkScopes,
+        checkAssertionsCount,
     });
     
     supertape.createStream().pipe(stdout);

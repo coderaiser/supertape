@@ -3,24 +3,16 @@
 const fullstore = require('fullstore');
 const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
-const once = require('once');
 const isDebug = require('./is-debug');
 
 const {createValidator} = require('./validator');
 
 const inc = wraptile((store) => store(store() + 1));
-
 const isOnly = ({only}) => only;
-
 const isSkip = ({skip}) => skip;
-
 const notSkip = ({skip}) => !skip;
 
-const getInitOperators = once(async () => {
-    const {initOperators} = await import('./operators.mjs');
-    
-    return initOperators;
-});
+const getInitOperators = async () => await import('./operators.mjs');
 
 const {
     SUPERTAPE_TIMEOUT = 3000,
@@ -83,7 +75,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
         tests,
     });
     
-    for (const {fn, message, extensions, at} of tests) {
+    for (const {fn, message, extensions, at, validations} of tests) {
         if (wasStop())
             break;
         
@@ -104,6 +96,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
             incFailed,
             incPassed,
             getValidationMessage,
+            validations,
             
             extensions: {
                 ...operators,
@@ -127,12 +120,18 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     };
 }
 
-async function runOneTest({message, at, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getValidationMessage}) {
+async function runOneTest({message, at, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getValidationMessage, validations}) {
+    const isReturn = fullstore(false);
+    const assertionsCount = fullstore(0);
+    const isEnded = fullstore(false);
+    const incAssertionsCount = inc(assertionsCount);
+    
     formatter.emit('test', {
         test: message,
     });
     
-    const initOperators = await getInitOperators();
+    const {initOperators} = await getInitOperators();
+    const {checkIfEnded} = validations;
     
     const t = initOperators({
         formatter,
@@ -140,16 +139,35 @@ async function runOneTest({message, at, fn, extensions, formatter, count, total,
         incCount,
         incPassed,
         incFailed,
+        assertionsCount,
+        incAssertionsCount,
+        isEnded,
         extensions,
+        checkIfEnded,
     });
     
-    const [timer, stopTimer] = timeout(SUPERTAPE_TIMEOUT, ['timeout']);
-    const [error] = await Promise.race([tryToCatch(fn, t), timer]);
-    stopTimer();
+    if (!isReturn()) {
+        const [timer, stopTimer] = timeout(SUPERTAPE_TIMEOUT, ['timeout']);
+        const [error] = await Promise.race([tryToCatch(fn, t), timer]);
+        stopTimer();
+        isEnded(false);
+        
+        if (error) {
+            t.fail(error, at);
+            t.end();
+            isReturn(true);
+        }
+    }
     
-    if (error) {
-        t.fail(error, at);
-        t.end();
+    if (!isReturn()) {
+        const [validationMessage, atLine] = getValidationMessage(message, {
+            assertionsCount: assertionsCount(),
+        });
+        
+        if (atLine) {
+            t.fail(validationMessage, atLine);
+            t.end();
+        }
     }
     
     formatter.emit('test:end', {
@@ -158,11 +176,4 @@ async function runOneTest({message, at, fn, extensions, formatter, count, total,
         test: message,
         failed: failed(),
     });
-    
-    const [validationMessage, atLine] = getValidationMessage(message);
-    
-    if (atLine) {
-        t.fail(validationMessage, atLine);
-        t.end();
-    }
 }

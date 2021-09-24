@@ -35,6 +35,8 @@ const defaultOptions = {
     getOperators,
     isStop: () => false,
     checkDuplicates: true,
+    checkIfEnded: true,
+    checkAssertionsCount: false,
     checkScopes: false,
 };
 
@@ -111,6 +113,8 @@ function test(message, fn, options = {}) {
         isStop,
         checkDuplicates,
         checkScopes,
+        checkAssertionsCount,
+        checkIfEnded,
     } = {
         ...defaultOptions,
         ...initedOptions,
@@ -120,6 +124,8 @@ function test(message, fn, options = {}) {
     const validations = {
         checkDuplicates,
         checkScopes,
+        checkAssertionsCount,
+        checkIfEnded,
     };
     
     setValidations(validations);

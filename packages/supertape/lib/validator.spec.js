@@ -83,6 +83,66 @@ test('supertape: validator: checkScopes', (t) => {
     t.end();
 });
 
+test('supertape: validator: checkAssertionsCount', (t) => {
+    const {
+        createValidator,
+        setValidations,
+    } = reRequire('./validator');
+    const current = {
+        message: 'hello world',
+        at: 'at',
+    };
+    
+    const tests = [current];
+    
+    setValidations({
+        checkAssertionsCount: true,
+    });
+    
+    const validate = createValidator({
+        tests,
+    });
+    
+    const result = validate('hello world', {
+        assertionsCount: 2,
+    });
+    
+    const expected = ['Only one assertion per test allowed, looks like you have more', 'at'];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
+test('supertape: validator: checkAssertionsCount: ok', (t) => {
+    const {
+        createValidator,
+        setValidations,
+    } = reRequire('./validator');
+    const current = {
+        message: 'hello world',
+        at: 'at',
+    };
+    
+    const tests = [current];
+    
+    setValidations({
+        checkAssertionsCount: true,
+    });
+    
+    const validate = createValidator({
+        tests,
+    });
+    
+    const result = validate('hello world', {
+        assertionsCount: 1,
+    });
+    
+    const expected = [];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
 test('supertape: validator: checkScopes: valid', (t) => {
     const {
         createValidator,

@@ -5,7 +5,7 @@ const dirs = [
 ];
 
 export default {
-    'test': () => `tape --check-scopes '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
+    'test': () => `tape --check-scopes --check-assertions-count '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
     'test:dts': () => 'cd packages/supertape && check-dts',
     'test:tap': () => `tape '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
     'test:fail': async () => `${await run('test')} -f fail`,

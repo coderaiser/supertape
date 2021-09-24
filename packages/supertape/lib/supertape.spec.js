@@ -806,6 +806,7 @@ test('supertape: duplicate', async (t) => {
     supertape.init({
         run: false,
         quiet: true,
+        checkIfEnded: false,
     });
     
     supertape(message, fn);

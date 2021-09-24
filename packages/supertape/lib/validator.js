@@ -14,11 +14,13 @@ const processedList = new Set();
 const validations = {
     checkDuplicates: true,
     checkScopes: false,
+    checkAssertionsCount: true,
 };
 
 const validators = {
     checkDuplicates,
     checkScopes,
+    checkAssertionsCount,
 };
 
 const {
@@ -33,16 +35,17 @@ const findByMessage = (msg, tests) => {
     return filtered;
 };
 
-module.exports.setValidations = ({checkDuplicates, checkScopes}) => {
+module.exports.setValidations = ({checkDuplicates, checkScopes, checkAssertionsCount}) => {
     assign(validations, {
         checkDuplicates,
         checkScopes,
+        checkAssertionsCount,
     });
 };
 
 const isValidationEnabled = (a) => values(a).filter(Boolean).length;
 
-module.exports.createValidator = ({tests}) => (msg) => {
+module.exports.createValidator = ({tests}) => (msg, options) => {
     if (!isValidationEnabled(validations))
         return [];
     
@@ -55,7 +58,7 @@ module.exports.createValidator = ({tests}) => (msg) => {
         if (!filtered.length)
             throw Error('☝️Looks like message cannot be find in tests, this should never happen');
         
-        const [message, at] = validators[name](msg, filtered);
+        const [message, at] = validators[name](msg, filtered, options);
         
         if (at)
             return [message, at];
@@ -65,14 +68,6 @@ module.exports.createValidator = ({tests}) => (msg) => {
 };
 
 module.exports.getAt = () => {
-    const {
-        checkDuplicates,
-        checkScopes,
-    } = validations;
-    
-    if (!checkDuplicates && !checkScopes)
-        return '';
-    
     return getFileName();
 };
 
@@ -89,6 +84,16 @@ function getFileName() {
     }
     
     return '';
+}
+
+function checkAssertionsCount(msg, filtered, options) {
+    const {assertionsCount} = options;
+    const [, at] = filtered[0];
+    
+    if (assertionsCount > 1)
+        return [`Only one assertion per test allowed, looks like you have more`, at];
+    
+    return [];
 }
 
 function checkScopes(msg, filtered) {

@@ -46,6 +46,8 @@ Options
    -v, --version               output version information and exit
    -f, --format                use a specific output format - default: progress-bar/tap on CI
    -r, --require               require module
+   --check-scopes              check that messages contains scope: 'scope: message'
+   --check-assertions-count    check that assertion count is no more then 1
    --no-check-duplicates       do not check messages for duplicates
 ```
 
@@ -53,7 +55,8 @@ Options
 
 - `SUPERTAPE_TIMEOUT` - timeout for long running processes;
 - `SUPERTAPE_CHECK_DUPLICATES` - toggle check duplicates;
-- `SUPERTAPE_CHECK_SCOPES` - check that test message has a scope: `scope: subject`
+- `SUPERTAPE_CHECK_SCOPES` - check that test message has a scope: `scope: subject`;
+- `SUPERTAPE_CHECK_ASSERTIONS_COUNT` - check that assertion count is no more then 1;
 
 ```js
 test('tape: error', (t) => {

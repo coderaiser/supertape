@@ -200,6 +200,14 @@ test('supertape: operators: match', (t) => {
     t.end();
 });
 
+test('supertape: operators: end', (t) => {
+    const {end} = operators;
+    const result = end();
+    
+    t.notOk(result);
+    t.end();
+});
+
 function getStubs(stubs = {}) {
     const {
         formatter = new EventEmitter(),
@@ -207,6 +215,8 @@ function getStubs(stubs = {}) {
         incCount = stub(),
         incPassed = stub(),
         incFailed = stub(),
+        incAssertionsCount = stub(),
+        isEnded = stub(),
         extensions = {},
     } = stubs;
     
@@ -216,6 +226,8 @@ function getStubs(stubs = {}) {
         incCount,
         incPassed,
         incFailed,
+        isEnded,
+        incAssertionsCount,
         extensions,
     };
 }

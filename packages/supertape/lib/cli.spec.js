@@ -300,6 +300,7 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: true,
+        checkAssertionsCount: false,
         checkScopes: false,
         isStop,
     }];
@@ -308,7 +309,51 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
     t.end();
 });
 
-test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES', async (t) => {
+test('supertape: bin: cli: --check-assertions-count', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [
+        name,
+        '-a',
+    ];
+    
+    const test = stub();
+    const init = stub();
+    const run = stub();
+    const isStop = stub();
+    
+    const {createStream} = reRequire('..');
+    mockRequire('@putout/cli-keypress', stub().returns({
+        isStop,
+    }));
+    
+    assign(test, {
+        init,
+        run,
+        createStream,
+    });
+    
+    mockRequire('..', test);
+    
+    await runCli({
+        argv,
+    });
+    
+    stopAll();
+    const expected = [{
+        format: 'progress-bar',
+        quiet: true,
+        run: false,
+        checkDuplicates: true,
+        checkAssertionsCount: true,
+        checkScopes: false,
+        isStop,
+    }];
+    
+    t.calledWith(init, expected);
+    t.end();
+});
+
+test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
     const argv = [
         name,
@@ -344,6 +389,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: false,
+        checkAssertionsCount: false,
         checkScopes: false,
         isStop,
     }];
@@ -352,7 +398,52 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES', async (t) => {
     t.end();
 });
 
-test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled', async (t) => {
+test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [
+        name,
+    ];
+    
+    const test = stub();
+    const init = stub();
+    const run = stub();
+    const isStop = stub();
+    
+    const {createStream} = reRequire('..');
+    mockRequire('@putout/cli-keypress', stub().returns({
+        isStop,
+    }));
+    
+    assign(test, {
+        init,
+        run,
+        createStream,
+    });
+    
+    mockRequire('..', test);
+    
+    process.env.SUPERTAPE_CHECK_ASSERTIONS_COUNT = '1';
+    await runCli({
+        argv,
+    });
+    delete process.env.SUPERTAPE_CHECK_ASSERTIONS_COUNT;
+    
+    stopAll();
+    const expected = [{
+        format: 'progress-bar',
+        quiet: true,
+        run: false,
+        checkDuplicates: true,
+        checkAssertionsCount: true,
+        checkScopes: false,
+        isStop,
+    }];
+    
+    t.calledWith(init, expected);
+    t.end();
+});
+
+test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, enable env', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
     const argv = [
         name,
@@ -389,6 +480,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: false,
+        checkAssertionsCount: false,
         checkScopes: false,
         isStop,
     }];
@@ -432,6 +524,7 @@ test('supertape: bin: cli: check-duplicates: -d', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: true,
+        checkAssertionsCount: false,
         checkScopes: false,
         isStop,
     }];
@@ -478,6 +571,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: true,
+        checkAssertionsCount: false,
         checkScopes: false,
         isStop,
     }];

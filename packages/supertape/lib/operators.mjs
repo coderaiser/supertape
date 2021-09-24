@@ -14,7 +14,6 @@ const isFn = (a) => typeof a === 'function';
 const isStr = (a) => typeof a === 'string';
 const isObj = (a) => typeof a === 'object';
 
-// backward compatibility or maybe formatters support
 const end = () => {};
 
 const ok = (actual, message = 'should be truthy') => ({
@@ -160,8 +159,6 @@ export const operators = {
     notMatch,
 };
 
-const noop = () => {};
-
 const initOperator = (runnerState) => (name) => {
     const fn = operators[name];
     
@@ -173,13 +170,18 @@ const initOperator = (runnerState) => (name) => {
     
     return (...a) => {
         if (name === 'end') {
-            runnerState.ended = true;
-            return noop;
+            runnerState.isEnded(true);
+            return end;
         }
         
-        if (runnerState.ended) {
-            const testState = fail(`Cannot run assertions after 't.end()' called`);
-            return run('fail', runnerState, testState);
+        runnerState.incAssertionsCount();
+        
+        if (runnerState.isEnded()) {
+            return run(
+                'fail',
+                runnerState,
+                operators.fail(`Cannot run assertions after 't.end()' called`),
+            );
         }
         
         const testState = fn(...a);
@@ -235,13 +237,15 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
     });
 }
 
-export const initOperators = ({formatter, count, incCount, incPassed, incFailed, extensions}) => {
+export const initOperators = ({formatter, count, incCount, incPassed, incFailed, incAssertionsCount, isEnded, extensions}) => {
     const operator = initOperator({
         formatter,
         count,
         incCount,
         incPassed,
         incFailed,
+        isEnded,
+        incAssertionsCount,
     });
     
     const extendedOperators = {};
