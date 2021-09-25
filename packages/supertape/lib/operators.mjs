@@ -164,30 +164,47 @@ const initOperator = (runnerState) => (name) => {
     
     if (isAsync(fn))
         return async (...a) => {
+            const [valid, end] = validateEnd(name, runnerState);
+            
+            if (!valid)
+                return end;
+            
             const testState = await fn(...a);
             return run(name, runnerState, testState);
         };
     
     return (...a) => {
-        if (name === 'end') {
-            runnerState.isEnded(true);
+        const [valid, end] = validateEnd(name, runnerState);
+        
+        if (!valid)
             return end;
-        }
-        
-        runnerState.incAssertionsCount();
-        
-        if (runnerState.isEnded()) {
-            return run(
-                'fail',
-                runnerState,
-                operators.fail(`Cannot run assertions after 't.end()' called`),
-            );
-        }
         
         const testState = fn(...a);
         return run(name, runnerState, testState);
     };
 };
+
+const VALID = true;
+const INVALID = false;
+
+function validateEnd(name, runnerState) {
+    if (name === 'end') {
+        runnerState.isEnded(true);
+        return [INVALID, end];
+    }
+    
+    runnerState.incAssertionsCount();
+    
+    if (runnerState.isEnded()) {
+        return [INVALID, run(
+            'fail',
+            runnerState,
+            operators.fail(`Cannot run assertions after 't.end()' called`),
+        )];
+    }
+    
+    return [VALID];
+}
 
 const validate = (a) => {
     if (isFn(a))
