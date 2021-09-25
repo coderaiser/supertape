@@ -341,6 +341,39 @@ test('supertape: runTests: assertions after t.end()', async (t) => {
     t.end();
 });
 
+test('supertape: runTests: a couple t.end()', async (t) => {
+    const fn = (t) => {
+        t.equal(1, 1);
+        t.end();
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    reRequire('once');
+    const supertape = reRequire('..');
+    supertape(message, fn, {
+        quiet: true,
+        checkIfEnded: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), 5),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello world
+        ok 1 should equal
+        not ok 2 Cannot use a couple 't.end()' operators in one test
+          ---
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: runTests: assertions after t.end(): async', async (t) => {
     const fn = async (t) => {
         t.end();

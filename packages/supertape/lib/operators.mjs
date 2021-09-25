@@ -164,7 +164,11 @@ const initOperator = (runnerState) => (name) => {
     
     if (isAsync(fn))
         return async (...a) => {
-            const [valid, end] = validateEnd(name, runnerState);
+            const [valid, end] = validateEnd({
+                name,
+                operators,
+                runnerState,
+            });
             
             if (!valid)
                 return end;
@@ -174,7 +178,11 @@ const initOperator = (runnerState) => (name) => {
         };
     
     return (...a) => {
-        const [valid, end] = validateEnd(name, runnerState);
+        const [valid, end] = validateEnd({
+            name,
+            operators,
+            runnerState,
+        });
         
         if (!valid)
             return end;
@@ -187,15 +195,27 @@ const initOperator = (runnerState) => (name) => {
 const VALID = true;
 const INVALID = false;
 
-function validateEnd(name, runnerState) {
+function validateEnd({name, operators, runnerState}) {
+    const {
+        isEnded,
+        incAssertionsCount,
+    } = runnerState;
+    
+    incAssertionsCount();
+    
+    if (name === 'end' && isEnded())
+        return [INVALID, run(
+            'fail',
+            runnerState,
+            operators.fail(`Cannot use a couple 't.end()' operators in one test`),
+        )];
+    
     if (name === 'end') {
-        runnerState.isEnded(true);
+        isEnded(true);
         return [INVALID, end];
     }
     
-    runnerState.incAssertionsCount();
-    
-    if (runnerState.isEnded()) {
+    if (isEnded()) {
         return [INVALID, run(
             'fail',
             runnerState,
