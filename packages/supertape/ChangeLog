@@ -1,3 +1,9 @@
+2021.09.25, v6.8.2
+
+feature:
+- (supertape) check that no assertions called after t.end() in async operators
+
+
 2021.09.24, v6.8.1
 
 fix:
