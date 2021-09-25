@@ -1,3 +1,9 @@
+2021.09.25, v6.9.0
+
+feature:
+- (supertape) fail when couple t.end() operators found
+
+
 2021.09.25, v6.8.2
 
 feature:
