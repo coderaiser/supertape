@@ -1,3 +1,9 @@
+2021.09.25, v6.9.1
+
+fix:
+- (supertape) wrong assertions count
+
+
 2021.09.25, v6.9.0
 
 feature:
