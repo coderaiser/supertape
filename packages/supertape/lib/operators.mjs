@@ -201,8 +201,6 @@ function validateEnd({name, operators, runnerState}) {
         incAssertionsCount,
     } = runnerState;
     
-    incAssertionsCount();
-    
     if (name === 'end' && isEnded())
         return [INVALID, run(
             'fail',
@@ -214,6 +212,8 @@ function validateEnd({name, operators, runnerState}) {
         isEnded(true);
         return [INVALID, end];
     }
+    
+    incAssertionsCount();
     
     if (isEnded()) {
         return [INVALID, run(
