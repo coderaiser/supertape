@@ -34,6 +34,9 @@ const validateRegExp = (regexp) => {
     if (!isObj(regexp) && !isStr(regexp))
         return Error('regexp should be RegExp or String');
     
+    if (!regexp)
+        return Error('regexp cannot be empty');
+    
     return null;
 };
 

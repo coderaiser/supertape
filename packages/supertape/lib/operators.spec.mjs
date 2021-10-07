@@ -152,6 +152,22 @@ test('supertape: operators: match: not RegExp and String', (t) => {
     t.end();
 });
 
+test('supertape: operators: match: empty', (t) => {
+    const {match} = operators;
+    const {message} = match('hello', '');
+    
+    t.equal(message.message, 'regexp cannot be empty');
+    t.end();
+});
+
+test('supertape: operators: match: empty string: not ok', (t) => {
+    const {match} = operators;
+    const {expected} = match('hello', '');
+    
+    t.notOk(expected);
+    t.end();
+});
+
 test('supertape: operators: match: string', (t) => {
     const {match} = operators;
     const {is} = match('hello', 'world');

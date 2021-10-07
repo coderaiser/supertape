@@ -548,7 +548,7 @@ test('supertape: runTests: not equal', async (t) => {
 
 test('supertape: runTests: not deepEqual', async (t) => {
     const fn = (t) => {
-        t.deepEqual('hello', 'world');
+        t.deepEqual({hello: 'world'}, {});
         t.end();
     };
     

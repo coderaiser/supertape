@@ -117,7 +117,7 @@ test('supertape: bin: cli: run', async (t) => {
     
     stopAll();
     
-    t.equal(run.callCount, 1, 'run always called once');
+    t.calledOnce(run, 'run always called once');
     t.end();
 });
 
