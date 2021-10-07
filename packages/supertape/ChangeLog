@@ -1,3 +1,9 @@
+2021.10.07, v6.9.2
+
+feature:
+- (supertape) add ability to match empty match
+
+
 2021.09.25, v6.9.1
 
 fix:
