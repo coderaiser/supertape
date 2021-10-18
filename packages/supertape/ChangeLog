@@ -1,3 +1,9 @@
+2021.10.18, v6.9.3
+
+fix:
+- (supertape) types: TestOptions
+
+
 2021.10.07, v6.9.2
 
 feature:
