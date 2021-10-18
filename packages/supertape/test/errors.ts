@@ -5,7 +5,7 @@ import test, {
     Stub,
 } from '../lib/supertape.js';
 
-// THROWS Expected 2 arguments, but got 0
+// THROWS Expected 2-3 arguments, but got 0
 test();
 
 test('hello', (t: Test) => {
@@ -34,4 +34,21 @@ test.only('hello', (t: Test) => {
 test.skip('hello', (t: Test) => {
     t.end();
 });
+
+test.skip('hello', (t: Test) => {
+    t.end();
+}, {checkAssertionsCount: false});
+
+test.only('hello', (t: Test) => {
+    t.end();
+}, {checkDuplicates: false});
+
+test('hello', (t: Test) => {
+    t.end();
+}, {checkScopes: false});
+
+test('hello', (t: Test) => {
+    t.end();
+// THROWS Argument of type '{ checkUnknown: boolean; }' is not assignable to parameter of type 'TestOptions'.
+}, {checkUnknown: true});
 

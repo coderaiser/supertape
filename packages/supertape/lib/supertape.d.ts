@@ -27,7 +27,13 @@ type Test = OperatorStub & {
     end: () => void;
 }
 
-declare function test(message: string, fn: (t: Test) => void): void;
+type TestOptions = {
+    checkAssertionsCount?: boolean,
+    checkScopes?: boolean,
+    checkDuplicates?: boolean,
+}
+
+declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
 declare namespace test {
     export var only: typeof test;
     export var skip: typeof test;
