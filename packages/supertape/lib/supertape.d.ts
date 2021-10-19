@@ -13,10 +13,10 @@ type Result = {
 }
 
 type Test = OperatorStub & {
-    equal: (from: unknown, to: unknown, message?: string) => Result;
-    notEqual: (from: unknown, to: unknown, message?: string) => Result;
-    deepEqual: (from: unknown, to: unknown, message?: string) => Result;
-    notDeepEqual: (from: unknown, to: unknown, message?: string) => Result;
+    equal: (result: unknown, expected: unknown, message?: string) => Result;
+    notEqual: (result: unknown, expected: unknown, message?: string) => Result;
+    deepEqual: (result: unknown, expected: unknown, message?: string) => Result;
+    notDeepEqual: (result: unknown, expected: unknown, message?: string) => Result;
     fail: (message: string) => Result;
     pass: (message: string) => Result;
     ok: (result: boolean | unknown, message?: string) => Result;
