@@ -1,3 +1,9 @@
+2021.10.19, v6.9.4
+
+fix:
+- (supertape) types: from/to -> result/expected
+
+
 2021.10.18, v6.9.3
 
 fix:
