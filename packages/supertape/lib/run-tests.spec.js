@@ -309,6 +309,38 @@ test('supertape: runTests: fail', async (t) => {
     t.end();
 });
 
+test('supertape: runTests: checkAssertionsCount: no assertions', async (t) => {
+    const fn = (t) => {
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    reRequire('once');
+    reRequire('./run-tests.js');
+    const supertape = reRequire('..');
+    supertape(message, fn, {
+        quiet: true,
+        checkAssertionsCount: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), 5),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello world
+        not ok 1 Only one assertion per test allowed, looks like you have none
+          ---
+            operator: fail
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: runTests: assertions after t.end()', async (t) => {
     const fn = (t) => {
         t.end();

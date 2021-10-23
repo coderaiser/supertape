@@ -96,6 +96,9 @@ function checkAssertionsCount(msg, filtered, options) {
     if (assertionsCount > 1)
         return [`Only one assertion per test allowed, looks like you have more`, at];
     
+    if (!assertionsCount)
+        return [`Only one assertion per test allowed, looks like you have none`, at];
+    
     return [];
 }
 
