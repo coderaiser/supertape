@@ -4,8 +4,8 @@
             "remove-unreachable-code": "off"
         },
         "test/errors.ts": {
-            "remove-only": "off",
-            "remove-skip": "off"
+            "tape/remove-only": "off",
+            "tape/remove-skip": "off"
         },
         "*.js": {
             "convert-esm-to-commonjs": "on"
