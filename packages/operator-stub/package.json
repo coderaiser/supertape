@@ -42,11 +42,11 @@
     "check-dts": "^0.5.5",
     "eslint": "^8.0.0-beta.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-putout": "^10.0.1",
+    "eslint-plugin-putout": "^11.0.0",
     "madrun": "^8.0.0",
     "mock-require": "^3.0.2",
     "nodemon": "^2.0.2",
-    "putout": "^20.0.1",
+    "putout": "^21.0.0",
     "supertape": "^6.0.1"
   },
   "license": "MIT",
