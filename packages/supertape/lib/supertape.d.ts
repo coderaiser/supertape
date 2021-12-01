@@ -7,10 +7,10 @@ import {
 
 type Result = {
     is: boolean,
-    expected: any,
-    actual: any,
+    expected: unknown,
+    actual: unknown,
     message: string,
-}
+};
 
 type Test = OperatorStub & {
     equal: (result: unknown, expected: unknown, message?: string) => Result;
@@ -25,13 +25,13 @@ type Test = OperatorStub & {
     match: (result: string, pattern: string | RegExp, message?: string) => Result;
     notMatch: (result: string, pattern: string | RegExp, message?: string) => Result;
     end: () => void;
-}
+};
 
 type TestOptions = {
     checkAssertionsCount?: boolean,
     checkScopes?: boolean,
     checkDuplicates?: boolean,
-}
+};
 
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
 declare namespace test {
