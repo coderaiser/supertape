@@ -318,6 +318,7 @@ test('supertape: runTests: checkAssertionsCount: no assertions', async (t) => {
     
     reRequire('once');
     reRequire('./run-tests.js');
+    
     const supertape = reRequire('..');
     supertape(message, fn, {
         quiet: true,
@@ -832,6 +833,7 @@ test('supertape: runTests: is debug', async (t) => {
     
     mockRequire('./is-debug', true);
     reRequire('./run-tests');
+    
     const supertape = reRequire('..');
     supertape(message, fn, {
         quiet: true,

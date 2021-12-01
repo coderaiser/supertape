@@ -149,6 +149,7 @@ async function runOneTest({message, at, fn, extensions, formatter, count, total,
     if (!isReturn()) {
         const [timer, stopTimer] = timeout(SUPERTAPE_TIMEOUT, ['timeout']);
         const [error] = await Promise.race([tryToCatch(fn, t), timer]);
+        
         stopTimer();
         isEnded(false);
         

@@ -331,7 +331,6 @@ test('supertape: skip', async (t) => {
     `;
     
     t.equal(result, expected);
-    
     t.end();
 });
 
@@ -832,7 +831,6 @@ test('supertape: destructuring test: skip', async (t) => {
     `;
     
     t.equal(result, expected);
-    
     t.end();
 });
 

@@ -295,6 +295,7 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
     });
     
     stopAll();
+    
     const expected = [{
         format: 'progress-bar',
         quiet: true,
@@ -339,6 +340,7 @@ test('supertape: bin: cli: --check-assertions-count', async (t) => {
     });
     
     stopAll();
+    
     const expected = [{
         format: 'progress-bar',
         quiet: true,
@@ -384,6 +386,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
     delete process.env.SUPERTAPE_CHECK_DUPLICATES;
     
     stopAll();
+    
     const expected = [{
         format: 'progress-bar',
         quiet: true,
@@ -429,6 +432,7 @@ test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
     delete process.env.SUPERTAPE_CHECK_ASSERTIONS_COUNT;
     
     stopAll();
+    
     const expected = [{
         format: 'progress-bar',
         quiet: true,
@@ -475,6 +479,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
     delete process.env.SUPERTAPE_CHECK_DUPLICATES;
     
     stopAll();
+    
     const expected = [{
         format: 'progress-bar',
         quiet: true,
@@ -519,6 +524,7 @@ test('supertape: bin: cli: check-duplicates: -d', async (t) => {
     });
     
     stopAll();
+    
     const expected = [{
         format: 'progress-bar',
         quiet: true,
@@ -566,6 +572,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
     });
     
     stopAll();
+    
     const expected = [{
         format: 'fail',
         quiet: true,

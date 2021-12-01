@@ -44,7 +44,7 @@ test('calledInOrder', (t: OperatorStub) => {
 
 test('calledInOrder: not stub', (t: OperatorStub) => {
     // THROWS Type '() => void' is not assignable to type 'Stub'.
-    t.calledInOrder([() => {}]);
+    t.calledInOrder([Function]);
     t.end();
 });
 
