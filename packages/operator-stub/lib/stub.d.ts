@@ -2,10 +2,10 @@ import {Stub} from '@cloudcmd/stub';
 
 type Result = {
     is: boolean,
-    expected: any,
-    actual: any,
+    expected: unknown,
+    actual: unknown,
     message: string,
-}
+};
 export function stub(arg?: unknown): Stub;
 
 export interface OperatorStub {
