@@ -1,10 +1,7 @@
-# @supertape/formatter-fail [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL]
+# @supertape/formatter-fail [![NPM version][NPMIMGURL]][NPMURL]
 
-[NPMIMGURL]:                https://img.shields.io/npm/v/@supertape/formatter-fail.svg?style=flat&longCache=true
-[NPMURL]:                   https://npmjs.org/package/@supertape/formatter-fail "npm"
-
-[DependencyStatusURL]:      https://david-dm.org/coderaiser/supertape?path=packages/formatter-fail
-[DependencyStatusIMGURL]:   https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-fail
+[NPMIMGURL]: https://img.shields.io/npm/v/@supertape/formatter-fail.svg?style=flat&longCache=true
+[NPMURL]: https://npmjs.org/package/@supertape/formatter-fail "npm"
 
 `supertape` formatter shows only failed.
 
@@ -23,4 +20,3 @@ supertape --format fail lib
 ## License
 
 MIT
-

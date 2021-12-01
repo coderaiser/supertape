@@ -1,10 +1,7 @@
-# @supertape/formatter-progress-bar [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL]
+# @supertape/formatter-progress-bar [![NPM version][NPMIMGURL]][NPMURL]
 
-[NPMIMGURL]:                https://img.shields.io/npm/v/@supertape/formatter-progress-bar.svg?style=flat&longCache=true
-[NPMURL]:                   https://npmjs.org/package/@supertape/formatter-progress-bar "npm"
-
-[DependencyStatusURL]:      https://david-dm.org/coderaiser/supertape?path=packages/formatter-progress-bar
-[DependencyStatusIMGURL]:   https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-progress-bar
+[NPMIMGURL]: https://img.shields.io/npm/v/@supertape/formatter-progress-bar.svg?style=flat&longCache=true
+[NPMURL]: https://npmjs.org/package/@supertape/formatter-progress-bar "npm"
 
 `supertape` formatter shows progress bar.
 
@@ -31,4 +28,3 @@ supertape --format progress-bar lib
 ## License
 
 MIT
-

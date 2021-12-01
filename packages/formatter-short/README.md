@@ -1,10 +1,7 @@
-# @supertape/formatter-short [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL]
+# @supertape/formatter-short [![NPM version][NPMIMGURL]][NPMURL]
 
-[NPMIMGURL]:                https://img.shields.io/npm/v/@supertape/formatter-short.svg?style=flat&longCache=true
-[NPMURL]:                   https://npmjs.org/package/@supertape/formatter-short "npm"
-
-[DependencyStatusURL]:      https://david-dm.org/coderaiser/supertape?path=packages/formatter-short
-[DependencyStatusIMGURL]:   https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-short
+[NPMIMGURL]: https://img.shields.io/npm/v/@supertape/formatter-short.svg?style=flat&longCache=true
+[NPMURL]: https://npmjs.org/package/@supertape/formatter-short "npm"
 
 `supertape` formatter with minimalistic output.
 
@@ -23,4 +20,3 @@ supertape --format short lib
 ## License
 
 MIT
-

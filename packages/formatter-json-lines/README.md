@@ -1,10 +1,7 @@
-# @supertape/formatter-json-lines [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL]
+# @supertape/formatter-json-lines [![NPM version][NPMIMGURL]][NPMURL]
 
-[NPMIMGURL]:                https://img.shields.io/npm/v/@supertape/formatter-json-lines.svg?style=flat&longCache=true
-[NPMURL]:                   https://npmjs.org/package/@supertape/formatter-json-lines "npm"
-
-[DependencyStatusURL]:      https://david-dm.org/coderaiser/supertape?path=packages/formatter-json-lines
-[DependencyStatusIMGURL]:   https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-json-lines
+[NPMIMGURL]: https://img.shields.io/npm/v/@supertape/formatter-json-lines.svg?style=flat&longCache=true
+[NPMURL]: https://npmjs.org/package/@supertape/formatter-json-lines "npm"
 
 `supertape` formatter shows [json-lines](https://jsonlines.org/)
 
@@ -28,4 +25,3 @@ supertape --format json-lines lib
 ## License
 
 MIT
-
