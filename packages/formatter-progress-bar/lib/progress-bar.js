@@ -9,6 +9,8 @@ const fullstore = require('fullstore');
 const {isCI} = require('ci-info');
 
 const OK = '👌';
+const YELLOW = '#f9d472';
+
 const {red} = chalk;
 const formatErrorsCount = (a) => a ? red(a) : OK;
 
@@ -29,7 +31,7 @@ let bar;
 module.exports.start = ({total}) => {
     out('TAP version 13');
     
-    const color = SUPERTAPE_PROGRESS_BAR_COLOR || '#f9d472';
+    const color = SUPERTAPE_PROGRESS_BAR_COLOR || YELLOW;
     
     bar = createProgress({
         total,
