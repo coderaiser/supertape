@@ -32,7 +32,7 @@ test('supertape: runTests', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     
@@ -68,15 +68,13 @@ test('supertape: runTests: duplicates: node_modules', async (t) => {
     const StackTracey = stub().returns([{
         beforeParse: 'at getDuplicatesMessage (/node_modules/supertape/lib/supertape.js:113:37)',
         file: '/node_modules/supertape/lib/supertape.js',
-    },
-    {
+    }, {
         beforeParse: 'at test (/node_modules/supertape/lib/supertape.js:144:31)',
         file: '/node_modules/supertape/lib/supertape.js',
     }, {
         beforeParse: 'at only (/node_modules/supertape/lib/supertape.js:144:31)',
         file: '/node_modules/supertape/lib/supertape.js',
-    },
-    {
+    }, {
         beforeParse: 'at Object.<anonymous> (/Users/coderaiser/putout/packages/traverse/lib/traverse.spec.js:123:1)',
         file: '/Users/coderaiser/putout/packages/traverse/lib/traverse.spec.js',
     }]);
@@ -99,7 +97,7 @@ test('supertape: runTests: duplicates: node_modules', async (t) => {
     
     const FOUR_TESTS = 30;
     const [result] = await Promise.all([
-        pull(supertape.createStream(), FOUR_TESTS),
+        pull(await supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
     ]);
     
@@ -139,7 +137,7 @@ test('supertape: runTests: duplicates', async (t) => {
     
     const FOUR_TESTS = 30;
     const [result] = await Promise.all([
-        pull(supertape.createStream(), FOUR_TESTS),
+        pull(await supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
     ]);
     
@@ -174,7 +172,7 @@ test('supertape: runTests: duplicates: false', async (t) => {
     
     const FOUR_TESTS = 30;
     const [result] = await Promise.all([
-        pull(supertape.createStream(), FOUR_TESTS),
+        pull(await supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
     ]);
     
@@ -209,7 +207,7 @@ test('supertape: runTests: duplicates: defaults', async (t) => {
     
     const FOUR_TESTS = 30;
     const [result] = await Promise.all([
-        pull(supertape.createStream(), FOUR_TESTS),
+        pull(await supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
     ]);
     
@@ -243,7 +241,7 @@ test('supertape: runTests: duplicates: not match', async (t) => {
     
     const FOUR_TESTS = 30;
     const [result] = await Promise.all([
-        pull(supertape.createStream(), FOUR_TESTS),
+        pull(await supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
     ]);
     
@@ -271,7 +269,7 @@ test('supertape: runTests: no duplicates', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     
@@ -293,7 +291,7 @@ test('supertape: runTests: fail', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
+        pull(await supertape.createStream(), 5),
         once(supertape.run(), 'end'),
     ]);
     
@@ -326,7 +324,7 @@ test('supertape: runTests: checkAssertionsCount: no assertions', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
+        pull(await supertape.createStream(), 5),
         once(supertape.run(), 'end'),
     ]);
     
@@ -358,7 +356,7 @@ test('supertape: runTests: assertions after t.end()', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
+        pull(await supertape.createStream(), 5),
         once(supertape.run(), 'end'),
     ]);
     
@@ -391,7 +389,7 @@ test('supertape: runTests: a couple t.end()', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
+        pull(await supertape.createStream(), 5),
         once(supertape.run(), 'end'),
     ]);
     
@@ -430,7 +428,7 @@ test('supertape: runTests: assertions after t.end(): async', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
+        pull(await supertape.createStream(), 5),
         once(supertape.run(), 'end'),
     ]);
     
@@ -460,7 +458,7 @@ test('supertape: runTests: fail: at', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 6),
+        pull(await supertape.createStream(), 6),
         once(supertape.run(), 'end'),
     ]);
     
@@ -495,7 +493,7 @@ test('supertape: runTests: fail: timeout', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
+        pull(await supertape.createStream(), 5),
         once(supertape.run(), 'end'),
     ]);
     
@@ -527,7 +525,7 @@ test('supertape: runTests: equal', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     
@@ -562,7 +560,7 @@ test('supertape: runTests: not equal', async (t) => {
     
     const BEFORE_DIFF = 6;
     const [result] = await Promise.all([
-        pull(supertape.createStream(), BEFORE_DIFF),
+        pull(await supertape.createStream(), BEFORE_DIFF),
         once(supertape.run(), 'end'),
     ]);
     
@@ -594,7 +592,7 @@ test('supertape: runTests: not deepEqual', async (t) => {
     
     const BEFORE_DIFF = 6;
     const [result] = await Promise.all([
-        pull(supertape.createStream(), BEFORE_DIFF),
+        pull(await supertape.createStream(), BEFORE_DIFF),
         once(supertape.run(), 'end'),
     ]);
     
@@ -625,7 +623,7 @@ test('supertape: runTests: comment', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     
@@ -658,7 +656,7 @@ test('supertape: runTests: crash', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 3),
+        pull(await supertape.createStream(), 3),
         once(supertape.run(), 'end'),
     ]);
     
@@ -686,7 +684,7 @@ test('supertape: runTests: pass', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     
@@ -720,7 +718,7 @@ test('supertape: runTests: pass: unnamed', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     
@@ -764,7 +762,7 @@ test('supertape: runTests: isStop', async (t) => {
     supertape(message2, fn2);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     
@@ -806,7 +804,7 @@ test('supertape: runTests: not equal, but deepEqual', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 6),
+        pull(await supertape.createStream(), 6),
         once(supertape.run(), 'end'),
     ]);
     
@@ -840,7 +838,7 @@ test('supertape: runTests: is debug', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     

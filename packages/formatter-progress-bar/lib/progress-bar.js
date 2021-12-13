@@ -1,12 +1,10 @@
-'use strict';
+import {Writable} from 'stream';
 
-const {Writable} = require('stream');
-
-const cliProgress = require('cli-progress');
-const chalk = require('chalk');
-const once = require('once');
-const fullstore = require('fullstore');
-const {isCI} = require('ci-info');
+import cliProgress from 'cli-progress';
+import chalk from 'chalk';
+import once from 'once';
+import fullstore from 'fullstore';
+import {isCI} from 'ci-info';
 
 const OK = '👌';
 const YELLOW = '#f9d472';
@@ -28,7 +26,7 @@ const {
 
 let bar;
 
-module.exports.start = ({total}) => {
+export const start = ({total}) => {
     out('TAP version 13');
     
     const color = SUPERTAPE_PROGRESS_BAR_COLOR || YELLOW;
@@ -40,11 +38,11 @@ module.exports.start = ({total}) => {
     });
 };
 
-module.exports.test = ({test}) => {
+export const test = ({test}) => {
     store(`# ${test}`);
 };
 
-module.exports.testEnd = ({count, total, failed, test}) => {
+export const testEnd = ({count, total, failed, test}) => {
     bar.increment({
         count,
         total,
@@ -53,7 +51,7 @@ module.exports.testEnd = ({count, total, failed, test}) => {
     });
 };
 
-module.exports.fail = ({at, count, message, operator, actual, expected, output, errorStack}) => {
+export const fail = ({at, count, message, operator, actual, expected, output, errorStack}) => {
     out('');
     out(store());
     out(`❌ not ok ${count} ${message}`);
@@ -81,7 +79,7 @@ module.exports.fail = ({at, count, message, operator, actual, expected, output, 
     out('');
 };
 
-module.exports.end = ({count, passed, failed, skiped}) => {
+export const end = ({count, passed, failed, skiped}) => {
     bar.stop();
     
     out('');
@@ -142,7 +140,7 @@ const getStream = ({total} = defaultStreamOptions) => {
     return new Writable();
 };
 
-module.exports._getStream = getStream;
+export const _getStream = getStream;
 
 const createProgress = once(({total, color, test}) => {
     const colorFn = getColorFn(color);

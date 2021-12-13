@@ -29,7 +29,7 @@ test('supertape: equal', async (t) => {
     });
     
     supertape(message, fn);
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [result] = await Promise.all([
         pull(stream),
@@ -67,7 +67,7 @@ test('supertape: stack trace', async (t) => {
     });
     
     supertape(message, fn);
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [result] = await Promise.all([
         pull(stream, -3),
@@ -102,7 +102,7 @@ test('supertape: stack strace: exception', async (t) => {
         fn();
         t.end();
     });
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [output] = await Promise.all([
         pull(stream, -3),
@@ -148,7 +148,7 @@ test('supertape: checkDuplicates: override', async (t) => {
         checkDuplicates: false,
     });
     
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [result] = await Promise.all([
         pull(stream),
@@ -192,7 +192,7 @@ test('supertape: checkAssertionsCount: override', async (t) => {
         checkAssertionsCount: true,
     });
     
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [result] = await Promise.all([
         pull(stream),
@@ -238,7 +238,7 @@ test('supertape: deepEqual', async (t) => {
     });
     
     supertape(message, fn);
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [result] = await Promise.all([
         pull(stream),
@@ -274,7 +274,7 @@ test('supertape: createStream', async (t) => {
         quiet: true,
     });
     
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     supertape(message, fn);
     
@@ -312,7 +312,7 @@ test('supertape: skip', async (t) => {
         quiet: true,
     });
     
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [result] = await Promise.all([
         pull(stream),
@@ -360,7 +360,7 @@ test('supertape: only', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(emitter, 'end'),
     ]);
     
@@ -402,7 +402,7 @@ test('supertape: extensions', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(emitter, 'end'),
     ]);
     
@@ -444,7 +444,7 @@ test('supertape: extensions: extend', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(emitter, 'end'),
     ]);
     
@@ -492,7 +492,7 @@ test('supertape: extensions: extend: no return', async (t) => {
     `;
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), expected.length),
+        pull(await supertape.createStream(), expected.length),
         once(emitter, 'end'),
     ]);
     
@@ -528,7 +528,7 @@ test('supertape: extensions: extend: return function', async (t) => {
     `;
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), expected.length),
+        pull(await supertape.createStream(), expected.length),
         once(emitter, 'end'),
     ]);
     
@@ -558,7 +558,7 @@ test('supertape: extensions: extend: async', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(emitter, 'end'),
     ]);
     
@@ -600,7 +600,7 @@ test('supertape: extensions: extend: only', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(emitter, 'end'),
     ]);
     
@@ -642,7 +642,7 @@ test('supertape: extensions: extend: skip', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(emitter, 'end'),
     ]);
     
@@ -689,7 +689,7 @@ test('supertape: quiet: false', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(emitter, 'end'),
     ]);
     
@@ -729,7 +729,7 @@ test('supertape: destructuring test', async (t) => {
     });
     
     supertape.test(message, fn);
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [result] = await Promise.all([
         pull(stream),
@@ -778,7 +778,7 @@ test('supertape: destructuring test: only', async (t) => {
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(emitter, 'end'),
     ]);
     
@@ -812,7 +812,7 @@ test('supertape: destructuring test: skip', async (t) => {
         quiet: true,
     });
     
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [result] = await Promise.all([
         pull(stream),
@@ -852,7 +852,7 @@ test('supertape: duplicate', async (t) => {
     supertape(message, fn);
     supertape(message, fn);
     
-    const stream = supertape.createStream();
+    const stream = await supertape.createStream();
     
     const [result] = await Promise.all([
         pull(stream, 62),

@@ -64,7 +64,7 @@ function _createEmitter({quiet, format, getOperators, isStop}) {
     });
     
     emitter.on('run', async () => {
-        const {harness, formatter} = createFormatter(format);
+        const {harness, formatter} = await createFormatter(format);
         
         if (!quiet)
             harness.pipe(stdout);
@@ -92,9 +92,9 @@ module.exports.init = (options) => {
     assign(initedOptions, options);
 };
 
-const createStream = () => {
+const createStream = async () => {
     const {format} = initedOptions;
-    const {harness} = createFormatter(format);
+    const {harness} = await createFormatter(format);
     
     return harness;
 };

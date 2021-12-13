@@ -1,7 +1,12 @@
 import {run} from 'madrun';
 
+const NODE_OPTIONS = `'--loader mock-import --no-warnings'`;
+const env = {
+    NODE_OPTIONS,
+}
+
 export default {
-    'test': () => `supertape 'lib/**/*.spec.js'`,
+    'test': () => [env, `supertape 'lib/**/*.spec.js'`],
     'watch:test': async () => `nodemon -w lib -w test -x "${await run('test')}"`,
     'lint': () => 'putout .',
     'fresh:lint': () => run('lint', '--fresh'),

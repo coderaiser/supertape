@@ -1,12 +1,15 @@
-'use strict';
+import {createMockImport,
+    enableNestedImports,
+    disableNestedImports,
+} from 'mock-import';
+import {once} from 'events';
 
-const {once} = require('events');
-
-const montag = require('montag');
-const mockRequire = require('mock-require');
-const {reRequire, stopAll} = mockRequire;
-const pullout = require('pullout');
-const {test, stub} = require('supertape');
+import montag from 'montag';
+import pullout from 'pullout';
+import {
+    test,
+    stub,
+} from 'supertape';
 
 const {env} = process;
 
@@ -20,6 +23,13 @@ const pull = async (stream, i = 9) => {
         .slice(0, i)
         .join('\n');
 };
+
+const {
+    reImport,
+    reImportDefault,
+    mockImport,
+    stopAll,
+} = createMockImport(import.meta.url);
 
 test('supertape: format: progress bar', async (t) => {
     const successFn = (t) => {
@@ -39,9 +49,9 @@ test('supertape: format: progress bar', async (t) => {
     const {CI} = env;
     env.CI = 1;
     
-    reRequire('ci-info');
-    reRequire('./progress-bar');
-    const supertape = reRequire('supertape');
+    await reImport('ci-info');
+    await reImport('./progress-bar');
+    const supertape = await reImport('supertape');
     
     supertape.init({
         quiet: true,
@@ -52,7 +62,7 @@ test('supertape: format: progress bar', async (t) => {
     supertape(failMessage, failFn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 10),
+        pull(await supertape.createStream(), 10),
         once(supertape.run(), 'end'),
     ]);
     
@@ -86,9 +96,9 @@ test('supertape: format: progress bar: diff', async (t) => {
     const {CI} = env;
     env.CI = 1;
     
-    reRequire('ci-info');
-    reRequire('./progress-bar');
-    const supertape = reRequire('supertape');
+    await reImport('ci-info');
+    await reImport('./progress-bar');
+    const supertape = await reImport('supertape');
     
     supertape.init({
         quiet: true,
@@ -98,7 +108,7 @@ test('supertape: format: progress bar: diff', async (t) => {
     supertape(message, fn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
+        pull(await supertape.createStream()),
         once(supertape.run(), 'end'),
     ]);
     
@@ -130,9 +140,9 @@ test('supertape: format: progress bar: success', async (t) => {
     
     env.CI = 1;
     
-    reRequire('ci-info');
-    reRequire('./progress-bar');
-    const supertape = reRequire('supertape');
+    await reImport('ci-info');
+    await reImport('./progress-bar');
+    const supertape = await reImport('supertape');
     
     supertape.init({
         quiet: true,
@@ -142,7 +152,7 @@ test('supertape: format: progress bar: success', async (t) => {
     supertape(message, fn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 8),
+        pull(await supertape.createStream(), 8),
         once(supertape.run(), 'end'),
     ]);
     
@@ -173,9 +183,9 @@ test('supertape: format: progress bar: skip', async (t) => {
     const {CI} = env;
     env.CI = 1;
     
-    reRequire('ci-info');
-    reRequire('./progress-bar');
-    const supertape = reRequire('supertape');
+    await reImport('ci-info');
+    await reImport('./progress-bar');
+    const supertape = await reImport('supertape');
     
     supertape.init({
         quiet: true,
@@ -185,7 +195,7 @@ test('supertape: format: progress bar: skip', async (t) => {
     supertape.skip(message, fn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 8),
+        pull(await supertape.createStream(), 8),
         once(supertape.run(), 'end'),
     ]);
     
@@ -218,9 +228,9 @@ test('supertape: format: progress bar: color', async (t) => {
     env.CI = 1;
     env.SUPERTAPE_PROGRESS_BAR_COLOR = 'red';
     
-    reRequire('ci-info');
-    reRequire('./progress-bar');
-    const supertape = reRequire('supertape');
+    await reImport('ci-info');
+    await reImport('./progress-bar');
+    const supertape = await reImport('supertape');
     
     supertape.init({
         quiet: true,
@@ -230,7 +240,7 @@ test('supertape: format: progress bar: color', async (t) => {
     supertape(message, fn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 8),
+        pull(await supertape.createStream(), 8),
         once(supertape.run(), 'end'),
     ]);
     
@@ -251,7 +261,7 @@ test('supertape: format: progress bar: color', async (t) => {
     t.end();
 });
 
-test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t) => {
+test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', async (t) => {
     const {
         CI,
         SUPERTAPE_PROGRESS_BAR,
@@ -260,8 +270,8 @@ test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t
     env.SUPERTAPE_PROGRESS_BAR = 0;
     env.CI = 1;
     
-    reRequire('ci-info');
-    const {_getStream} = reRequire('./progress-bar');
+    await reImport('ci-info');
+    const {_getStream} = await reImport('./progress-bar');
     const stream = _getStream({
         total: 1,
     });
@@ -273,7 +283,7 @@ test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t
     t.end();
 });
 
-test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR', (t) => {
+test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR', async (t) => {
     const {
         CI,
         SUPERTAPE_PROGRESS_BAR,
@@ -281,8 +291,8 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR', (t) =
     env.SUPERTAPE_PROGRESS_BAR = 1;
     env.CI = 1;
     
-    reRequire('ci-info');
-    const {_getStream} = reRequire('./progress-bar');
+    await reImport('ci-info');
+    const {_getStream} = await reImport('./progress-bar');
     const stream = _getStream({
         total: 100,
     });
@@ -294,7 +304,7 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR', (t) =
     t.end();
 });
 
-test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR, no CI', (t) => {
+test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR, no CI', async (t) => {
     const {
         CI,
         SUPERTAPE_PROGRESS_BAR,
@@ -303,8 +313,8 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR, no CI'
     env.SUPERTAPE_PROGRESS_BAR = 1;
     delete env.CI;
     
-    reRequire('ci-info');
-    const {_getStream} = reRequire('./progress-bar');
+    await reImport('ci-info');
+    const {_getStream} = await reImport('./progress-bar');
     const stream = _getStream();
     
     env.CI = CI;
@@ -314,22 +324,22 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR, no CI'
     t.end();
 });
 
-test('supertape: format: progress bar: testEnd', (t) => {
+test('supertape: format: progress bar: testEnd', async (t) => {
     const increment = stub();
     const SingleBar = stub().returns({
         start: stub(),
         increment,
     });
     
-    mockRequire('cli-progress', {
+    mockImport('cli-progress', {
         SingleBar,
         Presets: {
             React: {},
         },
     });
     
-    reRequire('once');
-    const {start, testEnd} = reRequire('./progress-bar');
+    await reImport('once');
+    const {start, testEnd} = await reImport('./progress-bar');
     start({total: 10});
     
     const count = 1;
@@ -357,7 +367,7 @@ test('supertape: format: progress bar: testEnd', (t) => {
     t.end();
 });
 
-test('supertape: format: progress bar: no stack', async (t) => {
+test.only('supertape: format: progress bar: no stack', async (t) => {
     const fn = (t) => {
         t.ok(false);
         t.end();
@@ -369,9 +379,16 @@ test('supertape: format: progress bar: no stack', async (t) => {
     env.CI = 1;
     env.SUPERTAPE_PROGRESS_BAR_STACK = 0;
     
-    reRequire('ci-info');
-    reRequire('./progress-bar');
-    const supertape = reRequire('supertape');
+    enableNestedImports();
+    
+    await reImport('ci-info');
+    await reImport('./progress-bar');
+    await reImport('once');
+    
+    debugger;
+    const supertape = await reImportDefault('supertape');
+    
+    disableNestedImports();
     
     supertape.init({
         quiet: true,
@@ -379,11 +396,15 @@ test('supertape: format: progress bar: no stack', async (t) => {
     });
     
     supertape(message, fn);
-    
+
+    debugger;
+    console.log('bbb');
     const [output] = await Promise.all([
-        pull(supertape.createStream(), 18),
+        pull(await supertape.createStream(), 18),
         once(supertape.run(), 'end'),
     ]);
+    
+    console.log('zzzz');
     
     const result = output.replace(/at .+\n/, 'at  xxx\n');
     
@@ -414,3 +435,4 @@ test('supertape: format: progress bar: no stack', async (t) => {
     t.equal(result, expected);
     t.end();
 });
+
