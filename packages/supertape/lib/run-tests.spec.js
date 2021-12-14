@@ -68,15 +68,13 @@ test('supertape: runTests: duplicates: node_modules', async (t) => {
     const StackTracey = stub().returns([{
         beforeParse: 'at getDuplicatesMessage (/node_modules/supertape/lib/supertape.js:113:37)',
         file: '/node_modules/supertape/lib/supertape.js',
-    },
-    {
+    }, {
         beforeParse: 'at test (/node_modules/supertape/lib/supertape.js:144:31)',
         file: '/node_modules/supertape/lib/supertape.js',
     }, {
         beforeParse: 'at only (/node_modules/supertape/lib/supertape.js:144:31)',
         file: '/node_modules/supertape/lib/supertape.js',
-    },
-    {
+    }, {
         beforeParse: 'at Object.<anonymous> (/Users/coderaiser/putout/packages/traverse/lib/traverse.spec.js:123:1)',
         file: '/Users/coderaiser/putout/packages/traverse/lib/traverse.spec.js',
     }]);
