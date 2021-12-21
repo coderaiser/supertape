@@ -67,9 +67,7 @@ module.exports.createValidator = ({tests}) => (msg, options) => {
     return [];
 };
 
-module.exports.getAt = () => {
-    return getFileName();
-};
+module.exports.getAt = () => getFileName();
 
 const CALLS_FROM_TEST = 3;
 
