@@ -26,7 +26,7 @@ const ok = (actual, message = 'should be truthy') => ({
 const notOk = (actual, message = 'should be falsy') => ({
     is: !actual,
     expected: false,
-    actual,
+    actual: actual && stringify(actual),
     message,
 });
 
@@ -39,6 +39,8 @@ const validateRegExp = (regexp) => {
     
     return null;
 };
+
+const {stringify} = JSON;
 
 function match(actual, regexp, message = 'should match') {
     const error = validateRegExp(regexp);

@@ -11,6 +11,8 @@ import {
     operators,
 } from './operators.mjs';
 
+const {stringify} = JSON;
+
 test('supertape: operators: extendOperators', async (t) => {
     const extensions = {
         transformCode: (t) => (a, b) => {
@@ -141,6 +143,20 @@ test('supertape: operators: notOk: false', (t) => {
     const {expected} = notOk(false);
     
     t.notOk(expected);
+    t.end();
+});
+
+test('supertape: operators: notOk: object', (t) => {
+    const {notOk} = operators;
+    const {actual} = notOk({
+        hello: 'world',
+    });
+    
+    const expected = stringify({
+        hello: 'world',
+    });
+    
+    t.equal(actual, expected);
     t.end();
 });
 
