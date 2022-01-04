@@ -1,3 +1,23 @@
+2022.01.04, v6.11.0
+
+fix:
+- (supertape) types: any -> unknown
+- (@supertape/operator-stub) types: any -> unknown
+
+feature:
+- (package) yargs-parser v21.0.0
+- (supertape) notOk: add ability to stringify content of passed value
+- (package) putout v23.0.0
+- (package) check-dts v0.6.5
+- (package) check-dts v0.6.5
+- (package) check-dts v0.6.5
+- (@supertape/formatter-progress-bar) add color constant
+- (package) eslint-plugin-putout v12.0.0
+- (package) putout v22.0.0
+- (package) check-dts v0.6.3
+- (supertape) putout v21
+
+
 2021.10.23, v6.10.0
 
 feature:
