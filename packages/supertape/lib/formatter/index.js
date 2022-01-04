@@ -3,9 +3,7 @@
 const {EventEmitter} = require('events');
 const {createHarness} = require('./harness');
 
-const resolveFormatter = (name) => {
-    return require(`@supertape/formatter-${name}`);
-};
+const resolveFormatter = (name) => require(`@supertape/formatter-${name}`);
 
 module.exports.createFormatter = (name) => {
     const formatter = new EventEmitter();

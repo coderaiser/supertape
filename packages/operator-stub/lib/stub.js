@@ -65,13 +65,9 @@ export const calledCount = (operator) => (fn, count, message = 'should be called
     return operator.equal(fn.callCount, count, message);
 };
 
-export const calledOnce = (operator) => (fn, message = 'should be called once') => {
-    return calledCount(operator)(fn, 1, message);
-};
+export const calledOnce = (operator) => (fn, message = 'should be called once') => calledCount(operator)(fn, 1, message);
 
-export const calledTwice = (operator) => (fn, count, message = 'should be called twice') => {
-    return calledCount(operator)(fn, 2, message);
-};
+export const calledTwice = (operator) => (fn, count, message = 'should be called twice') => calledCount(operator)(fn, 2, message);
 
 export const calledWithNew = (operator) => (fn, message = 'should be called with new') => {
     if (!isStub(fn))
