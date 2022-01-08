@@ -2,7 +2,7 @@
   "name": "supertape",
   "version": "6.11.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
-  "description": "tape compatible test runner with superpowers",
+  "description": "📼 Supertape fastest simplest test runner with lots of formatters",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/supertape.js",
   "exports": {

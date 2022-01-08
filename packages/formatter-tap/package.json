@@ -2,7 +2,7 @@
   "name": "@supertape/formatter-tap",
   "version": "2.0.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
-  "description": "supertape formatter tap",
+  "description": "📼Supertape formatter tap",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/tap.js",
   "release": false,

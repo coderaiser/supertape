@@ -3,7 +3,7 @@
 [NPMIMGURL]: https://img.shields.io/npm/v/@supertape/formatter-short.svg?style=flat&longCache=true
 [NPMURL]: https://npmjs.org/package/@supertape/formatter-short "npm"
 
-`supertape` formatter with minimalistic output.
+📼[`Supertape`](https://github.com/coderaiser/supertape) formatter with minimalistic output.
 
 ## Install
 

@@ -2,7 +2,7 @@
   "name": "@supertape/formatter-short",
   "version": "1.0.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
-  "description": "supertape formatter with short output (without callstack)",
+  "description": "📼Supertape formatter with short output (without callstack)",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/short.js",
   "release": false,

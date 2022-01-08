@@ -3,7 +3,7 @@
 [NPMIMGURL]: https://img.shields.io/npm/v/@supertape/formatter-fail.svg?style=flat&longCache=true
 [NPMURL]: https://npmjs.org/package/@supertape/formatter-fail "npm"
 
-`supertape` formatter shows only failed.
+📼[`Supertape`](https://github.com/coderaiser/supertape) formatter shows only failed.
 
 ## Install
 

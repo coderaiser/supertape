@@ -3,7 +3,7 @@
 [NPMIMGURL]: https://img.shields.io/npm/v/@supertape/formatter-progress-bar.svg?style=flat&longCache=true
 [NPMURL]: https://npmjs.org/package/@supertape/formatter-progress-bar "npm"
 
-`supertape` formatter shows progress bar.
+📼[`Supertape`](https://github.com/coderaiser/supertape) formatter shows progress bar.
 
 ## Install
 

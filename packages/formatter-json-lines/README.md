@@ -3,7 +3,7 @@
 [NPMIMGURL]: https://img.shields.io/npm/v/@supertape/formatter-json-lines.svg?style=flat&longCache=true
 [NPMURL]: https://npmjs.org/package/@supertape/formatter-json-lines "npm"
 
-`supertape` formatter shows [json-lines](https://jsonlines.org/)
+📼[`Supertape`](https://github.com/coderaiser/supertape) formatter shows [json-lines](https://jsonlines.org/)
 
 ## Install
 
