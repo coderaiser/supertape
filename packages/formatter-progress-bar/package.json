@@ -2,7 +2,7 @@
   "name": "@supertape/formatter-progress-bar",
   "version": "2.3.1",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
-  "description": "supertape formatter progress bar",
+  "description": "📼 Supertape formatter progress bar",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/progress-bar.js",
   "release": false,

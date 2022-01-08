@@ -94,17 +94,18 @@ module.exports.end = ({count, passed, failed, skiped}) => {
         out(`# ⚠️  skip ${skiped}`);
     }
     
+    out('');
+    
     if (failed) {
         out(`# ❌ fail ${failed}`);
     }
     
-    out('');
-    
     if (!failed) {
         out('# ✅ ok');
-        out('');
-        out('');
     }
+    
+    out('');
+    out('');
     
     return `\r${out()}`;
 };

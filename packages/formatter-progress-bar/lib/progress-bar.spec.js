@@ -381,7 +381,7 @@ test('supertape: format: progress bar: no stack', async (t) => {
     supertape(message, fn);
     
     const [output] = await Promise.all([
-        pull(supertape.createStream(), 18),
+        pull(supertape.createStream(), 19),
         once(supertape.run(), 'end'),
     ]);
     
@@ -408,6 +408,7 @@ test('supertape: format: progress bar: no stack', async (t) => {
       1..1
       # tests 1
       # pass 0
+      
       # ❌ fail 1
     `;
     
