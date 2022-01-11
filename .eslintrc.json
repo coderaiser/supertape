@@ -1,11 +1,10 @@
 {
     "rules": {
-        "node/no-unsupported-features/es-syntax": "off",
-        "putout/align-spaces": "error"
+        "node/no-unsupported-features/es-syntax": "off"
     },
     "extends": [
         "plugin:node/recommended",
-        "plugin:putout/safe"
+        "plugin:putout/safe+align"
     ],
     "plugins": [
         "node",
