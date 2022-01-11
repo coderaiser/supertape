@@ -49,21 +49,21 @@ To simplify `supertape` core some operators moved out into separate packages, ca
 
 Here is a list of built-int operators:
 
-| Package | Version | Dependencies |
-|--------|-------|------------|
-| [`@supertape/operator-stub`](/packages/operator-stub) | [![npm](https://img.shields.io/npm/v/@supertape/operator-stub.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-stub) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/operator-stub)](https://david-dm.org/coderaiser/supertape?path=packages/operator-stub) |
+| Package | Version |
+|--------|-------|
+| [`@supertape/operator-stub`](/packages/operator-stub) | [![npm](https://img.shields.io/npm/v/@supertape/operator-stub.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-stub) |
 
 ### Formatters
 
 There is a list of built-int `formatters` to customize output:
 
-| Package | Version | Dependencies |
-|--------|-------|------------|
-| [`@supertape/formatter-tap`](/packages/formatter-tap) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-tap.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-tap) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-tap)](https://david-dm.org/coderaiser/supertape?path=packages/formatter-tap) |
-| [`@supertape/formatter-fail`](/packages/formatter-fail) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-fail.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-fail) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-fail)](https://david-dm.org/coderaiser/supertape?path=packages/formatter-fail) |
-| [`@supertape/formatter-short`](/packages/formatter-short) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-short.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-short) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-short)](https://david-dm.org/coderaiser/supertape?path=packages/formatter-short) |
-| [`@supertape/formatter-progress-bar`](/packages/formatter-progress-bar) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-progress-bar.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-progress-bar) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-progress-bar)](https://david-dm.org/coderaiser/supertape?path=packages/formatter-progress-bar) |
-| [`@supertape/formatter-json-lines`](/packages/formatter-json-lines) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-json-lines.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-json-lines) | [![Dependency Status](https://david-dm.org/coderaiser/supertape.svg?path=packages/formatter-json-lines)](https://david-dm.org/coderaiser/supertape?path=packages/formatter-json-lines) |
+| Package | Version |
+|--------|-------|
+| [`@supertape/formatter-tap`](/packages/formatter-tap) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-tap.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-tap) | 
+| [`@supertape/formatter-fail`](/packages/formatter-fail) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-fail.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-fail) |
+| [`@supertape/formatter-short`](/packages/formatter-short) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-short.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-short) |
+| [`@supertape/formatter-progress-bar`](/packages/formatter-progress-bar) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-progress-bar.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-progress-bar) |
+| [`@supertape/formatter-json-lines`](/packages/formatter-json-lines) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-json-lines.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-json-lines) |
 
 ## API
 
