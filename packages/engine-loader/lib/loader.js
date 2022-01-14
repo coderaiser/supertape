@@ -1,3 +1,4 @@
+import {pathToFileURL} from 'url';
 import {getPaths} from './get-paths.js';
 import {simpleImport} from './simple-import.js';
 
@@ -7,8 +8,11 @@ export const loadOperators = async (operators) => {
     const promises = [];
     const paths = getPaths(operators);
     
-    for (const path of paths)
-        promises.push(simpleImport(path));
+    for (const path of paths) {
+        // always convert to fileURL for windows
+        const resolved = pathToFileURL(path);
+        promises.push(simpleImport(resolved));
+    }
     
     const loadedOperators = await Promise.all(promises);
     
