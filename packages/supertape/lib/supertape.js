@@ -2,7 +2,6 @@
 
 const {EventEmitter} = require('events');
 const once = require('once');
-const {createSimport} = require('simport');
 
 const options = require('../supertape.json');
 
@@ -11,7 +10,6 @@ const runTests = require('./run-tests');
 const createFormatter = once(require('./formatter').createFormatter);
 
 const createEmitter = once(_createEmitter);
-const simport = createSimport(__filename);
 
 const {assign} = Object;
 const {stdout} = process;
@@ -20,7 +18,7 @@ let mainEmitter;
 
 const getOperators = once(async () => {
     const {operators} = options;
-    const {loadOperators} = await simport('@supertape/engine-loader');
+    const {loadOperators} = await import('@supertape/engine-loader');
     
     return await loadOperators(operators);
 });

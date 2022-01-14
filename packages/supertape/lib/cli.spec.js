@@ -34,7 +34,7 @@ test('supertape: cli: -r', async (t) => {
     
     const [[message]] = write.args;
     
-    t.match(message, `Cannot find module 'hello'`);
+    t.match(message, `Cannot find package 'hello'`);
     t.end();
 });
 

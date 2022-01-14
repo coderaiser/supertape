@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = () => {
+module.exports.help = () => {
     const bin = require('../help.json');
     const usage = 'Usage: supertape [options] [path]';
     const result = [

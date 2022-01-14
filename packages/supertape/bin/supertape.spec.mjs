@@ -1,15 +1,15 @@
+import {createRequire} from 'module';
 import runsome from 'runsome';
-import {createSimport} from 'simport';
 
 import test from '../lib/supertape.js';
 
-const simport = createSimport(import.meta.url);
+const require = createRequire(import.meta.url);
 
 const name = new URL('supertape.mjs', import.meta.url).pathname;
 const run = runsome(name);
 
-test('supertape: bin: -v', async (t) => {
-    const {version} = await simport('../package.json');
+test('supertape: bin: -v', (t) => {
+    const {version} = require('../package.json');
     
     t.equal(run('-v'), `v${version}`);
     t.end();

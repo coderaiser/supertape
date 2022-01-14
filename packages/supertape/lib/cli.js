@@ -8,9 +8,7 @@ const glob = require('glob');
 const fullstore = require('fullstore');
 const tryToCatch = require('try-to-catch');
 const keypress = require('@putout/cli-keypress');
-const {createSimport} = require('simport');
-
-const simport = createSimport(__filename);
+const {simpleImport} = require('./simple-import');
 
 const supertape = require('..');
 const {
@@ -21,7 +19,6 @@ const {
     INVALID_OPTION,
 } = require('./exit-codes');
 
-const {resolve} = require;
 const {isArray} = Array;
 
 const maybeFirst = (a) => isArray(a) ? a.pop() : a;
@@ -119,7 +116,7 @@ async function cli({argv, cwd, stdout, isStop}) {
     }
     
     if (args.help) {
-        const help = await simport('./help.js');
+        const {help} = await import('./help.js');
         stdout.write(help());
         return OK;
     }
@@ -138,9 +135,7 @@ async function cli({argv, cwd, stdout, isStop}) {
         };
     
     for (const module of args.require)
-        await simport(resolve(module, {
-            paths: [cwd],
-        }));
+        await import(module);
     
     const allFiles = [];
     for (const arg of args._) {
@@ -171,7 +166,7 @@ async function cli({argv, cwd, stdout, isStop}) {
     const files = removeDuplicates(allFiles);
     
     for (const file of files) {
-        promises.push(simport(resolvePath(cwd, file)));
+        promises.push(simpleImport(resolvePath(cwd, file)));
     }
     
     filesCount(files.length);
