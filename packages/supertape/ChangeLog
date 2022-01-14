@@ -1,3 +1,13 @@
+2022.01.14, v6.12.0
+
+feature:
+- (supertape) get rid of simport
+- (package) putout v24.1.0
+- (package) eslint-plugin-putout v13.0.1
+- (@supertape/engine-loader) get rid of simport
+- (@supertape/formatter-progress-bar) add newline befor fail count
+
+
 2022.01.04, v6.11.0
 
 fix:
