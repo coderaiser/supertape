@@ -2,6 +2,7 @@
 
 const {resolve: resolvePath} = require('path');
 const {once} = require('events');
+const {pathToFileURL} = require('url');
 
 const yargsParser = require('yargs-parser');
 const glob = require('glob');
@@ -166,7 +167,9 @@ async function cli({argv, cwd, stdout, isStop}) {
     const files = removeDuplicates(allFiles);
     
     for (const file of files) {
-        promises.push(simpleImport(resolvePath(cwd, file)));
+        // always resolve before import for windows
+        const resolved = pathToFileURL(resolvePath(cwd, file));
+        promises.push(simpleImport(resolved));
     }
     
     filesCount(files.length);
