@@ -1,4 +1,3 @@
-import {OperatorStub} from '../lib/stub.js';
 import {
     stub,
     Stub,
@@ -22,28 +21,28 @@ test('calledWith', (t: Test) => {
     t.end();
 });
 
-test('calledWith', (t: OperatorStub) => {
+test('calledWith', (t: Test) => {
     t.calledWith(fn, [a]);
     t.end();
 });
 
-test('calledAfter', (t: OperatorStub) => {
+test('calledAfter', (t: Test) => {
     t.calledAfter(fn1, fn2);
     t.end();
 });
 
-test('calledBefore', (t: OperatorStub) => {
+test('calledBefore', (t: Test) => {
     t.calledBefore(fn1, fn2);
     t.end();
 });
 
-test('calledInOrder', (t: OperatorStub) => {
+test('calledInOrder', (t: Test) => {
     t.calledInOrder([fn1, fn2]);
     t.end();
 });
 
-test('calledInOrder: not stub', (t: OperatorStub) => {
-    // THROWS Type '() => void' is not assignable to type 'Stub'.
+test('calledInOrder: not stub', (t: Test) => {
+    // THROWS Type 'FunctionConstructor' is not assignable to type 'Stub'.
     t.calledInOrder([Function]);
     t.end();
 });

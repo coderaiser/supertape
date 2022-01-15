@@ -2,6 +2,7 @@ import {
     stub,
     extend,
 } from 'supertape';
+
 import * as operator from './stub.js';
 
 const test = extend(operator);
@@ -24,6 +25,19 @@ test('supertape: operator: stub: not called: not stub', (t) => {
     notCalled(fn);
     
     t.calledWith(fail, [`Expected stub, but received: ${fn.toString()}`]);
+    t.end();
+});
+
+test('supertape: operator: stub: not called: not arg', (t) => {
+    const fail = stub();
+    
+    const notCalled = operator.notCalled({
+        fail,
+    });
+    
+    notCalled();
+    
+    t.calledWith(fail, [`Expected stub, but received: undefined`]);
     t.end();
 });
 

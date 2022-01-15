@@ -1,7 +1,7 @@
 import {isStub} from '@cloudcmd/stub';
 
 const isString = (a) => typeof a === 'string';
-const getExpectedStubMessage = (fn) => `Expected stub, but received: ${fn.toString()}`;
+const getExpectedStubMessage = (fn) => `Expected stub, but received: ${fn?.toString()}`;
 
 const {stringify} = JSON;
 const {isArray} = Array;
