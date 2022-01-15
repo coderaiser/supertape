@@ -18,7 +18,6 @@ const {
     WAS_STOP,
     UNHANDLED,
     INVALID_OPTION,
-    SKIP,
 } = require('./exit-codes');
 
 const {isArray} = Array;
@@ -52,7 +51,6 @@ module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
     
     const {
         failed,
-        skiped,
         code,
         message,
     } = result;
@@ -66,13 +64,8 @@ module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
         return exit(code);
     }
     
-    if (isStop()) {
+    if (isStop())
         return exit(WAS_STOP);
-    }
-    
-    if (skiped) {
-        return exit(SKIP);
-    }
     
     return exit(OK);
 };
@@ -182,16 +175,13 @@ async function cli({argv, cwd, stdout, isStop}) {
     filesCount(files.length);
     
     if (!promises.length)
-        return {
-            failed: false,
-        };
+        return OK;
     
     await Promise.all(promises);
-    const [{failed, skiped}] = await once(supertape.run(), 'end');
+    const [{failed}] = await once(supertape.run(), 'end');
     
     return {
         failed,
-        skiped,
     };
 }
 

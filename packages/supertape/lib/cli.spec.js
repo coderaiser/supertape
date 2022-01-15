@@ -14,7 +14,6 @@ const wait = require('@iocmd/wait');
 const test = require('./supertape.js');
 const {
     OK,
-    SKIP,
     WAS_STOP,
 } = require('./exit-codes');
 
@@ -191,28 +190,6 @@ test('supertape: cli: successs', async (t) => {
     stopAll();
     
     t.calledWith(exit, [OK], 'should call exit with 0');
-    t.end();
-});
-
-test('supertape: cli: skiped', async (t) => {
-    const name = join(__dirname, 'fixture/cli-skip.js');
-    const argv = [name, name, '-f', 'tap'];
-    
-    const supertape = reRequire('./supertape');
-    const exit = stub();
-    
-    supertape.init({
-        quiet: true,
-    });
-    
-    await runCli({
-        argv,
-        exit,
-    });
-    
-    stopAll();
-    
-    t.calledWith(exit, [SKIP], 'should call exit with 0');
     t.end();
 });
 
