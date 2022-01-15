@@ -68,13 +68,13 @@ function _createEmitter({quiet, format, getOperators, isStop}) {
             harness.pipe(stdout);
         
         const operators = await getOperators();
-        const {failed} = await runTests(tests, {
+        const {failed, skiped} = await runTests(tests, {
             formatter,
             operators,
             isStop,
         });
         
-        emitter.emit('end', {failed});
+        emitter.emit('end', {failed, skiped});
     });
     
     return emitter;
