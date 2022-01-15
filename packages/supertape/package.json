@@ -1,6 +1,6 @@
 {
   "name": "supertape",
-  "version": "6.13.0",
+  "version": "6.13.1",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "📼 Supertape fastest simplest test runner with lots of formatters",
   "homepage": "http://github.com/coderaiser/supertape",

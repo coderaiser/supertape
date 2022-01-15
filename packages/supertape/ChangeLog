@@ -1,3 +1,9 @@
+2022.01.15, v6.13.1
+
+fix:
+- (supertape) revert: add exit code 5 for skip"
+
+
 2022.01.15, v6.13.0
 
 feature:
