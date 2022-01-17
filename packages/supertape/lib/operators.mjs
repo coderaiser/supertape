@@ -71,7 +71,13 @@ function notMatch(actual, regexp, message = 'should not match') {
 
 function equal(actual, expected, message = 'should equal') {
     let output = '';
-    const is = Object.is(actual, expected);
+    let is;
+    
+    if (isFn(actual) && isFn(expected))
+        is = true;
+    
+    if (!isFn(actual) || !isFn(expected))
+        is = Object.is(actual, expected);
     
     if (!is)
         output = diff(expected, actual) || '    result: values not equal, but deepEqual';

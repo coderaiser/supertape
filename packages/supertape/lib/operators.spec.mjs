@@ -106,6 +106,15 @@ test('supertape: operators: equal', (t) => {
     t.end();
 });
 
+test('supertape: operators: equal: functions', (t) => {
+    const {equal} = operators;
+    const fn = () => {};
+    const {is} = equal(fn, stub());
+    
+    t.ok(is);
+    t.end();
+});
+
 test('supertape: operators: notEqual: true', (t) => {
     const {notEqual} = operators;
     const {is} = notEqual(+0, -0);
