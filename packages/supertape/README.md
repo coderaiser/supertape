@@ -7,7 +7,7 @@
 [CoverageURL]: https://coveralls.io/github/coderaiser/supertape?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
 
-[Tape](https://github.com/substack/tape) compatible [TAP](https://testanything.org/) test runner with superpowers. Contains:
+[Tape](https://github.com/substack/tape)-inspired [TAP](https://testanything.org/)-compatible simplest high speed test runner with superpowers. Contains:
 
 - ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking).
 - shows colored diff when test not `equal` or not `deepEqual`;
