@@ -10,7 +10,7 @@
 
 [![supertape](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY.svg)](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY)
 
-[Tape](https://github.com/substack/tape) compatible [TAP](https://testanything.org/) simplest high speed test runner with superpowers. Contains:
+[Tape](https://github.com/substack/tape)-inspired [TAP](https://testanything.org/)-compatible simplest high speed test runner with superpowers. Contains:
 
 - ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking).
 - shows colored diff when test not `equal` or not `deepEqual`;
@@ -69,11 +69,34 @@ There is a list of built-int `formatters` to customize output:
 
 ### Methods
 
-The assertion methods in `supertape` are heavily influenced or copied from the methods
-in [tape](https://github.com/substack/tape).
+The assertion methods in `supertape` are heavily influenced by [tape](https://github.com/substack/tape).
 
 ```js
 const test = require('supertape');
+const {sum} = require('./calc.js';
+
+test('calc: sum', (t) => {
+    const result = sum(1, 2);
+    const expected = 3;
+    
+    t.equal(result, expected);
+    t.end();
+});
+```
+
+or in `ESM`:
+
+```js
+import {test} from 'supertape';
+import {sum} from './calc.js';
+
+test('calc: sum', (t) => {
+    const result = sum(1, 2);
+    const expected = 3;
+    
+    t.equal(result, expected);
+    t.end();
+});
 ```
 
 ## test(name, cb)
