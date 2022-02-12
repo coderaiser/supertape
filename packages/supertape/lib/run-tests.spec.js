@@ -83,6 +83,7 @@ test('supertape: runTests: duplicates: node_modules', async (t) => {
     
     const messages = new Set();
     const supertape = reRequire('..');
+    
     supertape(message, fn1, {
         quiet: true,
         checkDuplicates: true,
@@ -160,6 +161,7 @@ test('supertape: runTests: duplicates: false', async (t) => {
     
     reRequire('./validator');
     const supertape = reRequire('..');
+    
     supertape(message, fn1, {
         quiet: true,
         checkDuplicates: false,
@@ -195,6 +197,7 @@ test('supertape: runTests: duplicates: defaults', async (t) => {
     
     reRequire('./validator');
     const supertape = reRequire('..');
+    
     supertape(message, fn1, {
         quiet: true,
         checkIfEnded: false,
@@ -350,6 +353,7 @@ test('supertape: runTests: assertions after t.end()', async (t) => {
     
     reRequire('once');
     const supertape = reRequire('..');
+    
     supertape(message, fn, {
         quiet: true,
         checkIfEnded: true,
@@ -383,6 +387,7 @@ test('supertape: runTests: a couple t.end()', async (t) => {
     
     reRequire('once');
     const supertape = reRequire('..');
+    
     supertape(message, fn, {
         quiet: true,
         checkIfEnded: true,
@@ -488,6 +493,7 @@ test('supertape: runTests: fail: timeout', async (t) => {
     
     reRequire('./run-tests');
     const supertape = reRequire('..');
+    
     supertape(message, fn, {
         quiet: true,
     });

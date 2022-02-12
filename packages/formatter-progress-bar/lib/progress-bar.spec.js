@@ -330,6 +330,7 @@ test('supertape: format: progress bar: testEnd', (t) => {
     
     reRequire('once');
     const {start, testEnd} = reRequire('./progress-bar');
+    
     start({total: 10});
     
     const count = 1;
