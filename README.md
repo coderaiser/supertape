@@ -39,6 +39,34 @@ Doesn't contain:
 npm i supertape -D
 ```
 
+## Usage
+
+```
+Usage: supertape [options] [path]
+Options
+   -h, --help                  display this help and exit
+   -v, --version               output version information and exit
+   -f, --format                use a specific output format - default: progress-bar/tap on CI
+   -r, --require               require module
+   --check-scopes              check that messages contains scope: 'scope: message'
+   --check-assertions-count    check that assertion count is no more then 1
+   --no-check-duplicates       do not check messages for duplicates
+```
+
+## Environment variables
+
+- `SUPERTAPE_TIMEOUT` - timeout for long running processes;
+- `SUPERTAPE_CHECK_DUPLICATES` - toggle check duplicates;
+- `SUPERTAPE_CHECK_SCOPES` - check that test message has a scope: `scope: subject`;
+- `SUPERTAPE_CHECK_ASSERTIONS_COUNT` - check that assertion count is no more then 1;
+
+```js
+test('tape: error', (t) => {
+    t.equal(error.code, 'ENOENT');
+    t.end();
+});
+```
+
 ## 🤷 How to migrate from `tape`?
 
 You can convert your codebase from `tape` to 📼`Supertape` with help of 🐊[`Putout`](https://github.com/coderaiser/putout), which has built-in [@putout/plugin-tape](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape),
