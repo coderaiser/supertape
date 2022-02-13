@@ -45,8 +45,14 @@ You can convert your codebase from `tape` to 📼`Supertape` with help of 🐊[`
 which has a lot of rules that helps to write tests.
 Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
 
+## `ESLint` rules
 
-### Operators
+[`eslint-plugin-putout`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout#readme) has rules for 📼`Supertape`:
+- ✅ [`remove-newline-before-t-end`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-remove-newline-before-t-end#readme)
+- ✅ [`add-newline-before-assertion`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-add-newline-before-assertion#readme)
+- ✅ [`add-newline-between-tests`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-add-newline-between-tests#readme)
+
+## Operators
 
 To simplify `supertape` core operators located in separate packages, called `operators`:
 
@@ -56,7 +62,7 @@ Here is a list of built-int operators:
 |--------|-------|
 | [`@supertape/operator-stub`](/packages/operator-stub) | [![npm](https://img.shields.io/npm/v/@supertape/operator-stub.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-stub) |
 
-### Formatters
+## Formatters
 
 There is a list of built-int `formatters` to customize output:
 
