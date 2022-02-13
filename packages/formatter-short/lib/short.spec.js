@@ -22,14 +22,14 @@ test('supertape: format: short', async (t) => {
         t.end();
     };
     
-    const successMessage = 'success';
+    const successMessage = 'format: success';
     
     const tapFn = (t) => {
         t.ok(false);
         t.end();
     };
     
-    const tapMessage = 'short';
+    const tapMessage = 'format: short';
     const supertape = reRequire('supertape');
     
     supertape.init({
@@ -47,9 +47,9 @@ test('supertape: format: short', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # success
+        # format: success
         ok 1 should be truthy
-        # short
+        # format: short
         not ok 2 should be truthy
           ---
             operator: ok
@@ -110,7 +110,7 @@ test('supertape: format: short: comment', async (t) => {
         t.end();
     };
     
-    const successMessage = 'success';
+    const successMessage = 'format: success';
     
     const tapFn = (t) => {
         t.comment('hello');
@@ -118,7 +118,7 @@ test('supertape: format: short: comment', async (t) => {
         t.end();
     };
     
-    const tapMessage = 'short';
+    const tapMessage = 'format: short';
     
     const supertape = reRequire('supertape');
     
@@ -137,9 +137,9 @@ test('supertape: format: short: comment', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # success
+        # format: success
         ok 1 should be truthy
-        # short
+        # format: short
         # hello
         not ok 2 should be truthy
           ---
@@ -196,14 +196,14 @@ test('supertape: format: short: no stack trace', async (t) => {
         t.end();
     };
     
-    const successMessage = 'success';
+    const successMessage = 'format: success';
     
     const tapFn = (t) => {
         t.ok(false);
         t.end();
     };
     
-    const tapMessage = 'short';
+    const tapMessage = 'format: short';
     const supertape = reRequire('supertape');
     
     supertape.init({
@@ -223,9 +223,9 @@ test('supertape: format: short: no stack trace', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # success
+        # format: success
         ok 1 should be truthy
-        # short
+        # format: short
         not ok 2 should be truthy
           ---
             operator: ok

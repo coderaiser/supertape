@@ -22,14 +22,14 @@ test('supertape: format: fail', async (t) => {
         t.end();
     };
     
-    const successMessage = 'success';
+    const successMessage = 'format: success';
     
     const failFn = (t) => {
         t.ok(false);
         t.end();
     };
     
-    const failMessage = 'fail';
+    const failMessage = 'format: fail';
     
     const supertape = reRequire('supertape');
     
@@ -48,7 +48,7 @@ test('supertape: format: fail', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # fail
+        # format: fail
         not ok 2 should be truthy
           ---
             operator: ok

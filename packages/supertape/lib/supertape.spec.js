@@ -19,7 +19,7 @@ test('supertape: equal', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'hello: world';
     
     const supertape = reRequire('..');
     
@@ -38,7 +38,7 @@ test('supertape: equal', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # hello: world
         ok 1 should equal
         
         1..1
@@ -131,7 +131,7 @@ test('supertape: checkDuplicates: override', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'hello: world';
     const supertape = reRequire('..');
     
     supertape.init({
@@ -157,9 +157,9 @@ test('supertape: checkDuplicates: override', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # hello: world
         ok 1 should equal
-        # hello
+        # hello: world
         ok 2 should equal
         
         1..2
@@ -179,7 +179,7 @@ test('supertape: checkAssertionsCount: override', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'hello: check';
     const supertape = reRequire('..');
     
     supertape.init({
@@ -201,7 +201,7 @@ test('supertape: checkAssertionsCount: override', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # hello: check
         ok 1 should equal
         
         1..1
@@ -228,7 +228,7 @@ test('supertape: deepEqual', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'supertape: deepEqual';
     
     const supertape = reRequire('./supertape');
     
@@ -247,7 +247,7 @@ test('supertape: deepEqual', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # supertape: deepEqual
         ok 1 hello message
         
         1..1
@@ -267,7 +267,7 @@ test('supertape: createStream', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'tape: stream';
     const supertape = reRequire('..');
     
     supertape.init({
@@ -285,7 +285,7 @@ test('supertape: createStream', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # tape: stream
         ok 1 should be falsy
         
         1..1
@@ -345,8 +345,8 @@ test('supertape: only', async (t) => {
         t.end();
     };
     
-    const message1 = 'world';
-    const message2 = 'hello';
+    const message1 = 'tape: only';
+    const message2 = 'tape: only: 2';
     
     reRequire('./run-tests');
     const supertape = reRequire('..');
@@ -366,7 +366,7 @@ test('supertape: only', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # world
+        # tape: only
         ok 1 should be truthy
         
         1..1
@@ -393,7 +393,7 @@ test('supertape: extensions', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'tape: ext';
     const supertape = reRequire('..');
     
     const emitter = supertape(message, fn, {
@@ -408,7 +408,7 @@ test('supertape: extensions', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # tape: ext
         ok 1 should transform code
         
         1..1
@@ -434,7 +434,7 @@ test('supertape: extensions: extend', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'tape: extend';
     const supertape = reRequire('..');
     
     const extendedTape = supertape.extend(extensions);
@@ -450,7 +450,7 @@ test('supertape: extensions: extend', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # tape: extend
         ok 1 should transform code
         
         1..1
@@ -476,7 +476,7 @@ test('supertape: extensions: extend: no return', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'extend: no return';
     const supertape = reRequire('..');
     
     const extendedTape = supertape.extend(extensions);
@@ -487,7 +487,7 @@ test('supertape: extensions: extend: no return', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # extend: no return
         not ok 1 looks like operator returns nothing, it will always fail
     `;
     
@@ -512,7 +512,7 @@ test('supertape: extensions: extend: return function', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'return: fn';
     const supertape = reRequire('..');
     
     const extendedTape = supertape.extend(extensions);
@@ -523,7 +523,7 @@ test('supertape: extensions: extend: return function', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # return: fn
         not ok 1 looks like operator returns function, it will always fail
     `;
     
@@ -548,7 +548,7 @@ test('supertape: extensions: extend: async', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'extend: async';
     const supertape = reRequire('..');
     
     const extendedTape = supertape.extend(extensions);
@@ -564,7 +564,7 @@ test('supertape: extensions: extend: async', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # extend: async
         ok 1 should transform code
         
         1..1
@@ -590,7 +590,7 @@ test('supertape: extensions: extend: only', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'supertape: extend: only';
     const supertape = reRequire('..');
     
     const extendedTape = supertape.extend(extensions);
@@ -606,7 +606,7 @@ test('supertape: extensions: extend: only', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # supertape: extend: only
         ok 1 should transform code
         
         1..1
@@ -719,7 +719,7 @@ test('supertape: destructuring test', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
+    const message = 'hello: destructuring';
     
     const supertape = reRequire('..');
     
@@ -738,7 +738,7 @@ test('supertape: destructuring test', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello
+        # hello: destructuring
         ok 1 should equal
         
         1..1
@@ -763,8 +763,8 @@ test('supertape: destructuring test: only', async (t) => {
         t.end();
     };
     
-    const message1 = 'world';
-    const message2 = 'hello';
+    const message1 = 'world: only';
+    const message2 = 'hello: only';
     
     reRequire('./run-tests');
     const supertape = reRequire('..');
@@ -784,7 +784,7 @@ test('supertape: destructuring test: only', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # world
+        # world: only
         ok 1 should be truthy
         
         1..1

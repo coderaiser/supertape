@@ -315,7 +315,7 @@ test('supertape: runTests: checkAssertionsCount: no assertions', async (t) => {
         t.end();
     };
     
-    const message = 'hello world';
+    const message = 'hello: world';
     
     reRequire('once');
     reRequire('./run-tests.js');
@@ -333,7 +333,7 @@ test('supertape: runTests: checkAssertionsCount: no assertions', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello world
+        # hello: world
         not ok 1 Only one assertion per test allowed, looks like you have none
           ---
             operator: fail
@@ -523,7 +523,7 @@ test('supertape: runTests: equal', async (t) => {
         t.end();
     };
     
-    const message = 'hello world';
+    const message = 'hello: world';
     
     const supertape = reRequire('..');
     supertape(message, fn, {
@@ -537,7 +537,7 @@ test('supertape: runTests: equal', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello world
+        # hello: world
         ok 1 should equal
         
         1..1
@@ -621,11 +621,12 @@ test('supertape: runTests: comment', async (t) => {
         t.end();
     };
     
-    const message = 'hello world';
+    const message = 'hello: world';
     
     const supertape = reRequire('..');
     supertape(message, fn, {
         quiet: true,
+        checkAssertionsCount: false,
     });
     
     const [result] = await Promise.all([
@@ -635,7 +636,7 @@ test('supertape: runTests: comment', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello world
+        # hello: world
         # hello
         
         1..0
@@ -682,7 +683,7 @@ test('supertape: runTests: pass', async (t) => {
         t.end();
     };
     
-    const message = 'hello world';
+    const message = 'hello: world';
     
     const supertape = reRequire('..');
     supertape(message, fn, {
@@ -696,7 +697,7 @@ test('supertape: runTests: pass', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello world
+        # hello: world
         ok 1 hello
         
         1..1
@@ -716,7 +717,7 @@ test('supertape: runTests: pass: unnamed', async (t) => {
         t.end();
     };
     
-    const message = 'hello world';
+    const message = 'hello: world';
     
     const supertape = reRequire('..');
     supertape(message, fn, {
@@ -730,7 +731,7 @@ test('supertape: runTests: pass: unnamed', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello world
+        # hello: world
         ok 1 (unnamed assert)
         
         1..1
@@ -755,8 +756,8 @@ test('supertape: runTests: isStop', async (t) => {
         t.end();
     };
     
-    const message1 = 'hello world';
-    const message2 = 'bye world';
+    const message1 = 'hello: world';
+    const message2 = 'bye: world';
     const isStop = stub().returns(true);
     
     const supertape = reRequire('..');
@@ -774,7 +775,7 @@ test('supertape: runTests: isStop', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello world
+        # hello: world
         ok 2 (unnamed assert)
         
         1..2
@@ -833,7 +834,7 @@ test('supertape: runTests: is debug', async (t) => {
         t.end();
     };
     
-    const message = 'hello world';
+    const message = 'hello: world';
     
     mockRequire('./is-debug', true);
     reRequire('./run-tests');
@@ -852,7 +853,7 @@ test('supertape: runTests: is debug', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # hello world
+        # hello: world
         ok 1 (unnamed assert)
         
         1..1

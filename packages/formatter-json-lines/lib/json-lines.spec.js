@@ -24,14 +24,14 @@ test('supertape: format: json-lines', async (t) => {
         t.end();
     };
     
-    const successMessage = 'success';
+    const successMessage = 'json-lines: success';
     
     const tapFn = (t) => {
         t.ok(false);
         t.end();
     };
     
-    const tapMessage = 'tap';
+    const tapMessage = 'json-lines: tap';
     
     const supertape = reRequire('supertape');
     
@@ -49,8 +49,8 @@ test('supertape: format: json-lines', async (t) => {
     ]);
     
     const expected = montag`
-      {"count":1,"total":2,"failed":0,"test":"success"}
-      {"count":2,"total":2,"failed":1,"test":"tap"}
+      {"count":1,"total":2,"failed":0,"test":"json-lines: success"}
+      {"count":2,"total":2,"failed":1,"test":"json-lines: tap"}
     `;
     
     t.equal(result, expected);
@@ -96,7 +96,7 @@ test('supertape: format: json-lines: comment', async (t) => {
         t.end();
     };
     
-    const successMessage = 'success';
+    const successMessage = 'json-lines: success';
     
     const tapFn = (t) => {
         t.comment('hello');
@@ -104,7 +104,7 @@ test('supertape: format: json-lines: comment', async (t) => {
         t.end();
     };
     
-    const tapMessage = 'tap';
+    const tapMessage = 'json-lines: tap';
     
     const supertape = reRequire('supertape');
     
@@ -133,12 +133,12 @@ test('supertape: format: json-lines: comment', async (t) => {
     const expected = [{
         count: 1,
         failed: 0,
-        test: 'success',
+        test: 'json-lines: success',
         total: 2,
     }, {
         count: 2,
         failed: 1,
-        test: 'tap',
+        test: 'json-lines: tap',
         total: 2,
     }, {
         actual: false,
@@ -146,7 +146,7 @@ test('supertape: format: json-lines: comment', async (t) => {
         expected: true,
         message: 'should be truthy',
         operator: 'ok',
-        test: 'tap',
+        test: 'json-lines: tap',
     }, {
         count: 2,
         failed: 1,

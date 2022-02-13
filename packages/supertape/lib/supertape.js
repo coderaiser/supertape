@@ -34,8 +34,8 @@ const defaultOptions = {
     isStop: () => false,
     checkDuplicates: true,
     checkIfEnded: true,
-    checkAssertionsCount: false,
-    checkScopes: false,
+    checkAssertionsCount: true,
+    checkScopes: true,
 };
 
 function _createEmitter({quiet, format, getOperators, isStop}) {

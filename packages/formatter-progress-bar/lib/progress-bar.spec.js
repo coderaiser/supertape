@@ -27,14 +27,14 @@ test('supertape: format: progress bar', async (t) => {
         t.end();
     };
     
-    const successMessage = 'success';
+    const successMessage = 'progress bar: success';
     
     const failFn = (t) => {
         t.ok(false);
         t.end();
     };
     
-    const failMessage = 'fail';
+    const failMessage = 'progress bar: fail';
     
     const {CI} = env;
     env.CI = 1;
@@ -61,7 +61,7 @@ test('supertape: format: progress bar', async (t) => {
     const expected = montag`
         TAP version 13
         
-        # fail
+        # progress bar: fail
         ❌ not ok 2 should be truthy
           ---
             operator: ok
@@ -126,7 +126,7 @@ test('supertape: format: progress bar: success', async (t) => {
         t.end();
     };
     
-    const message = 'success';
+    const message = 'progress bar: success';
     
     env.CI = 1;
     
@@ -212,7 +212,7 @@ test('supertape: format: progress bar: color', async (t) => {
         t.end();
     };
     
-    const message = 'success';
+    const message = 'progress-bar: color';
     const {CI} = env;
     
     env.CI = 1;
@@ -364,7 +364,7 @@ test('supertape: format: progress bar: no stack', async (t) => {
         t.end();
     };
     
-    const message = 'success';
+    const message = 'progress-bar: success';
     const {CI} = env;
     
     env.CI = 1;
@@ -394,7 +394,7 @@ test('supertape: format: progress bar: no stack', async (t) => {
     const expected = montag`
       TAP version 13
       
-      # success
+      # progress-bar: success
       ❌ not ok 1 should be truthy
         ---
           operator: ok

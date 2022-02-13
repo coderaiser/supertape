@@ -22,14 +22,14 @@ test('supertape: format: tap', async (t) => {
         t.end();
     };
     
-    const successMessage = 'success';
+    const successMessage = 'format: success';
     
     const tapFn = (t) => {
         t.ok(false);
         t.end();
     };
     
-    const tapMessage = 'tap';
+    const tapMessage = 'format: tap';
     
     const supertape = reRequire('supertape');
     
@@ -48,9 +48,9 @@ test('supertape: format: tap', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # success
+        # format: success
         ok 1 should be truthy
-        # tap
+        # format: tap
         not ok 2 should be truthy
           ---
             operator: ok
@@ -111,7 +111,7 @@ test('supertape: format: tap: comment', async (t) => {
         t.end();
     };
     
-    const successMessage = 'success';
+    const successMessage = 'format: success';
     
     const tapFn = (t) => {
         t.comment('hello');
@@ -119,7 +119,7 @@ test('supertape: format: tap: comment', async (t) => {
         t.end();
     };
     
-    const tapMessage = 'tap';
+    const tapMessage = 'format: tap';
     
     const supertape = reRequire('supertape');
     
@@ -138,9 +138,9 @@ test('supertape: format: tap: comment', async (t) => {
     
     const expected = montag`
         TAP version 13
-        # success
+        # format: success
         ok 1 should be truthy
-        # tap
+        # format: tap
         # hello
         not ok 2 should be truthy
           ---
