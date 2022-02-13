@@ -1,19 +1,25 @@
-# 📼 `Supertape` [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage Status][CoverageIMGURL]][CoverageURL]
+# 📼 Supertape [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage Status][CoverageIMGURL]][CoverageURL]
 
 [NPMURL]: https://npmjs.org/package/supertape "npm"
 [NPMIMGURL]: https://img.shields.io/npm/v/supertape.svg?style=flat&longCache=true
-[BuildStatusURL]: https://github.com/coderaiser/supertape/actions?query=workflow%3A%22Node+CI%22 "Build Status"
-[BuildStatusIMGURL]: https://github.com/coderaiser/supertape/workflows/Node%20CI/badge.svg
+[BuildStatusURL]: https://github.com/coderaiser/putout/actions?query=workflow%3A%22Node+CI%22 "Build Status"
+[BuildStatusIMGURL]: https://github.com/coderaiser/putout/workflows/Node%20CI/badge.svg
+[BuildStatusURL]: https://travis-ci.org/coderaiser/supertape "Build Status"
 [CoverageURL]: https://coveralls.io/github/coderaiser/supertape?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
 
-[Tape](https://github.com/substack/tape)-inspired [TAP](https://testanything.org/)-compatible simplest high speed test runner with superpowers. Contains:
+[![supertape](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY.svg)](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY)
+
+[Tape](https://github.com/substack/tape)-inspired [TAP](https://testanything.org/)-compatible simplest high speed test runner with superpowers.
+
+📼`Supertape` written from scratch after messing a lot with `tape`, it willing to be compatible with it as much as possible.
+and has a couple differences. It contains:
 
 - ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking).
 - shows colored diff when test not `equal` or not `deepEqual`;
 - produces deteiled stack traces for `async functions`;
-- as many `only` as you wish
-- ability to extend
+- as many `only` as you wish;
+- ability to extend;
 - smart timeouts for long running tests 🏃‍♂️(configured with `SUPERTAPE_TIMEOUT`);
 - more natural assertions: `expected, result` -> `result, expected`, for example:
 
@@ -27,56 +33,73 @@ Doesn't contain:
 - aliases, methods list much shorter;
 - `throws`, `doesNotThrows` - use [tryCatch](https://github.com/coderaiser/try-catch), [tryToCatch](https://github.com/coderaiser/try-to-catch) with `equal` instead.
 
-`Supertape` was written from scratch after messing a lot with `tape`, it inspired by `tape` and willing to be compatible with it.
-
 ## Install
 
 ```
 npm i supertape -D
 ```
 
-## Usage
+## 🤷 How to migrate from `tape`?
 
-```
-Usage: supertape [options] [path]
-Options
-   -h, --help                  display this help and exit
-   -v, --version               output version information and exit
-   -f, --format                use a specific output format - default: progress-bar/tap on CI
-   -r, --require               require module
-   --check-scopes              check that messages contains scope: 'scope: message'
-   --check-assertions-count    check that assertion count is no more then 1
-   --no-check-duplicates       do not check messages for duplicates
-```
+You can convert your codebase from `tape` to 📼`Supertape` with help of 🐊[`Putout`](https://github.com/coderaiser/putout), which has built-in [@putout/plugin-tape](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape),
+which has a lot of rules that helps to write tests.
+Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
 
-## Environment variables
 
-- `SUPERTAPE_TIMEOUT` - timeout for long running processes;
-- `SUPERTAPE_CHECK_DUPLICATES` - toggle check duplicates;
-- `SUPERTAPE_CHECK_SCOPES` - check that test message has a scope: `scope: subject`;
-- `SUPERTAPE_CHECK_ASSERTIONS_COUNT` - check that assertion count is no more then 1;
+### Operators
 
-```js
-test('tape: error', (t) => {
-    t.equal(error.code, 'ENOENT');
-    t.end();
-});
-```
+To simplify `supertape` core operators located in separate packages, called `operators`:
 
-## Codemod
+Here is a list of built-int operators:
 
-You can convert your codebase from `tape` to `supertape` with help of a [putout](https://github.com/coderaiser/putout) and built-in [@putout/plugin-tape](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape).
-Here is [example of a result](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
+| Package | Version |
+|--------|-------|
+| [`@supertape/operator-stub`](/packages/operator-stub) | [![npm](https://img.shields.io/npm/v/@supertape/operator-stub.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-stub) |
+
+### Formatters
+
+There is a list of built-int `formatters` to customize output:
+
+| Package | Version |
+|--------|-------|
+| [`@supertape/formatter-tap`](/packages/formatter-tap) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-tap.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-tap) |
+| [`@supertape/formatter-fail`](/packages/formatter-fail) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-fail.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-fail) |
+| [`@supertape/formatter-short`](/packages/formatter-short) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-short.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-short) |
+| [`@supertape/formatter-progress-bar`](/packages/formatter-progress-bar) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-progress-bar.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-progress-bar) |
+| [`@supertape/formatter-json-lines`](/packages/formatter-json-lines) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-json-lines.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-json-lines) |
 
 ## API
 
 ### Methods
 
-The assertion methods in `supertape` are heavily influenced or copied from the methods
-in [tape](https://github.com/substack/tape).
+The assertion methods in `supertape` are heavily influenced by [tape](https://github.com/substack/tape).
 
 ```js
 const test = require('supertape');
+const {sum} = require('./calc.js');
+
+test('calc: sum', (t) => {
+    const result = sum(1, 2);
+    const expected = 3;
+    
+    t.equal(result, expected);
+    t.end();
+});
+```
+
+or in `ESM`:
+
+```js
+import {test} from 'supertape';
+import {sum} from './calc.js';
+
+test('calc: sum', (t) => {
+    const result = sum(1, 2);
+    const expected = 3;
+    
+    t.equal(result, expected);
+    t.end();
+});
 ```
 
 ## test(name, cb)
@@ -176,9 +199,8 @@ const test = require('supertape');
 
 test('lib: arguments', async (t) => {
     throw Error('hello');
-    // will call t.fail() with an error
-    // will call t.end()
-    t.end();
+    // will call t.fail with an error
+    // will call t.end
 });
 
 test('lib: diff', (t) => {

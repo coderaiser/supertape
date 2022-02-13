@@ -1,16 +1,19 @@
 # 📼 Supertape [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage Status][CoverageIMGURL]][CoverageURL]
 
+[NPMURL]: https://npmjs.org/package/supertape "npm"
 [NPMIMGURL]: https://img.shields.io/npm/v/supertape.svg?style=flat&longCache=true
 [BuildStatusURL]: https://github.com/coderaiser/putout/actions?query=workflow%3A%22Node+CI%22 "Build Status"
 [BuildStatusIMGURL]: https://github.com/coderaiser/putout/workflows/Node%20CI/badge.svg
-[NPMURL]: https://npmjs.org/package/supertape "npm"
 [BuildStatusURL]: https://travis-ci.org/coderaiser/supertape "Build Status"
 [CoverageURL]: https://coveralls.io/github/coderaiser/supertape?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
 
 [![supertape](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY.svg)](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY)
 
-[Tape](https://github.com/substack/tape)-inspired [TAP](https://testanything.org/)-compatible simplest high speed test runner with superpowers. Contains:
+[Tape](https://github.com/substack/tape)-inspired [TAP](https://testanything.org/)-compatible simplest high speed test runner with superpowers.
+
+📼`Supertape` written from scratch after messing a lot with `tape`, it willing to be compatible with it as much as possible.
+and has a couple differences. It contains:
 
 - ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking).
 - shows colored diff when test not `equal` or not `deepEqual`;
@@ -30,22 +33,22 @@ Doesn't contain:
 - aliases, methods list much shorter;
 - `throws`, `doesNotThrows` - use [tryCatch](https://github.com/coderaiser/try-catch), [tryToCatch](https://github.com/coderaiser/try-to-catch) with `equal` instead.
 
-`Supertape` was written from scratch after messing a lot with `tape`, it inspired by `tape` and willing to be compatible with it.
-
 ## Install
 
 ```
 npm i supertape -D
 ```
 
-## Codemod
+## 🤷 How to migrate from `tape`?
 
-You can convert your codebase from `tape` to `supertape` with help of a [putout](https://github.com/coderaiser/putout) and built-in [@putout/plugin-tape](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape).
-Here is [example of a result](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
+You can convert your codebase from `tape` to 📼`Supertape` with help of 🐊[`Putout`](https://github.com/coderaiser/putout), which has built-in [@putout/plugin-tape](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape),
+which has a lot of rules that helps to write tests.
+Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
+
 
 ### Operators
 
-To simplify `supertape` core some operators moved out into separate packages, called `operators`:
+To simplify `supertape` core operators located in separate packages, called `operators`:
 
 Here is a list of built-int operators:
 
