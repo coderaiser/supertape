@@ -69,8 +69,11 @@ test('tape: error', (t) => {
 
 ## 🤷 How to migrate from `tape`?
 
+> 🐊 + 📼 = ❤️
+
 You can convert your codebase from `tape` to 📼`Supertape` with help of 🐊[`Putout`](https://github.com/coderaiser/putout), which has built-in [@putout/plugin-tape](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape),
-which has a lot of rules that helps to write tests.
+with a lot of rules that helps to write and maintain tests of the highest possible quality.
+
 Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
 
 ## `ESLint` rules
@@ -80,6 +83,116 @@ Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795
 - ✅ [`remove-newline-before-t-end`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-remove-newline-before-t-end#readme)
 - ✅ [`add-newline-before-assertion`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-add-newline-before-assertion#readme)
 - ✅ [`add-newline-between-tests`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-add-newline-between-tests#readme)
+
+## Validation checks
+
+To help you keep quality of your tests on the highest possible level 📼`Supertape` has built-in checks.
+When test not passes validation it marked as a new failed test.
+
+### Single `t.end()`
+
+`t.end()` must not be used more than once. This check cannot be disabled
+and has auto fixable rule 🐊[`remove-useless-t-end`](https://github.com/coderaiser/putout/blob/master/packages/plugin-tape/README.md#remove-useless-t-end).
+
+#### ❌ Example of incorrect code
+
+```js
+test('hello: world', (t) => {
+    t.end();
+    t.end();
+});
+```
+
+#### ✅ Example of correct code
+
+```js
+test('hello: world', (t) => {
+    t.end();
+});
+```
+
+### Check duplicates
+
+Check for duplicates in test messages. Can be disabled with:
+
+- passing `--no-check-duplicates` command line flag;
+- setting `CHECK_DUPLICATES=0` env variable;
+
+#### ❌ Example of incorrect code
+
+```js
+test('hello: world', (t) => {
+    t.equal(1, 1);
+    t.end();
+});
+```
+
+```js
+test('hello: world', (t) => {
+    t.equal(2, 1);
+    t.end();
+});
+```
+
+### Check scopes
+
+Check that test message are divided on groups by colons. Can be disabled with:
+
+- passing `--no-check-scopes` command line flag;
+- setting `CHECK_SCOPES=0` env variable;
+
+#### ❌ Example of incorrect code
+
+```js
+test('hello', (t) => {
+    t.equal(1, 1);
+    t.end();
+});
+```
+
+#### ✅ Example of correct code
+
+```js
+test('hello: world', (t) => {
+    t.equal(1, 1);
+    t.end();
+});
+```
+
+### Check assertions count
+
+Check that test contains exactly one assertion. Can be disabled with:
+
+- passing `--no-check-assertions-count` command line flag;
+- setting `CHECK_ASSERTIONS_COUNT=0` env variable;
+
+#### ❌ Example of incorrect code
+
+```js
+test('hello: no assertion', (t) => {
+    t.end();
+});
+
+test('hello: more then one assertion', (t) => {
+    t.equal(1, 1);
+    t.equal(2, 2);
+    t.end();
+});
+```
+
+#### ✅ Example of correct code
+
+```js
+test('hello: one', (t) => {
+    t.equal(1, 1);
+    t.end();
+});
+
+test('hello: two', (t) => {
+    t.equal(2, 2);
+    t.end();
+});
+```
 
 ## Operators
 
