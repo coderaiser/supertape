@@ -71,7 +71,7 @@ test('tape: error', (t) => {
 
 > 🐊 + 📼 = ❤️
 
-You can convert your codebase from `tape` to 📼`Supertape` with help of 🐊[`Putout`](https://github.com/coderaiser/putout), which has built-in 🐲[`@putout/plugin-tape`](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape),
+You can convert your codebase from `tape` to 📼`Supertape` with help of 🐊[`Putout`](https://github.com/coderaiser/putout), which has built-in 🐲[`@putout/plugin-tape`](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape#putoutplugin-tape-),
 with a lot of rules that helps to write and maintain tests of the highest possible quality.
 
 Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
