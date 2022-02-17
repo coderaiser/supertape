@@ -1,3 +1,13 @@
+2022.02.17, v7.0.1
+
+fix:
+- (supertape) drop support of node < 16
+
+feature:
+- (package) madrun v9.0.0
+- (package) putout v25.0.0
+
+
 2022.02.14, v7.0.0
 
 fix:
