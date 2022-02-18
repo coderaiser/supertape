@@ -1,6 +1,10 @@
 'use strict';
 
-const {join} = require('path');
+const {
+    join,
+    dirname,
+} = require('path');
+
 const {Transform} = require('stream');
 const {EventEmitter} = require('events');
 const {readFile} = require('fs/promises');
@@ -190,6 +194,42 @@ test('supertape: cli: successs', async (t) => {
     stopAll();
     
     t.calledWith(exit, [OK], 'should call exit with 0');
+    t.end();
+});
+
+test('supertape: bin: cli: node_modules', async (t) => {
+    const {findUpSync} = await import('find-up');
+    const name = join(dirname(findUpSync('package.json')), 'node_modules');
+    const argv = [name];
+    
+    const emitter = new EventEmitter();
+    
+    const test = stub();
+    const init = stub();
+    const run = stub().returns(emitter);
+    
+    assign(test, {
+        init,
+        run,
+        createStream,
+    });
+    
+    mockRequire('./supertape', test);
+    
+    const emit = emitter.emit.bind(emitter);
+    const [[error, cli]] = await Promise.all([
+        runCli({
+            argv,
+        }),
+        wait(emit, 'end', {failed: 0}),
+    ]);
+    
+    const result = cli._filesCount();
+    const expected = 0;
+    
+    stopAll();
+    
+    t.equal(result, expected, 'should not process node_modules');
     t.end();
 });
 

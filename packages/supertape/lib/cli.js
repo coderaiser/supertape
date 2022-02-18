@@ -24,6 +24,7 @@ const {isArray} = Array;
 
 const maybeFirst = (a) => isArray(a) ? a.pop() : a;
 const maybeArray = (a) => isArray(a) ? a : [a];
+const isExclude = (a) => !a.includes('node_modules');
 
 const removeDuplicates = (a) => Array.from(new Set(a));
 const filesCount = fullstore(0);
@@ -140,7 +141,7 @@ async function cli({argv, cwd, stdout, isStop}) {
     
     const allFiles = [];
     for (const arg of args._) {
-        const files = glob.sync(arg);
+        const files = glob.sync(arg).filter(isExclude);
         allFiles.push(...files);
     }
     
