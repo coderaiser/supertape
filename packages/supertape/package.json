@@ -79,7 +79,7 @@
     "check-dts": "^0.6.5",
     "eslint": "^8.0.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-putout": "^13.0.1",
+    "eslint-plugin-putout": "^14.0.0",
     "find-up": "^6.3.0",
     "madrun": "^9.0.0",
     "mock-require": "^3.0.2",
