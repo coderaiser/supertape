@@ -2,8 +2,8 @@
 
 [NPMURL]: https://npmjs.org/package/supertape "npm"
 [NPMIMGURL]: https://img.shields.io/npm/v/supertape.svg?style=flat&longCache=true
-[BuildStatusURL]: https://github.com/coderaiser/putout/actions?query=workflow%3A%22Node+CI%22 "Build Status"
-[BuildStatusIMGURL]: https://github.com/coderaiser/putout/workflows/Node%20CI/badge.svg
+[BuildStatusURL]: https://github.com/coderaiser/supertape/actions?query=workflow%3A%22Node+CI%22 "Build Status"
+[BuildStatusIMGURL]: https://github.com/coderaiser/supertape/workflows/Node%20CI/badge.svg
 [BuildStatusURL]: https://travis-ci.org/coderaiser/supertape "Build Status"
 [CoverageURL]: https://coveralls.io/github/coderaiser/supertape?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
