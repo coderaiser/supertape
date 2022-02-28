@@ -1,3 +1,13 @@
+2022.02.28, v7.1.1
+
+fix:
+- (supertape) SUPERTAPE_CHECK_ASSERTIONS_COUNT (#2)
+
+
+feature:
+- (supertape) eslint-plugin-putout v14.0.0
+
+
 2022.02.18, v7.1.0
 
 feature:
