@@ -341,8 +341,8 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: true,
-        checkAssertionsCount: false,
-        checkScopes: false,
+        checkAssertionsCount: true,
+        checkScopes: true,
         isStop,
     }];
     
@@ -387,7 +387,7 @@ test('supertape: bin: cli: --check-assertions-count', async (t) => {
         run: false,
         checkDuplicates: true,
         checkAssertionsCount: true,
-        checkScopes: false,
+        checkScopes: true,
         isStop,
     }];
     
@@ -432,8 +432,8 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: false,
-        checkAssertionsCount: false,
-        checkScopes: false,
+        checkAssertionsCount: true,
+        checkScopes: true,
         isStop,
     }];
     
@@ -479,7 +479,7 @@ test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
         run: false,
         checkDuplicates: true,
         checkAssertionsCount: true,
-        checkScopes: false,
+        checkScopes: true,
         isStop,
     }];
     
@@ -525,8 +525,8 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
         quiet: true,
         run: false,
         checkDuplicates: false,
-        checkAssertionsCount: false,
-        checkScopes: false,
+        checkAssertionsCount: true,
+        checkScopes: true,
         isStop,
     }];
     
@@ -570,8 +570,8 @@ test('supertape: bin: cli: check-duplicates: -d', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: true,
-        checkAssertionsCount: false,
-        checkScopes: false,
+        checkAssertionsCount: true,
+        checkScopes: true,
         isStop,
     }];
     
@@ -618,8 +618,8 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         quiet: true,
         run: false,
         checkDuplicates: true,
-        checkAssertionsCount: false,
-        checkScopes: false,
+        checkAssertionsCount: true,
+        checkScopes: true,
         isStop,
     }];
     

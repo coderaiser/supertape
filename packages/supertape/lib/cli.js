@@ -31,8 +31,8 @@ const filesCount = fullstore(0);
 
 const {
     SUPERTAPE_CHECK_DUPLICATES = '1',
-    SUPERTAPE_CHECK_SCOPES = '0',
-    SUPERTAPE_CHECK_ASSERTIONS_COUNT = '0',
+    SUPERTAPE_CHECK_SCOPES = '1',
+    SUPERTAPE_CHECK_ASSERTIONS_COUNT = '1',
 } = process.env;
 
 module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
@@ -104,8 +104,8 @@ const yargsOptions = {
         format: 'progress-bar',
         require: [],
         checkDuplicates: SUPERTAPE_CHECK_DUPLICATES !== '0',
-        checkScopes: SUPERTAPE_CHECK_SCOPES === '1',
-        checkAssertionsCount: SUPERTAPE_CHECK_ASSERTIONS_COUNT === '1',
+        checkScopes: SUPERTAPE_CHECK_SCOPES !== '0',
+        checkAssertionsCount: SUPERTAPE_CHECK_ASSERTIONS_COUNT !== '0',
     },
 };
 
