@@ -104,7 +104,7 @@ function checkScopes(msg, filtered) {
     const [message, at] = filtered[0];
     
     if (!SCOPE_DEFINED.test(message))
-        return [`Scope should be defined before first colon: 'scope: subject', example: 'supertape: validator: enabled'`, at];
+        return [`Scope should be defined before first colon: 'scope: subject', received: '${message}'`, at];
     
     return [];
 }

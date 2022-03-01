@@ -77,7 +77,7 @@ test('supertape: validator: checkScopes', (t) => {
     });
     
     const result = validate('hello world');
-    const expected = [`Scope should be defined before first colon: 'scope: subject', example: 'supertape: validator: enabled'`, 'at'];
+    const expected = [`Scope should be defined before first colon: 'scope: subject', received: 'hello world'`, 'at'];
     
     t.deepEqual(result, expected);
     t.end();
