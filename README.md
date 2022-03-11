@@ -15,7 +15,7 @@
 📼`Supertape` written from scratch after messing a lot with `tape`, it willing to be compatible with it as much as possible.
 and has a couple differences. It contains:
 
-- ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking).
+- ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking and 🎩[ESCover](https://github.com/coderaiser/escover) for coverage).
 - shows colored diff when test not `equal` or not `deepEqual`;
 - produces deteiled stack traces for `async functions`;
 - as many `only` as you wish;
