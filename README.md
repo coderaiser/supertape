@@ -12,10 +12,10 @@
 
 [Tape](https://github.com/substack/tape)-inspired [TAP](https://testanything.org/)-compatible simplest high speed test runner with superpowers.
 
-📼`Supertape` written from scratch after messing a lot with `tape`, it willing to be compatible with it as much as possible.
+📼**Supertape** written from scratch after messing a lot with **tape**, it willing to be compatible with it as much as possible.
 and has a couple differences. It contains:
 
-- ability to work with [esm modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking and 🎩[ESCover](https://github.com/coderaiser/escover) for coverage).
+- ability to work with [ESM Modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking and 🎩[ESCover](https://github.com/coderaiser/escover) for coverage).
 - shows colored diff when test not `equal` or not `deepEqual`;
 - produces deteiled stack traces for `async functions`;
 - as many `only` as you wish;
@@ -67,18 +67,18 @@ test('tape: error', (t) => {
 });
 ```
 
-## 🤷 How to migrate from `tape`?
+## 🤷 How to migrate from **tape**?
 
 > 🐊 + 📼 = ❤️
 
-You can convert your codebase from `tape` to 📼`Supertape` with help of 🐊[`Putout`](https://github.com/coderaiser/putout), which has built-in 🐲[`@putout/plugin-tape`](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape#putoutplugin-tape-),
+You can convert your codebase from **tape** to 📼**Supertape** with help of 🐊[**Putout**](https://github.com/coderaiser/putout), which has built-in 🐲[**@putout/plugin-tape**](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape#putoutplugin-tape-),
 with a lot of rules that helps to write and maintain tests of the highest possible quality.
 
 Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
 
-## `ESLint` rules
+## **ESLint** rules
 
-[`eslint-plugin-putout`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout#-supertape) has rules for 📼`Supertape`:
+[**eslint-plugin-putout**](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout#-supertape) has a couple rules for 📼**Supertape**:
 
 - ✅ [`remove-newline-before-t-end`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-remove-newline-before-t-end#readme)
 - ✅ [`add-newline-before-assertion`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-add-newline-before-assertion#readme)
@@ -86,7 +86,7 @@ Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795
 
 ## Validation checks
 
-To help you keep quality of your tests on the highest possible level 📼`Supertape` has built-in checks.
+To up the quality of your tests even higher, 📼**Supertape** has built-in checks.
 When test not passes validation it marked as a new failed test.
 
 ### Single `t.end()`
