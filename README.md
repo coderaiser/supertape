@@ -18,7 +18,7 @@ and has a couple differences. It contains:
 - ability to work with [ESM Modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking and 🎩[ESCover](https://github.com/coderaiser/escover) for coverage).
 - shows colored diff when test not `equal` or not `deepEqual`;
 - produces deteiled stack traces for `async functions`;
-- as many `only` as you wish;
+- as many [`only`](https://github.com/coderaiser/supertape#testonlyname-cb) as you wish;
 - ability to [extend](https://github.com/coderaiser/supertape/blob/master/README.md#testextendextensions);
 - smart timeouts for long running tests 🏃‍♂️(configured with `SUPERTAPE_TIMEOUT`);
 - more natural assertions: `expected, result` -> `result, expected`, for example:
