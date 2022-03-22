@@ -220,7 +220,7 @@ There is a list of built-int `formatters` to customize output:
 
 ### Methods
 
-The assertion methods in `supertape` are heavily influenced by [tape](https://github.com/substack/tape).
+The assertion methods of 📼**Supertape** are heavily influenced by [**tape**](https://github.com/substack/tape).
 
 ```js
 const test = require('supertape');
