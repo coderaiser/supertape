@@ -19,7 +19,7 @@ and has a couple differences. It contains:
 - shows colored diff when test not `equal` or not `deepEqual`;
 - produces deteiled stack traces for `async functions`;
 - as many `only` as you wish;
-- ability to extend;
+- ability to [extend](https://github.com/coderaiser/supertape/blob/master/README.md#testextendextensions);
 - smart timeouts for long running tests 🏃‍♂️(configured with `SUPERTAPE_TIMEOUT`);
 - more natural assertions: `expected, result` -> `result, expected`, for example:
 
