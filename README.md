@@ -196,7 +196,7 @@ test('hello: two', (t) => {
 
 ## Operators
 
-To simplify `supertape` core operators located in separate packages, called `operators`:
+To simplify core operators of 📼**Supertape**, some of them located in separate packages, called `operators`:
 
 Here is a list of built-int operators:
 
