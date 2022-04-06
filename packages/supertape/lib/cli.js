@@ -140,6 +140,7 @@ async function cli({argv, cwd, stdout, isStop}) {
         await import(module);
     
     const allFiles = [];
+    
     for (const arg of args._) {
         const files = glob.sync(arg).filter(isExclude);
         allFiles.push(...files);
