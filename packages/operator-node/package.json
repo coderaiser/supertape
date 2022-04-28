@@ -1,0 +1,63 @@
+{
+  "name": "@supertape/operator-node",
+  "version": "1.0.0",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "supertape node operator",
+  "homepage": "http://github.com/coderaiser/supertape",
+  "main": "./lib/node.js",
+  "release": false,
+  "tag": false,
+  "changelog": false,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/supertape.git"
+  },
+  "scripts": {
+    "test": "madrun test",
+    "test:dts": "madrun test:dts",
+    "watch:test": "madrun watch:test",
+    "lint": "madrun lint",
+    "fresh:lint": "madrun fresh:lint",
+    "lint:fresh": "madrun lint:fresh",
+    "fix:lint": "madrun fix:lint",
+    "coverage": "madrun coverage",
+    "report": "madrun report",
+    "wisdom": "madrun wisdom"
+  },
+  "dependencies": {
+    "@cloudcmd/node": "^4.0.0"
+  },
+  "keywords": [
+    "operator",
+    "node",
+    "function",
+    "tap",
+    "tape",
+    "testing"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "c8": "^7.3.5",
+    "check-dts": "^0.6.5",
+    "eslint": "^8.0.0-beta.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-putout": "^14.0.0",
+    "madrun": "^9.0.0",
+    "mock-require": "^3.0.2",
+    "nodemon": "^2.0.2",
+    "putout": "^25.0.0",
+    "supertape": "^7.0.0",
+    "typescript": "^4.4.4"
+  },
+  "peerDependencies": {
+    "supertape": ">=7"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
