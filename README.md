@@ -116,7 +116,7 @@ test('hello: world', (t) => {
 Check for duplicates in test messages. Can be disabled with:
 
 - passing `--no-check-duplicates` command line flag;
-- setting `CHECK_DUPLICATES=0` env variable;
+- setting `SUPERTAPE_CHECK_DUPLICATES=0` env variable;
 
 #### ❌ Example of incorrect code
 
@@ -139,7 +139,7 @@ test('hello: world', (t) => {
 Check that test message are divided on groups by colons. Can be disabled with:
 
 - passing `--no-check-scopes` command line flag;
-- setting `CHECK_SCOPES=0` env variable;
+- setting `SUPERTAPE_CHECK_SCOPES=0` env variable;
 
 #### ❌ Example of incorrect code
 
@@ -164,7 +164,7 @@ test('hello: world', (t) => {
 Check that test contains exactly one assertion. Can be disabled with:
 
 - passing `--no-check-assertions-count` command line flag;
-- setting `CHECK_ASSERTIONS_COUNT=0` env variable;
+- setting `SUPERTAPE_CHECK_ASSERTIONS_COUNT=0` env variable;
 
 #### ❌ Example of incorrect code
 
