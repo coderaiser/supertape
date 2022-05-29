@@ -124,7 +124,7 @@ function createOutput() {
 }
 
 const getColorFn = (color) => {
-    if (/^#/.test(color))
+    if (color.startsWith('#'))
         return chalk.hex(color);
     
     return chalk[color];
