@@ -59,6 +59,7 @@ Options
 - `SUPERTAPE_CHECK_DUPLICATES` - toggle check duplicates;
 - `SUPERTAPE_CHECK_SCOPES` - check that test message has a scope: `scope: subject`;
 - `SUPERTAPE_CHECK_ASSERTIONS_COUNT` - check that assertion count is no more then 1;
+- `SUPERTAPE_CHECK_SKIPED` - check that skiped count equal to `0`, exit with status code
 
 ```js
 test('tape: error', (t) => {
@@ -253,6 +254,34 @@ test('lib: diff', (t) => {
 +   "hello": "world",
 + }
 `;
+```
+
+## 🚪Exit Codes
+
+📼**Supertape** can have one of next [exit codes](https://github.com/coderaiser/supertape/blob/master/packages/supertape/lib/exit-codes.js):
+
+| Code | Name | Description |
+|------|------|-----------------|
+| 0    | `OK` | no errors found |
+| 1    | `FAIL` | test failed |
+| 2    | `WAS_STOP` | test was halted by user |
+| 3    | `UNHANDLED`| unhandled exception occured |
+| 4    | `INVALID_OPTION`| wrong option provided |
+| 5    | `SKIPED` | works only with `SUPERTAPE_CHECK_SKIPED` env variable when skiped files 1 and more |
+
+Here is how exit code can look like:
+
+```js
+import {SKIPED} from 'supertape/exit-codes';
+
+const env = {
+    ESCOVER_SUCCESS_EXIT_CODE: SKIPED,
+    SUPERTAPE_CHECK_SKIPED: 1,
+};
+
+export default {
+    test: () => [env, `escover tape 'test/**/*.js' 'lib/**/*.spec.js'`],
+};
 ```
 
 ## License

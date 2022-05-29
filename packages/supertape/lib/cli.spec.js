@@ -19,6 +19,7 @@ const test = require('./supertape.js');
 const {
     OK,
     WAS_STOP,
+    SKIPED,
 } = require('./exit-codes');
 
 const {reRequire, stopAll} = mockRequire;
@@ -266,6 +267,80 @@ test('supertape: cli: fail', async (t) => {
     stopAll();
     
     t.calledWith(exit, [1], 'should call exit with 1');
+    t.end();
+});
+
+test('supertape: cli: exit: skiped', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [name, name];
+    
+    const init = stub();
+    const exit = stub();
+    
+    const test = stub();
+    const emitter = new EventEmitter();
+    const run = stub().returns(emitter);
+    
+    assign(test, {
+        init,
+        createStream,
+        run,
+    });
+    
+    process.env.SUPERTAPE_CHECK_SKIPED = '1';
+    mockRequire('..', test);
+    
+    const emit = emitter.emit.bind(emitter);
+    await Promise.all([
+        runCli({
+            argv,
+            exit,
+        }),
+        wait(emit, 'end', {
+            skiped: 1,
+        }),
+    ]);
+    
+    stopAll();
+    delete process.env.SUPERTAPE_CHECK_SKIPED;
+    
+    t.calledWith(exit, [SKIPED], 'should call exit with SKIPED');
+    t.end();
+});
+
+test('supertape: cli: exit: skiped: disabled', async (t) => {
+    const name = join(__dirname, 'fixture/cli.js');
+    const argv = [name, name];
+    
+    const init = stub();
+    const exit = stub();
+    
+    const test = stub();
+    const emitter = new EventEmitter();
+    const run = stub().returns(emitter);
+    
+    assign(test, {
+        init,
+        createStream,
+        run,
+    });
+    
+    mockRequire('..', test);
+    
+    const emit = emitter.emit.bind(emitter);
+    await Promise.all([
+        runCli({
+            argv,
+            exit,
+        }),
+        wait(emit, 'end', {
+            skiped: 1,
+        }),
+    ]);
+    
+    stopAll();
+    
+    t.calledWith(exit, [OK], 'should call exit with OK');
     t.end();
 });
 

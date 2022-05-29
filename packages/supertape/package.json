@@ -14,7 +14,8 @@
       "default": "./lib/supertape.js"
     },
     "./bin/supertape": "./bin/supertape.mjs",
-    "./cli": "./lib/cli.js"
+    "./cli": "./lib/cli.js",
+    "./exit-codes": "./lib/exit-codes.js"
   },
   "type": "commonjs",
   "bin": {

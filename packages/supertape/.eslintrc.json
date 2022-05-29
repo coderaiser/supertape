@@ -4,6 +4,11 @@
         "rules": {
             "no-var": "off"
         }
+    }, {
+        "files": "*.spec.*",
+        "rules": {
+            "node/no-extraneous-import": "off"
+        }
     }],
     "extends": [
         "plugin:node/recommended",

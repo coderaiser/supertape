@@ -18,6 +18,7 @@ const {
     WAS_STOP,
     UNHANDLED,
     INVALID_OPTION,
+    SKIPED,
 } = require('./exit-codes');
 
 const {isArray} = Array;
@@ -33,6 +34,7 @@ const {
     SUPERTAPE_CHECK_DUPLICATES = '1',
     SUPERTAPE_CHECK_SCOPES = '1',
     SUPERTAPE_CHECK_ASSERTIONS_COUNT = '1',
+    SUPERTAPE_CHECK_SKIPED = '0',
 } = process.env;
 
 module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
@@ -54,11 +56,14 @@ module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
         failed,
         code,
         message,
+        skiped,
     } = result;
     
-    if (failed) {
+    if (Number(SUPERTAPE_CHECK_SKIPED) && skiped)
+        return exit(SKIPED);
+    
+    if (failed)
         return exit(FAIL);
-    }
     
     if (code === INVALID_OPTION) {
         stderr.write(`${message}\n`);
@@ -180,11 +185,9 @@ async function cli({argv, cwd, stdout, isStop}) {
         return OK;
     
     await Promise.all(promises);
-    const [{failed}] = await once(supertape.run(), 'end');
+    const [result] = await once(supertape.run(), 'end');
     
-    return {
-        failed,
-    };
+    return result;
 }
 
 module.exports._filesCount = filesCount;
