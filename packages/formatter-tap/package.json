@@ -33,7 +33,7 @@
     "c8": "^7.3.5",
     "eslint": "^8.0.0-beta.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-putout": "^14.0.0",
+    "eslint-plugin-putout": "^15.4.0",
     "madrun": "^9.0.0",
     "mock-require": "^3.0.2",
     "montag": "^1.0.0",
