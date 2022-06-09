@@ -18,7 +18,7 @@ const {
     WAS_STOP,
     UNHANDLED,
     INVALID_OPTION,
-    SKIPED,
+    SKIPPED,
 } = require('./exit-codes');
 
 const {isArray} = Array;
@@ -34,7 +34,7 @@ const {
     SUPERTAPE_CHECK_DUPLICATES = '1',
     SUPERTAPE_CHECK_SCOPES = '1',
     SUPERTAPE_CHECK_ASSERTIONS_COUNT = '1',
-    SUPERTAPE_CHECK_SKIPED = '0',
+    SUPERTAPE_CHECK_SKIPPED = '0',
 } = process.env;
 
 module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
@@ -59,8 +59,8 @@ module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
         skiped,
     } = result;
     
-    if (Number(SUPERTAPE_CHECK_SKIPED) && skiped)
-        return exit(SKIPED);
+    if (Number(SUPERTAPE_CHECK_SKIPPED) && skiped)
+        return exit(SKIPPED);
     
     if (failed)
         return exit(FAIL);
