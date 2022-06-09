@@ -53,7 +53,7 @@
     "deep-equal": "^2.0.3",
     "fullstore": "^3.0.0",
     "glob": "^7.1.6",
-    "jest-diff": "^27.0.1",
+    "jest-diff": "^28.1.1",
     "once": "^1.4.0",
     "resolve": "^1.17.0",
     "stacktracey": "^2.1.7",
