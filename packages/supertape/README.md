@@ -59,7 +59,7 @@ Options
 - `SUPERTAPE_CHECK_DUPLICATES` - toggle check duplicates;
 - `SUPERTAPE_CHECK_SCOPES` - check that test message has a scope: `scope: subject`;
 - `SUPERTAPE_CHECK_ASSERTIONS_COUNT` - check that assertion count is no more then 1;
-- `SUPERTAPE_CHECK_SKIPPED` - check that skiped count equal to `0`, exit with status code
+- `SUPERTAPE_CHECK_SKIPED` - check that skiped count equal to `0`, exit with status code
 
 ```js
 test('tape: error', (t) => {
@@ -267,16 +267,16 @@ test('lib: diff', (t) => {
 | 2    | `WAS_STOP` | test was halted by user |
 | 3    | `UNHANDLED`| unhandled exception occured |
 | 4    | `INVALID_OPTION`| wrong option provided |
-| 5    | `SKIPPED` | works only with `SUPERTAPE_CHECK_SKIPPED` env variable when skipped files 1 and more |
+| 5    | `SKIPED` | works only with `SUPERTAPE_CHECK_SKIPED` env variable when skiped files 1 and more |
 
 Here is how exit code can look like:
 
 ```js
-import {SKIPPED} from 'supertape/exit-codes';
+import {SKIPED} from 'supertape/exit-codes';
 
 const env = {
-    ESCOVER_SUCCESS_EXIT_CODE: SKIPPED,
-    SUPERTAPE_CHECK_SKIPPED: 1,
+    ESCOVER_SUCCESS_EXIT_CODE: SKIPED,
+    SUPERTAPE_CHECK_SKIPED: 1,
 };
 
 export default {
