@@ -125,6 +125,7 @@ async function cli({argv, cwd, stdout, isStop}) {
     if (args.help) {
         const {help} = await import('./help.js');
         stdout.write(help());
+        
         return OK;
     }
     

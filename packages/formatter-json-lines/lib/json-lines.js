@@ -56,6 +56,7 @@ function createOutput() {
         if (!args.length) {
             const result = output.join('');
             output = [];
+            
             return result;
         }
         

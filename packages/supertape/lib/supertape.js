@@ -200,6 +200,7 @@ const loop = once(({emitter, tests}) => {
         if (previousCount === tests.length) {
             runned = true;
             emitter.emit('run');
+            
             return;
         }
         

@@ -6,9 +6,9 @@ const montag = require('montag');
 const mockRequire = require('mock-require');
 const pullout = require('pullout');
 
-const {reRequire, stopAll} = mockRequire;
-
 const {test, stub} = require('..');
+
+const {reRequire, stopAll} = mockRequire;
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(stream);

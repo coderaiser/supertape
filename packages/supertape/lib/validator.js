@@ -32,6 +32,7 @@ const {
 const findByMessage = (msg, tests) => {
     const getMessages = once(getMessagesList);
     const filtered = getMessages(tests).filter(compareMessage(msg));
+    
     return filtered;
 };
 

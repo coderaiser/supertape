@@ -1,13 +1,13 @@
 'use strict';
 
 const tap = require('@supertape/formatter-tap');
+const fullstore = require('fullstore');
+
 const {
     start,
     comment,
     end,
 } = tap;
-
-const fullstore = require('fullstore');
 const testStore = fullstore();
 
 function test({test}) {

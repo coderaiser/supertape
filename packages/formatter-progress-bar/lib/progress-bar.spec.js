@@ -4,9 +4,9 @@ const {once} = require('events');
 
 const montag = require('montag');
 const mockRequire = require('mock-require');
-const {reRequire, stopAll} = mockRequire;
 const pullout = require('pullout');
 const {test, stub} = require('supertape');
+const {reRequire, stopAll} = mockRequire;
 
 const {env} = process;
 

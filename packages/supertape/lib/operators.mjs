@@ -259,6 +259,7 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
             count: count(),
             message,
         });
+        
         return;
     }
     
