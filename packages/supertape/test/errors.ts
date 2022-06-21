@@ -3,6 +3,7 @@ import test, {
     Test,
     stub,
     Stub,
+    extend,
 } from '../lib/supertape.js';
 
 // THROWS Expected 2-3 arguments, but got 0
@@ -52,3 +53,5 @@ test('hello', (t: Test) => {
 // THROWS Argument of type '{ checkUnknown: boolean; }' is not assignable to parameter of type 'TestOptions'.
 }, {checkUnknown: true});
 
+// THROWS Expected 1 arguments, but got 0.
+extend();

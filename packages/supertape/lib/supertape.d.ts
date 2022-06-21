@@ -10,6 +10,7 @@ type Result = {
     expected: unknown,
     actual: unknown,
     message: string,
+    output: string,
 };
 
 type Test = OperatorStub & {
@@ -41,10 +42,17 @@ declare namespace test {
 
 export default test;
 
+type CustomOperators = {
+    [index: string]: (operator: Test) => (...args: any[]) => Result
+};
+
+declare function extend(operators: CustomOperators): Test;
+
 export {
     test,
     Test,
     stub,
     Stub,
+    extend,
 };
 
