@@ -13,7 +13,11 @@ type Result = {
     output: string,
 };
 
-type Test = OperatorStub & {
+type Operator = {
+    [index: string]: (...args: any[]) => Result
+};
+
+type Test = Operator & OperatorStub & {
     equal: (result: unknown, expected: unknown, message?: string) => Result;
     notEqual: (result: unknown, expected: unknown, message?: string) => Result;
     deepEqual: (result: unknown, expected: unknown, message?: string) => Result;
@@ -42,11 +46,11 @@ declare namespace test {
 
 export default test;
 
-type CustomOperators = {
-    [index: string]: (operator: Test) => (...args: any[]) => Result
+type CustomOperator = {
+    [index: string]: (operator: Operator) => (...args: any[]) => Result
 };
 
-declare function extend(operators: CustomOperators): Test;
+declare function extend(customOperator: CustomOperator): typeof test;
 
 export {
     test,

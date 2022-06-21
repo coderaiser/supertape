@@ -10,7 +10,6 @@ import test, {
 test();
 
 test('hello', (t: Test) => {
-    // THROWS Property 'abc' does not exist on type 'Test'
     t.abc();
     t.end();
 });
@@ -55,3 +54,17 @@ test('hello', (t: Test) => {
 
 // THROWS Expected 1 arguments, but got 0.
 extend();
+
+const extendedTest = extend({
+    // THROWS Type 'string' is not assignable to type '(operator: Operator) => (...args: any[]) => Result'.
+    hello: 'world',
+    
+    superFail: ({fail}) => (message) => fail(message),
+});
+
+// THROWS Expected 2-3 arguments, but got 0.
+extendedTest();
+extendedTest('hello', (t) => {
+    t.superFail('world');
+});
+
