@@ -1,0 +1,6 @@
+[default.extend-words]
+skiped = "skiped"
+SKIPED = "SKIPED"
+
+[files]
+extend-exclude = ["ChangeLog"]
