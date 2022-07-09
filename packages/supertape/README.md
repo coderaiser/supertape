@@ -265,7 +265,7 @@ test('lib: diff', (t) => {
 | 0    | `OK` | no errors found |
 | 1    | `FAIL` | test failed |
 | 2    | `WAS_STOP` | test was halted by user |
-| 3    | `UNHANDLED`| unhandled exception occured |
+| 3    | `UNHANDLED`| unhandled exception occurred |
 | 4    | `INVALID_OPTION`| wrong option provided |
 | 5    | `SKIPED` | works only with `SUPERTAPE_CHECK_SKIPED` env variable when skiped files 1 and more |
 

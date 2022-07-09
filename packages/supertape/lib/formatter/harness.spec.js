@@ -24,7 +24,7 @@ test('supertape: harness: proceed condition', (t) => {
         type: 'test',
     });
     
-    t.ok(length, 'should proceed ony when reporter return not zero length chunk');
+    t.ok(length, 'should proceed only when reporter return not zero length chunk');
     t.end();
 });
 
