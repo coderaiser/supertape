@@ -176,7 +176,7 @@ test('supertape: bin: cli: files count', async (t) => {
     t.end();
 });
 
-test('supertape: cli: successs', async (t) => {
+test('supertape: cli: success', async (t) => {
     const name = join(__dirname, 'fixture/cli-success.js');
     const argv = [name, name, '-f', 'tap'];
     

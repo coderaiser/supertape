@@ -102,7 +102,7 @@ test('supertape: operators: equal', (t) => {
     const {equal} = operators;
     const {is} = equal(+0, -0);
     
-    t.notOk(is, 'should use Object.is for comparisson');
+    t.notOk(is, 'should use Object.is for comparison');
     t.end();
 });
 
@@ -110,7 +110,7 @@ test('supertape: operators: notEqual: true', (t) => {
     const {notEqual} = operators;
     const {is} = notEqual(+0, -0);
     
-    t.ok(is, 'should use Object.is for comparisson');
+    t.ok(is, 'should use Object.is for comparison');
     t.end();
 });
 
