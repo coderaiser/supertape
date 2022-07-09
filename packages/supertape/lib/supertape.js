@@ -193,12 +193,10 @@ test.extend = (extensions) => {
 };
 
 const loop = once(({emitter, tests}) => {
-    let runned = false;
     let previousCount = 0;
     
     (function loop() {
         if (previousCount === tests.length) {
-            runned = true;
             emitter.emit('run');
             
             return;
