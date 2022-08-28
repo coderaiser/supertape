@@ -83,6 +83,33 @@ test('supertape: validator: checkScopes', (t) => {
     t.end();
 });
 
+test('supertape: validator: checkScopes: @', (t) => {
+    const {
+        createValidator,
+        setValidations,
+    } = reRequire('./validator');
+    const current = {
+        message: '@putout/eslint: create-plugin',
+        at: 'at',
+    };
+    
+    const tests = [current];
+    
+    setValidations({
+        checkScopes: true,
+    });
+    
+    const validate = createValidator({
+        tests,
+    });
+    
+    const result = validate('@putout/eslint: create-plugin');
+    const expected = [];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
 test('supertape: validator: checkAssertionsCount', (t) => {
     const {
         createValidator,

@@ -5,6 +5,7 @@
   "description": "📼 Supertape simplest high speed test runner with superpowers",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/supertape.js",
+  "commitType": "colon",
   "exports": {
     ".": {
       "node": {
