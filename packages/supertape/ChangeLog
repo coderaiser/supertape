@@ -1,3 +1,8 @@
+2022.08.29, v7.7.1
+
+feature:
+- package: jest-diff v29.0.1
+
 2022.08.28, v7.7.0
 
 feature:
