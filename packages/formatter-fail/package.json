@@ -5,6 +5,7 @@
   "description": "📼Supertape formatter shows only failed tests",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/fail.js",
+  "commitType": "colon",
   "release": false,
   "tag": false,
   "changelog": false,

@@ -5,6 +5,7 @@
   "description": "📼 Supertape formatter progress bar",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/progress-bar.js",
+  "commitType": "colon",
   "release": false,
   "tag": false,
   "changelog": false,
