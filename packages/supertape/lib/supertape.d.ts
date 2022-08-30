@@ -18,17 +18,17 @@ type Operators = {
 };
 
 type Test = Operators & OperatorStub & {
-    equal: (result: unknown, expected: unknown, message?: string) => Result;
-    notEqual: (result: unknown, expected: unknown, message?: string) => Result;
-    deepEqual: (result: unknown, expected: unknown, message?: string) => Result;
-    notDeepEqual: (result: unknown, expected: unknown, message?: string) => Result;
+    equal: (actual: unknown, expected: unknown, message?: string) => Result;
+    notEqual: (actual: unknown, expected: unknown, message?: string) => Result;
+    deepEqual: (actual: unknown, expected: unknown, message?: string) => Result;
+    notDeepEqual: (actual: unknown, expected: unknown, message?: string) => Result;
     fail: (message: string) => Result;
     pass: (message: string) => Result;
-    ok: (result: boolean | unknown, message?: string) => Result;
+    ok: (actual: boolean | unknown, message?: string) => Result;
     comment: (message: string) => Result;
-    notOk: (result: boolean | unknown, message?: string) => Result;
-    match: (result: string, pattern: string | RegExp, message?: string) => Result;
-    notMatch: (result: string, pattern: string | RegExp, message?: string) => Result;
+    notOk: (actual: boolean | unknown, message?: string) => Result;
+    match: (actual: string, pattern: string | RegExp, message?: string) => Result;
+    notMatch: (actual: string, pattern: string | RegExp, message?: string) => Result;
     end: () => void;
 };
 
