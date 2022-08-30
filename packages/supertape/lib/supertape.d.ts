@@ -32,6 +32,23 @@ type Test = Operators & OperatorStub & {
     end: () => void;
 };
 
+/** @since v3.8.0 */
+type FormatterTap = 'tap';
+
+/** @since v3.8.0 */
+type FormatterFail = 'fail';
+
+/** @since v3.9.0 */
+type FormatterProgressBar = 'progress-bar';
+
+/** @since v4.3.0 */
+type FormatterJSONLines = 'json-lines';
+
+/** @since v6.2.0 */
+type FormatterShort = 'short';
+
+type BuiltInFormatter = FormatterTap | FormatterFail | FormatterProgressBar | FormatterJSONLines | FormatterShort;
+
 type TestOptions = {
     /**
      * Whether or not to skip the current (set of) test(s).
@@ -68,7 +85,7 @@ type TestOptions = {
      * @note When using the CLI, the default is `progress-bar`.
      * @since v3.8.1 (renamed from `formatter` added in v.3.8.0)
      */
-    format?: string;
+    format?: BuiltInFormatter;
 
     /**
      * Whether or not to run this (set of) test(s).
