@@ -1,4 +1,4 @@
-# 📼 Supertape [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage Status][CoverageIMGURL]][CoverageURL]
+# 📼 Supertape [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage Status][CoverageIMGURL]][CoverageURL] [![License: MIT][MITLicenseIMGURL]][MITLicenseURL]
 
 [NPMURL]: https://npmjs.org/package/supertape "npm"
 [NPMIMGURL]: https://img.shields.io/npm/v/supertape.svg?style=flat&longCache=true
@@ -7,32 +7,36 @@
 [BuildStatusURL]: https://travis-ci.org/coderaiser/supertape "Build Status"
 [CoverageURL]: https://coveralls.io/github/coderaiser/supertape?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
+[MITLicenseURL]: https://opensource.org/licenses/MIT
+[MITLicenseIMGURL]: https://img.shields.io/badge/License-MIT-green.svg
 
 [![supertape](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY.svg)](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY)
 
-[Tape](https://github.com/substack/tape)-inspired [TAP](https://testanything.org/)-compatible simplest high speed test runner with superpowers.
+[**Tape**](https://github.com/substack/tape)-inspired [`TAP`](https://testanything.org/)-compatible simplest high speed test runner with superpowers.
 
-📼**Supertape** written from scratch after messing a lot with **tape**, it willing to be compatible with it as much as possible.
-and has a couple differences. It contains:
+📼 **Supertape** is a fast, minimal test runner with the soul of **tape**. It's designed to be as compatible as possible with **tape** while still having some key improvements, such as:
 
-- ability to work with [ESM Modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking and 🎩[ESCover](https://github.com/coderaiser/escover) for coverage).
-- shows colored diff when test not `equal` or not `deepEqual`;
-- produces deteiled stack traces for `async functions`;
-- as many [`only`](https://github.com/coderaiser/supertape#testonlyname-cb) as you wish;
-- ability to [extend](https://github.com/coderaiser/supertape/blob/master/README.md#testextendextensions);
-- smart timeouts for long running tests 🏃‍♂️(configured with `SUPERTAPE_TIMEOUT`);
-- outputs `result` instead of `actual`;
-- more natural assertions: `expected, result` -> `result, expected`, for example:
+- the ability to work with [ESM Modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking and 🎩[ESCover](https://github.com/coderaiser/escover) for coverage)
+- a number of [built-in pretty output formatters](#formatters)
+- the ability to [extend](#testextendextensions)
+- showing colored diff when using the [`t.equal()`](#tequalresult-any-expected-any-message-string) and [`t.deepEqual()`](#tdeepequalresult-any-expected-any-message-string) assertion operators
+- detailed stack traces for `async` functions
+- multiple [`test.only`'s](#testonlyname-cb)
+- [smart timeouts](#environment-variables) for long running tests 🏃‍♂️
+- more natural assertions: `expected, result` -> `result, expected`:
 
-```js
-t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
-```
+  ```js
+  t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
+  ```
 
-Doesn't contain:
+📼 **Supertape** doesn't contain:
 
-- `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills).
-- aliases, methods list much shorter;
-- `throws`, `doesNotThrows` - use [tryCatch](https://github.com/coderaiser/try-catch), [tryToCatch](https://github.com/coderaiser/try-to-catch) with `equal` instead.
+- assertion aliases, making the available operators far more concise
+- `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills)
+- `t.throws()`, `t.doesNotThrow()` - use [**tryCatch**](https://github.com/coderaiser/try-catch) or [**tryToCatch**](https://github.com/coderaiser/try-to-catch) with [`t.equal()`](#tequalresult-any-expected-any-message-string) instead
+- [`t.plan()`](https://github.com/substack/tape#tplann)
+
+For a list of all built-in assertions, see [Operators](#operators).
 
 ## Install
 
@@ -197,7 +201,73 @@ test('hello: two', (t) => {
 
 ## Operators
 
-To simplify core operators of 📼**Supertape**, some of them located in separate packages, called `operators`:
+The assertion methods of 📼 **Supertape** are heavily influenced by [**tape**](https://github.com/substack/tape). However, to keep a minimal core of assertions, there are no aliases and some superfluous operators have been removed (such as `t.throws()`).
+
+The following is a list of the base methods maintained by 📼 **Supertape**. Others, such as assertions for stubbing, are maintained in [special operators](#special-operators). To add custom assertion operators, see [Extending](#testextendextensions).
+
+### Core Operators
+
+#### `t.equal(result: any, expected: any, message?: string)`
+
+Asserts that `result` and `expected` are strictly equal. If `message` is provided, it will be outputted as a description of the assertion.
+
+*Note: uses `Object.is(result, expected)`*
+
+#### `t.notEqual(result: any, expected: any, message?: string)`
+
+Asserts that `result` and `expected` are not strictly equal. If `message` is provided, it will be outputted as a description of the assertion.
+
+*Note: uses `!Object.is(result, expected)`*
+
+#### `t.deepEqual(result: any, expected: any, message?: string)`
+
+Asserts that `result` and `expected` are loosely equal, with the same structure and nested values. If `message` is provided, it will be outputted as a description of the assertion.
+
+*Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
+
+#### `t.notDeepEqual(result: any, expected: any, message?: string)`
+
+Asserts that `result` and `expected` not loosely equal, with different structure and/or nested values. If `message` is provided, it will be outputted as a description of the assertion.
+
+*Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
+
+[NodeDeepEqual]: https://github.com/substack/node-deep-equal
+
+#### `t.ok(result: boolean | any, message?: string)`
+
+Asserts that `result` is truthy. If `message` is provided, it will be outputted as a description of the assertion.
+
+#### `t.notOk(result: boolean | any, message?: string)`
+
+Asserts that `result` is falsy. If `message` is provided, it will be outputted as a description of the assertion.
+
+#### `t.pass(message: string)`
+
+Generates a passing assertion with `message` as a description.
+
+#### `t.fail(message: string)`
+
+Generates a failing assertion with `message` as a description.
+
+#### `t.end()`
+
+Declares the end of a test explicitly. Must be called exactly once per test. (See: [Single Call to `t.end()`](#single-tend)
+
+#### `t.match(result: string, pattern: string | RegExp, message?: string)`
+
+Asserts that `result` matches the regex `pattern`. If `pattern` is not a valid regex, the assertion fails. If `message` is provided, it will be outputted as a description of the assertion.
+
+#### `t.notMatch(result: string, pattern: string | RegExp, message?: string)`
+
+Asserts that `result` does not match the regex `pattern`. If `pattern` is not a valid regex, the assertion always fails. If `message` is provided, it will be outputted as a description of the assertion.
+
+#### `t.comment(message: string)`
+
+Print a message without breaking the `TAP` output. Useful when using a `tap`-reporter such as `tap-colorize`, where the output is buffered and `console.log()` will print in incorrect order vis-a-vis `TAP` output.
+
+### Special Operators
+
+To simplify the core of 📼 **Supertape**, other operators are maintained in separate packages. The following is a list of all such packages:
 
 Here is a list of built-int operators:
 
@@ -288,58 +358,6 @@ test('assertion', (t) => {
     t.end();
 });
 ```
-
-## t.end()
-
-Declare the end of a test explicitly.
-
-## t.fail(msg)
-
-Generate a failing assertion with a message `msg`.
-
-## t.pass(msg)
-
-Generate a passing assertion with a message `msg`.
-
-## t.ok(value, msg)
-
-Assert that `value` is truthy with an optional description of the assertion `msg`.
-
-## t.notOk(value, msg)
-
-Assert that `value` is falsy with an optional description of the assertion `msg`.
-
-## t.match(result, pattern[, msg])
-
-Assert that `pattern: string | regexp` matches `result` with an optional description of the assertion `msg`.
-
-## t.notMatch(result, pattern[, msg])
-
-Assert that `pattern: string | regexp`  not matches `result` with an optional description of the assertion `msg`.
-
-## t.equal(result, expected, msg)
-
-Assert that `Object.is(result, expected)` with an optional description of the assertion `msg`.
-
-## t.notEqual(result, expected, msg)
-
-Assert that `!Object.is(result, expected)` with an optional description of the assertion `msg`.
-
-## t.deepEqual(result, expected, msg)
-
-Assert that `result` and `expected` have the same structure and nested values using
-[node's deepEqual() algorithm](https://github.com/substack/node-deep-equal)
-with strict comparisons (`===`) on leaf nodes and an optional description of the assertion `msg`.
-
-## t.notDeepEqual(result, expected, msg)
-
-Assert that `result` and `expected` do not have the same structure and nested values using
-[node's deepEqual() algorithm](https://github.com/substack/node-deep-equal)
-with strict comparisons (`===`) on leaf nodes and an optional description of the assertion `msg`.
-
-## t.comment(message)
-
-Print a message without breaking the tap output. (Useful when using e.g. `tap-colorize` where output is buffered & `console.log` will print in incorrect order vis-a-vis tap output.)
 
 ## Example
 
