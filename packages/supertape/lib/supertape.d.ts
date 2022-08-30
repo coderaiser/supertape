@@ -13,11 +13,11 @@ type Result = {
     output: string,
 };
 
-type Operator = {
-    [index: string]: (...args: any[]) => Result
+type Operators = {
+    [operatorName: string]: (...args: any[]) => Result
 };
 
-type Test = Operator & OperatorStub & {
+type Test = Operators & OperatorStub & {
     equal: (result: unknown, expected: unknown, message?: string) => Result;
     notEqual: (result: unknown, expected: unknown, message?: string) => Result;
     deepEqual: (result: unknown, expected: unknown, message?: string) => Result;
@@ -53,7 +53,7 @@ type TestOptions = {
      * @default {}
      * @since v3.5.0
      */
-    extensions?: CustomOperator;
+    extensions?: CustomOperators;
 
     /**
      * Whether or not to not output results to `stdout`.
@@ -112,11 +112,11 @@ declare namespace test {
 
 export default test;
 
-type CustomOperator = {
-    [index: string]: (operator: Operator) => (...args: any[]) => Result
+type CustomOperators = {
+    [operatorName: string]: (t: Test) => (...args: any[]) => Result
 };
 
-declare function extend(customOperator: CustomOperator): typeof test;
+declare function extend(customOperator: CustomOperators): typeof test;
 
 export {
     test,
