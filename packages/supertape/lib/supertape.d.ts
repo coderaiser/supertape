@@ -33,9 +33,15 @@ type Test = Operator & OperatorStub & {
 };
 
 type TestOptions = {
-    checkAssertionsCount?: boolean,
-    checkScopes?: boolean,
-    checkDuplicates?: boolean,
+    skip?: boolean;
+    only?: boolean;
+    extensions?: CustomOperator;
+    quiet?: boolean;
+    format?: string;
+    run?: boolean;
+    checkDuplicates?: boolean;
+    checkAssertionsCount?: boolean;
+    checkScopes?: boolean;
 };
 
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
