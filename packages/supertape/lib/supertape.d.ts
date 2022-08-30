@@ -33,14 +33,74 @@ type Test = Operator & OperatorStub & {
 };
 
 type TestOptions = {
+    /**
+     * Whether or not to skip the current (set of) test(s).
+     * @default false
+     * @since v1.0.0
+     */
     skip?: boolean;
+
+    /**
+     * Whether or not to mark this (set of) test(s) as the only
+     * test(s) run by the process.
+     * @default false
+     * @since v1.0.0
+     */
     only?: boolean;
+
+    /**
+     * Custom extension operators to use in this (set of) test(s).
+     * @default {}
+     * @since v3.5.0
+     */
     extensions?: CustomOperator;
+
+    /**
+     * Whether or not to not output results to `stdout`.
+     * @default false
+     * @since v3.8.0
+     */
     quiet?: boolean;
+
+    /**
+     * Which output format to use for the test results.
+     * @default 'tap'
+     * @note When using the CLI, the default is `progress-bar`.
+     * @since v3.8.1 (renamed from `formatter` added in v.3.8.0)
+     */
     format?: string;
+
+    /**
+     * Whether or not to run this (set of) test(s).
+     * @default true
+     * @since v3.8.0
+     */
     run?: boolean;
+
+    /**
+     * Whether or not to check test messages for duplicates.
+     * By default, Supertape expects each message to be unique.
+     * @default true // (`false` until v6.0.0)
+     * @since v5.6.0
+     */
     checkDuplicates?: boolean;
+
+    /**
+     * Whether or not to check the number of assertions per
+     * test. By default, Supertape expects each test to have
+     * only one assertion.
+     * @default true
+     * @since v6.8.0
+     */
     checkAssertionsCount?: boolean;
+
+    /**
+     * Whether or not to check that test messages are scoped
+     * (i.e. in the form `scope: message`). By default,
+     * Supertape expects each test to be scoped.
+     * @default true
+     * @since v6.7.0
+     */
     checkScopes?: boolean;
 };
 
