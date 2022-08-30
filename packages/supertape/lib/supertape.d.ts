@@ -51,22 +51,22 @@ type BuiltInFormatter = FormatterTap | FormatterFail | FormatterProgressBar | Fo
 
 type TestOptions = {
     /**
-     * Whether or not to skip the current (set of) test(s).
+     * Whether or not to skip this test case.
      * @default false
      * @since v1.0.0
      */
     skip?: boolean;
 
     /**
-     * Whether or not to mark this (set of) test(s) as the only
-     * test(s) run by the process.
+     * Whether or not to mark this test case as the only one
+     * run by the process.
      * @default false
      * @since v1.0.0
      */
     only?: boolean;
 
     /**
-     * Custom extension operators to use in this (set of) test(s).
+     * Custom extension operators to use in this test case.
      * @default {}
      * @since v3.5.0
      */
@@ -88,7 +88,7 @@ type TestOptions = {
     format?: BuiltInFormatter;
 
     /**
-     * Whether or not to run this (set of) test(s).
+     * Whether or not to run this test case.
      * @default true
      * @since v3.8.0
      */
@@ -104,8 +104,8 @@ type TestOptions = {
 
     /**
      * Whether or not to check the number of assertions per
-     * test. By default, Supertape expects each test to have
-     * only one assertion.
+     * test case. By default, Supertape expects each test to
+     * have only one assertion.
      * @default true
      * @since v6.8.0
      */
@@ -114,7 +114,7 @@ type TestOptions = {
     /**
      * Whether or not to check that test messages are scoped
      * (i.e. in the form `scope: message`). By default,
-     * Supertape expects each test to be scoped.
+     * Supertape expects each test case to be scoped.
      * @default true
      * @since v6.7.0
      */
