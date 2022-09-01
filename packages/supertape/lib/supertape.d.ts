@@ -5,31 +5,53 @@ import {
     Stub,
 } from '@cloudcmd/stub';
 
-type Result = {
-    is: boolean,
-    expected: unknown,
-    actual: unknown,
-    message: string,
-    output: string,
+type Result<A = unknown, E = unknown> = {
+    is: boolean;
+    message: string;
+    output?: string;
+    actual?: A;
+    expected?: E;
 };
 
-type Operators = {
-    [operatorName: string]: (...args: any[]) => Result
+type EmptyOutput = {
+    output: '';
 };
 
-type Test = Operators & OperatorStub & {
-    equal: (actual: unknown, expected: unknown, message?: string) => Result;
-    notEqual: (actual: unknown, expected: unknown, message?: string) => Result;
-    deepEqual: (actual: unknown, expected: unknown, message?: string) => Result;
-    notDeepEqual: (actual: unknown, expected: unknown, message?: string) => Result;
-    fail: (message: string) => Result;
-    pass: (message: string) => Result;
-    ok: (actual: boolean | unknown, message?: string) => Result;
-    comment: (message: string) => Result;
-    notOk: (actual: boolean | unknown, message?: string) => Result;
-    match: (actual: string, pattern: string | RegExp, message?: string) => Result;
-    notMatch: (actual: string, pattern: string | RegExp, message?: string) => Result;
-    end: () => void;
+type EqualResult<A, E> = Required<Result<A, E>>;
+
+type PassResult = Pick<Result, "message"> & EmptyOutput & { is: true };
+
+type FailResult<M = Error> = EmptyOutput & {
+    is: false;
+    stack: Error["stack"];
+    message: M;
+    at: string;
+};
+
+type OkResult<A, E> = Omit<Required<Result<A, E>>, "output">;
+
+type MatchResult = Omit<Required<Result<string, string | RegExp>>, "output">;
+
+type Operator = OperatorStub & {
+    equal:        <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    notEqual:     <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    deepEqual:    <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    notDeepEqual: <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    ok:              <A>(actual: boolean | A, message?: string) => OkResult<A, true>;
+    notOk:           <A>(actual: boolean | A, message?: string) => OkResult<A | string, false>;
+    pass:               (message: string) => PassResult;
+    fail:               (message: string, at?: string) => FailResult<string>;
+    end:                () => void;
+    match:              (actual: string, pattern: string | RegExp, message?: string) => MatchResult | FailResult;
+    notMatch:           (actual: string, pattern: string | RegExp, message?: string) => MatchResult;
+};
+
+type CommentOperator = {
+    comment: (message: string) => void;
+};
+
+type Test = CommentOperator & {
+    [operator in keyof Operator]: (...args: Parameters<Operator[operator]>) => void;
 };
 
 /** @since v3.8.0 */
@@ -121,19 +143,22 @@ type TestOptions = {
     checkScopes?: boolean;
 };
 
+type CustomOperators = {
+    [operatorName: string]: (t: Operator) => (...args: any[]) => Result | FailResult;
+};
+
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
+
+declare function extend(customOperator: CustomOperators): typeof test;
+type _extend = typeof extend;
+
 declare namespace test {
-    export var only: typeof test;
-    export var skip: typeof test;
+    export const only: typeof test;
+    export const skip: typeof test;
+    export const extend: _extend;
 }
 
 export default test;
-
-type CustomOperators = {
-    [operatorName: string]: (t: Test) => (...args: any[]) => Result
-};
-
-declare function extend(customOperator: CustomOperators): typeof test;
 
 export {
     test,
