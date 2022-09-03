@@ -13,14 +13,15 @@ type Result<A = unknown, E = unknown> = {
     expected?: E;
 };
 
-type EmptyOutput = {
-    output: '';
-};
+type EmptyOutput = {output: ''};
 
+/** The result of the `t.equal()` operators. */
 type EqualResult<A, E> = Required<Result<A, E>>;
 
-type PassResult = Pick<Result, "message"> & EmptyOutput & { is: true };
+/** The result of the `t.pass()` operator. */
+type PassResult = Pick<Result, "message"> & EmptyOutput & {is: true};
 
+/** The result of the `t.fail()` operator. */
 type FailResult<M = Error> = EmptyOutput & {
     is: false;
     stack: Error["stack"];
@@ -28,28 +29,155 @@ type FailResult<M = Error> = EmptyOutput & {
     at: string;
 };
 
+/** The result of the `t.ok()` operators. */
 type OkResult<A, E> = Omit<Required<Result<A, E>>, "output">;
 
+/** The result of the `t.match()` operators. */
 type MatchResult = Omit<Required<Result<string, string | RegExp>>, "output">;
 
+/** Assertions available in extension operators. */
 type Operator = OperatorStub & {
-    equal:        <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
-    notEqual:     <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
-    deepEqual:    <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    /**
+     * Asserts that `actual` and `expected` are strictly equal.
+     * 
+     * @note uses `Object.is()`
+     * 
+     * @param actual The resulting value to be tested.
+     * @param expected The value to be tested against.
+     * @param message An optional description of the assertion.
+     * 
+     * @since v1.0.2 (renamed from `equals` added in v1.0.0)
+     */
+    equal: <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    
+    /**
+     * Asserts that `actual` and `expected` are not strictly equal.
+     * 
+     * @note uses `Object.is()`
+     * 
+     * @param actual The resulting value to be tested.
+     * @param expected The value to be tested against.
+     * @param message An optional description of the assertion.
+     * 
+     * @since v3.3.0
+     */
+    notEqual: <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    
+    /**
+     * Asserts that `actual` and `expected` are loosely equal, with the same
+     * structure and nested values.
+     * 
+     * @note uses node's `deepEqual()` algorithm with strict comparisons
+     * (`===`) on leaf nodes
+     * 
+     * @param actual The resulting value to be tested.
+     * @param expected The value to be tested against.
+     * @param message An optional description of the assertion.
+     * 
+     * @since v1.0.2 (renamed from `deepEquals` added in v1.0.0)
+     */
+    deepEqual: <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    
+    /**
+     * Asserts that `actual` and `expected` are not loosely equal, with different
+     * structure and/or nested values.
+     * 
+     * @note uses node's `deepEqual()` algorithm with strict comparisons
+     * (`===`) on leaf nodes
+     * 
+     * @param actual The resulting value to be tested.
+     * @param expected The value to be tested against.
+     * @param message An optional description of the assertion.
+     * 
+     * @since v3.3.0
+     */
     notDeepEqual: <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
-    ok:              <A>(actual: boolean | A, message?: string) => OkResult<A, true>;
-    notOk:           <A>(actual: boolean | A, message?: string) => OkResult<A | string, false>;
-    pass:               (message: string) => PassResult;
-    fail:               (message: string, at?: string) => FailResult<string>;
-    end:                () => void;
-    match:              (actual: string, pattern: string | RegExp, message?: string) => MatchResult | FailResult;
-    notMatch:           (actual: string, pattern: string | RegExp, message?: string) => MatchResult;
+    
+    /**
+     * Asserts that `actual` is truthy.
+     * 
+     * @param actual The resulting value to be tested.
+     * 
+     * @since v3.1.0
+     */
+    ok: <A>(actual: boolean | A, message?: string) => OkResult<A, true>;
+    
+    /**
+     * Asserts that `actual` is falsy.
+     * 
+     * @param actual The resulting value to be tested.
+     * 
+     * @since v3.1.0
+     */
+    notOk: <A>(actual: boolean | A, message?: string) => OkResult<A | string, false>;
+    
+    /**
+     * Generates a passing assertion.
+     * 
+     * @param message An optional description of the assertion.
+     * 
+     * @since v3.2.0
+     */
+    pass: (message?: string) => PassResult;
+    
+    /**
+     * Generates a failing assertion.
+     * 
+     * @param message A description of the assertion.
+     * @param at 
+     * 
+     * @since v3.1.0
+     */
+    fail: (message: string, at?: string) => FailResult<string>;
+    
+    /**
+     * Declares the end of a test explicitly. `t.end()` must be
+     * called once (and only once) per test, and no further
+     * assertions are allowed.
+     * 
+     * @since v3.1.0
+     */
+    end: () => void;
+    
+    /**
+     * Asserts that `actual` matches the regex `pattern`.
+     * 
+     * @note if `pattern` is not a valid regex, the assertion fails.
+     * 
+     * @param actual The resulting value to be tested.
+     * @param pattern A regex to be tested against.
+     * @param message An optional description of the assertion.
+     * 
+     * @since v5.1.0
+     */
+    match: (actual: string, pattern: string | RegExp, message?: string) => MatchResult | FailResult;
+    
+    /**
+     * Asserts that `actual` does not match the regex `pattern`.
+     * 
+     * @note if `pattern` is not a valid regex, the assertion always fails.
+     * 
+     * @param actual The resulting value to be tested.
+     * @param pattern A regex to be tested against.
+     * @param message An optional description of the assertion.
+     * 
+     * @since v5.6.0
+     */
+    notMatch: (actual: string, pattern: string | RegExp, message?: string) => MatchResult;
 };
 
 type CommentOperator = {
+    /**
+     * Prints a message without breaking the `tap` output.
+     * 
+     * @param message The message to be printed.
+     * 
+     * @since v3.1.0
+     */
     comment: (message: string) => void;
 };
 
+/** Assertions available in tests. */
 type Test = CommentOperator & {
     [operator in keyof Operator]: (...args: Parameters<Operator[operator]>) => void;
 };
@@ -69,8 +197,10 @@ type FormatterJSONLines = 'json-lines';
 /** @since v6.2.0 */
 type FormatterShort = 'short';
 
+/** Built-in `tap` formatters for test outputs. */
 type BuiltInFormatter = FormatterTap | FormatterFail | FormatterProgressBar | FormatterJSONLines | FormatterShort;
 
+/** Options available per test. */
 type TestOptions = {
     /**
      * Whether or not to skip this test case.
@@ -149,7 +279,8 @@ type CustomOperators = {
 
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
 
-declare function extend(customOperator: CustomOperators): typeof test;
+/** Add custom extensions operators to tests. @since v3.5.0 */
+declare function extend(customOperators: CustomOperators): typeof test;
 type _extend = typeof extend;
 
 declare namespace test {
