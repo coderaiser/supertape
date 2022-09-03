@@ -273,29 +273,43 @@ type TestOptions = {
     checkScopes?: boolean;
 };
 
+/** Initialize Supertape with options for all tests. Overriden by `test(options)` on a per-test basis. */
+declare function init(options: TestOptions): void;
+
 type CustomOperators = {
     [operatorName: string]: (t: Operator) => (...args: any[]) => Result | FailResult;
 };
 
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
 
+/** Skips the given test case. @since v1.0.0 */
+declare const skip: typeof test;
+
+/** Only runs the given test case. No other test cases are run. @since v1.0.0 */
+declare const only: typeof test;
+
 /** Add custom extensions operators to tests. @since v3.5.0 */
-declare function extend(customOperators: CustomOperators): typeof test;
-type _extend = typeof extend;
+declare function extend(extensions: CustomOperators): typeof test;
 
 declare namespace test {
-    export const only: typeof test;
-    export const skip: typeof test;
-    export const extend: _extend;
+    export {
+        skip,
+        only,
+        extend,
+        stub,
+        test,
+    };
 }
 
 export default test;
 
 export {
+    init,
     test,
     Test,
     stub,
     Stub,
+    skip,
+    only,
     extend,
 };
-
