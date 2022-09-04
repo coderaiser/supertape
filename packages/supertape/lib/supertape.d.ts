@@ -289,7 +289,12 @@ declare const skip: typeof test;
 declare const only: typeof test;
 
 /** Add custom extensions operators to tests. @since v3.5.0 */
-declare function extend(extensions: CustomOperators): typeof test;
+declare function extend<O extends CustomOperators>(extensions: O): (
+    message: string,
+    // provides IntelliSense for extension operators w/ a mapped type
+    fn: (t: Test & { [operator in keyof O]: (...args: Parameters<ReturnType<O[operator]>>) => void }) => void,
+    options?: TestOptions,
+) => void;
 
 declare namespace test {
     export {
