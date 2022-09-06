@@ -9,7 +9,7 @@ const pullout = require('pullout');
 const test = require('supertape');
 
 const pull = async (stream, i = 9) => {
-    const output = await pullout(stream);
+    const output = await pullout(await stream);
     
     return output.split('\n')
         .slice(0, i)
