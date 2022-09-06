@@ -301,14 +301,16 @@ declare const skip: typeof test;
 /** Only runs the given test case. No other test cases are run. @since v1.0.0 */
 declare const only: typeof test;
 
-type CustomTest<O extends CustomOperators> = (
-    message: string,
-    fn: (t: Test & {[operator in keyof O]: (...args: Parameters<ReturnType<O[operator]>>) => void}) => void,
-    options?: TestOptions,
-) => void;
+// Map custom operators onto `Test`
+type CustomTest<O extends CustomOperators> = Test & {
+    [operator in keyof O]: (...args: Parameters<ReturnType<O[operator]>>) => void;
+};
+
+// `test()` with custom operators
+type ExtendedTest<O extends CustomOperators> = (message: string, fn: (t: CustomTest<O>) => void, options?: TestOptions) => void;
 
 /** Add custom extensions operators to tests. @since v3.5.0 */
-declare function extend<O extends CustomOperators>(extensions: O): CustomTest<O>;
+declare function extend<O extends CustomOperators>(extensions: O): ExtendedTest<O>;
 
 declare namespace test {
     export {
