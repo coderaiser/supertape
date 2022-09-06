@@ -81,7 +81,7 @@ Tests can be run either through the `supertape` CLI or through `node` (or `ts-no
 📼 **Supertape** provides a CLI that supports running both `CJS` and `ESM` tests:
 
 ```
-$ [npx] supertape "tests/test1.js" [options]
+$ [npx] supertape [options] [path/glob]
 ```
 
 If a glob is specified instead of a single file path (e.g. `tests/*.js`), all of the tests results are outputted together.
@@ -90,7 +90,19 @@ If a glob is specified instead of a single file path (e.g. `tests/*.js`), all of
 
 #### `--help` (alias: `-h`)
 
-Displays a help prompt with usage information and exits.
+Displays a help prompt with usage information and exits:
+
+```
+Usage: supertape [options] [path]
+Options
+   -h, --help                  display this help and exit
+   -v, --version               output version information and exit
+   -f, --format                use a specific output format - default: progress-bar/tap on CI
+   -r, --require               require module
+   --no-check-scopes           do not check that messages contains scope: 'scope: message'
+   --no-check-assertions-count do not check that assertion count is no more then 1
+   --no-check-duplicates       do not check messages for duplicates
+```
 
 #### `--version` (alias: `-v`)
 
