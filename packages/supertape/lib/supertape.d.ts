@@ -19,21 +19,21 @@ type EmptyOutput = {output: ''};
 type EqualResult<A, E> = Required<Result<A, E>>;
 
 /** The result of the `t.pass()` operator. */
-type PassResult = Pick<Result, "message"> & EmptyOutput & {is: true};
+type PassResult = Pick<Result, 'message'> & EmptyOutput & {is: true};
 
 /** The result of the `t.fail()` operator. */
 type FailResult<M = Error> = EmptyOutput & {
     is: false;
-    stack: Error["stack"];
+    stack: Error['stack'];
     message: M;
     at: string;
 };
 
 /** The result of the `t.ok()` operators. */
-type OkResult<A, E> = Omit<Required<Result<A, E>>, "output">;
+type OkResult<A, E> = Omit<Required<Result<A, E>>, 'output'>;
 
 /** The result of the `t.match()` operators. */
-type MatchResult = Omit<Required<Result<string, string | RegExp>>, "output">;
+type MatchResult = Omit<Required<Result<string, string | RegExp>>, 'output'>;
 
 /** Assertions available in extension operators. */
 type Operator = OperatorStub & {
@@ -53,7 +53,7 @@ type Operator = OperatorStub & {
     /**
      * Asserts that `actual` and `expected` are not strictly equal.
      * 
-     * @note uses `Object.is()`
+     * @note uses `!Object.is()`
      * 
      * @param actual The resulting value to be tested.
      * @param expected The value to be tested against.
@@ -225,7 +225,7 @@ type TestOptions = {
     extensions?: CustomOperators;
 
     /**
-     * Whether or not to not output results to `stdout`.
+     * Whether or not to not report test results.
      * @default false
      * @since v3.8.0
      */
@@ -265,7 +265,7 @@ type TestOptions = {
 
     /**
      * Whether or not to check that test messages are scoped
-     * (i.e. in the form `scope: message`). By default,
+     * (i.e. in the form `'scope: message'`). By default,
      * Supertape expects each test case to be scoped.
      * @default true
      * @since v6.7.0
@@ -273,13 +273,21 @@ type TestOptions = {
     checkScopes?: boolean;
 };
 
-/** Initialize Supertape with options for all tests. Overriden by `test(options)` on a per-test basis. */
+/** Initializes Supertape with options for all tests. Overriden by `test(options)` on a per-test basis. @since v3.4.0 */
 declare function init(options: TestOptions): void;
 
 type CustomOperators = {
     [operatorName: string]: (t: Operator) => (...args: any[]) => Result | FailResult;
 };
 
+/**
+ * Runs one test case. By default, Supertape expects each test
+ * message to be scoped in the form `'scope: message'`, with
+ * one assertion per test. Each test must finish with a call to
+ * `t.end()`, and no further assertion(s) are allowed after it.
+ * Settings in `options` take precedence over any setting set
+ * elsewhere.
+ */
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
 
 /** Skips the given test case. @since v1.0.0 */
@@ -312,9 +320,11 @@ export {
     init,
     test,
     Test,
+    TestOptions,
     stub,
     Stub,
     skip,
     only,
     extend,
+    CustomOperators,
 };
