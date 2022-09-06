@@ -8,7 +8,7 @@
 [CoverageURL]: https://coveralls.io/github/coderaiser/supertape?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
 [MITLicenseURL]: https://opensource.org/licenses/MIT
-[MITLicenseIMGURL]: https://img.shields.io/badge/License-MIT-yellow.svg
+[MITLicenseIMGURL]: https://img.shields.io/badge/License-MIT-green.svg
 
 [![supertape](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY.svg)](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY)
 
