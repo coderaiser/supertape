@@ -597,9 +597,9 @@ You can easily convert your tests from **tape** to 📼 **Supertape** using 🐊
 [PutoutPluginTape]: https://github.com/coderaiser/putout/tree/master/packages/plugin-tape#readme
 [PutoutExample]: https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6
 
-### **ES-Lint** Rules
+### **ESLint** Rules
 
-🐊 **Putout** also provides some **es-lint** rules for 📼 **Supertape** to help ensure high quality tests:
+🐊 **Putout** also provides some **ESLint** rules for 📼 **Supertape** to help ensure high quality tests:
 
 - ✅ [`remove-newline-before-t-end`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-remove-newline-before-t-end#readme)
 - ✅ [`add-newline-before-assertion`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-add-newline-before-assertion#readme)
