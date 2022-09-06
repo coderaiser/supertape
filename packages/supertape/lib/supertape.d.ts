@@ -9,7 +9,7 @@ type Result<A = unknown, E = unknown> = {
     is: boolean;
     message: string;
     output?: string;
-    actual?: A;
+    result?: A;
     expected?: E;
 };
 
@@ -40,78 +40,78 @@ type MatchResult = Omit<Required<Result<string, string | RegExp>>, 'output'>;
 /** Assertions available in extension operators. */
 type Operator = OperatorStub & {
     /**
-     * Asserts that `actual` and `expected` are strictly equal.
+     * Asserts that `result` and `expected` are strictly equal.
      *
      * @note uses `Object.is()`
      *
-     * @param actual The resulting value to be tested.
+     * @param result The resulting value to be tested.
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
      *
      * @since v1.0.2 (renamed from `equals` added in v1.0.0)
      */
-    equal: <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    equal: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
     
     /**
-     * Asserts that `actual` and `expected` are not strictly equal.
+     * Asserts that `result` and `expected` are not strictly equal.
      *
      * @note uses `!Object.is()`
      *
-     * @param actual The resulting value to be tested.
+     * @param result The resulting value to be tested.
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
      *
      * @since v3.3.0
      */
-    notEqual: <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    notEqual: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
     
     /**
-     * Asserts that `actual` and `expected` are loosely equal, with the same
+     * Asserts that `result` and `expected` are loosely equal, with the same
      * structure and nested values.
      *
      * @note uses node's `deepEqual()` algorithm with strict comparisons
      * (`===`) on leaf nodes
      *
-     * @param actual The resulting value to be tested.
+     * @param result The resulting value to be tested.
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
      *
      * @since v1.0.2 (renamed from `deepEquals` added in v1.0.0)
      */
-    deepEqual: <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    deepEqual: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
     
     /**
-     * Asserts that `actual` and `expected` are not loosely equal, with different
+     * Asserts that `result` and `expected` are not loosely equal, with different
      * structure and/or nested values.
      *
      * @note uses node's `deepEqual()` algorithm with strict comparisons
      * (`===`) on leaf nodes
      *
-     * @param actual The resulting value to be tested.
+     * @param result The resulting value to be tested.
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
      *
      * @since v3.3.0
      */
-    notDeepEqual: <A, E>(actual: A, expected: E, message?: string) => EqualResult<A, E>;
+    notDeepEqual: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
     
     /**
-     * Asserts that `actual` is truthy.
+     * Asserts that `result` is truthy.
      *
-     * @param actual The resulting value to be tested.
+     * @param result The resulting value to be tested.
      *
      * @since v3.1.0
      */
-    ok: <A>(actual: boolean | A, message?: string) => OkResult<A, true>;
+    ok: <A>(result: boolean | A, message?: string) => OkResult<A, true>;
     
     /**
-     * Asserts that `actual` is falsy.
+     * Asserts that `result` is falsy.
      *
-     * @param actual The resulting value to be tested.
+     * @param result The resulting value to be tested.
      *
      * @since v3.1.0
      */
-    notOk: <A>(actual: boolean | A, message?: string) => OkResult<A | string, false>;
+    notOk: <A>(result: boolean | A, message?: string) => OkResult<A | string, false>;
     
     /**
      * Generates a passing assertion.
@@ -141,30 +141,30 @@ type Operator = OperatorStub & {
     end: () => void;
     
     /**
-     * Asserts that `actual` matches the regex `pattern`.
+     * Asserts that `result` matches the regex `pattern`.
      *
      * @note if `pattern` is not a valid regex, the assertion fails.
      *
-     * @param actual The resulting value to be tested.
+     * @param result The resulting value to be tested.
      * @param pattern A regex to be tested against.
      * @param message An optional description of the assertion.
      *
      * @since v5.1.0
      */
-    match: (actual: string, pattern: string | RegExp, message?: string) => MatchResult | FailResult;
+    match: (result: string, pattern: string | RegExp, message?: string) => MatchResult | FailResult;
     
     /**
-     * Asserts that `actual` does not match the regex `pattern`.
+     * Asserts that `result` does not match the regex `pattern`.
      *
      * @note if `pattern` is not a valid regex, the assertion always fails.
      *
-     * @param actual The resulting value to be tested.
+     * @param result The resulting value to be tested.
      * @param pattern A regex to be tested against.
      * @param message An optional description of the assertion.
      *
      * @since v5.6.0
      */
-    notMatch: (actual: string, pattern: string | RegExp, message?: string) => MatchResult;
+    notMatch: (result: string, pattern: string | RegExp, message?: string) => MatchResult;
 };
 
 type CommentOperator = {

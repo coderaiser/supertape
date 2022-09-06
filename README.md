@@ -27,7 +27,7 @@
 - not needing to specify the number of assertions with [`t.plan()`](https://github.com/substack/tape#tplann)
 - multiple [`test.only`'s](#testonlymessage-string-fn-t-test--void-options-testoptions-since-v100)
 - [smart timeouts](#supertape_timeout) for long running tests 🏃‍♂️
-- more natural assertions: `expected, actual` -> `actual, expected`:
+- more natural assertions: `expected, result` -> `result, expected`:
 
   ```js
   t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
@@ -515,39 +515,39 @@ The following is a list of the base methods maintained by 📼 **Supertape**. Ot
 
 ### Core Operators
 
-#### `t.equal(actual: any, expected: any, message?: string)` (since: `v1.0.2`)
+#### `t.equal(result: any, expected: any, message?: string)` (since: `v1.0.2`)
 
-Asserts that `actual` and `expected` are strictly equal. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` and `expected` are strictly equal. If `message` is provided, it will be outputted as a description of the assertion.
 
-*Note: uses `Object.is(actual, expected)`*
+*Note: uses `Object.is(result, expected)`*
 
-#### `t.notEqual(actual: any, expected: any, message?: string)` (since: `v3.3.0`)
+#### `t.notEqual(result: any, expected: any, message?: string)` (since: `v3.3.0`)
 
-Asserts that `actual` and `expected` are not strictly equal. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` and `expected` are not strictly equal. If `message` is provided, it will be outputted as a description of the assertion.
 
-*Note: uses `!Object.is(actual, expected)`*
+*Note: uses `!Object.is(result, expected)`*
 
-#### `t.deepEqual(actual: any, expected: any, message?: string)` (since: `v1.0.2`)
+#### `t.deepEqual(result: any, expected: any, message?: string)` (since: `v1.0.2`)
 
-Asserts that `actual` and `expected` are loosely equal, with the same structure and nested values. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` and `expected` are loosely equal, with the same structure and nested values. If `message` is provided, it will be outputted as a description of the assertion.
 
 *Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
 
-#### `t.notDeepEqual(actual: any, expected: any, message?: string)` (since: `v3.3.0`)
+#### `t.notDeepEqual(result: any, expected: any, message?: string)` (since: `v3.3.0`)
 
-Asserts that `actual` and `expected` not loosely equal, with different structure and/or nested values. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` and `expected` not loosely equal, with different structure and/or nested values. If `message` is provided, it will be outputted as a description of the assertion.
 
 *Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
 
 [NodeDeepEqual]: https://github.com/substack/node-deep-equal
 
-#### `t.ok(actual: boolean | any, message?: string)` (since: `v3.1.0`)
+#### `t.ok(result: boolean | any, message?: string)` (since: `v3.1.0`)
 
-Asserts that `actual` is truthy. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` is truthy. If `message` is provided, it will be outputted as a description of the assertion.
 
-#### `t.notOk(actual: boolean | any, message?: string)` (since: `v3.1.0`)
+#### `t.notOk(result: boolean | any, message?: string)` (since: `v3.1.0`)
 
-Asserts that `actual` is falsy. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` is falsy. If `message` is provided, it will be outputted as a description of the assertion.
 
 #### `t.pass(message: string)` (since: `v3.2.0`)
 
@@ -561,13 +561,13 @@ Generates a failing assertion with `message` as a description.
 
 Declares the end of a test explicitly. Must be called exactly once per test. (See: [Single Call to `t.end()`](#single-call-to-tend))
 
-#### `t.match(actual: string, pattern: string | RegExp, message?: string)` (since: `v5.1.0`)
+#### `t.match(result: string, pattern: string | RegExp, message?: string)` (since: `v5.1.0`)
 
-Asserts that `actual` matches the regex `pattern`. If `pattern` is not a valid regex, the assertion fails. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` matches the regex `pattern`. If `pattern` is not a valid regex, the assertion fails. If `message` is provided, it will be outputted as a description of the assertion.
 
-#### `t.notMatch(actual: string, pattern: string | RegExp, message?: string)` (since: `v5.6.0`)
+#### `t.notMatch(result: string, pattern: string | RegExp, message?: string)` (since: `v5.6.0`)
 
-Asserts that `actual` does not match the regex `pattern`. If `pattern` is not a valid regex, the assertion always fails. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` does not match the regex `pattern`. If `pattern` is not a valid regex, the assertion always fails. If `message` is provided, it will be outputted as a description of the assertion.
 
 #### `t.comment(message: string)` (since: `v3.1.0`)
 
