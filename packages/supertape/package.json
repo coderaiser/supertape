@@ -45,7 +45,7 @@
     "@putout/cli-validate-args": "^1.0.1",
     "@supertape/engine-loader": "^1.0.0",
     "@supertape/formatter-fail": "^2.0.0",
-    "@supertape/formatter-json-lines": "^1.0.0",
+    "@supertape/formatter-json-lines": "^2.0.0",
     "@supertape/formatter-progress-bar": "^2.0.0",
     "@supertape/formatter-short": "^2.0.0",
     "@supertape/formatter-tap": "^3.0.0",
