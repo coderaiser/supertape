@@ -1,7 +1,5 @@
-'use strict';
-
-const tap = require('@supertape/formatter-tap');
-const fullstore = require('fullstore');
+import * as tap from '@supertape/formatter-tap';
+import fullstore from 'fullstore';
 
 const {
     start,
@@ -22,7 +20,7 @@ function fail(...a) {
     return `# ${message}\n${fail}`;
 }
 
-module.exports = {
+export default {
     start,
     test,
     comment,

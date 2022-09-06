@@ -1,12 +1,12 @@
-'use strict';
+import montag from 'montag';
+import pullout from 'pullout';
 
-const {once} = require('events');
+import {
+    test,
+    createTest,
+} from 'supertape';
 
-const montag = require('montag');
-const {reRequire} = require('mock-require');
-const pullout = require('pullout');
-
-const test = require('supertape');
+import failFormatter from './fail.js';
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
@@ -31,19 +31,20 @@ test('supertape: format: fail', async (t) => {
     
     const failMessage = 'format: fail';
     
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'fail',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        format: failFormatter,
     });
     
-    supertape(successMessage, successFn);
-    supertape(failMessage, failFn);
+    test(successMessage, successFn);
+    test(failMessage, failFn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(supertape.run(), 'end'),
+        pull(stream),
+        run(),
     ]);
     
     const expected = montag`
@@ -68,25 +69,24 @@ test('supertape: format: fail: skip', async (t) => {
         t.end();
     };
     
-    const message = 'success';
+    const message = 'skip: success';
     
-    process.env.SUPERTAPE_NO_PROGRESS_BAR = 1;
-    
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'fail',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        format: failFormatter,
     });
     
-    supertape.skip(message, fn);
+    test(message, fn, {
+        skip: true,
+    });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 8),
-        once(supertape.run(), 'end'),
+        pull(stream, 8),
+        run(),
     ]);
-    
-    delete process.env.SUPERTAPE_NO_PROGRESS_BAR;
     
     const expected = montag`
       TAP version 13

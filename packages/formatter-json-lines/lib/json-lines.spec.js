@@ -1,10 +1,10 @@
-import {once} from 'events';
-
 import montag from 'montag';
-import {reRequire} from 'mock-require';
 import pullout from 'pullout';
 
-import test from 'supertape';
+import {
+    test,
+    createTest,
+} from 'supertape';
 
 const {parse} = JSON;
 
@@ -31,19 +31,20 @@ test('supertape: format: json-lines', async (t) => {
     
     const tapMessage = 'json-lines: tap';
     
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
+    const {
+        test,
+        run,
+        stream,
+    } = await createTest({
         format: 'json-lines',
     });
     
-    supertape(successMessage, successFn);
-    supertape(tapMessage, tapFn);
+    test(successMessage, successFn);
+    test(tapMessage, tapFn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 2),
-        once(supertape.run(), 'end'),
+        pull(stream, 2),
+        run(),
     ]);
     
     const expected = montag`
@@ -62,18 +63,22 @@ test('supertape: format: json-lines: skip', async (t) => {
     };
     
     const message = 'success';
-    const supertape = reRequire('supertape');
     
-    supertape.init({
-        quiet: true,
+    const {
+        test,
+        run,
+        stream,
+    } = await createTest({
         format: 'json-lines',
     });
     
-    supertape.skip(message, fn);
+    test(message, fn, {
+        skip: true,
+    });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 8),
-        once(supertape.run(), 'end'),
+        pull(stream, 8),
+        run(),
     ]);
     
     const parsed = parse(result);
@@ -104,19 +109,20 @@ test('supertape: format: json-lines: comment', async (t) => {
     
     const tapMessage = 'json-lines: tap';
     
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
+    const {
+        test,
+        run,
+        stream,
+    } = await createTest({
         format: 'json-lines',
     });
     
-    supertape(successMessage, successFn);
-    supertape(tapMessage, tapFn);
+    test(successMessage, successFn);
+    test(tapMessage, tapFn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 12),
-        once(supertape.run(), 'end'),
+        pull(stream, 12),
+        run(),
     ]);
     
     const parsed = result

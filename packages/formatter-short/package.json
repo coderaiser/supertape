@@ -36,7 +36,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-putout": "^16.0.1",
     "madrun": "^9.0.0",
-    "mock-require": "^3.0.2",
     "montag": "^1.0.0",
     "nodemon": "^2.0.2",
     "pullout": "^4.0.0",
