@@ -9,7 +9,7 @@
   "release": false,
   "tag": false,
   "changelog": false,
-  "type": "module",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "git://github.com/coderaiser/supertape.git"

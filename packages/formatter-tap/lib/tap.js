@@ -1,20 +1,22 @@
+'use strict';
+
 const isStr = (a) => typeof a === 'string';
 
-export const start = () => 'TAP version 13\n';
+module.exports.start = () => 'TAP version 13\n';
 
-export const test = ({test}) => {
+module.exports.test = ({test}) => {
     return `# ${test}\n`;
 };
 
-export const comment = ({message}) => {
+module.exports.comment = ({message}) => {
     return `# ${message}\n`;
 };
 
-export const success = ({count, message}) => {
+module.exports.success = ({count, message}) => {
     return `ok ${count} ${message}\n`;
 };
 
-export const fail = ({at, count, message, operator, result, expected, output, errorStack}) => {
+module.exports.fail = ({at, count, message, operator, result, expected, output, errorStack}) => {
     const out = createOutput();
     
     out(`not ok ${count} ${message}`);
@@ -40,7 +42,7 @@ export const fail = ({at, count, message, operator, result, expected, output, er
     return out();
 };
 
-export const end = ({count, passed, failed, skiped}) => {
+module.exports.end = ({count, passed, failed, skiped}) => {
     const out = createOutput();
     
     out('');

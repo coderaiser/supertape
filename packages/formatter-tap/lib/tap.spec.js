@@ -1,10 +1,12 @@
-import {once} from 'events';
+'use strict';
 
-import montag from 'montag';
-import {reRequire} from 'mock-require';
-import pullout from 'pullout';
+const {once} = require('events');
 
-import test from 'supertape';
+const montag = require('montag');
+const {reRequire} = require('mock-require');
+const pullout = require('pullout');
+
+const test = require('supertape');
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
