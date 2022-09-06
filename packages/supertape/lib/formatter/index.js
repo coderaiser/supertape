@@ -3,11 +3,11 @@
 const {EventEmitter} = require('events');
 const {createHarness} = require('./harness');
 
-const resolveFormatter = (name) => require(`@supertape/formatter-${name}`);
+const resolveFormatter = async (name) => await import(`@supertape/formatter-${name}`);
 
-module.exports.createFormatter = (name) => {
+module.exports.createFormatter = async (name) => {
     const formatter = new EventEmitter();
-    const harness = createHarness(resolveFormatter(name));
+    const harness = createHarness(await resolveFormatter(name));
     
     formatter.on('start', ({total}) => {
         harness.write({

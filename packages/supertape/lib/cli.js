@@ -169,7 +169,9 @@ async function cli({argv, cwd, stdout, isStop}) {
         checkAssertionsCount,
     });
     
-    supertape.createStream().pipe(stdout);
+    const stream = await supertape.createStream();
+    
+    stream.pipe(stdout);
     
     const promises = [];
     const files = removeDuplicates(allFiles);

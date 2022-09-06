@@ -11,7 +11,7 @@ const {test, stub} = require('..');
 const {reRequire, stopAll} = mockRequire;
 
 const pull = async (stream, i = 9) => {
-    const output = await pullout(stream);
+    const output = await pullout(await stream);
     
     return output.split('\n')
         .slice(0, i)
