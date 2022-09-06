@@ -5,11 +5,11 @@ import {
     Stub,
 } from '@cloudcmd/stub';
 
-type Result<A = unknown, E = unknown> = {
+type Result<R = unknown, E = unknown> = {
     is: boolean;
     message: string;
     output?: string;
-    result?: A;
+    result?: R;
     expected?: E;
 };
 
@@ -18,7 +18,7 @@ type EmptyOutput = {
 };
 
 /** The result of the `t.equal()` operators. */
-type EqualResult<A, E> = Required<Result<A, E>>;
+type EqualResult<R, E> = Required<Result<R, E>>;
 
 /** The result of the `t.pass()` operator. */
 type PassResult = Pick<Result, 'message'> & EmptyOutput & {is: true};
@@ -32,7 +32,7 @@ type FailResult<M = Error> = EmptyOutput & {
 };
 
 /** The result of the `t.ok()` operators. */
-type OkResult<A, E> = Omit<Required<Result<A, E>>, 'output'>;
+type OkResult<R, E> = Omit<Required<Result<R, E>>, 'output'>;
 
 /** The result of the `t.match()` operators. */
 type MatchResult = Omit<Required<Result<string, string | RegExp>>, 'output'>;
@@ -48,7 +48,7 @@ type Operator = OperatorStub & {
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
      */
-    equal: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
+    equal: <R, E>(result: R, expected: E, message?: string) => EqualResult<R, E>;
     
     /**
      * Asserts that `result` and `expected` are not strictly equal.
@@ -59,7 +59,7 @@ type Operator = OperatorStub & {
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
      */
-    notEqual: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
+    notEqual: <R, E>(result: R, expected: E, message?: string) => EqualResult<R, E>;
     
     /**
      * Asserts that `result` and `expected` are loosely equal, with the same
@@ -72,7 +72,7 @@ type Operator = OperatorStub & {
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
      */
-    deepEqual: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
+    deepEqual: <R, E>(result: R, expected: E, message?: string) => EqualResult<R, E>;
     
     /**
      * Asserts that `result` and `expected` are not loosely equal, with different
@@ -85,21 +85,21 @@ type Operator = OperatorStub & {
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
      */
-    notDeepEqual: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
+    notDeepEqual: <R, E>(result: R, expected: E, message?: string) => EqualResult<R, E>;
     
     /**
      * Asserts that `result` is truthy.
      *
      * @param result The resulting value to be tested.
      */
-    ok: <A>(result: boolean | A, message?: string) => OkResult<A, true>;
+    ok: <R>(result: boolean | R, message?: string) => OkResult<R, true>;
     
     /**
      * Asserts that `result` is falsy.
      *
      * @param result The resulting value to be tested.
      */
-    notOk: <A>(result: boolean | A, message?: string) => OkResult<A | string, false>;
+    notOk: <R>(result: boolean | R, message?: string) => OkResult<R | string, false>;
     
     /**
      * Generates a passing assertion.
