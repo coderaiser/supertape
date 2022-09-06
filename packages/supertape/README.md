@@ -196,31 +196,31 @@ Assert that `value` is truthy with an optional description of the assertion `msg
 
 Assert that `value` is falsy with an optional description of the assertion `msg`.
 
-## t.match(actual, pattern[, msg])
+## t.match(result, pattern[, msg])
 
-Assert that `pattern: string | regexp` matches `actual` with an optional description of the assertion `msg`.
+Assert that `pattern: string | regexp` matches `result` with an optional description of the assertion `msg`.
 
-## t.notMatch(actual, pattern[, msg])
+## t.notMatch(result, pattern[, msg])
 
-Assert that `pattern: string | regexp`  not matches `actual` with an optional description of the assertion `msg`.
+Assert that `pattern: string | regexp`  not matches `result` with an optional description of the assertion `msg`.
 
-## t.equal(actual, expected, msg)
+## t.equal(result, expected, msg)
 
-Assert that `Object.is(actual, expected)` with an optional description of the assertion `msg`.
+Assert that `Object.is(result, expected)` with an optional description of the assertion `msg`.
 
-## t.notEqual(actual, expected, msg)
+## t.notEqual(result, expected, msg)
 
-Assert that `!Object.is(actual, expected)` with an optional description of the assertion `msg`.
+Assert that `!Object.is(result, expected)` with an optional description of the assertion `msg`.
 
-## t.deepEqual(actual, expected, msg)
+## t.deepEqual(result, expected, msg)
 
-Assert that `actual` and `expected` have the same structure and nested values using
+Assert that `result` and `expected` have the same structure and nested values using
 [node's deepEqual() algorithm](https://github.com/substack/node-deep-equal)
 with strict comparisons (`===`) on leaf nodes and an optional description of the assertion `msg`.
 
-## t.notDeepEqual(actual, expected, msg)
+## t.notDeepEqual(result, expected, msg)
 
-Assert that `actual` and `expected` do not have the same structure and nested values using
+Assert that `result` and `expected` do not have the same structure and nested values using
 [node's deepEqual() algorithm](https://github.com/substack/node-deep-equal)
 with strict comparisons (`===`) on leaf nodes and an optional description of the assertion `msg`.
 
