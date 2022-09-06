@@ -1,13 +1,16 @@
 'use strict';
 
 const {EventEmitter} = require('events');
+const {PassThrough} = require('stream');
+
 const once = require('once');
 
 const options = require('../supertape.json');
 
 const {getAt, setValidations} = require('./validator');
 const runTests = require('./run-tests');
-const createFormatter = once(require('./formatter').createFormatter);
+const _createFormatter = require('./formatter').createFormatter;
+const createFormatter = once(_createFormatter);
 
 const createEmitter = once(_createEmitter);
 
@@ -38,7 +41,7 @@ const defaultOptions = {
     checkScopes: true,
 };
 
-function _createEmitter({quiet, format, getOperators, isStop}) {
+function _createEmitter({quiet, stream = stdout, format, getOperators, isStop, readyFormatter}) {
     const tests = [];
     const emitter = new EventEmitter();
     
@@ -62,10 +65,10 @@ function _createEmitter({quiet, format, getOperators, isStop}) {
     });
     
     emitter.on('run', async () => {
-        const {harness, formatter} = await createFormatter(format);
+        const {harness, formatter} = readyFormatter || await createFormatter(format);
         
         if (!quiet)
-            harness.pipe(stdout);
+            harness.pipe(stream);
         
         const operators = await getOperators();
         const result = await runTests(tests, {
@@ -98,6 +101,37 @@ const createStream = async () => {
 };
 
 module.exports.createStream = createStream;
+module.exports.createTest = async (testOptions = {}) => {
+    const {format = 'tap', formatter} = testOptions;
+    const readyFormatter = await _createFormatter(formatter || format);
+    
+    const stream = new PassThrough();
+    const emitter = _createEmitter({
+        ...defaultOptions,
+        ...testOptions,
+        readyFormatter,
+        stream,
+    });
+    
+    const fn = (message, fn, options = {}) => {
+        return test(message, fn, {
+            ...testOptions,
+            ...options,
+            emitter,
+        });
+    };
+    
+    assign(fn, {
+        stream,
+        ...test,
+        test: fn,
+        run: () => {
+            emitter.emit('run');
+        },
+    });
+    
+    return fn;
+};
 
 function test(message, fn, options = {}) {
     const {
@@ -130,7 +164,7 @@ function test(message, fn, options = {}) {
     
     const at = getAt();
     
-    const emitter = createEmitter({
+    const emitter = options.emitter || createEmitter({
         format,
         quiet,
         getOperators,

@@ -870,6 +870,79 @@ test('supertape: duplicate', async (t) => {
     t.end();
 });
 
+test('supertape: createTest', async (t) => {
+    const fn = (t) => {
+        t.equal(1, 1);
+        t.end();
+    };
+    
+    const message = 'hello: world';
+    
+    const {createTest} = reRequire('..');
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        run: false,
+    });
+    
+    test(message, fn);
+    
+    const [result] = await Promise.all([
+        pull(stream),
+        run(),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello: world
+        ok 1 should equal
+        
+        1..1
+        # tests 1
+        # pass 1
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: createTest: formatter', async (t) => {
+    const fn = (t) => {
+        t.equal(1, 1);
+        t.end();
+    };
+    
+    const message = 'hello: world';
+    
+    const {createTest} = reRequire('..');
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        formatter: await import('@supertape/formatter-json-lines'),
+    });
+    
+    test(message, fn);
+    
+    const [result] = await Promise.all([
+        pull(stream),
+        run(),
+    ]);
+    
+    const expected = montag`
+        {"count":1,"total":1,"failed":0,"test":"hello: world"}
+        {"count":1,"passed":1,"failed":0,"skiped":0
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 function createStream() {
     return new Transform({
         transform(chunk, encoding, callback) {

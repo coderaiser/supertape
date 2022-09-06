@@ -40,7 +40,7 @@ function prepare(reporter) {
         success: stub,
         comment: stub,
         end: stub,
-        ...reporter,
+        ...reporter.createFormatter?.() || reporter,
     });
     
     return result;
