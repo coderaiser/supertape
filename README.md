@@ -14,7 +14,7 @@
 
 [**Tape**](https://github.com/substack/tape)-inspired [`TAP`](https://testanything.org/)-compatible simplest high speed test runner with superpowers.
 
-----
+***
 
 📼 **Supertape** is a fast, minimal test runner with the soul of **tape**. It's designed to be as compatible as possible with **tape** while still having some key improvements, such as:
 
@@ -252,7 +252,6 @@ While each formatter is maintained in a separate package, they are included when
 [FShortNPMBadge]: https://img.shields.io/npm/v/@supertape/formatter-short.svg?maxAge=86400
 [FShortNPMLink]: https://www.npmjs.com/package/@supertape/formatter-short
 
-
 #### **<u>Using Other `TAP` Reporters</u>:**
 
 If you'd like to use another output format instead of the built-in formatters, such as [**`tap-min`**](https://www.npmjs.com/package/tap-min), use the `format: 'tap'` option and pipe the output to the reporter of your choice:
@@ -272,7 +271,10 @@ This can also be done by setting [test options on a per-file basis](#per-test-op
 The `extend()` function takes a dictionary of functions that each take an object of built-in operators as input, and return an operator function with any number of arguments. The return value of the function is a `test` object with the custom operators added to it. For example, adding a `transform` operator:
 
 ```ts
-import {extend, Operator} from 'supertape';
+import {
+    extend,
+    Operator,
+} from 'supertape';
 
 const test = extend({
     /** Transforms `a` by +1 and `b` by -1. */
@@ -472,12 +474,15 @@ test('hello: world', (t) => {
 [Options](#list-of-options) can be specified on a per-test basis as well:
 
 ```ts
-import {test, TestOptions} from 'supertape';
+import {
+    test,
+    TestOptions,
+} from 'supertape';
 
 const options: TestOptions = {
     checkAssertionsCount: false,
     checkScopes: false,
-}
+};
 
 test('no scope', (t) => {
     t.pass('this test has two assertions');
