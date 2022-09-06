@@ -124,11 +124,10 @@ type Operator = OperatorStub & {
      * Generates a failing assertion.
      * 
      * @param message A description of the assertion.
-     * @param at 
      * 
      * @since v3.1.0
      */
-    fail: (message: string, at?: string) => FailResult<string>;
+    fail: (message: string) => FailResult<string>;
     
     /**
      * Declares the end of a test explicitly. `t.end()` must be
