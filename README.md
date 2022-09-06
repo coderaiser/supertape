@@ -335,7 +335,7 @@ Whether or not to not report test results. Defaults to `false`.
 
 Which output format to use for the test results. The [built-in `tap` formatters](#formatting) are `tap`, `fail`, `progress-bar`, `json-lines`, and `short`. Defaults to `tap`.
 
-When using the CLI, the default formatter is `progress-bar`. This can only be overriden using the `--format [format]` flag.
+When using the CLI, the default formatter is `progress-bar`. This can only be overridden using the `--format [format]` flag.
 
 #### `run: boolean`
 
@@ -517,7 +517,7 @@ Generates a new test function that includes the specified custom extension opera
 
 #### `test.init(options: TestOptions)`
 
-Initializes 📼 **Supertape** with the specified [options](#list-of-options). Overriden by any options passed to a given test or to `test.extend()`.
+Initializes 📼 **Supertape** with the specified [options](#list-of-options). Overridden by any options passed to a given test or to `test.extend()`.
 
 ## Operators
 

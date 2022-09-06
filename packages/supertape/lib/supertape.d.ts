@@ -236,7 +236,7 @@ type TestOptions = {
     checkScopes?: boolean;
 };
 
-/** Initializes Supertape with options for all tests. Overriden by `test(options)` on a per-test basis. */
+/** Initializes Supertape with options for all tests. Overridden by `test(options)` on a per-test basis. */
 declare function init(options: TestOptions): void;
 
 type CustomOperators = {
