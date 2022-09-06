@@ -1,6 +1,12 @@
 import test from './supertape.js';
 
-const {extend, stub, createStream, init, run} = test;
+const {
+    extend,
+    stub,
+    createStream,
+    init,
+    run,
+} = test;
 
 export default test;
 
