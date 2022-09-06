@@ -296,13 +296,14 @@ declare const skip: typeof test;
 /** Only runs the given test case. No other test cases are run. @since v1.0.0 */
 declare const only: typeof test;
 
-/** Add custom extensions operators to tests. @since v3.5.0 */
-declare function extend<O extends CustomOperators>(extensions: O): (
+type CustomTest<O extends CustomOperators> = (
     message: string,
-    // provides IntelliSense for extension operators w/ a mapped type
     fn: (t: Test & { [operator in keyof O]: (...args: Parameters<ReturnType<O[operator]>>) => void }) => void,
     options?: TestOptions,
 ) => void;
+
+/** Add custom extensions operators to tests. @since v3.5.0 */
+declare function extend<O extends CustomOperators>(extensions: O): CustomTest<O>;
 
 declare namespace test {
     export {

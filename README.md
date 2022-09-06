@@ -272,7 +272,7 @@ This can also be done by setting [test options on a per-file basis](#per-test-op
 The `extend()` function takes a dictionary of functions that each take an object of built-in operators as input, and return an operator function with any number of arguments. The return value of the function is a `test` object with the custom operators added to it. For example, adding a `transform` operator:
 
 ```ts
-import {extend} from 'supertape';
+import {extend, Operator} from 'supertape';
 
 const test = extend({
     /** Transforms `a` by +1 and `b` by -1. */
@@ -281,6 +281,7 @@ const test = extend({
         return {
             is,
             output,
+            message,
         };
     },
 });
