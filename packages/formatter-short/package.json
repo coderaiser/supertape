@@ -1,6 +1,6 @@
 {
   "name": "@supertape/formatter-short",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "📼Supertape formatter with short output (without callstack)",
   "homepage": "http://github.com/coderaiser/supertape",
@@ -9,7 +9,7 @@
   "release": false,
   "tag": false,
   "changelog": false,
-  "type": "commonjs",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git://github.com/coderaiser/supertape.git"
@@ -45,7 +45,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "publishConfig": {
     "access": "public"

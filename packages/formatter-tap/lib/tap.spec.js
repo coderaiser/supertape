@@ -9,7 +9,7 @@ const pullout = require('pullout');
 const test = require('supertape');
 
 const pull = async (stream, i = 9) => {
-    const output = await pullout(stream);
+    const output = await pullout(await stream);
     
     return output.split('\n')
         .slice(0, i)
@@ -56,7 +56,7 @@ test('supertape: format: tap', async (t) => {
             operator: ok
             expected: |-
               true
-            actual: |-
+            result: |-
               false
     `;
     
@@ -147,7 +147,7 @@ test('supertape: format: tap: comment', async (t) => {
             operator: ok
             expected: |-
               true
-            actual: |-
+            result: |-
               false
     `;
     

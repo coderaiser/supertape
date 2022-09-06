@@ -67,7 +67,7 @@ test('supertape: format: progress bar', async (t) => {
             operator: ok
             expected: |-
               true
-            actual: |-
+            result: |-
               false
     `;
     
@@ -400,7 +400,7 @@ test('supertape: format: progress bar: no stack', async (t) => {
           operator: ok
           expected: |-
             true
-          actual: |-
+          result: |-
             false
           at  xxx
         ...

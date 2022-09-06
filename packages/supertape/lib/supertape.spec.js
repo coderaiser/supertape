@@ -9,7 +9,7 @@ const {reRequire} = require('mock-require');
 const pullout = require('pullout');
 
 const pull = async (stream, end = -2) => {
-    const output = await pullout(stream);
+    const output = await pullout(await stream);
     return output.slice(0, end);
 };
 

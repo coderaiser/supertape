@@ -1,15 +1,13 @@
-'use strict';
+import {once} from 'events';
 
-const {once} = require('events');
+import montag from 'montag';
+import {reRequire} from 'mock-require';
+import pullout from 'pullout';
 
-const montag = require('montag');
-const {reRequire} = require('mock-require');
-const pullout = require('pullout');
-
-const test = require('supertape');
+import test from 'supertape';
 
 const pull = async (stream, i = 9) => {
-    const output = await pullout(stream);
+    const output = await pullout(await stream);
     
     return output.split('\n')
         .slice(0, i)
@@ -55,7 +53,7 @@ test('supertape: format: short', async (t) => {
             operator: ok
             expected: |-
               true
-            actual: |-
+            result: |-
               false
     `;
     
@@ -146,7 +144,7 @@ test('supertape: format: short: comment', async (t) => {
             operator: ok
             expected: |-
               true
-            actual: |-
+            result: |-
               false
     `;
     
@@ -231,7 +229,7 @@ test('supertape: format: short: no stack trace', async (t) => {
             operator: ok
             expected: |-
               true
-            actual: |-
+            result: |-
               false
             at xxx
           ...

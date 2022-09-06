@@ -1,6 +1,6 @@
 {
   "name": "@supertape/formatter-tap",
-  "version": "2.0.0",
+  "version": "3.0.2",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "📼Supertape formatter tap",
   "homepage": "http://github.com/coderaiser/supertape",
@@ -45,7 +45,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "publishConfig": {
     "access": "public"

@@ -56,7 +56,7 @@ test('hello', (t: Test) => {
 extend();
 
 const extendedTest = extend({
-    // THROWS Type 'string' is not assignable to type '(operator: Operator) => (...args: any[]) => Result'.
+    // THROWS Type 'string' is not assignable to type '(operator: Operator) => (...args: any[]) => OperationResult'.
     hello: 'world',
     
     superFail: ({fail}) => (message) => fail(message),

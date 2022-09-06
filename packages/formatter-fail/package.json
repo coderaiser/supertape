@@ -1,6 +1,6 @@
 {
   "name": "@supertape/formatter-fail",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "📼Supertape formatter shows only failed tests",
   "homepage": "http://github.com/coderaiser/supertape",
@@ -24,7 +24,7 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
-    "@supertape/formatter-tap": "^2.0.0",
+    "@supertape/formatter-tap": "^3.0.1",
     "fullstore": "^3.0.0"
   },
   "keywords": [
@@ -48,7 +48,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "publishConfig": {
     "access": "public"

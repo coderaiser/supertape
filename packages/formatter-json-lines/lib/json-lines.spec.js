@@ -1,17 +1,15 @@
-'use strict';
+import {once} from 'events';
 
-const {once} = require('events');
+import montag from 'montag';
+import {reRequire} from 'mock-require';
+import pullout from 'pullout';
 
-const montag = require('montag');
-const {reRequire} = require('mock-require');
-const pullout = require('pullout');
-
-const test = require('supertape');
+import test from 'supertape';
 
 const {parse} = JSON;
 
 const pull = async (stream, i = 9) => {
-    const output = await pullout(stream);
+    const output = await pullout(await stream);
     
     return output.split('\n')
         .slice(0, i)
@@ -141,7 +139,7 @@ test('supertape: format: json-lines: comment', async (t) => {
         test: 'json-lines: tap',
         total: 2,
     }, {
-        actual: false,
+        result: false,
         count: 2,
         expected: true,
         message: 'should be truthy',

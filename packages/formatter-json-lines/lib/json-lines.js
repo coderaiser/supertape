@@ -1,17 +1,15 @@
-'use strict';
-
-const fullstore = require('fullstore');
+import fullstore from 'fullstore';
 
 const out = createOutput();
 const store = fullstore();
 
-module.exports.test = ({test}) => {
+export const test = ({test}) => {
     store(test);
 };
 
 const stringify = (a) => JSON.stringify(a) + '\n';
 
-module.exports.testEnd = ({count, total, failed, test}) => {
+export const testEnd = ({count, total, failed, test}) => {
     return stringify({
         count,
         total,
@@ -20,23 +18,21 @@ module.exports.testEnd = ({count, total, failed, test}) => {
     });
 };
 
-module.exports.fail = ({at, count, message, operator, actual, expected, output, errorStack}) => {
-    const result = {
+export const fail = ({at, count, message, operator, result, expected, output, errorStack}) => {
+    return out({
         test: store(),
         at,
         count,
         message,
         operator,
-        actual,
+        result,
         expected,
         errorStack,
         output,
-    };
-    
-    return out(result);
+    });
 };
 
-module.exports.end = ({count, passed, failed, skiped}) => {
+export const end = ({count, passed, failed, skiped}) => {
     out({
         count,
         passed,
