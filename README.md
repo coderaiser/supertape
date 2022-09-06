@@ -86,7 +86,7 @@ $ [npx] supertape "tests/test1.js" [options]
 
 If a glob is specified instead of a single file path (e.g. `tests/*.js`), all of the tests results are outputted together.
 
-#### **<u>Command Line Flags</u>:**
+#### **<ins>Command Line Flags</ins>:**
 
 #### `--help` (alias: `-h`)
 
@@ -116,7 +116,7 @@ Tells 📼 **Supertape** not to check the number of assertions per test case. By
 
 Tells 📼 **Supertape** not to check test case messages for proper scoping (i.e. in the form `'scope: message'`). By default, messages are expected to be scoped.
 
-#### **<u>Environment Variables</u>:**
+#### **<ins>Environment Variables</ins>:**
 
 #### `SUPERTAPE_TIMEOUT`
 
@@ -172,7 +172,7 @@ $ ts-node test.ts
 
 Options can be specified either by using [environment variables](#environment-variables) or on a per-file basis with `test.init(options)` or `test(message, fn, options)`.
 
-#### **<u>With Environment Variables</u>:**
+#### **<ins>With Environment Variables</ins>:**
 
 For example, setting options for the `progress-bar` formatter:
 
@@ -180,7 +180,7 @@ For example, setting options for the `progress-bar` formatter:
 $ SUPERTAPE_PROGRESS_BAR_MIN=10 node test.js
 ```
 
-#### **<u>Initialization</u>:**
+#### **<ins>Initialization</ins>:**
 
 📼 **Supertape** also provides a function `test.init(options)` that initializes the test engine with the specified options:
 
@@ -194,7 +194,7 @@ init({
 
 Any options specified in an individual test take precedence over initialized options.
 
-#### **<u>Per-Test Options</u>:**
+#### **<ins>Per-Test Options</ins>:**
 
 Individual test cases take an optional `options` parameter that overrides any previously-specified options:
 
@@ -207,7 +207,7 @@ test('test: options', (t) => {
 }, {format: 'short'});
 ```
 
-#### **<u>Using a Wrapper</u>:**
+#### **<ins>Using a Wrapper</ins>:**
 
 Instead of setting the same options on each test in multiple files (or in a `test.init()` call in each file), a custom wrapper can be used that sets common options:
 
@@ -222,7 +222,7 @@ export const test = (message, fn) => _test(message, fn, {
 
 ### Formatting
 
-#### **<u>Built-In Formatters</u>:**
+#### **<ins>Built-In Formatters</ins>:**
 
 📼 **Supertape** provides a few different output formats beyond the regular `TAP` format. When using the [`supertape` CLI](#command-line), the `progress-bar` formatter is used by default. In all other cases, the default is the `tap` format.
 
@@ -252,7 +252,7 @@ While each formatter is maintained in a separate package, they are included when
 [FShortNPMBadge]: https://img.shields.io/npm/v/@supertape/formatter-short.svg?maxAge=86400
 [FShortNPMLink]: https://www.npmjs.com/package/@supertape/formatter-short
 
-#### **<u>Using Other `TAP` Reporters</u>:**
+#### **<ins>Using Other `TAP` Reporters</ins>:**
 
 If you'd like to use another output format instead of the built-in formatters, such as [**`tap-min`**](https://www.npmjs.com/package/tap-min), use the `format: 'tap'` option and pipe the output to the reporter of your choice:
 
@@ -266,7 +266,7 @@ This can also be done by setting [test options on a per-file basis](#per-test-op
 
 📼 **Supertape** maintains a minimal number of core assertions, leaving out aliases and things like `t.throws()`. Custom extension operators can either be added through the `test.extend(extensions)` function or through options (such as in [`test()`](#per-test-options) or [`test.init()`](#initialization)).
 
-#### **<u>`test.extend(extensions)`</u>:**
+#### **<ins>`test.extend(extensions)`</ins>:**
 
 The `extend()` function takes a dictionary of functions that each take an object of built-in operators as input, and return an operator function with any number of arguments. The return value of the function is a `test` object with the custom operators added to it. For example, adding a `transform` operator:
 
@@ -297,7 +297,7 @@ test('test: transform', (t) => {
 
 If using **TypeScript**, all of the provided extension operators are mapped to the `test` object and are included in IntelliSense hints.
 
-#### **<u>`options.extensions`</u>:**
+#### **<ins>`options.extensions`</ins>:**
 
 Extension operators can also be included in the `options` object in calls to `test()` and `test.init()`. Currently, however, operators included this way do not give **TypeScript** IntelliSense hints.
 
@@ -353,7 +353,7 @@ This check cannot be disabled. In addition, 🐊 **Putout** has a rule 🐊 [`re
 
 [PutoutTEnd]: https://github.com/coderaiser/putout/blob/master/packages/plugin-tape/README.md#remove-useless-t-end
 
-#### **❌ <u>Example of Incorrect Code</u>:**
+#### **❌ <ins>Example of Incorrect Code</ins>:**
 
 ```js
 test('hello: world', (t) => {
@@ -363,7 +363,7 @@ test('hello: world', (t) => {
 });
 ```
 
-#### **✅ <u>Example of Correct Code</u>:**
+#### **✅ <ins>Example of Correct Code</ins>:**
 
 ```js
 test('hello: world', (t) => {
@@ -380,7 +380,7 @@ test('hello: world', (t) => {
 - the [`SUPERTAPE_CHECK_DUPLICATES`](#supertape_check_duplicates) environment variable (set to `0`)
 - the [`checkDuplicates`](#checkduplicates-boolean-since-v560) test option (set to `true`)
 
-#### **❌ <u>Example of Incorrect Code</u>:**
+#### **❌ <ins>Example of Incorrect Code</ins>:**
 
 ```js
 test('hello: world', (t) => {
@@ -402,7 +402,7 @@ test('hello: world', (t) => {
 - the [`SUPERTAPE_CHECK_ASSERTIONS_COUNT`](#supertape_check_assertions_count) environment variable (set to `0`)
 - the [`checkAssertionsCount`](#checkassertionscount-boolean-since-v680) test option (set to `true`)
 
-#### **❌ <u>Example of Incorrect Code</u>:**
+#### **❌ <ins>Example of Incorrect Code</ins>:**
 
 ```js
 test('test: no assertion', (t) => {
@@ -416,7 +416,7 @@ test('test: more than one assertion', (t) => {
 });
 ```
 
-#### **✅ <u>Example of Correct Code</u>:**
+#### **✅ <ins>Example of Correct Code</ins>:**
 
 ```js
 test('test: one', (t) => {
@@ -438,7 +438,7 @@ test('test: two', (t) => {
 - the [`SUPERTAPE_CHECK_SCOPES`](#supertape_check_scopes) environment variable (set to `0`)
 - the [`checkScopes`](#checkscopes-boolean-since-v670) test option (set to `true`)
 
-#### **❌ <u>Example of Incorrect Code</u>:**
+#### **❌ <ins>Example of Incorrect Code</ins>:**
 
 ```js
 test('test no scope', (t) => {
@@ -447,7 +447,7 @@ test('test no scope', (t) => {
 });
 ```
 
-#### **✅ <u>Example of Correct Code</u>:**
+#### **✅ <ins>Example of Correct Code</ins>:**
 
 ```js
 test('test: scope', (t) => {
