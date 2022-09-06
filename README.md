@@ -134,10 +134,6 @@ Set to `0` to tell 📼 **Supertape** not to check the number of assertions per 
 
 Set to `0` to tell 📼 **Supertape** not to check test case messages for proper scoping (i.e. in the form `'scope: message'`). By default, messages are expected to be scoped.
 
-#### `CI=1`
-
-TODO: disable progress bar?
-
 #### `SUPERTAPE_PROGRESS_BAR`
 
 TODO: force enable/disable progress bar?
