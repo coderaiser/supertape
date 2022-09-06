@@ -1,6 +1,6 @@
 {
   "name": "@supertape/formatter-json-lines",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "📼Supertape formatter progress bar",
   "homepage": "http://github.com/coderaiser/supertape",
