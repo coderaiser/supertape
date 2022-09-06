@@ -48,7 +48,7 @@
     "@supertape/formatter-json-lines": "^1.0.0",
     "@supertape/formatter-progress-bar": "^2.0.0",
     "@supertape/formatter-short": "^1.0.0",
-    "@supertape/formatter-tap": "^2.0.0",
+    "@supertape/formatter-tap": "^3.0.0",
     "@supertape/operator-stub": "^2.0.0",
     "cli-progress": "^3.8.2",
     "deep-equal": "^2.0.3",
