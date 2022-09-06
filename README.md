@@ -24,7 +24,6 @@
 - the ability to [extend](#extending)
 - showing colored diff when using the [`t.equal()`](#tequalresult-any-expected-any-message-string) and [`t.deepEqual()`](#tdeepequalresult-any-expected-any-message-string) assertion operators
 - detailed stack traces for `async` functions
-- not needing to specify the number of assertions with [`t.plan()`](https://github.com/substack/tape#tplann)
 - multiple [`test.only`'s](#testonlymessage-string-fn-t-test--void-options-testoptions)
 - [smart timeouts](#supertape_timeout) for long running tests 🏃‍♂️
 - more natural assertions: `expected, result` -> `result, expected`:
@@ -38,6 +37,7 @@
 - assertion aliases, making the available operators far more concise
 - `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills)
 - `t.throws()`, `t.doesNotThrow()` - use [**tryCatch**](https://github.com/coderaiser/try-catch) or [**tryToCatch**](https://github.com/coderaiser/try-to-catch) with `t.equal()` instead
+- [`t.plan()`](https://github.com/substack/tape#tplann) - can have either 1 or any number of assertions per test
 
 For a list of all built-in assertions, see [Operators](#operators).
 
