@@ -1,6 +1,6 @@
 {
   "name": "@supertape/formatter-fail",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "📼Supertape formatter shows only failed tests",
   "homepage": "http://github.com/coderaiser/supertape",
@@ -24,7 +24,7 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
-    "@supertape/formatter-tap": "^3.0.1",
+    "@supertape/formatter-tap": "^3.0.3",
     "fullstore": "^3.0.0"
   },
   "keywords": [
