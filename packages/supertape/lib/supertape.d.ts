@@ -47,8 +47,6 @@ type Operator = OperatorStub & {
      * @param result The resulting value to be tested.
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
-     *
-     * @since v1.0.2 (renamed from `equals` added in v1.0.0)
      */
     equal: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
     
@@ -60,8 +58,6 @@ type Operator = OperatorStub & {
      * @param result The resulting value to be tested.
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
-     *
-     * @since v3.3.0
      */
     notEqual: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
     
@@ -75,8 +71,6 @@ type Operator = OperatorStub & {
      * @param result The resulting value to be tested.
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
-     *
-     * @since v1.0.2 (renamed from `deepEquals` added in v1.0.0)
      */
     deepEqual: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
     
@@ -90,8 +84,6 @@ type Operator = OperatorStub & {
      * @param result The resulting value to be tested.
      * @param expected The value to be tested against.
      * @param message An optional description of the assertion.
-     *
-     * @since v3.3.0
      */
     notDeepEqual: <A, E>(result: A, expected: E, message?: string) => EqualResult<A, E>;
     
@@ -99,8 +91,6 @@ type Operator = OperatorStub & {
      * Asserts that `result` is truthy.
      *
      * @param result The resulting value to be tested.
-     *
-     * @since v3.1.0
      */
     ok: <A>(result: boolean | A, message?: string) => OkResult<A, true>;
     
@@ -108,8 +98,6 @@ type Operator = OperatorStub & {
      * Asserts that `result` is falsy.
      *
      * @param result The resulting value to be tested.
-     *
-     * @since v3.1.0
      */
     notOk: <A>(result: boolean | A, message?: string) => OkResult<A | string, false>;
     
@@ -117,8 +105,6 @@ type Operator = OperatorStub & {
      * Generates a passing assertion.
      *
      * @param message An optional description of the assertion.
-     *
-     * @since v3.2.0
      */
     pass: (message?: string) => PassResult;
     
@@ -126,8 +112,6 @@ type Operator = OperatorStub & {
      * Generates a failing assertion.
      *
      * @param message A description of the assertion.
-     *
-     * @since v3.1.0
      */
     fail: (message: string) => FailResult<string>;
     
@@ -135,8 +119,6 @@ type Operator = OperatorStub & {
      * Declares the end of a test explicitly. `t.end()` must be
      * called once (and only once) per test, and no further
      * assertions are allowed.
-     *
-     * @since v3.1.0
      */
     end: () => void;
     
@@ -148,8 +130,6 @@ type Operator = OperatorStub & {
      * @param result The resulting value to be tested.
      * @param pattern A regex to be tested against.
      * @param message An optional description of the assertion.
-     *
-     * @since v5.1.0
      */
     match: (result: string, pattern: string | RegExp, message?: string) => MatchResult | FailResult;
     
@@ -161,8 +141,6 @@ type Operator = OperatorStub & {
      * @param result The resulting value to be tested.
      * @param pattern A regex to be tested against.
      * @param message An optional description of the assertion.
-     *
-     * @since v5.6.0
      */
     notMatch: (result: string, pattern: string | RegExp, message?: string) => MatchResult;
 };
@@ -172,8 +150,6 @@ type CommentOperator = {
      * Prints a message without breaking the `tap` output.
      *
      * @param message The message to be printed.
-     *
-     * @since v3.1.0
      */
     comment: (message: string) => void;
 };
@@ -183,19 +159,10 @@ type Test = CommentOperator & {
     [operator in keyof Operator]: (...args: Parameters<Operator[operator]>) => void;
 };
 
-/** @since v3.8.0 */
 type FormatterTap = 'tap';
-
-/** @since v3.8.0 */
 type FormatterFail = 'fail';
-
-/** @since v3.9.0 */
 type FormatterProgressBar = 'progress-bar';
-
-/** @since v4.3.0 */
 type FormatterJSONLines = 'json-lines';
-
-/** @since v6.2.0 */
 type FormatterShort = 'short';
 
 /** Built-in `tap` formatters for test outputs. */
@@ -210,7 +177,6 @@ type TestOptions = {
     /**
      * Whether or not to skip this test case.
      * @default false
-     * @since v1.0.0
      */
     skip?: boolean;
     
@@ -218,21 +184,18 @@ type TestOptions = {
      * Whether or not to mark this test case as the only one
      * run by the process.
      * @default false
-     * @since v1.0.0
      */
     only?: boolean;
     
     /**
      * Custom extension operators to use in this test case.
      * @default {}
-     * @since v3.5.0
      */
     extensions?: CustomOperators;
     
     /**
      * Whether or not to not report test results.
      * @default false
-     * @since v3.8.0
      */
     quiet?: boolean;
     
@@ -240,22 +203,19 @@ type TestOptions = {
      * Which output format to use for the test results.
      * @default 'tap'
      * @note When using the CLI, the default is `progress-bar`.
-     * @since v3.8.1 (renamed from `formatter` added in v.3.8.0)
      */
     format?: BuiltInFormatter;
     
     /**
      * Whether or not to run this test case.
      * @default true
-     * @since v3.8.0
      */
     run?: boolean;
     
     /**
      * Whether or not to check test messages for duplicates.
      * By default, Supertape expects each message to be unique.
-     * @default true // (`false` until v6.0.0)
-     * @since v5.6.0
+     * @default true
      */
     checkDuplicates?: boolean;
     
@@ -264,7 +224,6 @@ type TestOptions = {
      * test case. By default, Supertape expects each test to
      * have only one assertion.
      * @default true
-     * @since v6.8.0
      */
     checkAssertionsCount?: boolean;
     
@@ -273,12 +232,11 @@ type TestOptions = {
      * (i.e. in the form `'scope: message'`). By default,
      * Supertape expects each test case to be scoped.
      * @default true
-     * @since v6.7.0
      */
     checkScopes?: boolean;
 };
 
-/** Initializes Supertape with options for all tests. Overriden by `test(options)` on a per-test basis. @since v3.4.0 */
+/** Initializes Supertape with options for all tests. Overriden by `test(options)` on a per-test basis. */
 declare function init(options: TestOptions): void;
 
 type CustomOperators = {
@@ -295,10 +253,10 @@ type CustomOperators = {
  */
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
 
-/** Skips the given test case. @since v1.0.0 */
+/** Skips the given test case. */
 declare const skip: typeof test;
 
-/** Only runs the given test case. No other test cases are run. @since v1.0.0 */
+/** Only runs the given test case. No other test cases are run. */
 declare const only: typeof test;
 
 // Map custom operators onto `Test`
@@ -309,7 +267,7 @@ type CustomTest<O extends CustomOperators> = Test & {
 // `test()` with custom operators
 type ExtendedTest<O extends CustomOperators> = (message: string, fn: (t: CustomTest<O>) => void, options?: TestOptions) => void;
 
-/** Add custom extensions operators to tests. @since v3.5.0 */
+/** Add custom extensions operators to tests. */
 declare function extend<O extends CustomOperators>(extensions: O): ExtendedTest<O>;
 
 declare namespace test {
