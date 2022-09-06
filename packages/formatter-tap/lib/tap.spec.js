@@ -56,7 +56,7 @@ test('supertape: format: tap', async (t) => {
             operator: ok
             expected: |-
               true
-            actual: |-
+            result: |-
               false
     `;
     
@@ -147,7 +147,7 @@ test('supertape: format: tap: comment', async (t) => {
             operator: ok
             expected: |-
               true
-            actual: |-
+            result: |-
               false
     `;
     

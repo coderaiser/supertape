@@ -5,30 +5,30 @@ import {
     Stub,
 } from '@cloudcmd/stub';
 
-type Result = {
+type OperationResult = {
     is: boolean,
     expected: unknown,
-    actual: unknown,
+    result: unknown,
     message: string,
     output: string,
 };
 
 type Operator = {
-    [index: string]: (...args: any[]) => Result
+    [index: string]: (...args: any[]) => OperationResult;
 };
 
 type Test = Operator & OperatorStub & {
-    equal: (result: unknown, expected: unknown, message?: string) => Result;
-    notEqual: (result: unknown, expected: unknown, message?: string) => Result;
-    deepEqual: (result: unknown, expected: unknown, message?: string) => Result;
-    notDeepEqual: (result: unknown, expected: unknown, message?: string) => Result;
-    fail: (message: string) => Result;
-    pass: (message: string) => Result;
-    ok: (result: boolean | unknown, message?: string) => Result;
-    comment: (message: string) => Result;
-    notOk: (result: boolean | unknown, message?: string) => Result;
-    match: (result: string, pattern: string | RegExp, message?: string) => Result;
-    notMatch: (result: string, pattern: string | RegExp, message?: string) => Result;
+    equal: (result: unknown, expected: unknown, message?: string) => OperationResult;
+    notEqual: (result: unknown, expected: unknown, message?: string) => OperationResult;
+    deepEqual: (result: unknown, expected: unknown, message?: string) => OperationResult;
+    notDeepEqual: (result: unknown, expected: unknown, message?: string) => OperationResult;
+    fail: (message: string) => OperationResult;
+    pass: (message: string) => OperationResult;
+    ok: (result: boolean | unknown, message?: string) => OperationResult;
+    comment: (message: string) => OperationResult;
+    notOk: (result: boolean | unknown, message?: string) => OperationResult;
+    match: (result: string, pattern: string | RegExp, message?: string) => OperationResult;
+    notMatch: (result: string, pattern: string | RegExp, message?: string) => OperationResult;
     end: () => void;
 };
 
@@ -47,7 +47,7 @@ declare namespace test {
 export default test;
 
 type CustomOperator = {
-    [index: string]: (operator: Operator) => (...args: any[]) => Result
+    [index: string]: (operator: Operator) => (...args: any[]) => OperationResult
 };
 
 declare function extend(customOperator: CustomOperator): typeof test;

@@ -54,7 +54,7 @@ test('supertape: format: fail', async (t) => {
             operator: ok
             expected: |-
               true
-            actual: |-
+            result: |-
               false
     `;
     

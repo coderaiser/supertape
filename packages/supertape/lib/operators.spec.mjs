@@ -148,7 +148,7 @@ test('supertape: operators: notOk: false', (t) => {
 
 test('supertape: operators: notOk: object', (t) => {
     const {notOk} = operators;
-    const {actual} = notOk({
+    const {result} = notOk({
         hello: 'world',
     });
     
@@ -156,7 +156,7 @@ test('supertape: operators: notOk: object', (t) => {
         hello: 'world',
     });
     
-    t.equal(actual, expected);
+    t.equal(result, expected);
     t.end();
 });
 

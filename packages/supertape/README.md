@@ -21,6 +21,7 @@ and has a couple differences. It contains:
 - as many `only` as you wish;
 - ability to extend;
 - smart timeouts for long running tests 🏃‍♂️(configured with `SUPERTAPE_TIMEOUT`);
+- outputs `result` instead of `actual`;
 - more natural assertions: `expected, result` -> `result, expected`, for example:
 
 ```js

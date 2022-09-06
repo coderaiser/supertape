@@ -16,7 +16,7 @@ module.exports.success = ({count, message}) => {
     return `ok ${count} ${message}\n`;
 };
 
-module.exports.fail = ({at, count, message, operator, actual, expected, output}) => {
+module.exports.fail = ({at, count, message, operator, result, expected, output}) => {
     const out = createOutput();
     
     out(`not ok ${count} ${message}`);
@@ -29,8 +29,8 @@ module.exports.fail = ({at, count, message, operator, actual, expected, output})
     if (!isStr(output)) {
         out('    expected: |-');
         out(`      ${expected}`);
-        out('    actual: |-');
-        out(`      ${actual}`);
+        out('    result: |-');
+        out(`      ${result}`);
     }
     
     out(`    ${at}`);

@@ -48,14 +48,14 @@ module.exports.createFormatter = (name) => {
         });
     });
     
-    formatter.on('test:fail', ({at, count, message, operator, actual, expected, output, errorStack}) => {
+    formatter.on('test:fail', ({at, count, message, operator, result, expected, output, errorStack}) => {
         harness.write({
             type: 'fail',
             at,
             count,
             message,
             operator,
-            actual,
+            result,
             expected,
             output,
             errorStack,

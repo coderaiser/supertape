@@ -16,17 +16,17 @@ const isObj = (a) => typeof a === 'object';
 
 const end = () => {};
 
-const ok = (actual, message = 'should be truthy') => ({
-    is: Boolean(actual),
+const ok = (result, message = 'should be truthy') => ({
+    is: Boolean(result),
     expected: true,
-    actual,
+    result,
     message,
 });
 
-const notOk = (actual, message = 'should be falsy') => ({
-    is: !actual,
+const notOk = (result, message = 'should be falsy') => ({
+    is: !result,
     expected: false,
-    actual: actual && stringify(actual),
+    result: result && stringify(result),
     message,
 });
 
@@ -42,56 +42,56 @@ const validateRegExp = (regexp) => {
 
 const {stringify} = JSON;
 
-function match(actual, regexp, message = 'should match') {
+function match(result, regexp, message = 'should match') {
     const error = validateRegExp(regexp);
     
     if (error)
         return fail(error);
     
-    const is = maybeRegExp(regexp).test(actual);
+    const is = maybeRegExp(regexp).test(result);
     
     return {
         is,
-        actual,
+        result,
         expected: regexp,
         message,
     };
 }
 
-function notMatch(actual, regexp, message = 'should not match') {
-    const {is} = match(actual, regexp, message);
+function notMatch(result, regexp, message = 'should not match') {
+    const {is} = match(result, regexp, message);
     
     return {
         is: !is,
-        actual,
+        result,
         expected: regexp,
         message,
     };
 }
 
-function equal(actual, expected, message = 'should equal') {
+function equal(result, expected, message = 'should equal') {
     let output = '';
-    const is = Object.is(actual, expected);
+    const is = Object.is(result, expected);
     
     if (!is)
-        output = diff(expected, actual) || '    result: values not equal, but deepEqual';
+        output = diff(expected, result) || '    result: values not equal, but deepEqual';
     
     return {
         is,
-        actual,
+        result,
         expected,
         message,
         output,
     };
 }
 
-function notEqual(actual, expected, message = 'should not equal') {
-    const is = !Object.is(actual, expected);
-    const output = is ? '' : diff(expected, actual);
+function notEqual(result, expected, message = 'should not equal') {
+    const is = !Object.is(result, expected);
+    const output = is ? '' : diff(expected, result);
     
     return {
         is,
-        actual,
+        result,
         expected,
         message,
         output,
@@ -112,26 +112,26 @@ const fail = (error, at) => ({
     at,
 });
 
-const deepEqual = (actual, expected, message = 'should deep equal') => {
-    const is = deepEqualCheck(actual, expected);
-    const output = is ? '' : diff(expected, actual);
+const deepEqual = (result, expected, message = 'should deep equal') => {
+    const is = deepEqualCheck(result, expected);
+    const output = is ? '' : diff(expected, result);
     
     return {
         is: is || !output,
-        actual,
+        result,
         expected,
         message,
         output,
     };
 };
 
-const notDeepEqual = (actual, expected, message = 'should not deep equal') => {
-    const is = !deepEqualCheck(actual, expected);
-    const output = is ? '' : diff(expected, actual);
+const notDeepEqual = (result, expected, message = 'should not deep equal') => {
+    const is = !deepEqualCheck(result, expected);
+    const output = is ? '' : diff(expected, result);
     
     return {
         is,
-        actual,
+        result,
         expected,
         message,
         output,
@@ -245,7 +245,7 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
         is,
         message,
         expected,
-        actual,
+        result,
         output,
         stack,
         at,
@@ -272,7 +272,7 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
         count: count(),
         message,
         operator: name,
-        actual,
+        result,
         expected,
         output,
         errorStack: formatOutput(errorStack),

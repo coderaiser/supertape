@@ -53,7 +53,7 @@ module.exports.testEnd = ({count, total, failed, test}) => {
     });
 };
 
-module.exports.fail = ({at, count, message, operator, actual, expected, output, errorStack}) => {
+module.exports.fail = ({at, count, message, operator, result, expected, output, errorStack}) => {
     out('');
     out(store());
     out(`❌ not ok ${count} ${message}`);
@@ -66,8 +66,8 @@ module.exports.fail = ({at, count, message, operator, actual, expected, output, 
     if (!isStr(output)) {
         out('    expected: |-');
         out(`      ${expected}`);
-        out('    actual: |-');
-        out(`      ${actual}`);
+        out('    result: |-');
+        out(`      ${result}`);
     }
     
     out(`    ${at}`);

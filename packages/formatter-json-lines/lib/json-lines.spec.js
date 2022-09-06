@@ -141,7 +141,7 @@ test('supertape: format: json-lines: comment', async (t) => {
         test: 'json-lines: tap',
         total: 2,
     }, {
-        actual: false,
+        result: false,
         count: 2,
         expected: true,
         message: 'should be truthy',

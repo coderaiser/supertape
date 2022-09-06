@@ -20,20 +20,18 @@ module.exports.testEnd = ({count, total, failed, test}) => {
     });
 };
 
-module.exports.fail = ({at, count, message, operator, actual, expected, output, errorStack}) => {
-    const result = {
+module.exports.fail = ({at, count, message, operator, result, expected, output, errorStack}) => {
+    return out({
         test: store(),
         at,
         count,
         message,
         operator,
-        actual,
+        result,
         expected,
         errorStack,
         output,
-    };
-    
-    return out(result);
+    });
 };
 
 module.exports.end = ({count, passed, failed, skiped}) => {
