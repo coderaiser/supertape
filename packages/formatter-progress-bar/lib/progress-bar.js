@@ -1,12 +1,11 @@
-'use strict';
+import {Writable} from 'stream';
 
-const {Writable} = require('stream');
+import cliProgress from 'cli-progress';
+import chalk from 'chalk';
+import fullstore from 'fullstore';
+import {isCI} from 'ci-info';
 
-const cliProgress = require('cli-progress');
-const chalk = require('chalk');
-const once = require('once');
-const fullstore = require('fullstore');
-const {isCI} = require('ci-info');
+global._isCI = isCI;
 
 const OK = '👌';
 const YELLOW = '#f9d472';
@@ -15,37 +14,54 @@ const {red} = chalk;
 const formatErrorsCount = (a) => a ? red(a) : OK;
 
 const isStr = (a) => typeof a === 'string';
-const out = createOutput();
-const store = fullstore();
 
 const {stderr} = process;
-const {
-    SUPERTAPE_PROGRESS_BAR,
-    SUPERTAPE_PROGRESS_BAR_MIN = 100,
-    SUPERTAPE_PROGRESS_BAR_COLOR,
-    SUPERTAPE_PROGRESS_BAR_STACK = 1,
-} = process.env;
 
-let bar;
+let SUPERTAPE_PROGRESS_BAR;
+let SUPERTAPE_PROGRESS_BAR_MIN = 100;
+let SUPERTAPE_PROGRESS_BAR_COLOR;
+let SUPERTAPE_PROGRESS_BAR_STACK = 1;
 
-module.exports.start = ({total}) => {
+export function createFormatter(bar) {
+    ({
+        SUPERTAPE_PROGRESS_BAR,
+        SUPERTAPE_PROGRESS_BAR_MIN = 100,
+        SUPERTAPE_PROGRESS_BAR_COLOR,
+        SUPERTAPE_PROGRESS_BAR_STACK = 1,
+    } = process.env);
+    
+    const out = createOutput();
+    const store = fullstore();
+    const barStore = fullstore(bar);
+    
+    return {
+        start: start({barStore, out}),
+        test: test({store}),
+        testEnd: testEnd({barStore}),
+        fail: fail({out, store}),
+        end: end({barStore, out}),
+    };
+}
+
+export const start = ({barStore, out}) => ({total}) => {
     out('TAP version 13');
     
     const color = SUPERTAPE_PROGRESS_BAR_COLOR || YELLOW;
-    
-    bar = createProgress({
+    const bar = barStore() || _createProgress({
         total,
         color,
         test: '',
     });
+    
+    barStore(bar);
 };
 
-module.exports.test = ({test}) => {
+export const test = ({store}) => ({test}) => {
     store(`# ${test}`);
 };
 
-module.exports.testEnd = ({count, total, failed, test}) => {
-    bar.increment({
+export const testEnd = ({barStore}) => ({count, total, failed, test}) => {
+    barStore().increment({
         count,
         total,
         test,
@@ -53,7 +69,7 @@ module.exports.testEnd = ({count, total, failed, test}) => {
     });
 };
 
-module.exports.fail = ({at, count, message, operator, result, expected, output, errorStack}) => {
+export const fail = ({out, store}) => ({at, count, message, operator, result, expected, output, errorStack}) => {
     out('');
     out(store());
     out(`❌ not ok ${count} ${message}`);
@@ -81,8 +97,8 @@ module.exports.fail = ({at, count, message, operator, result, expected, output, 
     out('');
 };
 
-module.exports.end = ({count, passed, failed, skiped}) => {
-    bar.stop();
+export const end = ({barStore, out}) => ({count, passed, failed, skiped}) => {
+    barStore().stop();
     
     out('');
     
@@ -111,13 +127,17 @@ module.exports.end = ({count, passed, failed, skiped}) => {
 };
 
 function createOutput() {
-    const output = [];
+    let output = [];
     
     return (...args) => {
         const [line] = args;
         
-        if (!args.length)
-            return output.join('\n');
+        if (!args.length) {
+            const result = output.join('\n');
+            output = [];
+            
+            return result;
+        }
         
         output.push(line);
     };
@@ -137,15 +157,15 @@ const defaultStreamOptions = {
 const getStream = ({total} = defaultStreamOptions) => {
     const is = total >= SUPERTAPE_PROGRESS_BAR_MIN;
     
-    if (is && !isCI || SUPERTAPE_PROGRESS_BAR === '1')
+    if (is && !global._isCI || SUPERTAPE_PROGRESS_BAR === '1')
         return stderr;
     
     return new Writable();
 };
 
-module.exports._getStream = getStream;
+export const _getStream = getStream;
 
-const createProgress = once(({total, color, test}) => {
+function _createProgress({total, color, test}) {
     const colorFn = getColorFn(color);
     const bar = new cliProgress.SingleBar({
         format: `${colorFn('{bar}')} {percentage}% | {failed} | {count}/{total} | {test}`,
@@ -167,5 +187,5 @@ const createProgress = once(({total, color, test}) => {
     });
     
     return bar;
-});
+}
 
