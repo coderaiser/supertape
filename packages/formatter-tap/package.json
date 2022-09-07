@@ -1,6 +1,6 @@
 {
   "name": "@supertape/formatter-tap",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "📼Supertape formatter tap",
   "homepage": "http://github.com/coderaiser/supertape",
@@ -9,7 +9,7 @@
   "release": false,
   "tag": false,
   "changelog": false,
-  "type": "commonjs",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git://github.com/coderaiser/supertape.git"
@@ -36,12 +36,11 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-putout": "^16.0.1",
     "madrun": "^9.0.0",
-    "mock-require": "^3.0.2",
     "montag": "^1.0.0",
     "nodemon": "^2.0.2",
     "pullout": "^4.0.0",
     "putout": "^27.2.0",
-    "supertape": "^7.0.0"
+    "supertape": "^8.0.0"
   },
   "license": "MIT",
   "engines": {

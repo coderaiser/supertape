@@ -1,10 +1,12 @@
-import {once} from 'events';
-
 import montag from 'montag';
-import {reRequire} from 'mock-require';
 import pullout from 'pullout';
 
-import test from 'supertape';
+import {
+    test,
+    createTest,
+} from 'supertape';
+
+import * as shortFormatter from './short.js';
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
@@ -28,19 +30,20 @@ test('supertape: format: short', async (t) => {
     };
     
     const tapMessage = 'format: short';
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'short',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        format: shortFormatter,
     });
     
-    supertape(successMessage, successFn);
-    supertape(tapMessage, tapFn);
+    test(successMessage, successFn);
+    test(tapMessage, tapFn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 11),
-        once(supertape.run(), 'end'),
+        pull(stream, 11),
+        run(),
     ]);
     
     const expected = montag`
@@ -71,18 +74,21 @@ test('supertape: format: short: skip', async (t) => {
     
     process.env.SUPERTAPE_NO_PROGRESS_BAR = 1;
     
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'short',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        format: shortFormatter,
     });
     
-    supertape.skip(message, fn);
+    test(message, fn, {
+        skip: true,
+    });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 8),
-        once(supertape.run(), 'end'),
+        pull(stream, 8),
+        run(),
     ]);
     
     delete process.env.SUPERTAPE_NO_PROGRESS_BAR;
@@ -117,20 +123,20 @@ test('supertape: format: short: comment', async (t) => {
     };
     
     const tapMessage = 'format: short';
-    
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'short',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        formatter: shortFormatter,
     });
     
-    supertape(successMessage, successFn);
-    supertape(tapMessage, tapFn);
+    test(successMessage, successFn);
+    test(tapMessage, tapFn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 12),
-        once(supertape.run(), 'end'),
+        pull(stream, 12),
+        run(),
     ]);
     
     const expected = montag`
@@ -159,20 +165,20 @@ test('supertape: formatter: short: output', async (t) => {
     };
     
     const message = 'hello world';
-    
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'short',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        formatter: shortFormatter,
     });
     
-    await supertape(message, fn);
+    await test(message, fn);
     
     const BEFORE_DIFF = 6;
     const [result] = await Promise.all([
-        pull(supertape.createStream(), BEFORE_DIFF),
-        once(supertape.run(), 'end'),
+        pull(stream, BEFORE_DIFF),
+        run(),
     ]);
     
     const expected = montag`
@@ -202,19 +208,20 @@ test('supertape: format: short: no stack trace', async (t) => {
     };
     
     const tapMessage = 'format: short';
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'short',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        formatter: shortFormatter,
     });
     
-    supertape(successMessage, successFn);
-    supertape(tapMessage, tapFn);
+    test(successMessage, successFn);
+    test(tapMessage, tapFn);
     
     const [output] = await Promise.all([
-        pull(supertape.createStream(), 18),
-        once(supertape.run(), 'end'),
+        pull(stream, 18),
+        run(),
     ]);
     
     const result = output.replace(/at .+\n/, 'at xxx\n');

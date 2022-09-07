@@ -6,6 +6,7 @@ const {
     createStream,
     init,
     run,
+    createTest,
 } = test;
 
 export default test;
@@ -17,4 +18,5 @@ export {
     createStream,
     init,
     run,
+    createTest,
 };

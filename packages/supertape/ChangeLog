@@ -1,3 +1,28 @@
+2022.09.07, v8.0.0
+
+fix:
+- @supertape/formatter-short: drop support of node < 16
+- @supertape/formatter-tap: drop support of node < 16
+- @supertape/formatter-tap: get back commonjs, since @supertape/formatter-fail is commonjs
+
+feature:
+- package: @supertape/formatter-progress-bar v3.0.0
+- formatters: convert to ESM
+- supertape: add ability to use 'createFormatter()' to create formatters
+- @putout/formatter-progress-bar: convert to ESM
+- package: @supertape/formatter-fail v3.0.0
+- @supertape/formatter-json-lines: drop support of node < 16
+- @supertape/formatter-fail: drop support of node < 16
+- package: @supertape/formatter-tap v3.0.1
+- package: @supertape/formatter-json-lines v2.0.0
+- package: @supertape/formatter-short v2.0.0
+- package: @supertape/formatter-tap v3.0.0
+- @supertape/formatter-short: convert to ESM
+- @supertape/formatter-tap: convert to ESM
+- @supertape/formatter-json-lines: convert to ESM
+- supertape: add support of ESM formatters
+- supertape: actual -> result
+
 2022.08.29, v7.7.1
 
 feature:

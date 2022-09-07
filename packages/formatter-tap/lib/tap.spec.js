@@ -1,12 +1,11 @@
-'use strict';
+import montag from 'montag';
+import pullout from 'pullout';
 
-const {once} = require('events');
-
-const montag = require('montag');
-const {reRequire} = require('mock-require');
-const pullout = require('pullout');
-
-const test = require('supertape');
+import {
+    test,
+    createTest,
+} from 'supertape';
+import * as tapFormatter from './tap.js';
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
@@ -31,19 +30,20 @@ test('supertape: format: tap', async (t) => {
     
     const tapMessage = 'format: tap';
     
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'tap',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        formatter: tapFormatter,
     });
     
-    supertape(successMessage, successFn);
-    supertape(tapMessage, tapFn);
+    test(successMessage, successFn);
+    test(tapMessage, tapFn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 11),
-        once(supertape.run(), 'end'),
+        pull(stream, 11),
+        run(),
     ]);
     
     const expected = montag`
@@ -71,21 +71,21 @@ test('supertape: format: tap: skip', async (t) => {
     };
     
     const message = 'success';
-    
-    process.env.SUPERTAPE_NO_PROGRESS_BAR = 1;
-    
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'tap',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        formatter: tapFormatter,
     });
     
-    supertape.skip(message, fn);
+    test(message, fn, {
+        skip: true,
+    });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 8),
-        once(supertape.run(), 'end'),
+        pull(stream, 8),
+        run(),
     ]);
     
     delete process.env.SUPERTAPE_NO_PROGRESS_BAR;
@@ -121,19 +121,20 @@ test('supertape: format: tap: comment', async (t) => {
     
     const tapMessage = 'format: tap';
     
-    const supertape = reRequire('supertape');
-    
-    supertape.init({
-        quiet: true,
-        format: 'tap',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        formatter: tapFormatter,
     });
     
-    supertape(successMessage, successFn);
-    supertape(tapMessage, tapFn);
+    test(successMessage, successFn);
+    test(tapMessage, tapFn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 12),
-        once(supertape.run(), 'end'),
+        pull(stream, 12),
+        run(),
     ]);
     
     const expected = montag`
@@ -163,16 +164,20 @@ test('supertape: formatter: tap: output', async (t) => {
     
     const message = 'hello world';
     
-    const supertape = reRequire('supertape');
-    await supertape(message, fn, {
-        quiet: true,
-        format: 'tap',
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        formatter: tapFormatter,
     });
+    
+    test(message, fn);
     
     const BEFORE_DIFF = 6;
     const [result] = await Promise.all([
-        pull(supertape.createStream(), BEFORE_DIFF),
-        once(supertape.run(), 'end'),
+        pull(stream, BEFORE_DIFF),
+        run(),
     ]);
     
     const expected = montag`
