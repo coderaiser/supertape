@@ -1,3 +1,10 @@
+2022.09.07, v8.0.1
+
+feature:
+- package: @supertape/operator-stub v3.0.0
+- @supertape/operator-stub: type: Result -> OperationResult
+- (package) supertape v8.0.0
+
 2022.09.07, v8.0.0
 
 fix:
