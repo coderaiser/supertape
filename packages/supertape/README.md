@@ -164,7 +164,6 @@ Here is a list of built-int operators:
 |--------|-------|
 | [`@supertape/operator-stub`](/packages/operator-stub) | [![npm](https://img.shields.io/npm/v/@supertape/operator-stub.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-stub) |
 
-
 ## Formatters
 
 There is a list of built-int `formatters` to customize output:
