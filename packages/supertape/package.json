@@ -79,7 +79,6 @@
     "c8": "^7.3.5",
     "check-dts": "^0.6.5",
     "eslint": "^8.0.0",
-    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-putout": "^16.0.1",
     "find-up": "^6.3.0",
     "madrun": "^9.0.0",
