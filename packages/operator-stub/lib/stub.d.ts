@@ -1,6 +1,6 @@
 import {Stub} from '@cloudcmd/stub';
 
-type Result = {
+type OperationResult = {
     is: boolean,
     expected: unknown,
     actual: unknown,
@@ -9,16 +9,16 @@ type Result = {
 export function stub(arg?: unknown): Stub;
 
 export interface OperatorStub {
-    called: (fn: Stub, message?: string) => Result
-    notCalled: (fn: Stub, message?: string) => Result
-    calledWith: (fn: Stub, args: unknown[], message?: string) => Result;
-    calledWithNoArgs: (fn: Stub, message?: string) => Result;
-    calledCount: (fn: Stub, count: number, message?: string) => Result;
-    calledOnce: (fn: Stub, message?: string) => Result;
-    calledTwice: (fn: Stub, message?: string) => Result;
-    calledWithNew: (fn: Stub, message?: string) => Result;
-    calledBefore: (fn1: Stub, fn2: Stub, message?: string) => Result;
-    calledAfter: (fn1: Stub, fn2: Stub, message?: string) => Result;
-    calledInOrder: (fns: Stub[], message?: string) => Result;
+    called: (fn: Stub, message?: string) => OperationResult
+    notCalled: (fn: Stub, message?: string) => OperationResult
+    calledWith: (fn: Stub, args: unknown[], message?: string) => OperationResult;
+    calledWithNoArgs: (fn: Stub, message?: string) => OperationResult;
+    calledCount: (fn: Stub, count: number, message?: string) => OperationResult;
+    calledOnce: (fn: Stub, message?: string) => OperationResult;
+    calledTwice: (fn: Stub, message?: string) => OperationResult;
+    calledWithNew: (fn: Stub, message?: string) => OperationResult;
+    calledBefore: (fn1: Stub, fn2: Stub, message?: string) => OperationResult;
+    calledAfter: (fn1: Stub, fn2: Stub, message?: string) => OperationResult;
+    calledInOrder: (fns: Stub[], message?: string) => OperationResult;
 }
 
