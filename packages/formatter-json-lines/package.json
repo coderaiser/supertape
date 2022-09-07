@@ -35,6 +35,7 @@
     "@babel/core": "^7.12.9",
     "c8": "^7.3.5",
     "eslint": "^8.0.0-beta.0",
+    "eslint-plugin-n": "^15.2.5",
     "eslint-plugin-putout": "^16.0.1",
     "madrun": "^9.0.0",
     "montag": "^1.0.0",
