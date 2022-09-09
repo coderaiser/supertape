@@ -1,15 +1,13 @@
 'use strict';
 
-const {resolve: resolvePath} = require('path');
 const {once} = require('events');
-const {pathToFileURL} = require('url');
 
 const yargsParser = require('yargs-parser');
 const glob = require('glob');
 const fullstore = require('fullstore');
 const tryToCatch = require('try-to-catch');
 const keypress = require('@putout/cli-keypress');
-const {simpleImport} = require('./simple-import');
+const {importOrRequire} = require('./import-or-require');
 
 const supertape = require('..');
 const {
@@ -176,11 +174,8 @@ async function cli({argv, cwd, stdout, isStop}) {
     const promises = [];
     const files = removeDuplicates(allFiles);
     
-    for (const file of files) {
-        // always resolve before import for windows
-        const resolved = pathToFileURL(resolvePath(cwd, file));
-        promises.push(simpleImport(resolved));
-    }
+    for (const file of files)
+        promises.push(importOrRequire(cwd, file));
     
     filesCount(files.length);
     
