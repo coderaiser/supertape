@@ -144,6 +144,12 @@ Certain options, such as [`SUPERTAPE_TIMEOUT`](#supertape_timeout) can only be s
 
 Controls the time (in milliseconds) that a test is allowed to run for before timing out. By default, tests time out after 3 seconds (or `3000` ms).
 
+#### `SUPERTAPE_CHECK_SKIPED`
+
+If specified, tells 📼 **Supertape** to check the number of skipped test files. Exits with status code [`SKIPED`](#-exit-codes).
+
+*Note: yes, `skiped` is a typo.*
+
 #### `SUPERTAPE_PROGRESS_BAR_COLOR`
 
 If using the `progress-bar` formatter, sets the color of the progress bar itself. Can either be a hex color or a valid [**chalk**](https://github.com/chalk/chalk#colors) color. Defaults to ![#f9d472](https://via.placeholder.com/15/f9d472/f9d472.png) `#f9d472`.
@@ -557,6 +563,32 @@ To simplify the core of 📼 **Supertape**, other operators are maintained in se
 
 [OperatorStubNPMBadge]: https://img.shields.io/npm/v/@supertape/operator-stub.svg?maxAge=86400
 [OperatorStubNPMLink]: https://www.npmjs.com/package/@supertape/operator-stub
+
+## 🚪 Exit Codes
+
+📼**Supertape** can have one of the following [exit codes](https://github.com/coderaiser/supertape/blob/master/packages/supertape/lib/exit-codes.js) to denote its status:
+
+| Code | Name | Description |
+|------|------|-----------------|
+| 0    | `OK` | no errors found |
+| 1    | `FAIL` | test failed |
+| 2    | `WAS_STOP` | test was halted by user |
+| 3    | `UNHANDLED`| unhandled exception occurred |
+| 4    | `INVALID_OPTION`| wrong option provided |
+| 5    | `SKIPED` | works only with [`SUPERTAPE_CHECK_SKIPED`](#supertape_check_skiped) when skiped files 1 and more |
+
+```js
+import {SKIPED} from 'supertape/exit-codes';
+
+const env = {
+    ESCOVER_SUCCESS_EXIT_CODE: SKIPED,
+    SUPERTAPE_CHECK_SKIPED: 1,
+};
+
+export default {
+    test: () => [env, `escover tape 'test/**/*.js' 'lib/**/*.spec.js'`],
+};
+```
 
 ## 🐊 **Putout**
 
