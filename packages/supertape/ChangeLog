@@ -1,3 +1,10 @@
+2022.09.15, v8.1.0
+
+feature:
+- supertape: add ability to return value from operator
+- package: @supertape/operator-stub v3.0.0
+- @supertape/operator-stub: type: Result -> OperationResult
+
 2022.09.07, v8.0.1
 
 feature:
