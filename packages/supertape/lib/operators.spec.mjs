@@ -37,6 +37,32 @@ test('supertape: operators: extendOperators', async (t) => {
     t.end();
 });
 
+test('supertape: operators: returns', (t) => {
+    const result = t.equal('a', 'a');
+    
+    t.equal(result.message, 'should equal');
+    t.end();
+}, {checkAssertionsCount: false});
+
+test('supertape: operators: extendOperators: async: returns', async (t) => {
+    const extensions = {
+        transformCode: (t) => async (a, b) => {
+            return await t.equal(a, b, 'should transform code');
+        },
+    };
+    
+    const formatter = new EventEmitter();
+    const {transformCode} = initOperators(getStubs({formatter, extensions}));
+    
+    const [result] = await Promise.all([
+        transformCode('a', 'a'),
+        once(formatter, 'test:success'),
+    ]);
+    
+    t.equal(result.message, 'should transform code');
+    t.end();
+});
+
 test('supertape: operators: initOperators: notEqual', async (t) => {
     const formatter = new EventEmitter();
     const {notEqual} = initOperators(getStubs({formatter}));

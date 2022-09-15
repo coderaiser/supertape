@@ -910,6 +910,36 @@ test('supertape: createTest', async (t) => {
     t.end();
 });
 
+test('supertape: createTest: operator returns', async (t) => {
+    let result;
+    
+    const fn = (t) => {
+        result = t.equal(1, 1);
+        t.end();
+    };
+    
+    const message = 'hello: world';
+    
+    const {createTest} = reRequire('..');
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        run: false,
+    });
+    
+    test(message, fn);
+    
+    await Promise.all([
+        pull(stream),
+        run(),
+    ]);
+    
+    t.equal(result.message, 'should equal');
+    t.end();
+});
+
 test('supertape: createTest: formatter', async (t) => {
     const fn = (t) => {
         t.equal(1, 1);

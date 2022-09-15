@@ -179,7 +179,9 @@ const initOperator = (runnerState) => (name) => {
                 return end;
             
             const testState = await fn(...a);
-            return run(name, runnerState, testState);
+            run(name, runnerState, testState);
+            
+            return testState;
         };
     
     return (...a) => {
@@ -193,7 +195,9 @@ const initOperator = (runnerState) => (name) => {
             return end;
         
         const testState = fn(...a);
-        return run(name, runnerState, testState);
+        run(name, runnerState, testState);
+        
+        return testState;
     };
 };
 
