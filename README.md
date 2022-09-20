@@ -12,9 +12,7 @@
 
 [![supertape](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY.svg)](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY)
 
-[**Tape**](https://github.com/substack/tape)-inspired [`TAP`](https://testanything.org/)-compatible simplest high speed test runner with superpowers.
-
-📼 **Supertape** is a fast, minimal test runner with the soul of **tape**. It's designed to be as compatible as possible with **tape** while still having some key improvements, such as:
+📼 **Supertape** is [**Tape**](https://github.com/substack/tape)-inspired [`TAP`](https://testanything.org/)-compatible simplest high speed test runner with superpowers. It's designed to be as compatible as possible with **tape** while still having some key improvements, such as:
 
 - the ability to work with [ESM Modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking and 🎩[ESCover](https://github.com/coderaiser/escover) for coverage)
 - a number of [built-in pretty output formatters](#formatters)
@@ -28,13 +26,13 @@
   ```js
   t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
   ```
+- ability to generate tests with ♨️[**Speca**](https://github.com/coderaiser/speca)
 
 📼 **Supertape** doesn't contain:
 
 - assertion aliases, making the available operators far more concise
 - `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills)
 - `t.throws()`, `t.doesNotThrow()` - use [**tryCatch**](https://github.com/coderaiser/try-catch) or [**tryToCatch**](https://github.com/coderaiser/try-to-catch) with [`t.equal()`](#tequalresult-any-expected-any-message-string) instead
-- [`t.plan()`](https://github.com/substack/tape#tplann)
 
 For a list of all built-in assertions, see [Operators](#operators).
 
