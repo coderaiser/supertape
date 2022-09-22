@@ -14,8 +14,6 @@
 
 [**Tape**](https://github.com/substack/tape)-inspired [`TAP`](https://testanything.org/)-compatible simplest high speed test runner with superpowers.
 
-----
-
 📼 **Supertape** is a fast, minimal test runner with the soul of **tape**. It's designed to be as compatible as possible with **tape** while still having some key improvements, such as:
 
 - out-of-the-box [ES6 module](https://nodejs.org/api/esm.html) support (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking and 🎩[ESCover](https://github.com/coderaiser/escover) for coverage)
