@@ -41,7 +41,6 @@ For a list of all built-in assertions, see [Operators](#operators).
 
 ## Installation
 
-```plain
 npm i supertape -D
 ```
 
