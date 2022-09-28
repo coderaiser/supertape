@@ -199,7 +199,7 @@ test('hello: two', (t) => {
 
 ## Operators
 
-The assertion methods of 📼 **Supertape** are heavily influenced by [**tape**](https://github.com/substack/tape). However, to keep a minimal core of assertions, there are no aliases and some superfluous operators have been removed (such as `t.throws()`).
+The assertion methods of 📼 **Supertape** are heavily influenced by [**tape**](https://github.com/substack/tape). However, to keep a minimal core of assertions, there are no aliases and some superfluous operators hasn't been implemented (such as `t.throws()`).
 
 The following is a list of the base methods maintained by 📼 **Supertape**. Others, such as assertions for stubbing, are maintained in [special operators](#special-operators). To add custom assertion operators, see [Extending](#testextendextensions).
 
@@ -209,25 +209,25 @@ The following is a list of the base methods maintained by 📼 **Supertape**. Ot
 
 Asserts that `result` and `expected` are strictly equal. If `message` is provided, it will be outputted as a description of the assertion.
 
-*Note: uses `Object.is(result, expected)`*
+☝️ *Note: uses `Object.is(result, expected)`*
 
 #### `t.notEqual(result: any, expected: any, message?: string)`
 
 Asserts that `result` and `expected` are not strictly equal. If `message` is provided, it will be outputted as a description of the assertion.
 
-*Note: uses `!Object.is(result, expected)`*
+☝️ *Note: uses `!Object.is(result, expected)`*
 
 #### `t.deepEqual(result: any, expected: any, message?: string)`
 
 Asserts that `result` and `expected` are loosely equal, with the same structure and nested values. If `message` is provided, it will be outputted as a description of the assertion.
 
-*Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
+☝️ *Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
 
 #### `t.notDeepEqual(result: any, expected: any, message?: string)`
 
 Asserts that `result` and `expected` not loosely equal, with different structure and/or nested values. If `message` is provided, it will be outputted as a description of the assertion.
 
-*Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
+☝️ *Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
 
 [NodeDeepEqual]: https://github.com/substack/node-deep-equal
 
