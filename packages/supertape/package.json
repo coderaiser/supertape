@@ -87,7 +87,7 @@
     "montag": "^1.0.0",
     "nodemon": "^2.0.2",
     "pullout": "^4.0.0",
-    "putout": "^27.2.0",
+    "putout": "^28.0.0",
     "runsome": "^1.0.0",
     "try-catch": "^3.0.0",
     "typescript": "^4.4.4"
