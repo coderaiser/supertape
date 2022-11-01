@@ -1,7 +1,5 @@
 name: Node PR CI
-on:
-  pull_request
-
+on: pull_request
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,28 +11,24 @@ jobs:
         node-version:
           - 16.x
           - 18.x
+          - 19.x
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Redrun
         run: npm i redrun -g
-
       - name: Install
         run: npm install
-
       - name: Bootstrap
         run: redrun bootstrap
-
       - name: Lint
         run: redrun lint
-      
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-        
       - uses: actions/cache@v3
         with:
           path: |
@@ -44,13 +38,9 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-        
       - name: Typos Install
         run: cargo install typos-cli || echo 'already installed'
-      
       - name: Typos
         run: typos
-      
       - name: Coverage
         run: redrun coverage report
- 
