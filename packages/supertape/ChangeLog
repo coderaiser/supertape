@@ -1,3 +1,10 @@
+2022.11.14, v8.2.0
+
+feature:
+- supertape: types: improve support of skip, only in WebStorm
+- (package) putout v28.0.0
+- (package) lerna v6.0.1
+
 2022.09.15, v8.1.0
 
 feature:
