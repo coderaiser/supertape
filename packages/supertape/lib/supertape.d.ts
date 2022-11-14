@@ -39,9 +39,14 @@ type TestOptions = {
 };
 
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
+declare const skip: typeof test;
+declare const only: typeof test;
+
 declare namespace test {
-    export var only: typeof test;
-    export var skip: typeof test;
+    export {
+        only,
+        skip,
+    };
 }
 
 export default test;

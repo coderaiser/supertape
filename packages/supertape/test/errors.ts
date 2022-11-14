@@ -27,8 +27,9 @@ test('stub should be a function', (t) => {
     t.end();
 });
 
-test.only('hello', (t: Test) => {
-    t.end();
+// THROWS Argument of type 'number' is not assignable to parameter of type 'string'.
+test.only(123, (t) => {
+    t.abc();
 });
 
 test.skip('hello', (t: Test) => {
