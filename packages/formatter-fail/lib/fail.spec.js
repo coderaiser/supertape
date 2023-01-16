@@ -6,7 +6,7 @@ import {
     createTest,
 } from 'supertape';
 
-import failFormatter from './fail.js';
+import * as failFormatter from './fail.js';
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
