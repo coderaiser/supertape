@@ -110,6 +110,33 @@ test('supertape: validator: checkScopes: @', (t) => {
     t.end();
 });
 
+test('supertape: validator: checkScopes: +', (t) => {
+    const {
+        createValidator,
+        setValidations,
+    } = reRequire('./validator');
+    const current = {
+        message: '+hello: world',
+        at: 'at',
+    };
+    
+    const tests = [current];
+    
+    setValidations({
+        checkScopes: true,
+    });
+    
+    const validate = createValidator({
+        tests,
+    });
+    
+    const result = validate('+hello: world');
+    const expected = [];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
 test('supertape: validator: checkAssertionsCount', (t) => {
     const {
         createValidator,
