@@ -1,3 +1,11 @@
+2023.02.03, v8.3.0
+
+fix:
+- @supertape/formatter-fail: export: default -> named
+
+feature:
+- validate: add support of any symbol before ":"
+
 2022.11.14, v8.2.0
 
 feature:
