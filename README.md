@@ -31,7 +31,7 @@
 📼 **Supertape** doesn't contain:
 
 - assertion aliases, making the available operators far more concise
-- `es3 code` and lot's of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills)
+- `es3 code` and lots of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills)
 - `t.throws()`, `t.doesNotThrow()` - use [**tryCatch**](https://github.com/coderaiser/try-catch) or [**tryToCatch**](https://github.com/coderaiser/try-to-catch) with [`t.equal()`](#tequalresult-any-expected-any-message-string) instead
 
 For a list of all built-in assertions, see [Operators](#operators).
@@ -74,8 +74,8 @@ test('tape: error', (t) => {
 
 > 🐊 + 📼 = ❤️
 
-You can convert your codebase from **tape** to 📼**Supertape** with help of 🐊[**Putout**](https://github.com/coderaiser/putout), which has built-in [**@putout/plugin-tape**](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape#readme),
-with a lot of rules that helps to write and maintain tests of the highest possible quality.
+You can convert your codebase from **Tape**, or **Jest** to 📼**Supertape** with help of 🐊[**Putout**](https://github.com/coderaiser/putout), which has built-in [**@putout/plugin-tape**](https://github.com/coderaiser/putout/tree/master/packages/plugin-tape#readme),
+with a lots of rules that helps to write and maintain tests of the highest possible quality.
 
 Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795d22e98937dce0641ee3c7514a79e9e6).
 
