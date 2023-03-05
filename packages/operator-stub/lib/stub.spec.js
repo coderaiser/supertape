@@ -5,6 +5,8 @@ import {
 
 import * as operator from './stub.js';
 
+const noop = () => {};
+
 const test = extend(operator);
 
 test('supertape: operator: stub: not called', (t) => {
@@ -188,12 +190,12 @@ test('supertape: operator: stub: calledWith: deep equals', (t) => {
     
     const obj = {
         hello: 'world',
-        f: () => {},
+        f: noop,
     };
     
     fn(obj);
     
-    t.calledWith(fn, [{hello: 'world', f: () => {}}]);
+    t.calledWith(fn, [{hello: 'world', f: noop}]);
     t.end();
 });
 

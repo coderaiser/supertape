@@ -11,6 +11,8 @@ import {
     operators,
 } from './operators.mjs';
 
+const noop = () => {};
+
 const {stringify} = JSON;
 
 test('supertape: operators: extendOperators', async (t) => {
@@ -104,11 +106,11 @@ test('supertape: operators: deepEqual: no visual differences', async (t) => {
     const {deepEqual} = initOperators(getStubs({formatter}));
     
     const a = {
-        fn: () => {},
+        fn: noop,
     };
     
     const b = {
-        fn: () => {},
+        fn: noop,
     };
     const [[result]] = await Promise.all([
         once(formatter, 'test:success'),

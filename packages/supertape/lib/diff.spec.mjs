@@ -1,6 +1,8 @@
 import test from './supertape.js';
 import diff from './diff.mjs';
 
+const noop = () => {};
+
 test('supertape: diff', (t) => {
     const diffed = diff(undefined, 'hello');
     const {length} = diffed.split('\n');
@@ -12,11 +14,11 @@ test('supertape: diff', (t) => {
 
 test('supertape: diff: no diff', (t) => {
     const a = {
-        fn: () => {},
+        fn: noop,
     };
     
     const b = {
-        fn: () => {},
+        fn: noop,
     };
     
     const diffed = diff(a, b);

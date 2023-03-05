@@ -26,7 +26,10 @@ const {reRequire, stopAll} = mockRequire;
 const {assign} = Object;
 
 test('supertape: cli: -r', async (t) => {
-    const argv = ['-r', 'hello'];
+    const argv = [
+        '-r',
+        'hello',
+    ];
     const write = stub();
     const stderr = {
         write,
@@ -79,7 +82,10 @@ test('supertape: bin: cli: glob', async (t) => {
 });
 
 test('supertape: bin: cli: glob: a couple', async (t) => {
-    const argv = ['hello', 'world'];
+    const argv = [
+        'hello',
+        'world',
+    ];
     const sync = stub().returns([]);
     
     mockRequire('glob', {
