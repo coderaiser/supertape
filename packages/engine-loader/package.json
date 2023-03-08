@@ -5,7 +5,6 @@
   "description": "supertape stub operator",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/loader.js",
-  "commitType": "colon",
   "release": false,
   "tag": false,
   "changelog": false,

@@ -5,7 +5,6 @@
   "description": "📼Supertape formatter with short output (without callstack)",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/short.js",
-  "commitType": "colon",
   "release": false,
   "tag": false,
   "changelog": false,

@@ -5,7 +5,6 @@
   "description": "📼Supertape formatter tap",
   "homepage": "http://github.com/coderaiser/supertape",
   "main": "./lib/tap.js",
-  "commitType": "colon",
   "release": false,
   "tag": false,
   "changelog": false,
