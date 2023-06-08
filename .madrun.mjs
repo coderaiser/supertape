@@ -28,7 +28,7 @@ export default {
     'fix:lint:fresh': () => run('fix:lint', '--fresh'),
     'fix:lint:cache': () => run('lint:cache', '--fix'),
     'fix:lint:slow': () => 'lerna run --no-bail fix:lint',
-    'bootstrap': () => 'lerna bootstrap',
+    'bootstrap': () => 'npm i',
     'report': () => `c8 report --reporter=lcov`,
     'prepare': () => 'husky install',
 };
