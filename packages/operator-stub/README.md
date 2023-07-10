@@ -22,9 +22,7 @@ Adds next operators to work with:
 ### t.calledWith(fn, args [, message])
 
 ```js
-import test, {
-    stub,
-} from 'supertape';
+import test, {stub} from 'supertape';
 
 test('function call', (t) => {
     const fn = stub();
@@ -39,9 +37,7 @@ test('function call', (t) => {
 ### t.calledWithNoArgs(fn[, message])
 
 ```js
-import test, {
-    stub,
-} from 'supertape';
+import test, {stub} from 'supertape';
 
 test('function called with no args', (t) => {
     const fn = stub();
@@ -56,9 +52,7 @@ test('function called with no args', (t) => {
 ### t.calledCount(fn, count[, message])
 
 ```js
-import test, {
-    stub,
-} from 'supertape';
+import test, {stub} from 'supertape';
 
 test('function called count', (t) => {
     const fn = stub();
@@ -74,9 +68,7 @@ test('function called count', (t) => {
 ### t.calledOnce(fn [, message])
 
 ```js
-import test, {
-    stub,
-} from 'supertape';
+import test, {stub} from 'supertape';
 
 test('function called once', (t) => {
     const fn = stub();
@@ -91,9 +83,7 @@ test('function called once', (t) => {
 ### t.calledTwice(fn, count[, message])
 
 ```js
-import test, {
-    stub,
-} from 'supertape';
+import test, {stub} from 'supertape';
 
 test('function called twice', (t) => {
     const fn = stub();
@@ -109,9 +99,7 @@ test('function called twice', (t) => {
 ### t.calledWithNew(fn, count[, message])
 
 ```js
-import test, {
-    stub,
-} from 'supertape';
+import test, {stub} from 'supertape';
 
 test('function called with new', (t) => {
     const fn = stub();
@@ -129,9 +117,7 @@ Check that `fn1` called before `fn2`.
 Do not forget to set names of stubs.
 
 ```js
-import test, {
-    stub,
-} from 'supertape';
+import test, {stub} from 'supertape';
 
 test('function called with new', (t) => {
     const init = stub().withName('init');
@@ -151,9 +137,7 @@ Check that `fn1` called after `fn2`.
 Do not forget to set names of stubs.
 
 ```js
-import test, {
-    stub,
-} from 'supertape';
+import test, {stub} from 'supertape';
 
 test('function called with new', (t) => {
     const init = stub().withName('init');
@@ -173,9 +157,7 @@ Check that array of stubs `fns` called in order;
 Do not forget to set names of stubs.
 
 ```js
-import test, {
-    stub,
-} from 'supertape';
+import test, {stub} from 'supertape';
 
 test('function called with new', (t) => {
     const init = stub().withName('init');

@@ -2,9 +2,7 @@ import {
     once,
     EventEmitter,
 } from 'events';
-
 import stub from '@cloudcmd/stub';
-
 import test from './supertape.js';
 import {
     initOperators,
@@ -23,7 +21,10 @@ test('supertape: operators: extendOperators', async (t) => {
     };
     
     const formatter = new EventEmitter();
-    const {transformCode} = initOperators(getStubs({formatter, extensions}));
+    const {transformCode} = initOperators(getStubs({
+        formatter,
+        extensions,
+    }));
     
     const [[result]] = await Promise.all([
         once(formatter, 'test:success'),
@@ -44,7 +45,9 @@ test('supertape: operators: returns', (t) => {
     
     t.equal(result.message, 'should equal');
     t.end();
-}, {checkAssertionsCount: false});
+}, {
+    checkAssertionsCount: false,
+});
 
 test('supertape: operators: extendOperators: async: returns', async (t) => {
     const extensions = {
@@ -54,7 +57,10 @@ test('supertape: operators: extendOperators: async: returns', async (t) => {
     };
     
     const formatter = new EventEmitter();
-    const {transformCode} = initOperators(getStubs({formatter, extensions}));
+    const {transformCode} = initOperators(getStubs({
+        formatter,
+        extensions,
+    }));
     
     const [result] = await Promise.all([
         transformCode('a', 'a'),
@@ -67,7 +73,9 @@ test('supertape: operators: extendOperators: async: returns', async (t) => {
 
 test('supertape: operators: initOperators: notEqual', async (t) => {
     const formatter = new EventEmitter();
-    const {notEqual} = initOperators(getStubs({formatter}));
+    const {notEqual} = initOperators(getStubs({
+        formatter,
+    }));
     
     const [[result]] = await Promise.all([
         once(formatter, 'test:success'),
@@ -85,11 +93,15 @@ test('supertape: operators: initOperators: notEqual', async (t) => {
 
 test('supertape: operators: initOperators: notDeepEqual: true', async (t) => {
     const formatter = new EventEmitter();
-    const {notDeepEqual} = initOperators(getStubs({formatter}));
+    const {notDeepEqual} = initOperators(getStubs({
+        formatter,
+    }));
     
     const [[result]] = await Promise.all([
         once(formatter, 'test:success'),
-        notDeepEqual({a: 'b'}, {b: 'a'}),
+        notDeepEqual({a: 'b'}, {
+            b: 'a',
+        }),
     ]);
     
     const expected = {
@@ -103,7 +115,9 @@ test('supertape: operators: initOperators: notDeepEqual: true', async (t) => {
 
 test('supertape: operators: deepEqual: no visual differences', async (t) => {
     const formatter = new EventEmitter();
-    const {deepEqual} = initOperators(getStubs({formatter}));
+    const {deepEqual} = initOperators(getStubs({
+        formatter,
+    }));
     
     const a = {
         fn: noop,
@@ -112,6 +126,7 @@ test('supertape: operators: deepEqual: no visual differences', async (t) => {
     const b = {
         fn: noop,
     };
+    
     const [[result]] = await Promise.all([
         once(formatter, 'test:success'),
         deepEqual(a, b),
@@ -152,7 +167,9 @@ test('supertape: operators: notEqual: false', (t) => {
 
 test('supertape: operators: notDeepEqual: false', (t) => {
     const {notDeepEqual} = operators;
-    const {is} = notDeepEqual({a: 'b'}, {a: 'b'});
+    const {is} = notDeepEqual({a: 'b'}, {
+        a: 'b',
+    });
     
     t.notOk(is);
     t.end();
@@ -291,4 +308,3 @@ function getStubs(stubs = {}) {
         extensions,
     };
 }
-

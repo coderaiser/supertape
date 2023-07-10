@@ -1,22 +1,19 @@
 import {OperatorStub} from '@supertape/operator-stub';
-
 import {
     stub,
     Stub,
 } from '@cloudcmd/stub';
 
 type OperationResult = {
-    is: boolean,
-    expected: unknown,
-    result: unknown,
-    message: string,
-    output: string,
+    is: boolean;
+    expected: unknown;
+    result: unknown;
+    message: string;
+    output: string;
 };
-
 type Operator = {
     [index: string]: (...args: any[]) => OperationResult;
 };
-
 type Test = Operator & OperatorStub & {
     equal: (result: unknown, expected: unknown, message?: string) => OperationResult;
     notEqual: (result: unknown, expected: unknown, message?: string) => OperationResult;
@@ -31,11 +28,10 @@ type Test = Operator & OperatorStub & {
     notMatch: (result: string, pattern: string | RegExp, message?: string) => OperationResult;
     end: () => void;
 };
-
 type TestOptions = {
-    checkAssertionsCount?: boolean,
-    checkScopes?: boolean,
-    checkDuplicates?: boolean,
+    checkAssertionsCount?: boolean;
+    checkScopes?: boolean;
+    checkDuplicates?: boolean;
 };
 
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
@@ -52,11 +48,10 @@ declare namespace test {
 export default test;
 
 type CustomOperator = {
-    [index: string]: (operator: Operator) => (...args: any[]) => OperationResult
+    [index: string]: (operator: Operator) => (...args: any[]) => OperationResult;
 };
 
 declare function extend(customOperator: CustomOperator): typeof test;
-
 export {
     test,
     Test,
@@ -64,4 +59,3 @@ export {
     Stub,
     extend,
 };
-

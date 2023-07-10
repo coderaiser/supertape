@@ -18,4 +18,3 @@ export const loadOperators = async (operators) => {
     
     return assign(...loadedOperators);
 };
-

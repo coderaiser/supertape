@@ -1,6 +1,5 @@
 import montag from 'montag';
 import pullout from 'pullout';
-
 import {
     test,
     createTest,
@@ -11,7 +10,8 @@ const {parse} = JSON;
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
     
-    return output.split('\n')
+    return output
+        .split('\n')
         .slice(0, i)
         .join('\n');
 };
@@ -82,6 +82,7 @@ test('supertape: format: json-lines: skip', async (t) => {
     ]);
     
     const parsed = parse(result);
+    
     const expected = {
         count: 0,
         passed: 0,
@@ -131,6 +132,7 @@ test('supertape: format: json-lines: comment', async (t) => {
         .map(parse);
     
     const FAIL = 2;
+    
     delete parsed[FAIL].at;
     delete parsed[FAIL].errorStack;
     
@@ -161,4 +163,3 @@ test('supertape: format: json-lines: comment', async (t) => {
     t.deepEqual(parsed, expected);
     t.end();
 });
-

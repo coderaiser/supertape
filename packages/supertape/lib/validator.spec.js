@@ -2,10 +2,7 @@
 
 const tryCatch = require('try-catch');
 
-const {
-    stub,
-    test,
-} = require('..');
+const {stub, test} = require('..');
 
 const mockRequire = require('mock-require');
 const {getAt} = require('./validator');
@@ -61,6 +58,7 @@ test('supertape: validator: checkScopes', (t) => {
         createValidator,
         setValidations,
     } = reRequire('./validator');
+    
     const current = {
         message: 'hello world',
         at: 'at',
@@ -77,7 +75,11 @@ test('supertape: validator: checkScopes', (t) => {
     });
     
     const result = validate('hello world');
-    const expected = [`Scope should be defined before first colon: 'scope: subject', received: 'hello world'`, 'at'];
+    
+    const expected = [
+        `Scope should be defined before first colon: 'scope: subject', received: 'hello world'`,
+        'at',
+    ];
     
     t.deepEqual(result, expected);
     t.end();
@@ -88,6 +90,7 @@ test('supertape: validator: checkScopes: @', (t) => {
         createValidator,
         setValidations,
     } = reRequire('./validator');
+    
     const current = {
         message: '@putout/eslint: create-plugin',
         at: 'at',
@@ -115,6 +118,7 @@ test('supertape: validator: checkScopes: +', (t) => {
         createValidator,
         setValidations,
     } = reRequire('./validator');
+    
     const current = {
         message: '+hello: world',
         at: 'at',
@@ -142,6 +146,7 @@ test('supertape: validator: checkAssertionsCount', (t) => {
         createValidator,
         setValidations,
     } = reRequire('./validator');
+    
     const current = {
         message: 'hello world',
         at: 'at',
@@ -164,7 +169,10 @@ test('supertape: validator: checkAssertionsCount', (t) => {
         assertionsCount: 2,
     });
     
-    const expected = ['Only one assertion per test allowed, looks like you have more', 'at'];
+    const expected = [
+        'Only one assertion per test allowed, looks like you have more',
+        'at',
+    ];
     
     t.deepEqual(result, expected);
     t.end();
@@ -175,6 +183,7 @@ test('supertape: validator: checkAssertionsCount: disabled', (t) => {
         createValidator,
         setValidations,
     } = reRequire('./validator');
+    
     const current = {
         message: 'hello world',
         at: 'at',
@@ -208,6 +217,7 @@ test('supertape: validator: checkAssertionsCount: ok', (t) => {
         createValidator,
         setValidations,
     } = reRequire('./validator');
+    
     const current = {
         message: 'hello world',
         at: 'at',
@@ -355,6 +365,7 @@ test('supertape: validator: no validations', (t) => {
         createValidator,
         setValidations,
     } = reRequire('./validator');
+    
     const current = {
         message: 'hello world',
         at: 'at',
@@ -377,4 +388,3 @@ test('supertape: validator: no validations', (t) => {
     t.deepEqual(result, expected);
     t.end();
 });
-

@@ -81,4 +81,3 @@ function createOutput() {
         output.push(line);
     };
 }
-

@@ -46,4 +46,3 @@ test('calledInOrder: not stub', (t: Test) => {
     t.calledInOrder([Function]);
     t.end();
 });
-

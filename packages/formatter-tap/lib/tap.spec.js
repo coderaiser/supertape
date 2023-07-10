@@ -1,6 +1,5 @@
 import montag from 'montag';
 import pullout from 'pullout';
-
 import {
     test,
     createTest,
@@ -10,7 +9,8 @@ import * as tapFormatter from './tap.js';
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
     
-    return output.split('\n')
+    return output
+        .split('\n')
         .slice(0, i)
         .join('\n');
 };
@@ -192,4 +192,3 @@ test('supertape: formatter: tap: output', async (t) => {
     t.equal(result, expected);
     t.end();
 });
-

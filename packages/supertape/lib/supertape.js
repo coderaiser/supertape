@@ -71,6 +71,7 @@ function _createEmitter({quiet, stream = stdout, format, getOperators, isStop, r
             harness.pipe(stream);
         
         const operators = await getOperators();
+        
         const result = await runTests(tests, {
             formatter,
             operators,
@@ -237,7 +238,6 @@ const loop = once(({emitter, tests}) => {
         }
         
         previousCount = tests.length;
-        
         // 5ms ought to be enough for anybody
         setTimeout(loop, 5);
     })();
@@ -264,4 +264,3 @@ function fakeEmitter() {
     
     return emitter;
 }
-

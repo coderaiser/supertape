@@ -24,9 +24,7 @@ import {
     stub,
 } from 'supertape';
 
-const operators = await loadOperators([
-    'stub',
-]);
+const operators = await loadOperators(['stub']);
 
 const test = extend(operators);
 

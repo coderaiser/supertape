@@ -36,4 +36,3 @@ function getModulePath(name) {
     const [, path] = tryCatch(resolve, name);
     return path;
 }
-

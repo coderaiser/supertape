@@ -126,6 +126,7 @@ export const calledInOrder = (operator) => (fns, message = 'should call in order
     
     let failMessage = '';
     const fail = (message) => failMessage = message;
+    
     const ok = (result, message) => {
         if (!result)
             failMessage = message;
@@ -148,4 +149,3 @@ export const calledInOrder = (operator) => (fns, message = 'should call in order
     
     return operator.pass(message);
 };
-

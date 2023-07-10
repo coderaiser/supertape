@@ -51,6 +51,7 @@ function createOutput() {
         
         if (!args.length) {
             const result = output.join('');
+            
             output = [];
             
             return result;
@@ -59,4 +60,3 @@ function createOutput() {
         output.push(stringify(line));
     };
 }
-

@@ -11,6 +11,7 @@ test('supertape: harness: proceed condition', (t) => {
     
     let length = 1;
     const input = createHarness(reporter);
+    
     const output = new Transform({
         transform(chunk, enc, callback) {
             ({length} = chunk);
@@ -27,4 +28,3 @@ test('supertape: harness: proceed condition', (t) => {
     t.ok(length, 'should proceed only when reporter return not zero length chunk');
     t.end();
 });
-

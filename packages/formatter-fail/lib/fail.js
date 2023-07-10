@@ -1,5 +1,10 @@
 import * as tap from '@supertape/formatter-tap';
-export {start, comment, end} from '@supertape/formatter-tap';
+
+export {
+    start,
+    comment,
+    end,
+} from '@supertape/formatter-tap';
 
 import fullstore from 'fullstore';
 
@@ -16,4 +21,3 @@ export const fail = (...a) => {
     
     return `# ${message}\n${fail}`;
 };
-

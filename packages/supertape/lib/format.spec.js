@@ -5,7 +5,9 @@ const {parseAt} = require('./format');
 
 test('supertape: format', (t) => {
     const stack = `Error: ENOENT: no such file or directory, open '/abc'`;
-    const result = parseAt(stack, {reason: 'user'});
+    const result = parseAt(stack, {
+        reason: 'user',
+    });
     
     t.equal(result, stack);
     t.end();
@@ -21,7 +23,10 @@ test('supertape: format: reason: exception', (t) => {
             at async EventEmitter.<anonymous> (/Users/coderaiser/estrace/node_modules/supertape/lib/supertape.js:69:26)
       `;
     
-    const result = parseAt(stack, {reason: 'exception'});
+    const result = parseAt(stack, {
+        reason: 'exception',
+    });
+    
     const expected = 'at file:///Users/coderaiser/estrace/lib/estrace.spec.js:57:11';
     
     t.equal(result, expected);
@@ -38,10 +43,12 @@ test('supertape: format: mock-import: ', (t) => {
             at async EventEmitter.<anonymous> (/Users/coderaiser/estrace/node_modules/supertape/lib/supertape.js:69:26)
       `;
     
-    const result = parseAt(stack, {reason: 'exception'});
+    const result = parseAt(stack, {
+        reason: 'exception',
+    });
+    
     const expected = 'at file:///Users/coderaiser/estrace/lib/estrace.spec.js:57:11';
     
     t.equal(result, expected);
     t.end();
 });
-

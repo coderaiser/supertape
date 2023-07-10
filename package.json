@@ -46,8 +46,6 @@
   "engines": {
     "node": ">=16"
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "dependencies": {}
 }

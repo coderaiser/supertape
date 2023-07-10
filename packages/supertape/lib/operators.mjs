@@ -1,5 +1,4 @@
 import deepEqualCheck from 'deep-equal';
-
 import diff from './diff.mjs';
 import {
     formatOutput,
@@ -139,7 +138,9 @@ const notDeepEqual = (result, expected, message = 'should not deep equal') => {
 };
 
 const comment = ({formatter}) => (message) => {
-    const messages = message.trim().split('\n');
+    const messages = message
+        .trim()
+        .split('\n');
     
     for (const current of messages) {
         const line = current
@@ -211,11 +212,7 @@ function validateEnd({name, operators, runnerState}) {
     } = runnerState;
     
     if (name === 'end' && isEnded())
-        return [INVALID, run(
-            'fail',
-            runnerState,
-            operators.fail(`Cannot use a couple 't.end()' operators in one test`),
-        )];
+        return [INVALID, run('fail', runnerState, operators.fail(`Cannot use a couple 't.end()' operators in one test`))];
     
     if (name === 'end') {
         isEnded(true);
@@ -225,11 +222,7 @@ function validateEnd({name, operators, runnerState}) {
     incAssertionsCount();
     
     if (isEnded()) {
-        return [INVALID, run(
-            'fail',
-            runnerState,
-            operators.fail(`Cannot run assertions after 't.end()' called`),
-        )];
+        return [INVALID, run('fail', runnerState, operators.fail(`Cannot run assertions after 't.end()' called`))];
     }
     
     return [VALID];
@@ -280,7 +273,9 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
         expected,
         output,
         errorStack: formatOutput(errorStack),
-        at: at || parseAt(errorStack, {reason}),
+        at: at || parseAt(errorStack, {
+            reason,
+        }),
     });
 }
 
@@ -311,7 +306,9 @@ export const initOperators = ({formatter, count, incCount, incPassed, incFailed,
         notOk: operator('notOk'),
         pass: operator('pass'),
         fail: operator('fail'),
-        comment: comment({formatter}),
+        comment: comment({
+            formatter,
+        }),
         match: operator('match'),
         notMatch: operator('notMatch'),
         end: operator('end'),
@@ -319,4 +316,3 @@ export const initOperators = ({formatter, count, incCount, incPassed, incFailed,
         ...extendedOperators,
     };
 };
-

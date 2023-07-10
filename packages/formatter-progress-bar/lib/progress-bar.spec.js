@@ -5,7 +5,6 @@ import {
     stub,
     createTest,
 } from 'supertape';
-
 import * as progressBar from './progress-bar.js';
 
 const {env} = process;
@@ -37,6 +36,7 @@ test('supertape: format: progress bar', async (t) => {
     const failMessage = 'progress bar: fail';
     
     const {CI} = env;
+    
     env.CI = 1;
     
     const {
@@ -83,6 +83,7 @@ test('supertape: format: progress bar: diff', async (t) => {
     const message = 'progress bar';
     
     const {CI} = env;
+    
     env.CI = 1;
     
     const {
@@ -168,6 +169,7 @@ test('supertape: format: progress bar: skip', async (t) => {
     const message = 'skip: success';
     
     const {CI} = env;
+    
     env.CI = 1;
     
     const {
@@ -300,6 +302,7 @@ test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t
     const {SUPERTAPE_PROGRESS_BAR} = env;
     
     const {_isCI} = global;
+    
     global._isCI = 1;
     
     updateEnv({
@@ -324,6 +327,7 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR', (t) =
     const {SUPERTAPE_PROGRESS_BAR} = env;
     
     const {_isCI} = global;
+    
     global._isCI = false;
     
     updateEnv({

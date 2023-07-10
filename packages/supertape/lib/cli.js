@@ -148,7 +148,10 @@ async function cli({argv, cwd, stdout, isStop}) {
     const allFiles = [];
     
     for (const arg of args._) {
-        const files = glob.sync(arg).filter(isExclude);
+        const files = glob
+            .sync(arg)
+            .filter(isExclude);
+        
         allFiles.push(...files);
     }
     
@@ -194,4 +197,3 @@ async function cli({argv, cwd, stdout, isStop}) {
 }
 
 module.exports._filesCount = filesCount;
-

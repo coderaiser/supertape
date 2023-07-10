@@ -4,7 +4,11 @@ const once = require('once');
 const StackTracey = require('stacktracey');
 const getDuplicatesMessage = ([, a]) => a;
 
-const getMessage = ({message, at, validations}) => [message, at, validations];
+const getMessage = ({message, at, validations}) => [
+    message,
+    at,
+    validations,
+];
 
 const getMessagesList = (tests) => tests.map(getMessage);
 const compareMessage = (a) => ([b]) => a === b;
@@ -93,10 +97,16 @@ function checkAssertionsCount(msg, filtered, options) {
         return [];
     
     if (assertionsCount > 1)
-        return [`Only one assertion per test allowed, looks like you have more`, at];
+        return [
+            `Only one assertion per test allowed, looks like you have more`,
+            at,
+        ];
     
     if (!assertionsCount)
-        return [`Only one assertion per test allowed, looks like you have none`, at];
+        return [
+            `Only one assertion per test allowed, looks like you have none`,
+            at,
+        ];
     
     return [];
 }
@@ -105,13 +115,16 @@ function checkScopes(msg, filtered) {
     const [message, at] = filtered[0];
     
     if (!SCOPE_DEFINED.test(message))
-        return [`Scope should be defined before first colon: 'scope: subject', received: '${message}'`, at];
+        return [
+            `Scope should be defined before first colon: 'scope: subject', received: '${message}'`,
+            at,
+        ];
     
     return [];
 }
 
 const isEnabled = (tests, name) => {
-    for (const [,, validations] of tests) {
+    for (const [, , validations] of tests) {
         if (!validations[name]) {
             return false;
         }
@@ -133,6 +146,8 @@ function checkDuplicates(msg, filtered) {
         return [];
     
     processedList.add(first);
-    return [`Duplicate ${first}`, second];
+    return [
+        `Duplicate ${first}`,
+        second,
+    ];
 }
-

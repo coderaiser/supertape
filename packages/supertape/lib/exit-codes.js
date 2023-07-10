@@ -15,4 +15,3 @@ module.exports = {
     INVALID_OPTION,
     SKIPED,
 };
-

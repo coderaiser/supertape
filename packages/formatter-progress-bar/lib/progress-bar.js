@@ -1,5 +1,4 @@
 import {Writable} from 'stream';
-
 import cliProgress from 'cli-progress';
 import chalk from 'chalk';
 import fullstore from 'fullstore';
@@ -35,11 +34,24 @@ export function createFormatter(bar) {
     const barStore = fullstore(bar);
     
     return {
-        start: start({barStore, out}),
-        test: test({store}),
-        testEnd: testEnd({barStore}),
-        fail: fail({out, store}),
-        end: end({barStore, out}),
+        start: start({
+            barStore,
+            out,
+        }),
+        test: test({
+            store,
+        }),
+        testEnd: testEnd({
+            barStore,
+        }),
+        fail: fail({
+            out,
+            store,
+        }),
+        end: end({
+            barStore,
+            out,
+        }),
     };
 }
 
@@ -134,6 +146,7 @@ function createOutput() {
         
         if (!args.length) {
             const result = output.join('\n');
+            
             output = [];
             
             return result;
@@ -188,4 +201,3 @@ function _createProgress({total, color, test}) {
     
     return bar;
 }
-

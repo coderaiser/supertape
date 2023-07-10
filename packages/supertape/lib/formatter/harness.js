@@ -67,4 +67,3 @@ function run(reporter, type, data) {
     
     return reporter.end(data);
 }
-

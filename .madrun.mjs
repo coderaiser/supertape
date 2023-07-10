@@ -1,8 +1,6 @@
 import {run} from 'madrun';
 
-const dirs = [
-    'packages',
-];
+const dirs = ['packages'];
 
 export default {
     'test': () => `tape --check-scopes --check-assertions-count '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
@@ -32,4 +30,3 @@ export default {
     'report': () => `c8 report --reporter=lcov`,
     'prepare': () => 'husky install',
 };
-

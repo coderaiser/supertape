@@ -1,6 +1,5 @@
 import {diff} from 'jest-diff';
 import strip from 'strip-ansi';
-
 import {
     formatOutput,
     addSpaces,
@@ -27,4 +26,3 @@ export default (a, b) => {
     
     return output.join('\n');
 };
-

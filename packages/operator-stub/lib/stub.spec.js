@@ -2,7 +2,6 @@ import {
     stub,
     extend,
 } from 'supertape';
-
 import * as operator from './stub.js';
 
 const noop = () => {};
@@ -195,7 +194,10 @@ test('supertape: operator: stub: calledWith: deep equals', (t) => {
     
     fn(obj);
     
-    t.calledWith(fn, [{hello: 'world', f: noop}]);
+    t.calledWith(fn, [{
+        hello: 'world',
+        f: noop,
+    }]);
     t.end();
 });
 
@@ -679,4 +681,3 @@ test('supertape: operator: stub: calledInOrder: not array', (t) => {
     t.calledWith(fail, [`Expected 'fns' to be 'array' but received: () => {}`]);
     t.end();
 });
-

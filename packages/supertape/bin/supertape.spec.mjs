@@ -1,6 +1,5 @@
 import {createRequire} from 'module';
 import runsome from 'runsome';
-
 import test from '../lib/supertape.js';
 
 const require = createRequire(import.meta.url);
@@ -14,4 +13,3 @@ test('supertape: bin: -v', (t) => {
     t.equal(run('-v'), `v${version}`);
     t.end();
 });
-

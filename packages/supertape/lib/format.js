@@ -27,4 +27,3 @@ module.exports.formatOutput = (str) => {
 function cutMockImport(str) {
     return str.replace(/\?mock-import-count=\d+/g, '');
 }
-

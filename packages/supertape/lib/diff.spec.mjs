@@ -26,4 +26,3 @@ test('supertape: diff: no diff', (t) => {
     t.notOk(diffed);
     t.end();
 });
-

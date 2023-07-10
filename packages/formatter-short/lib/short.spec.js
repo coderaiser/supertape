@@ -1,17 +1,16 @@
 import montag from 'montag';
 import pullout from 'pullout';
-
 import {
     test,
     createTest,
 } from 'supertape';
-
 import * as shortFormatter from './short.js';
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
     
-    return output.split('\n')
+    return output
+        .split('\n')
         .slice(0, i)
         .join('\n');
 };
@@ -30,6 +29,7 @@ test('supertape: format: short', async (t) => {
     };
     
     const tapMessage = 'format: short';
+    
     const {
         test,
         stream,
@@ -123,6 +123,7 @@ test('supertape: format: short: comment', async (t) => {
     };
     
     const tapMessage = 'format: short';
+    
     const {
         test,
         stream,
@@ -208,6 +209,7 @@ test('supertape: format: short: no stack trace', async (t) => {
     };
     
     const tapMessage = 'format: short';
+    
     const {
         test,
         stream,

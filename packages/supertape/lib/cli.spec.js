@@ -1,9 +1,6 @@
 'use strict';
 
-const {
-    join,
-    dirname,
-} = require('path');
+const {join, dirname} = require('path');
 
 const {Transform} = require('stream');
 const {EventEmitter} = require('events');
@@ -30,6 +27,7 @@ test('supertape: cli: -r', async (t) => {
         '-r',
         'hello',
     ];
+    
     const write = stub();
     const stderr = {
         write,
@@ -86,6 +84,7 @@ test('supertape: bin: cli: glob: a couple', async (t) => {
         'hello',
         'world',
     ];
+    
     const sync = stub().returns([]);
     
     mockRequire('glob', {
@@ -170,7 +169,9 @@ test('supertape: bin: cli: files count', async (t) => {
         runCli({
             argv,
         }),
-        wait(emit, 'end', {failed: 0}),
+        wait(emit, 'end', {
+            failed: 0,
+        }),
     ]);
     
     const result = cli._filesCount();
@@ -184,7 +185,12 @@ test('supertape: bin: cli: files count', async (t) => {
 
 test('supertape: cli: success', async (t) => {
     const name = join(__dirname, 'fixture/cli-success.js');
-    const argv = [name, name, '-f', 'tap'];
+    const argv = [
+        name,
+        name,
+        '-f',
+        'tap',
+    ];
     
     const supertape = reRequire('./supertape');
     const exit = stub();
@@ -228,7 +234,9 @@ test('supertape: bin: cli: node_modules', async (t) => {
         runCli({
             argv,
         }),
-        wait(emit, 'end', {failed: 0}),
+        wait(emit, 'end', {
+            failed: 0,
+        }),
     ]);
     
     const result = cli._filesCount();
@@ -388,10 +396,7 @@ test('supertape: cli: -h', async (t) => {
 
 test('supertape: bin: cli: --check-duplicates', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [
-        name,
-        '-d',
-    ];
+    const argv = [name, '-d'];
     
     const test = stub();
     const init = stub();
@@ -433,10 +438,7 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
 
 test('supertape: bin: cli: --check-assertions-count', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [
-        name,
-        '-a',
-    ];
+    const argv = [name, '-a'];
     
     const test = stub();
     const init = stub();
@@ -478,9 +480,7 @@ test('supertape: bin: cli: --check-assertions-count', async (t) => {
 
 test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [
-        name,
-    ];
+    const argv = [name];
     
     const test = stub();
     const init = stub();
@@ -524,9 +524,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
 
 test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [
-        name,
-    ];
+    const argv = [name];
     
     const test = stub();
     const init = stub();
@@ -570,10 +568,7 @@ test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
 
 test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, enable env', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [
-        name,
-        '--no-check-duplicates',
-    ];
+    const argv = [name, '--no-check-duplicates'];
     
     const test = stub();
     const init = stub();
@@ -617,10 +612,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
 
 test('supertape: bin: cli: check-duplicates: -d', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [
-        name,
-        '-d',
-    ];
+    const argv = [name, '-d'];
     
     const test = stub();
     const init = stub();
@@ -710,11 +702,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
 
 test('supertape: cli: isStop', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [
-        name,
-        '-f',
-        'json-lines',
-    ];
+    const argv = [name, '-f', 'json-lines'];
     
     const exit = stub();
     const isStop = stub().returns(true);
@@ -738,13 +726,10 @@ test('supertape: cli: isStop', async (t) => {
 
 test('supertape: cli: validation', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [
-        name,
-        '--forma',
-        'json-lines',
-    ];
+    const argv = [name, '--forma', 'json-lines'];
     
     const write = stub();
+    
     const stderr = {
         write,
     };
@@ -790,4 +775,3 @@ async function runCli(options) {
     
     return [error, cli];
 }
-

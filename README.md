@@ -344,6 +344,7 @@ const {extend} = require('supertape');
 const test = extend({
     transform: (operator) => (a, b, message = 'should transform') => {
         const {is, output} = operator.equal(a + 1, b - 1);
+        
         return {
             is,
             output,

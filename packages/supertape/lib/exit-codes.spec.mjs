@@ -7,4 +7,3 @@ test('supertape: exit-codes', async (t) => {
     t.equal(Original.SKIPED, SKIPED);
     t.end();
 });
-

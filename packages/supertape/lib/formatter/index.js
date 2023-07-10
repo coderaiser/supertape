@@ -78,4 +78,3 @@ module.exports.createFormatter = async (name) => {
         harness,
     };
 };
-

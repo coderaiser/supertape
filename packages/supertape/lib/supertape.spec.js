@@ -220,6 +220,7 @@ test('supertape: deepEqual', async (t) => {
         const a = {
             hello: 'world',
         };
+        
         const b = {
             hello: 'world',
         };

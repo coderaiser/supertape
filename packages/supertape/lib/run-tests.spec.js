@@ -13,7 +13,8 @@ const {reRequire, stopAll} = mockRequire;
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
     
-    return output.split('\n')
+    return output
+        .split('\n')
         .slice(0, i)
         .join('\n');
 };
@@ -97,6 +98,7 @@ test('supertape: runTests: duplicates: node_modules', async (t) => {
     });
     
     const FOUR_TESTS = 30;
+    
     const [result] = await Promise.all([
         pull(supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
@@ -137,6 +139,7 @@ test('supertape: runTests: duplicates', async (t) => {
     });
     
     const FOUR_TESTS = 30;
+    
     const [result] = await Promise.all([
         pull(supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
@@ -173,6 +176,7 @@ test('supertape: runTests: duplicates: false', async (t) => {
     });
     
     const FOUR_TESTS = 30;
+    
     const [result] = await Promise.all([
         pull(supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
@@ -209,6 +213,7 @@ test('supertape: runTests: duplicates: defaults', async (t) => {
     });
     
     const FOUR_TESTS = 30;
+    
     const [result] = await Promise.all([
         pull(supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
@@ -243,6 +248,7 @@ test('supertape: runTests: duplicates: not match', async (t) => {
     });
     
     const FOUR_TESTS = 30;
+    
     const [result] = await Promise.all([
         pull(supertape.createStream(), FOUR_TESTS),
         once(supertape.run(), 'end'),
@@ -489,6 +495,7 @@ test('supertape: runTests: fail: timeout', async (t) => {
     const message = 'hello world';
     
     const {SUPERTAPE_TIMEOUT} = process.env;
+    
     process.env.SUPERTAPE_TIMEOUT = 1;
     
     reRequire('./run-tests');
@@ -565,6 +572,7 @@ test('supertape: runTests: not equal', async (t) => {
     });
     
     const BEFORE_DIFF = 6;
+    
     const [result] = await Promise.all([
         pull(supertape.createStream(), BEFORE_DIFF),
         once(supertape.run(), 'end'),
@@ -597,6 +605,7 @@ test('supertape: runTests: not deepEqual', async (t) => {
     });
     
     const BEFORE_DIFF = 6;
+    
     const [result] = await Promise.all([
         pull(supertape.createStream(), BEFORE_DIFF),
         once(supertape.run(), 'end'),
