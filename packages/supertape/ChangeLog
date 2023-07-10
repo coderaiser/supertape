@@ -1,3 +1,14 @@
+2023.07.10, v8.4.0
+
+feature:
+- f3faec5 package: c8 v8.0.0
+- 74f7265 package: eslint-plugin-n v16.0.1
+- 098bc4a package: eslint-plugin-putout v18.0.0
+- 1a73835 package: putout v30.2.3
+- 4ca9bb2 package: typescript v5.1.6
+- 4b4842e package: putout v29.0.4
+- ebaca5b (package) check-dts v0.7.0
+
 2023.02.03, v8.3.0
 
 fix:
