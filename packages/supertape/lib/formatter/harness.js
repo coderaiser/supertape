@@ -6,6 +6,7 @@ const {assign} = Object;
 module.exports.createHarness = (reporter) => {
     const prepared = prepare(reporter);
     
+    let is = false;
     const stream = new Transform({
         readableObjectMode: true,
         writableObjectMode: true,
@@ -14,11 +15,15 @@ module.exports.createHarness = (reporter) => {
             const {type, ...data} = chunk;
             const result = run(prepared, type, data);
             
-            if (result)
+            if (!is && result) {
                 this.push(result);
+            }
             
-            if (type === 'end')
+            if (type === 'end') {
+                is = true;
+                
                 this.push(null);
+            }
             
             callback();
         },

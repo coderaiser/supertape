@@ -63,10 +63,10 @@ test('supertape: cli: -v', async (t) => {
 
 test('supertape: bin: cli: glob', async (t) => {
     const argv = ['hello'];
-    const sync = stub().returns([]);
+    const glob = stub().resolves([]);
     
     mockRequire('glob', {
-        sync,
+        glob,
     });
     
     await runCli({
@@ -75,7 +75,7 @@ test('supertape: bin: cli: glob', async (t) => {
     
     stopAll();
     
-    t.calledWith(sync, ['hello']);
+    t.calledWith(glob, ['hello']);
     t.end();
 });
 
@@ -85,10 +85,10 @@ test('supertape: bin: cli: glob: a couple', async (t) => {
         'world',
     ];
     
-    const sync = stub().returns([]);
+    const glob = stub().resolves([]);
     
     mockRequire('glob', {
-        sync,
+        glob,
     });
     
     await runCli({
@@ -97,9 +97,13 @@ test('supertape: bin: cli: glob: a couple', async (t) => {
     
     stopAll();
     
-    const [[first], [second]] = sync.args;
+    const [result] = glob.args;
+    const expected = [
+        ['hello', 'world'], {
+            ignore: 'node_modules/**',
+        }];
     
-    t.deepEqual([first, second], ['hello', 'world'], 'should call glob.sync on every iteration');
+    t.deepEqual(result, expected, 'should call glob on every iteration');
     t.end();
 });
 
@@ -305,6 +309,7 @@ test('supertape: cli: exit: skiped', async (t) => {
     mockRequire('..', test);
     
     const emit = emitter.emit.bind(emitter);
+    
     await Promise.all([
         runCli({
             argv,

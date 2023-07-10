@@ -5,7 +5,7 @@ const {once} = require('events');
 const {pathToFileURL} = require('url');
 
 const yargsParser = require('yargs-parser');
-const glob = require('glob');
+const {glob} = require('glob');
 const fullstore = require('fullstore');
 const tryToCatch = require('try-to-catch');
 const keypress = require('@putout/cli-keypress');
@@ -25,7 +25,6 @@ const {isArray} = Array;
 
 const maybeFirst = (a) => isArray(a) ? a.pop() : a;
 const maybeArray = (a) => isArray(a) ? a : [a];
-const isExclude = (a) => !a.includes('node_modules');
 
 const removeDuplicates = (a) => Array.from(new Set(a));
 const filesCount = fullstore(0);
@@ -147,13 +146,11 @@ async function cli({argv, cwd, stdout, isStop}) {
     
     const allFiles = [];
     
-    for (const arg of args._) {
-        const files = glob
-            .sync(arg)
-            .filter(isExclude);
-        
-        allFiles.push(...files);
-    }
+    const globFiles = await glob(args._, {
+        ignore: 'node_modules/**',
+    });
+    
+    allFiles.push(...globFiles);
     
     const {
         format,

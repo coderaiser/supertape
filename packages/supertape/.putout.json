@@ -11,7 +11,5 @@
             "convert-esm-to-commonjs": "on"
         }
     },
-    "ignore": [
-        "test"
-    ]
+    "ignore": ["test"]
 }
