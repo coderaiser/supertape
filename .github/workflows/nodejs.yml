@@ -46,11 +46,13 @@ jobs:
         run: typos --write-changes
       - name: Commit fixes
         uses: EndBug/add-and-commit@v9
+        continue-on-error: true
         with:
           message: "chore: ${{ env.NAME }}: actions: lint ☘️"
       - name: Coverage
         run: redrun coverage report
       - name: Coveralls
         uses: coverallsapp/github-action@v2
+        continue-on-error: true
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
