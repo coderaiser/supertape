@@ -39,13 +39,15 @@
     "husky": "^6.0.0",
     "lerna": "^6.0.1",
     "madrun": "^9.0.0",
-    "putout": "^30.2.3",
+    "putout": "^31.0.3",
     "supertape": "^8.0.0",
     "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=16"
   },
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {}
 }
