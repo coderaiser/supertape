@@ -35,9 +35,8 @@ const {
 
 const findByMessage = (msg, tests) => {
     const getMessages = once(getMessagesList);
-    const filtered = getMessages(tests).filter(compareMessage(msg));
     
-    return filtered;
+    return getMessages(tests).filter(compareMessage(msg));
 };
 
 module.exports.setValidations = ({checkDuplicates, checkScopes, checkAssertionsCount}) => {
