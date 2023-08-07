@@ -1,3 +1,10 @@
+2023.08.07, v8.4.1
+
+feature:
+- 7e7cec1 supertape: validator: simplify
+- 0cfa5f1 package: eslint-plugin-putout v19.0.3
+- 1bba62a package: putout v31.0.3
+
 2023.07.10, v8.4.0
 
 feature:
