@@ -1,4 +1,4 @@
-import {Writable} from 'stream';
+import {Writable} from 'node:stream';
 import cliProgress from 'cli-progress';
 import chalk from 'chalk';
 import fullstore from 'fullstore';
