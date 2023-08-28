@@ -4,15 +4,17 @@ import {
     Stub,
 } from '@cloudcmd/stub';
 
-type OperationResult = {
+type OperationBaseResult = {
     is: boolean;
     expected: unknown;
     result: unknown;
     message: string;
     output: string;
 };
+type OperationResult = OperationBaseResult | Promise<OperationBaseResult>;
+type OperatorFn = (...args: any[]) => OperationResult;
 type Operator = {
-    [index: string]: (...args: any[]) => OperationResult;
+    [index: string]: OperatorFn;
 };
 type Test = Operator & OperatorStub & {
     equal: (result: unknown, expected: unknown, message?: string) => OperationResult;
@@ -58,4 +60,5 @@ export {
     stub,
     Stub,
     extend,
+    OperationResult,
 };

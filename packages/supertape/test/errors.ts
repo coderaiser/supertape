@@ -4,6 +4,7 @@ import test, {
     stub,
     Stub,
     extend,
+    OperationResult,
 } from '../lib/supertape.js';
 
 // THROWS Expected 2-3 arguments, but got 0
@@ -67,5 +68,17 @@ const extendedTest = extend({
 extendedTest();
 extendedTest('hello', (t) => {
     t.superFail('world');
+});
+
+const minifyExtension = () => async (pass: () => Promise<OperationResult>) => {
+    return await pass();
+};
+
+const testAsync = extend({
+    minify: minifyExtension,
+});
+
+testAsync('hello', async (t) => {
+    await t.minify();
 });
 

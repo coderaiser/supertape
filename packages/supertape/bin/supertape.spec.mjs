@@ -1,4 +1,4 @@
-import {createRequire} from 'module';
+import {createRequire} from 'node:module';
 import runsome from 'runsome';
 import test from '../lib/supertape.js';
 
