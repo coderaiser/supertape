@@ -1,4 +1,4 @@
-import {pathToFileURL} from 'url';
+import {pathToFileURL} from 'node:url';
 import {getPaths} from './get-paths.js';
 import {simpleImport} from './simple-import.js';
 
