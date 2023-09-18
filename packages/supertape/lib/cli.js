@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const {resolve: resolvePath} = require('path');
 const {once} = require('events');
 const {pathToFileURL} = require('url');

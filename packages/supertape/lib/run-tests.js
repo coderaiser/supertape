@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const fullstore = require('fullstore');
 const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');

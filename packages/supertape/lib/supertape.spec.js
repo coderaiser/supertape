@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const {once} = require('events');
 const {Transform} = require('stream');
 

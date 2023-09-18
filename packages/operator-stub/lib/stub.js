@@ -36,8 +36,7 @@ export const calledWith = (operator) => (fn, args, message = `should be called w
     if (!isArray(args))
         return operator.fail(`Expected 'args' to be 'array' but received: ${stringify(args)}`);
     
-    const {length} = fn.args;
-    const calledArgs = fn.args[length - 1];
+    const calledArgs = fn.args.at(-1);
     
     return operator.deepEqual(calledArgs, args, message);
 };
@@ -52,8 +51,7 @@ export const calledWithNoArgs = (operator) => (fn, message = 'should be called w
     if (!isString(message))
         return operator.fail(`'t.calledWithNoArgs' expects message to be string, but received: '${stringify(message)}', looks like you need 't.calledWith'`);
     
-    const {length} = fn.args;
-    const calledArgs = fn.args[length - 1];
+    const calledArgs = fn.args.at(-1);
     
     return operator.deepEqual(calledArgs, [], message);
 };

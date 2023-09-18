@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const {once, EventEmitter} = require('events');
 
 const montag = require('montag');

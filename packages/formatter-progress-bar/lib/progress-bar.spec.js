@@ -5,6 +5,7 @@ import {
     stub,
     createTest,
 } from 'supertape';
+import process from 'node:process';
 import * as progressBar from './progress-bar.js';
 
 const {env} = process;

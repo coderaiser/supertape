@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const {EventEmitter} = require('events');
 const {PassThrough} = require('stream');
 

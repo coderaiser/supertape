@@ -3,6 +3,7 @@ import cliProgress from 'cli-progress';
 import chalk from 'chalk';
 import fullstore from 'fullstore';
 import {isCI} from 'ci-info';
+import process from 'node:process';
 
 global._isCI = isCI;
 
