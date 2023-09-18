@@ -35,7 +35,7 @@
     "check-dts": "^0.7.0",
     "eslint": "^8.5.0",
     "eslint-plugin-n": "^16.0.1",
-    "eslint-plugin-putout": "^19.0.3",
+    "eslint-plugin-putout": "^20.0.0",
     "husky": "^6.0.0",
     "lerna": "^6.0.1",
     "madrun": "^9.0.0",
