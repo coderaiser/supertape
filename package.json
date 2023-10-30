@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "supertape",
   "private": true,
   "type": "commonjs",
   "scripts": {
@@ -35,7 +35,7 @@
     "check-dts": "^0.7.0",
     "eslint": "^8.5.0",
     "eslint-plugin-n": "^16.0.1",
-    "eslint-plugin-putout": "^20.0.0",
+    "eslint-plugin-putout": "^21.0.1",
     "husky": "^6.0.0",
     "lerna": "^6.0.1",
     "madrun": "^9.0.0",
@@ -46,6 +46,8 @@
   "engines": {
     "node": ">=16"
   },
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {}
 }
