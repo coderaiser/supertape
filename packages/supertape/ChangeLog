@@ -1,3 +1,9 @@
+2023.10.30, v8.6.1
+
+feature:
+- 0c6c891 supertape: eslint-plugin-putout v21.0.1
+- 7ff4b4e package: @putout/cli-keypress v2.0.0
+
 2023.09.18, v8.6.0
 
 feature:
