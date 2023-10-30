@@ -21,7 +21,7 @@ export default {
     'fresh': () => run(['lint:memory', 'coverage']),
     'lint': () => `putout . --rulesdir rules`,
     'lint:mark': () => 'putout **/*.md',
-    'memory': () => run(['lint:fresh', '-f memory']),
+    'memory': () => run('lint:fresh', '-f memory'),
     'fix:lint': () => run('lint', '--fix'),
     'fix:lint:fresh': () => run('fix:lint', '--fresh'),
     'fix:lint:cache': () => run('lint:cache', '--fix'),
