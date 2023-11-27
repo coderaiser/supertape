@@ -51,7 +51,7 @@ test('hello', (t: Test) => {
 
 test('hello', (t: Test) => {
     t.end();
-// THROWS Argument of type '{ checkUnknown: boolean; }' is not assignable to parameter of type 'TestOptions'.
+// THROWS Object literal may only specify known properties, and 'checkUnknown' does not exist in type 'TestOptions'
 }, {checkUnknown: true});
 
 // THROWS Expected 1 arguments, but got 0.
