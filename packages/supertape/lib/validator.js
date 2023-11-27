@@ -124,9 +124,8 @@ function checkScopes(msg, filtered) {
 
 const isEnabled = (tests, name) => {
     for (const [, , validations] of tests) {
-        if (!validations[name]) {
+        if (!validations[name])
             return false;
-        }
     }
     
     return true;

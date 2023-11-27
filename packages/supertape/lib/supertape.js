@@ -245,9 +245,8 @@ const loop = once(({emitter, tests}) => {
 });
 
 module.exports.run = () => {
-    if (!mainEmitter) {
+    if (!mainEmitter)
         return fakeEmitter();
-    }
     
     mainEmitter.emit('loop');
     

@@ -49,13 +49,11 @@ export const end = ({count, passed, failed, skiped}) => {
     out(`# tests ${count}`);
     out(`# pass ${passed}`);
     
-    if (skiped) {
+    if (skiped)
         out(`# skip ${skiped}`);
-    }
     
-    if (failed) {
+    if (failed)
         out(`# fail ${failed}`);
-    }
     
     out('');
     

@@ -221,9 +221,8 @@ function validateEnd({name, operators, runnerState}) {
     
     incAssertionsCount();
     
-    if (isEnded()) {
+    if (isEnded())
         return [INVALID, run('fail', runnerState, operators.fail(`Cannot run assertions after 't.end()' called`))];
-    }
     
     return [VALID];
 }

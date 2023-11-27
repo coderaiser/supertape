@@ -1,7 +1,7 @@
 import {
     once,
     EventEmitter,
-} from 'events';
+} from 'node:events';
 import stub from '@cloudcmd/stub';
 import test from './supertape.js';
 import {
