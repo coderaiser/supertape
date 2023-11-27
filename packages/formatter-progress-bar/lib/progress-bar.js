@@ -119,19 +119,16 @@ export const end = ({barStore, out}) => ({count, passed, failed, skiped}) => {
     out(`# tests ${count}`);
     out(`# pass ${passed}`);
     
-    if (skiped) {
+    if (skiped)
         out(`# ⚠️  skip ${skiped}`);
-    }
     
     out('');
     
-    if (failed) {
+    if (failed)
         out(`# ❌ fail ${failed}`);
-    }
     
-    if (!failed) {
+    if (!failed)
         out('# ✅ ok');
-    }
     
     out('');
     out('');
