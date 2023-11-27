@@ -1,3 +1,4 @@
+import strip from 'strip-ansi';
 import test from './supertape.js';
 import diff from './diff.mjs';
 
@@ -9,6 +10,35 @@ test('supertape: diff', (t) => {
     const expected = 2;
     
     t.equal(length, expected);
+    t.end();
+});
+
+test('supertape: diff: no Array', (t) => {
+    const result = strip(diff(['hello'], []));
+    const expected = `
+      diff: |-
+      - [
+      -   "hello",
+      - ]
+      + []
+    `.slice(1, -5);
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: diff: no Object', (t) => {
+    const result = strip(diff({a: 'b'}, {}));
+    
+    const expected = `
+      diff: |-
+      - {
+      -   "a": "b",
+      - }
+      + {}
+    `.slice(1, -5);
+    
+    t.equal(result, expected);
     t.end();
 });
 

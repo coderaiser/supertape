@@ -6,7 +6,9 @@ import {
 } from './format.js';
 
 export default (a, b) => {
-    const diffed = diff(a, b);
+    const diffed = diff(a, b)
+        .replaceAll('Object ', '')
+        .replaceAll('Array ', '');
     
     let striped = diffed;
     
