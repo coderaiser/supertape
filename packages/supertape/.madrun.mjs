@@ -9,7 +9,7 @@ const env = {
 
 export default {
     'test': () => [env, `bin/supertape.mjs '{bin,lib}/**/*.spec.{js,mjs}'`],
-    'test:dts': () => 'check-dts',
+    'test:dts': () => 'check-dts test/*.ts',
     'watch:test': async () => `nodemon -w lib -w test -x "${await cutEnv('test')}"`,
     'lint': () => 'putout .',
     'fresh:lint': () => run('lint', '--fresh'),
