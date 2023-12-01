@@ -956,6 +956,7 @@ test('supertape: createTest: formatter', async (t) => {
         stream,
         run,
     } = await createTest({
+        run: false,
         formatter: await import('@supertape/formatter-json-lines'),
     });
     
