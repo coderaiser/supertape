@@ -52,7 +52,7 @@
     "cli-progress": "^3.8.2",
     "deep-equal": "^2.0.3",
     "fullstore": "^3.0.0",
-    "glob": "^8.0.3",
+    "glob": "^10.3.10",
     "jest-diff": "^29.0.1",
     "once": "^1.4.0",
     "resolve": "^1.17.0",
