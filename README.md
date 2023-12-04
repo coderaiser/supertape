@@ -30,9 +30,10 @@
 
 📼 **Supertape** doesn't contain:
 
-- assertion aliases, making the available operators far more concise
-- `es3 code` and lots of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills)
-- `t.throws()`, `t.doesNotThrow()` - use [**tryCatch**](https://github.com/coderaiser/try-catch) or [**tryToCatch**](https://github.com/coderaiser/try-to-catch) with [`t.equal()`](#tequalresult-any-expected-any-message-string) instead
+- assertion aliases, making the available operators far more concise;
+- `es3 code` and lots of [ponyfills](https://github.com/sindresorhus/ponyfill#how-are-ponyfills-better-than-polyfills);
+- `t.throws()`, `t.doesNotThrow()` - use [**tryCatch**](https://github.com/coderaiser/try-catch) or [**tryToCatch**](https://github.com/coderaiser/try-to-catch) with [`t.equal()`](#tequalresult-any-expected-any-message-string) instead;
+- [`t.plan()`](https://github.com/substack/tape#tplann);
 
 For a list of all built-in assertions, see [Operators](#operators).
 
