@@ -213,6 +213,15 @@ test('supertape: operators: match: not RegExp and String', (t) => {
     t.end();
 });
 
+test('supertape: operators: match: encode', (t) => {
+    const {match} = operators;
+    const line = '&quot;&gt;&lt;svg onload=alert(3);&gt;';
+    const {is} = match(line, '&quot;&gt;&lt;svg onload=alert(3);&gt;');
+    
+    t.ok(is, 'regexp should match');
+    t.end();
+});
+
 test('supertape: operators: match: empty', (t) => {
     const {match} = operators;
     const {message} = match('hello', '');

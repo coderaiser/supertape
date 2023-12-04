@@ -7,7 +7,14 @@ import {
 
 const {entries} = Object;
 const isAsync = (a) => a[Symbol.toStringTag] === 'AsyncFunction';
-const maybeRegExp = (a) => isStr(a) ? RegExp(a) : a;
+const encode = (a) => a.replace(')', '\\)').replace('(', '\\(');
+
+const maybeRegExp = (a) => {
+    if (!isStr(a))
+        return a;
+    
+    return RegExp(encode(a));
+};
 
 const isFn = (a) => typeof a === 'function';
 const isStr = (a) => typeof a === 'string';
