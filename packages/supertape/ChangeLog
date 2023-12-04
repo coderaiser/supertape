@@ -1,3 +1,8 @@
+2023.12.04, v8.9.0
+
+feature:
+- 549609b supertape: match: improve convert to RegExp
+
 2023.12.01, v8.8.0
 
 feature:
