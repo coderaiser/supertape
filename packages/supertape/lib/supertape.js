@@ -18,6 +18,9 @@ const createEmitter = once(_createEmitter);
 const {assign} = Object;
 const {stdout} = process;
 
+// 5ms ought to be enough for anybody
+const {SUPERTAPE_LOAD_LOOP_TIMEOUT = 5} = process.env;
+
 let mainEmitter;
 
 const getOperators = once(async () => {
@@ -239,8 +242,7 @@ const loop = once(({emitter, tests}) => {
         }
         
         previousCount = tests.length;
-        // 5ms ought to be enough for anybody
-        setTimeout(loop, 5);
+        setTimeout(loop, SUPERTAPE_LOAD_LOOP_TIMEOUT);
     })();
 });
 
