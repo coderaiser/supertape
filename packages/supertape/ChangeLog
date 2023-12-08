@@ -1,3 +1,8 @@
+2023.12.08, v8.10.0
+
+feature:
+- 02028a6 supertape: SUPERTAPE_LOAD_LOOP_TIMEOUT: add
+
 2023.12.04, v8.9.0
 
 feature:
