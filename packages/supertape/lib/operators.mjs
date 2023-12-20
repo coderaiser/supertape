@@ -203,6 +203,10 @@ const initOperator = (runnerState) => (name) => {
             return end;
         
         const testState = fn(...a);
+        
+        if (testState instanceof Promise)
+            throw Error(`☝️ Looks like test function returned Promise, but it was determined as not async function. Maybe the reason is 'curry', try to create to separate functions instead`);
+        
         run(name, runnerState, testState);
         
         return testState;
