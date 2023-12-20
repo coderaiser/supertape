@@ -1,3 +1,10 @@
+2023.12.21, v9.1.0
+
+feature:
+- 3ec1988 supertape: handle case with curried async function used as operator
+- 5543c40 supertape: currify v4.0.0
+- 8383cea supertape: supertape v9.0.0
+
 2023.12.10, v9.0.0
 
 feature:
