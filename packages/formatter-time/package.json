@@ -1,0 +1,57 @@
+{
+  "name": "@supertape/formatter-time",
+  "version": "1.0.0",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "📼 Supertape formatter progress bar",
+  "homepage": "http://github.com/coderaiser/supertape",
+  "main": "./lib/time.js",
+  "release": false,
+  "tag": false,
+  "changelog": false,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/supertape.git"
+  },
+  "scripts": {
+    "test": "madrun test",
+    "watch:test": "madrun watch:test",
+    "lint": "madrun lint",
+    "fix:lint": "madrun fix:lint",
+    "coverage": "madrun coverage",
+    "report": "madrun report",
+    "wisdom": "madrun wisdom"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "ci-info": "^4.0.0",
+    "cli-progress": "^3.8.2",
+    "fullstore": "^3.0.0",
+    "once": "^1.4.0",
+    "timer-node": "^5.0.7"
+  },
+  "keywords": [
+    "formatter",
+    "time",
+    "supertape"
+  ],
+  "devDependencies": {
+    "c8": "^8.0.0",
+    "eslint": "^8.0.0-beta.0",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-putout": "^22.0.0",
+    "madrun": "^10.0.0",
+    "montag": "^1.0.0",
+    "nodemon": "^3.0.1",
+    "pullout": "^4.0.0",
+    "putout": "^34.0.0",
+    "supertape": "^9.0.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
