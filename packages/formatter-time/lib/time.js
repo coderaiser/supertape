@@ -5,6 +5,7 @@ import fullstore from 'fullstore';
 import {isCI} from 'ci-info';
 import process from 'node:process';
 import {Timer} from 'timer-node';
+import once from 'once';
 
 global._isCI = isCI;
 
@@ -17,6 +18,8 @@ const formatErrorsCount = (a) => a ? red(a) : OK;
 const isStr = (a) => typeof a === 'string';
 
 const {stderr} = process;
+
+const createProgress = once(_createProgress);
 
 let SUPERTAPE_TIME;
 let SUPERTAPE_TIME_MIN = 100;
@@ -67,7 +70,7 @@ export const start = ({barStore, timerStore, out}) => ({total}) => {
     out('TAP version 13');
     
     const color = SUPERTAPE_TIME_COLOR || YELLOW;
-    const {bar, timer} = _createProgress({
+    const {bar, timer} = createProgress({
         total,
         color,
         test: '',
@@ -168,7 +171,7 @@ function createOutput() {
     };
 }
 
-const getColorFn = (color) => {
+export const getColorFn = (color) => {
     if (color.startsWith('#'))
         return chalk.hex(color);
     
@@ -218,6 +221,8 @@ function _createProgress({total, color, test}) {
             timer,
         }),
     });
+    
+    timer.start();
     
     return {
         bar,

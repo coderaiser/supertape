@@ -1,4 +1,5 @@
 import montag from 'montag';
+import chalk from 'chalk';
 import pullout from 'pullout';
 import {
     test,
@@ -479,6 +480,13 @@ test('formatter: time: maybeZero: yes', (t) => {
     const expected = '0';
     
     t.equal(result, expected);
+    t.end();
+});
+
+test('formatter: time: getColorFn', (t) => {
+    const result = time.getColorFn('red');
+    
+    t.equal(result, chalk.red);
     t.end();
 });
 
