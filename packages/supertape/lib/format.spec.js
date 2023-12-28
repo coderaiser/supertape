@@ -1,5 +1,8 @@
 'use strict';
 
+const tryCatch = require('try-catch');
+const montag = require('montag');
+
 const test = require('./supertape');
 const {parseAt} = require('./format');
 
@@ -50,5 +53,22 @@ test('supertape: format: mock-import: ', (t) => {
     const expected = 'at file:///Users/coderaiser/estrace/lib/estrace.spec.js:57:11';
     
     t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: format: parseAt: less then 4', (t) => {
+    const stack = montag`
+        Error: should deep equal
+            at run (file:///Users/coderaiser/putout/node_modules/supertape/lib/operators.mjs:275:33)
+            at validateEnd.name.name (file:///Users/coderaiser/putout/node_modules/supertape/lib/operators.mjs:190:13)'
+      `;
+    
+    const [error] = tryCatch(parseAt, stack, {
+        reason: 'user',
+    });
+    
+    const expected = 'Error: should deep equal';
+    
+    t.match(error.message, expected);
     t.end();
 });

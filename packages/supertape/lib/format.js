@@ -13,6 +13,9 @@ module.exports.parseAt = (stack, {reason}) => {
     
     const line = lines[reason === 'user' ? REASON_USER : REASON_EXCEPTION];
     
+    if (!line)
+        throw Error(`☝️ Looks like 'async' operator called without 'await': ${stack}`);
+    
     return line.trim();
 };
 
