@@ -5,7 +5,6 @@ const {assign} = Object;
 
 module.exports.createHarness = (reporter) => {
     const prepared = prepare(reporter);
-    
     const stream = new Transform({
         readableObjectMode: true,
         writableObjectMode: true,
@@ -14,11 +13,16 @@ module.exports.createHarness = (reporter) => {
             const {type, ...data} = chunk;
             const result = run(prepared, type, data);
             
+            if (this._ended)
+                return callback(Error(`☝️ Looks like 'async' operator called without 'await'`));
+            
             if (result)
                 this.push(result);
             
-            if (type === 'end')
+            if (type === 'end') {
+                this._ended = true;
                 this.push(null);
+            }
             
             callback();
         },
