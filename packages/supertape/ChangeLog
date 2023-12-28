@@ -1,3 +1,12 @@
+2023.12.28, v9.3.0
+
+fix:
+- 3318f1b @supertape/formatter-time: time
+
+feature:
+- fac6958 supertape: find-up v7.0.0
+- 93088e0 supertape: formatter: harness: handle case when write after end
+
 2023.12.22, v9.2.0
 
 feature:
