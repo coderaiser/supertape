@@ -240,12 +240,12 @@ function validateEnd({name, operators, runnerState}) {
 
 const validate = (a) => {
     if (isFn(a))
-        return fail('looks like operator returns function, it will always fail');
+        return fail(`☝️ Looks like operator returns function, it will always fail: '${a}'`);
     
     return a;
 };
 
-const returnMissing = () => fail('looks like operator returns nothing, it will always fail');
+const returnMissing = () => fail('☝️ Looks like operator returns nothing, it will always fail');
 
 function run(name, {formatter, count, incCount, incPassed, incFailed}, testState = returnMissing()) {
     const {

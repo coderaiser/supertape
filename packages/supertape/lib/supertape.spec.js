@@ -490,7 +490,7 @@ test('supertape: extensions: extend: no return', async (t) => {
     const expected = montag`
         TAP version 13
         # extend: no return
-        not ok 1 looks like operator returns nothing, it will always fail
+        not ok 1 ☝️ Looks like operator returns nothing, it will always fail
     `;
     
     const [result] = await Promise.all([
@@ -526,7 +526,7 @@ test('supertape: extensions: extend: return function', async (t) => {
     const expected = montag`
         TAP version 13
         # return: fn
-        not ok 1 looks like operator returns function, it will always fail
+        not ok 1 ☝️ Looks like operator returns function, it will always f
     `;
     
     const [result] = await Promise.all([
