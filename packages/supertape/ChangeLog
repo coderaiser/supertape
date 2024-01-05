@@ -1,3 +1,9 @@
+2024.01.05, v9.5.0
+
+feature:
+- 3abf553 supertape: operator: improve fail message when operator returns function
+- 74893c0 supertape: c8 v9.0.0
+
 2023.12.28, v9.4.0
 
 feature:
