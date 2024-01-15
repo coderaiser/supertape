@@ -20,6 +20,7 @@ export default {
     'fresh:lint': () => run('lint:fresh'),
     'fresh': () => run(['lint:memory', 'coverage']),
     'lint': () => `putout . --rulesdir rules`,
+    'prelint': () => 'redlint scan',
     'lint:mark': () => 'putout **/*.md',
     'memory': () => run('lint:fresh', '-f memory'),
     'fix:lint': () => run('lint', '--fix'),
