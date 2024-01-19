@@ -39,7 +39,7 @@
     "husky": "^6.0.0",
     "lerna": "^6.0.1",
     "madrun": "^10.0.0",
-    "putout": "^34.0.0",
+    "putout": "^35.0.0",
     "redlint": "^3.9.0",
     "supertape": "^9.0.0",
     "typescript": "^5.1.6"
