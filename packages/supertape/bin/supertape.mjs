@@ -1,9 +1,10 @@
 import process from 'node:process';
-import cli from '../lib/cli.js';
 import {createCommunication} from './communication.mjs';
 import {subscribe} from './subscribe.mjs';
+import {createIsStop} from './is-stop.mjs';
 import {createFormatter} from './formatter.mjs';
 import {parseArgs} from '../lib/cli/parse-args.js';
+import cli from '../lib/cli.js';
 
 const {
     worker,
@@ -20,6 +21,7 @@ const {
 } = process;
 
 const workerFormatter = createFormatter(parentPort);
+const isStop = createIsStop(parentPort);
 
 if (worker)
     subscribe({
@@ -37,4 +39,5 @@ export default await cli({
     cwd: process.cwd(),
     argv: workerData.slice(2),
     workerFormatter,
+    isStop,
 });
