@@ -5,5 +5,6 @@
     "-r, --require              ": "require module",
     "--no-check-scopes          ": "do not check that messages contains scope: 'scope: message'",
     "--no-check-assertions-count": "do not check that assertion count is no more then 1",
-    "--no-check-duplicates      ": "do not check messages for duplicates"
+    "--no-check-duplicates      ": "do not check messages for duplicates",
+    "--no-worker                ": "disable worker thread"
 }
