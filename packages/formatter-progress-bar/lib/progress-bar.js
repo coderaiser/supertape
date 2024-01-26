@@ -14,7 +14,6 @@ const {red} = chalk;
 const formatErrorsCount = (a) => a ? red(a) : OK;
 
 const isStr = (a) => typeof a === 'string';
-
 const {stderr} = process;
 
 let SUPERTAPE_PROGRESS_BAR;

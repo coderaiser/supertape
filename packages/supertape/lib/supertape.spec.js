@@ -953,8 +953,8 @@ test('supertape: createTest: formatter', async (t) => {
     const {createTest} = reRequire('..');
     const {
         test,
-        stream,
         run,
+        stream,
     } = await createTest({
         run: false,
         formatter: await import('@supertape/formatter-json-lines'),

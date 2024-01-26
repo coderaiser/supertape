@@ -431,6 +431,7 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
         checkAssertionsCount: true,
         checkScopes: true,
         isStop,
+        workerFormatter: null,
     }];
     
     t.calledWith(init, expected);
@@ -473,6 +474,7 @@ test('supertape: bin: cli: --check-assertions-count', async (t) => {
         checkAssertionsCount: true,
         checkScopes: true,
         isStop,
+        workerFormatter: null,
     }];
     
     t.calledWith(init, expected);
@@ -502,11 +504,13 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
     mockRequire('..', test);
     
     process.env.SUPERTAPE_CHECK_DUPLICATES = '0';
+    reRequire('./cli/parse-args');
     await runCli({
         argv,
     });
     delete process.env.SUPERTAPE_CHECK_DUPLICATES;
     
+    reRequire('./cli/parse-args');
     stopAll();
     
     const expected = [{
@@ -517,6 +521,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
         checkAssertionsCount: true,
         checkScopes: true,
         isStop,
+        workerFormatter: null,
     }];
     
     t.calledWith(init, expected);
@@ -561,6 +566,7 @@ test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
         checkAssertionsCount: true,
         checkScopes: true,
         isStop,
+        workerFormatter: null,
     }];
     
     t.calledWith(init, expected);
@@ -605,6 +611,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
         checkAssertionsCount: true,
         checkScopes: true,
         isStop,
+        workerFormatter: null,
     }];
     
     t.calledWith(init, expected);
@@ -647,6 +654,7 @@ test('supertape: bin: cli: check-duplicates: -d', async (t) => {
         checkAssertionsCount: true,
         checkScopes: true,
         isStop,
+        workerFormatter: null,
     }];
     
     t.calledWith(init, expected);
@@ -695,6 +703,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         checkAssertionsCount: true,
         checkScopes: true,
         isStop,
+        workerFormatter: null,
     }];
     
     t.calledWith(init, expected);
@@ -762,6 +771,7 @@ async function runCli(options) {
         stderr = createStream(),
         cwd = __dirname,
         exit = stub(),
+        workerFormatter = null,
     } = options;
     
     const cli = reRequire('./cli');
@@ -772,6 +782,7 @@ async function runCli(options) {
         stderr,
         cwd,
         exit,
+        workerFormatter,
     });
     
     return [error, cli];

@@ -69,5 +69,6 @@ function run(reporter, type, data) {
     if (type === 'fail')
         return reporter.fail(data);
     
-    return reporter.end(data);
+    if (type === 'end')
+        return reporter.end(data);
 }

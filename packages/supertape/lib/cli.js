@@ -5,12 +5,13 @@ const {resolve: resolvePath} = require('path');
 const {once} = require('events');
 const {pathToFileURL} = require('url');
 
-const yargsParser = require('yargs-parser');
 const glob = require('glob');
 const fullstore = require('fullstore');
 const tryToCatch = require('try-to-catch');
 const keypress = require('@putout/cli-keypress');
+
 const {simpleImport} = require('./simple-import');
+const {parseArgs, yargsOptions} = require('./cli/parse-args');
 
 const supertape = require('..');
 const {
@@ -22,23 +23,14 @@ const {
     SKIPED,
 } = require('./exit-codes');
 
-const {isArray} = Array;
-
-const maybeFirst = (a) => isArray(a) ? a.pop() : a;
-const maybeArray = (a) => isArray(a) ? a : [a];
 const isExclude = (a) => !a.includes('node_modules');
-
 const removeDuplicates = (a) => Array.from(new Set(a));
+
 const filesCount = fullstore(0);
 
-const {
-    SUPERTAPE_CHECK_DUPLICATES = '1',
-    SUPERTAPE_CHECK_SCOPES = '1',
-    SUPERTAPE_CHECK_ASSERTIONS_COUNT = '1',
-    SUPERTAPE_CHECK_SKIPED = '0',
-} = process.env;
+const {SUPERTAPE_CHECK_SKIPED = '0'} = process.env;
 
-module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
+module.exports = async ({argv, cwd, stdout, stderr, exit, workerFormatter}) => {
     const {isStop} = keypress();
     const [error, result] = await tryToCatch(cli, {
         argv,
@@ -46,6 +38,7 @@ module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
         stdout,
         exit,
         isStop,
+        workerFormatter,
     });
     
     if (error) {
@@ -77,46 +70,8 @@ module.exports = async ({argv, cwd, stdout, stderr, exit}) => {
     return exit(OK);
 };
 
-const yargsOptions = {
-    configuration: {
-        'strip-aliased': true,
-        'strip-dashed': true,
-    },
-    coerce: {
-        require: maybeArray,
-        format: maybeFirst,
-    },
-    string: [
-        'format',
-        'require',
-    ],
-    boolean: [
-        'version',
-        'help',
-        'check-duplicates',
-        'check-scopes',
-        'check-assertions-count',
-    ],
-    alias: {
-        version: 'v',
-        format: 'f',
-        help: 'h',
-        require: 'r',
-        checkDuplicates: 'd',
-        checkScopes: 's',
-        checkAssertionsCount: 'a',
-    },
-    default: {
-        format: 'progress-bar',
-        require: [],
-        checkDuplicates: SUPERTAPE_CHECK_DUPLICATES !== '0',
-        checkScopes: SUPERTAPE_CHECK_SCOPES !== '0',
-        checkAssertionsCount: SUPERTAPE_CHECK_ASSERTIONS_COUNT !== '0',
-    },
-};
-
-async function cli({argv, cwd, stdout, isStop}) {
-    const args = yargsParser(argv, yargsOptions);
+async function cli({argv, cwd, stdout, isStop, workerFormatter}) {
+    const args = parseArgs(argv);
     
     if (args.version) {
         stdout.write(`v${require('../package').version}\n`);
@@ -171,6 +126,7 @@ async function cli({argv, cwd, stdout, isStop}) {
         checkDuplicates,
         checkScopes,
         checkAssertionsCount,
+        workerFormatter,
     });
     
     const stream = await supertape.createStream();

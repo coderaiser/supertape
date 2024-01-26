@@ -4,7 +4,7 @@ import test from '../lib/supertape.js';
 
 const require = createRequire(import.meta.url);
 
-const name = new URL('supertape.mjs', import.meta.url).pathname;
+const name = new URL('tracer.mjs', import.meta.url).pathname;
 const run = runsome(name);
 
 test('supertape: bin: -v', (t) => {

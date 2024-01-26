@@ -16,7 +16,6 @@ const notSkip = ({skip}) => !skip;
 const getInitOperators = async () => await import('./operators.mjs');
 
 const {SUPERTAPE_TIMEOUT = 3000} = process.env;
-
 const DEBUG_TIME = 3000 * 1000;
 
 const timeout = (time, value) => {

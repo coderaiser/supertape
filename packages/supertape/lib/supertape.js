@@ -45,7 +45,7 @@ const defaultOptions = {
     checkScopes: true,
 };
 
-function _createEmitter({quiet, stream = stdout, format, getOperators, isStop, readyFormatter}) {
+function _createEmitter({quiet, stream = stdout, format, getOperators, isStop, readyFormatter, workerFormatter}) {
     const tests = [];
     const emitter = new EventEmitter();
     
@@ -77,7 +77,7 @@ function _createEmitter({quiet, stream = stdout, format, getOperators, isStop, r
         const operators = await getOperators();
         
         const result = await runTests(tests, {
-            formatter,
+            formatter: workerFormatter || formatter,
             operators,
             isStop,
         });
@@ -152,6 +152,7 @@ function test(message, fn, options = {}) {
         checkScopes,
         checkAssertionsCount,
         checkIfEnded,
+        workerFormatter,
     } = {
         ...defaultOptions,
         ...initedOptions,
@@ -168,12 +169,12 @@ function test(message, fn, options = {}) {
     setValidations(validations);
     
     const at = getAt();
-    
     const emitter = options.emitter || createEmitter({
         format,
         quiet,
         getOperators,
         isStop,
+        workerFormatter,
     });
     
     mainEmitter = emitter;
