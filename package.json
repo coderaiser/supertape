@@ -41,12 +41,14 @@
     "madrun": "^10.0.0",
     "putout": "^35.0.0",
     "redlint": "^3.9.0",
-    "supertape": "^9.0.0",
+    "supertape": "^10.0.0",
     "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=18"
   },
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {}
 }
