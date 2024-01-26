@@ -1,3 +1,11 @@
+2024.01.26, v10.0.0
+
+feature:
+- 174a856 supertape: help
+- 0e55c2f supertape: isStop
+- 64c7acb supertape: add support of worker_threads
+- 1e4429d supertape: putout v35.0.0
+
 2024.01.05, v9.5.0
 
 feature:
