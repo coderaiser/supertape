@@ -207,6 +207,56 @@ test('supertape: format: progress bar: skip', async (t) => {
     t.end();
 });
 
+test('supertape: format: progress bar: skip: webstorm', async (t) => {
+    const fn = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const message = 'skip: success';
+    const {
+        CI,
+        TERMINAL_EMULATOR,
+    } = env;
+    
+    env.CI = 1;
+    env.TERMINAL_EMULATOR = 'JetBrains-JediTerm';
+    
+    const {
+        run,
+        test,
+        stream,
+    } = await createTest({
+        formatter: progressBar,
+    });
+    
+    test(message, fn, {
+        skip: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(stream, 8),
+        run(),
+    ]);
+    
+    env.CI = CI;
+    env.TERMINAL_EMULATOR = TERMINAL_EMULATOR;
+    
+    const expected = montag`
+      TAP version 13
+      
+      1..0
+      # tests 0
+      # pass 0
+      # ⚠️ skip 1
+      
+      # ✅ ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: format: progress bar: color', async (t) => {
     const fn = (t) => {
         t.ok(true);

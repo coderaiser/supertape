@@ -119,7 +119,7 @@ export const end = ({barStore, out}) => ({count, passed, failed, skiped}) => {
     out(`# pass ${passed}`);
     
     if (skiped)
-        out(`# ⚠️  skip ${skiped}`);
+        out(formatSkip(skiped));
     
     out('');
     
@@ -197,4 +197,11 @@ function _createProgress({total, color, test}) {
     });
     
     return bar;
+}
+
+function formatSkip(skiped) {
+    const {TERMINAL_EMULATOR} = process.env;
+    const spaces = /JetBrains/.test(TERMINAL_EMULATOR) ? '' : ' ';
+    
+    return `# ⚠️ ${spaces}skip ${skiped}`;
 }
