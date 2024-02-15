@@ -8,6 +8,7 @@ import process from 'node:process';
 global._isCI = isCI;
 
 const OK = '👌';
+const WARNING = '⚠️';
 const YELLOW = '#f9d472';
 
 const {red} = chalk;
@@ -201,7 +202,7 @@ function _createProgress({total, color, test}) {
 
 function formatSkip(skiped) {
     const {TERMINAL_EMULATOR} = process.env;
-    const spaces = /JetBrains/.test(TERMINAL_EMULATOR) ? '' : ' ';
+    const spaces = /JetBrains/.test(TERMINAL_EMULATOR) ? '' : '  ';
     
-    return `# ⚠️ ${spaces}skip ${skiped}`;
+    return `# ${WARNING}${spaces}skip ${skiped}`;
 }
