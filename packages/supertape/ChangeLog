@@ -1,3 +1,11 @@
+2024.02.15, v10.1.0
+
+feature:
+- e55d74d supertape: @supertape/formatter-progress-bar v5.0.0
+- e8d4f09 @supertape/formatter-progress-bar: drop support of node < 18
+- 3b9155c @supertape/formatter-progress-bar: add support of WebStorm
+- 9405efc supertape: supertape v10.0.0
+
 2024.01.26, v10.0.0
 
 feature:
