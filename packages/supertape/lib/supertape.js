@@ -4,6 +4,7 @@ const process = require('process');
 const {EventEmitter} = require('events');
 const {PassThrough} = require('stream');
 
+const stub = require('@cloudcmd/stub');
 const once = require('once');
 
 const options = require('../supertape.json');
@@ -215,11 +216,16 @@ const getExtend = (extensions, type) => (message, fn, options) => {
     });
 };
 
-test.stub = require('@cloudcmd/stub');
+test.stub = stub;
 test.test = test;
 
 test.extend = (extensions) => {
     const extendedTest = getExtend(extensions);
+    
+    assign(extendedTest, {
+        test: extendedTest,
+        stub,
+    });
     
     extendedTest.only = getExtend(extensions, {
         only: true,

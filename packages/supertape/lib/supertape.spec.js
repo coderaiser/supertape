@@ -4,7 +4,7 @@ const process = require('process');
 const {once} = require('events');
 const {Transform} = require('stream');
 
-const test = require('..');
+const {test, stub} = require('..');
 const montag = require('montag');
 const {reRequire} = require('mock-require');
 const pullout = require('pullout');
@@ -660,6 +660,78 @@ test('supertape: extensions: extend: skip', async (t) => {
     `;
     
     t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: extensions: extend: test', async (t) => {
+    const extensions = {
+        transformCode: (t) => async (a, b) => {
+            return await t.equal(a + 1, b, 'should transform code');
+        },
+    };
+    
+    const fn = (t) => {
+        t.transformCode(0, 1);
+        t.end();
+    };
+    
+    const message = 'tape: extend';
+    const supertape = reRequire('..');
+    
+    const {test: extendedTape} = supertape.extend(extensions);
+    
+    const emitter = extendedTape(message, fn, {
+        quiet: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream()),
+        once(emitter, 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # tape: extend
+        ok 1 should transform code
+        
+        1..1
+        # tests 1
+        # pass 1
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: extensions: extend: stub', async (t) => {
+    const extensions = {
+        transformCode: (t) => async (a, b) => {
+            return await t.equal(a + 1, b, 'should transform code');
+        },
+    };
+    
+    const fn = (t) => {
+        t.transformCode(0, 1);
+        t.end();
+    };
+    
+    const message = 'tape: extend';
+    const supertape = reRequire('..');
+    
+    const {stub: _stub, test: extendedTape} = supertape.extend(extensions);
+    
+    const emitter = extendedTape(message, fn, {
+        quiet: true,
+    });
+    
+    await Promise.all([
+        pull(supertape.createStream()),
+        once(emitter, 'end'),
+    ]);
+    
+    t.equal(_stub, stub);
     t.end();
 });
 
