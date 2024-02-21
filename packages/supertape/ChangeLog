@@ -1,3 +1,11 @@
+2024.02.21, v10.2.0
+
+feature:
+- 6b6715b @supertape/formatter-time: chalk v5.3.0
+- de5d7ad @supertape/formatter-progress-bar: chalk v5.3.0
+- 833b60b supertape: extend: test, stub
+- eebaf9e @supertape/progress-bar: improve WebStorm support
+
 2024.02.15, v10.1.0
 
 feature:
