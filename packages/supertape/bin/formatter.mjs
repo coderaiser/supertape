@@ -31,7 +31,7 @@ export const createFormatter = (parentPort) => {
     });
     
     formatter.on('test:success', ({count, message}) => {
-        parentPort.postMessage(['test:success', {
+        parentPort.postMessage(['success', {
             count,
             message,
         }]);
