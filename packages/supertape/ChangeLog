@@ -1,3 +1,8 @@
+2024.02.28, v10.2.1
+
+fix:
+- 9b0bf03 supertape: tap: success (#8)
+
 2024.02.21, v10.2.0
 
 feature:
