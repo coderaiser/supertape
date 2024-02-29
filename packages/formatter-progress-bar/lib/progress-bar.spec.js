@@ -169,9 +169,13 @@ test('supertape: format: progress bar: skip', async (t) => {
     
     const message = 'skip: success';
     
-    const {CI} = env;
+    const {
+        CI,
+        TERMINAL_EMULATOR,
+    } = env;
     
     env.CI = 1;
+    delete env.TERMINAL_EMULATOR;
     
     const {
         run,
@@ -191,6 +195,9 @@ test('supertape: format: progress bar: skip', async (t) => {
     ]);
     
     env.CI = CI;
+    
+    if (TERMINAL_EMULATOR)
+        env.TERMINAL_EMULATOR = TERMINAL_EMULATOR;
     
     const expected = montag`
       TAP version 13
