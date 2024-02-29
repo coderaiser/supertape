@@ -24,8 +24,8 @@ export const createFormatter = (parentPort) => {
         }]);
     });
     
-    formatter.on('comment', (message) => {
-        parentPort.postMessage(['test:end', {
+    formatter.on('comment', ({message}) => {
+        parentPort.postMessage(['comment', {
             message,
         }]);
     });
