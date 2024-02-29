@@ -37,7 +37,6 @@
     "testing"
   ],
   "devDependencies": {
-    "@babel/core": "^7.12.9",
     "c8": "^9.0.0",
     "check-dts": "^0.7.0",
     "eslint": "^8.0.0-beta.0",

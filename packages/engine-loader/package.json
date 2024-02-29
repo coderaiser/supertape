@@ -33,7 +33,6 @@
     "testing"
   ],
   "devDependencies": {
-    "@babel/core": "^7.12.9",
     "@supertape/operator-stub": "*",
     "c8": "^9.0.0",
     "eslint": "^8.0.0-beta.0",
