@@ -1,8 +1,8 @@
+import {EventEmitter} from 'node:events';
 import {
     parentPort,
     workerData,
 } from 'node:worker_threads';
-import {EventEmitter} from 'node:events';
 
 const {assign} = Object;
 
