@@ -38,6 +38,24 @@
 
 For a list of all built-in assertions, see [Operators](#operators).
 
+## How 📼**Supertape** test looks like?
+
+You can use both **CommonJS** and **ESM**, here is **ESM** example:
+
+```js
+import {test} from 'supertape';
+
+const sump = (a, b) => a + b;
+
+test('calc: sum', (t) => {
+    const result = sum(1, 2);
+    const expected = 3;
+    
+    t.equal(result, expected);
+    t.end();
+});
+```
+
 ## Install
 
 ```
@@ -61,7 +79,7 @@ Options
 
 ## Environment variables
 
-- `SUPERTAPE_TIMEOUT` - timeout for long running processes;
+- `SUPERTAPE_TIMEOUT` - timeout for long running processes, defaults to `3000` (3 seconds);
 - `SUPERTAPE_CHECK_DUPLICATES` - toggle check duplicates;
 - `SUPERTAPE_CHECK_SCOPES` - check that test message has a scope: `scope: subject`;
 - `SUPERTAPE_CHECK_ASSERTIONS_COUNT` - check that assertion count is no more then 1;
@@ -179,39 +197,7 @@ There is a list of built-int `formatters` to customize output:
 
 ## API
 
-### Methods
-
-The assertion methods in `supertape` are heavily influenced by [tape](https://github.com/substack/tape).
-
-```js
-const test = require('supertape');
-const {sum} = require('./calc.js');
-
-test('calc: sum', (t) => {
-    const result = sum(1, 2);
-    const expected = 3;
-    
-    t.equal(result, expected);
-    t.end();
-});
-```
-
-or in `ESM`:
-
-```js
-import {test} from 'supertape';
-import {sum} from './calc.js';
-
-test('calc: sum', (t) => {
-    const result = sum(1, 2);
-    const expected = 3;
-    
-    t.equal(result, expected);
-    t.end();
-});
-```
-
-## test(message: string, fn: (t: Test) => void, options?: TestOptions)
+### test(message: string, fn: (t: Test) => void, options?: TestOptions)
 
 Create a new test with `message` string.
 `fn(t)` fires with the new test object `t` once all preceding tests have
@@ -224,17 +210,17 @@ Here is Possible `options` similar to [Environment Variables](#environment-varia
 - `checkAssertionsCount`;
 - `timeout`;
 
-## test.only(message, fn, options?)
+### test.only(message, fn, options?)
 
 Like `test(name, cb)` except if you use `.only` this is the only test case
 that will run for the entire process, all other test cases using `tape` will
 be ignored.
 
-## test.skip(message, fn, options?)
+### test.skip(message, fn, options?)
 
 Generate a new test that will be skipped over.
 
-## test.extend(extensions)
+### test.extend(extensions)
 
 Extend base assertions with more:
 
