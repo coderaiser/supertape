@@ -20,7 +20,10 @@ const {assign} = Object;
 const {stdout} = process;
 
 // 5ms ought to be enough for anybody
-const {SUPERTAPE_LOAD_LOOP_TIMEOUT = 5} = process.env;
+const {
+    SUPERTAPE_LOAD_LOOP_TIMEOUT = 5,
+    SUPERTAPE_TIMEOUT = 3000,
+} = process.env;
 
 let mainEmitter;
 
@@ -44,13 +47,14 @@ const defaultOptions = {
     checkIfEnded: true,
     checkAssertionsCount: true,
     checkScopes: true,
+    timeout: SUPERTAPE_TIMEOUT,
 };
 
 function _createEmitter({quiet, stream = stdout, format, getOperators, isStop, readyFormatter, workerFormatter}) {
     const tests = [];
     const emitter = new EventEmitter();
     
-    emitter.on('test', (message, fn, {skip, only, extensions, at, validations}) => {
+    emitter.on('test', (message, fn, {skip, only, extensions, at, validations, timeout}) => {
         tests.push({
             message,
             fn,
@@ -59,6 +63,7 @@ function _createEmitter({quiet, stream = stdout, format, getOperators, isStop, r
             extensions,
             at,
             validations,
+            timeout,
         });
     });
     
@@ -154,6 +159,7 @@ function test(message, fn, options = {}) {
         checkAssertionsCount,
         checkIfEnded,
         workerFormatter,
+        timeout,
     } = {
         ...defaultOptions,
         ...initedOptions,
@@ -186,6 +192,7 @@ function test(message, fn, options = {}) {
         extensions,
         at,
         validations,
+        timeout,
     });
     
     if (run)

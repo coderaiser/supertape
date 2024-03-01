@@ -49,6 +49,11 @@ test('hello', (t: Test) => {
     t.end();
 }, {checkScopes: false});
 
+test.only('hello', (t: Test) => {
+    t.end();
+// THROWS Type 'string' is not assignable to type 'number'
+}, {timeout: 'hello'});
+
 test('hello', (t: Test) => {
     t.end();
 // THROWS Object literal may only specify known properties, and 'checkUnknown' does not exist in type 'TestOptions'

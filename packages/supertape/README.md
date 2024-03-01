@@ -211,19 +211,26 @@ test('calc: sum', (t) => {
 });
 ```
 
-## test(name, cb)
+## test(message: string, fn: (t: Test) => void, options?: TestOptions)
 
-Create a new test with `name` string.
-`cb(t)` fires with the new test object `t` once all preceding tests have
+Create a new test with `message` string.
+`fn(t)` fires with the new test object `t` once all preceding tests have
 finished. Tests execute serially.
 
-## test.only(name, cb)
+Here is Possible `options` similar to [Environment Variables](#environment-variables) but relates to one test:
+
+- `checkDuplicates`;
+- `checkScopes`;-
+- `checkAssertionsCount`;
+- `timeout`;
+
+## test.only(message, fn, options?)
 
 Like `test(name, cb)` except if you use `.only` this is the only test case
 that will run for the entire process, all other test cases using `tape` will
 be ignored.
 
-## test.skip(name, cb)
+## test.skip(message, fn, options?)
 
 Generate a new test that will be skipped over.
 

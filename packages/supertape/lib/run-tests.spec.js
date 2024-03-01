@@ -487,7 +487,7 @@ test('supertape: runTests: fail: at', async (t) => {
     t.end();
 });
 
-test('supertape: runTests: fail: timeout', async (t) => {
+test('supertape: runTests: fail: timeout: SUPERTAPE_TIMEOUT', async (t) => {
     const fn = async (t) => {
         await once(new EventEmitter(), 'end');
         t.end();
@@ -520,6 +520,37 @@ test('supertape: runTests: fail: timeout', async (t) => {
     `;
     
     process.env.SUPERTAPE_TIMEOUT = SUPERTAPE_TIMEOUT;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: runTests: fail: timeout', async (t) => {
+    const fn = async (t) => {
+        await once(new EventEmitter(), 'end');
+        t.end();
+    };
+    
+    const message = 'hello world';
+    
+    const supertape = reRequire('..');
+    supertape(message, fn, {
+        quiet: true,
+        timeout: 1,
+    });
+    
+    const [result] = await Promise.all([
+        pull(supertape.createStream(), 5),
+        once(supertape.run(), 'end'),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello world
+        not ok 1 timeout
+          ---
+            operator: fail
+    `;
     
     t.equal(result, expected);
     t.end();

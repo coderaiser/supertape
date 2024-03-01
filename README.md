@@ -64,6 +64,8 @@ Options
 - `SUPERTAPE_CHECK_DUPLICATES` - toggle check duplicates;
 - `SUPERTAPE_CHECK_SCOPES` - check that test message has a scope: `scope: subject`;
 - `SUPERTAPE_CHECK_ASSERTIONS_COUNT` - check that assertion count is no more then 1;
+- `SUPERTAPE_CHECK_SKIPED` - check that skiped count equal to `0`, exit with status code;
+- `SUPERTAPE_LOAD_LOOP_TIMEOUT` - timeout for load tests, defaults to `5ms`, when mocha used as runner - `50ms` optimal;
 
 ```js
 test('tape: error', (t) => {
