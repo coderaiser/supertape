@@ -1,3 +1,8 @@
+2024.03.01, v10.3.0
+
+feature:
+- 4aeb021 supertape: add per-test timeout option (#9)
+
 2024.02.29, v10.2.2
 
 fix:
