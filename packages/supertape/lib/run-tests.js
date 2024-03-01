@@ -15,10 +15,9 @@ const notSkip = ({skip}) => !skip;
 
 const getInitOperators = async () => await import('./operators.mjs');
 
-const {SUPERTAPE_TIMEOUT = 3000} = process.env;
 const DEBUG_TIME = 3000 * 1000;
 
-const timeout = (time, value) => {
+const doTimeout = (time, value) => {
     let stop;
     
     if (isDebug)
@@ -95,6 +94,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
             incPassed,
             getValidationMessage,
             validations,
+            timeout,
             
             extensions: {
                 ...operators,
@@ -118,7 +118,7 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
     };
 }
 
-async function runOneTest({message, at, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getValidationMessage, validations}) {
+async function runOneTest({message, at, fn, extensions, formatter, count, total, failed, incCount, incPassed, incFailed, getValidationMessage, validations, timeout}) {
     const isReturn = fullstore(false);
     const assertionsCount = fullstore(0);
     const isEnded = fullstore(false);
@@ -145,7 +145,7 @@ async function runOneTest({message, at, fn, extensions, formatter, count, total,
     });
     
     if (!isReturn()) {
-        const [timer, stopTimer] = timeout(SUPERTAPE_TIMEOUT, ['timeout']);
+        const [timer, stopTimer] = doTimeout(timeout, ['timeout']);
         const [error] = await Promise.race([tryToCatch(fn, t), timer]);
         
         stopTimer();

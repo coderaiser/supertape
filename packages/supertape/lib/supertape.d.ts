@@ -34,6 +34,7 @@ type TestOptions = {
     checkAssertionsCount?: boolean;
     checkScopes?: boolean;
     checkDuplicates?: boolean;
+    timeout?: number;
 };
 
 declare function test(message: string, fn: (t: Test) => void, options?: TestOptions): void;
