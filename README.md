@@ -241,17 +241,17 @@ Asserts that `result` and `expected` are not strictly equal. If `message` is pro
 
 #### `t.deepEqual(result: any, expected: any, message?: string)`
 
-Asserts that `result` and `expected` are loosely equal, with the same structure and nested values. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` and `expected` are equal, with the same structure and nested values. If `message` is provided, it will be outputted as a description of the assertion.
 
-☝️ *Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
+☝️ *Note: uses [node's isDeepStrictEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
 
 #### `t.notDeepEqual(result: any, expected: any, message?: string)`
 
-Asserts that `result` and `expected` not loosely equal, with different structure and/or nested values. If `message` is provided, it will be outputted as a description of the assertion.
+Asserts that `result` and `expected` are not equal, with different structure and/or nested values. If `message` is provided, it will be outputted as a description of the assertion.
 
-☝️ *Note: uses [node's deepEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
+☝️ *Note: uses [node's isDeepStrictEqual() algorithm][NodeDeepEqual] with strict comparisons (`===`) on leaf nodes*
 
-[NodeDeepEqual]: https://github.com/substack/node-deep-equal
+[NodeDeepEqual]: https://nodejs.org/dist/latest-v17.x/docs/api/util.html#utilisdeepstrictequalval1-val2
 
 #### `t.ok(result: boolean | any, message?: string)`
 

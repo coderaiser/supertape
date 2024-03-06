@@ -1,4 +1,4 @@
-import deepEqualCheck from 'deep-equal';
+import {isDeepStrictEqual} from 'node:util';
 import diff from './diff.mjs';
 import {
     formatOutput,
@@ -119,7 +119,7 @@ const fail = (error, at) => ({
 });
 
 const deepEqual = (result, expected, message = 'should deep equal') => {
-    const is = deepEqualCheck(result, expected);
+    const is = isDeepStrictEqual(result, expected);
     const output = is ? '' : diff(expected, result);
     
     return {
@@ -132,7 +132,7 @@ const deepEqual = (result, expected, message = 'should deep equal') => {
 };
 
 const notDeepEqual = (result, expected, message = 'should not deep equal') => {
-    const is = !deepEqualCheck(result, expected);
+    const is = !isDeepStrictEqual(result, expected);
     const output = is ? '' : diff(expected, result);
     
     return {
