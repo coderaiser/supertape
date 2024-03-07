@@ -1,9 +1,6 @@
 import {isDeepStrictEqual} from 'node:util';
 import diff from './diff.mjs';
-import {
-    formatOutput,
-    parseAt,
-} from './format.js';
+import {formatOutput, parseAt} from './format.js';
 
 const {entries} = Object;
 const isAsync = (a) => a[Symbol.toStringTag] === 'AsyncFunction';

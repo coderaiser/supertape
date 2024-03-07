@@ -1,8 +1,5 @@
 import {OperatorStub} from '@supertape/operator-stub';
-import {
-    stub,
-    Stub,
-} from '@cloudcmd/stub';
+import {stub, Stub} from '@cloudcmd/stub';
 
 type OperationBaseResult = {
     is: boolean;

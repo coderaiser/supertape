@@ -1,7 +1,4 @@
-import {
-    stub,
-    extend,
-} from 'supertape';
+import {stub, extend} from 'supertape';
 import * as operator from './stub.js';
 
 const noop = () => {};

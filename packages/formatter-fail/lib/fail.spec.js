@@ -1,9 +1,6 @@
 import montag from 'montag';
 import pullout from 'pullout';
-import {
-    test,
-    createTest,
-} from 'supertape';
+import {test, createTest} from 'supertape';
 import * as failFormatter from './fail.js';
 
 const pull = async (stream, i = 9) => {

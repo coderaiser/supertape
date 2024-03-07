@@ -19,10 +19,7 @@ npm i @supertape/engine-loader -D
 
 ```js
 import {loadOperators} from '@supertape/engine-loader';
-import {
-    extend,
-    stub,
-} from 'supertape';
+import {extend, stub} from 'supertape';
 
 const operators = await loadOperators(['stub']);
 

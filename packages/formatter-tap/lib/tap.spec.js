@@ -1,9 +1,6 @@
 import montag from 'montag';
 import pullout from 'pullout';
-import {
-    test,
-    createTest,
-} from 'supertape';
+import {test, createTest} from 'supertape';
 import process from 'node:process';
 import * as tapFormatter from './tap.js';
 
