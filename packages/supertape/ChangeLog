@@ -1,3 +1,8 @@
+2024.03.07, v10.4.0
+
+feature:
+- 3aef569 supertape: remove dependency on deep-equal
+
 2024.03.01, v10.3.0
 
 feature:
