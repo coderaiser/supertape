@@ -18,6 +18,7 @@ const {
     OK,
     WAS_STOP,
     SKIPED,
+    UNHANDLED,
 } = require('./exit-codes');
 
 const {reRequire, stopAll} = mockRequire;
@@ -710,6 +711,20 @@ test('supertape: bin: cli: format: apply last', async (t) => {
     t.end();
 });
 
+test('supertape: bin: cli: invalid file', async (t) => {
+    const name = join(__dirname, 'fixture/invalid.js');
+    const argv = [name];
+    const exit = stub();
+    
+    await runCli({
+        exit,
+        argv,
+    });
+    
+    t.calledWith(exit, [UNHANDLED]);
+    t.end();
+});
+
 test('supertape: cli: isStop', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
     const argv = [name, '-f', 'json-lines'];
@@ -739,7 +754,6 @@ test('supertape: cli: validation', async (t) => {
     const argv = [name, '--forma', 'json-lines'];
     
     const write = stub();
-    
     const stderr = {
         write,
     };

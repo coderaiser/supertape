@@ -137,9 +137,14 @@ async function cli({argv, cwd, stdout, isStop, workerFormatter}) {
     const promises = [];
     const files = removeDuplicates(allFiles);
     
+    const resolvedNames = [];
+    
+    // always resolve before import for windows
     for (const file of files) {
-        // always resolve before import for windows
-        const resolved = pathToFileURL(resolvePath(cwd, file));
+        resolvedNames.push(pathToFileURL(resolvePath(cwd, file)));
+    }
+    
+    for (const resolved of resolvedNames) {
         promises.push(simpleImport(resolved));
     }
     
@@ -148,7 +153,12 @@ async function cli({argv, cwd, stdout, isStop, workerFormatter}) {
     if (!promises.length)
         return OK;
     
-    await Promise.all(promises);
+    const [importError] = await tryToCatch(Promise.all.bind(Promise), promises);
+    
+    if (importError)
+        for (const resolved of resolvedNames)
+            await simpleImport(resolved);
+    
     const [result] = await once(supertape.run(), 'end');
     
     return result;
