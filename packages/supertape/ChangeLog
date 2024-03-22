@@ -1,3 +1,9 @@
+2024.03.22, v10.5.0
+
+feature:
+- b4e7436 supertape: when cannot import parallel, try series (nodejs/node#52187)
+- ebb9d46 supertape: remove dependency on deep-equal (#10)
+
 2024.03.07, v10.4.0
 
 feature:
