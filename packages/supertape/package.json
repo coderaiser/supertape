@@ -75,10 +75,11 @@
   "devDependencies": {
     "@babel/core": "^8.0.0-alpha.5",
     "@iocmd/wait": "^2.1.0",
+    "@putout/eslint-flat": "^1.0.4",
     "c8": "^9.0.0",
     "check-dts": "^0.7.0",
     "currify": "^4.0.0",
-    "eslint": "^8.0.0",
+    "eslint": "^9.1.1",
     "eslint-plugin-n": "^16.0.1",
     "eslint-plugin-putout": "^22.0.0",
     "find-up": "^7.0.0",

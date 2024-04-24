@@ -4,7 +4,8 @@
     "exclude": [
         "**/lib/**/{fixture,*.spec.{js,mjs}}",
         ".*",
-        "**/packages/supertape/bin/*.mjs"
+        "**/packages/supertape/bin/*.mjs",
+        "**/*.config.*"
     ],
     "branches": 100,
     "lines": 100,

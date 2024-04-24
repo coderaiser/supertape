@@ -10,7 +10,6 @@ const fullstore = require('fullstore');
 const tryToCatch = require('try-to-catch');
 const keypress = require('@putout/cli-keypress');
 
-const {simpleImport} = require('./simple-import');
 const {parseArgs, yargsOptions} = require('./cli/parse-args');
 
 const supertape = require('..');
@@ -145,7 +144,7 @@ async function cli({argv, cwd, stdout, isStop, workerFormatter}) {
     }
     
     for (const resolved of resolvedNames) {
-        promises.push(simpleImport(resolved));
+        promises.push(import(resolved));
     }
     
     filesCount(files.length);
@@ -157,7 +156,7 @@ async function cli({argv, cwd, stdout, isStop, workerFormatter}) {
     
     if (importError)
         for (const resolved of resolvedNames)
-            await simpleImport(resolved);
+            await import(resolved);
     
     const [result] = await once(supertape.run(), 'end');
     
