@@ -1,3 +1,11 @@
+2024.05.09, v10.6.0
+
+feature:
+- 81503f1 supertape: eslint-plugin-n: drop
+- 2a378d1 supertape: pullout v5.0.1
+- 68a1fa9 supertape: formatter: harness: readableObjectMode: rm
+- 41af461 supertape: eslint v9.1.1
+
 2024.03.22, v10.5.0
 
 feature:
