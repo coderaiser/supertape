@@ -76,6 +76,7 @@ test('supertape: harness: no readableObjectMode, since it breaks console.log', (
     const {args} = Transform;
     const [[arg]] = args;
     const result = keys(arg);
+    
     const expected = [
         'writableObjectMode',
         'transform',

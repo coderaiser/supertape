@@ -1,8 +1,8 @@
 'use strict';
 
-const process = require('process');
-const {EventEmitter} = require('events');
-const {PassThrough} = require('stream');
+const process = require('node:process');
+const {EventEmitter} = require('node:events');
+const {PassThrough} = require('node:stream');
 
 const stub = require('@cloudcmd/stub');
 const once = require('once');

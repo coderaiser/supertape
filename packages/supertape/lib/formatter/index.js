@@ -1,6 +1,6 @@
 'use strict';
 
-const {EventEmitter} = require('events');
+const {EventEmitter} = require('node:events');
 const {createHarness} = require('./harness');
 
 const resolveFormatter = async (name) => await import(`@supertape/formatter-${name}`);

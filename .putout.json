@@ -2,6 +2,9 @@
     "match": {
         "*.md": {
             "remove-unreachable-code": "off"
+        },
+        ".filesystem.json": {
+            "eslint/convert-rc-to-flat": "on"
         }
     },
     "ignore": [".husky"]

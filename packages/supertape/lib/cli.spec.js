@@ -1,11 +1,11 @@
 'use strict';
 
-const process = require('process');
-const {join, dirname} = require('path');
+const process = require('node:process');
+const {join, dirname} = require('node:path');
 
-const {Transform} = require('stream');
-const {EventEmitter} = require('events');
-const {readFile} = require('fs/promises');
+const {Transform} = require('node:stream');
+const {EventEmitter} = require('node:events');
+const {readFile} = require('node:fs/promises');
 
 const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');

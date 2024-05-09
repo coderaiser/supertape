@@ -1,7 +1,7 @@
 'use strict';
 
-const process = require('process');
-const {once, EventEmitter} = require('events');
+const process = require('node:process');
+const {once, EventEmitter} = require('node:events');
 
 const montag = require('montag');
 const mockRequire = require('mock-require');

@@ -1,9 +1,9 @@
 'use strict';
 
-const process = require('process');
-const {resolve: resolvePath} = require('path');
-const {once} = require('events');
-const {pathToFileURL} = require('url');
+const process = require('node:process');
+const {resolve: resolvePath} = require('node:path');
+const {once} = require('node:events');
+const {pathToFileURL} = require('node:url');
 
 const glob = require('glob');
 const fullstore = require('fullstore');

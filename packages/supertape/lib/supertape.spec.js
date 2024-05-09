@@ -1,8 +1,8 @@
 'use strict';
 
-const process = require('process');
-const {once} = require('events');
-const {Transform} = require('stream');
+const process = require('node:process');
+const {once} = require('node:events');
+const {Transform} = require('node:stream');
 
 const {test, stub} = require('..');
 const montag = require('montag');
