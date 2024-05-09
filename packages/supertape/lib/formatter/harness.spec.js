@@ -1,10 +1,12 @@
 'use strict';
 
-const {once} = require('events');
-const {Transform} = require('stream');
+const {stub} = require('supertape');
+const {once} = require('node:events');
+const {Transform} = require('node:stream');
 
 const test = require('../..');
 const {createHarness} = require('./harness');
+const {keys} = Object;
 
 test('supertape: harness: proceed condition', (t) => {
     const reporter = {
@@ -37,7 +39,6 @@ test('supertape: harness: proceed condition: write after end', async (t) => {
     };
     
     const input = createHarness(reporter);
-    
     const output = new Transform({
         transform(chunk, enc, callback) {
             callback();
@@ -58,5 +59,28 @@ test('supertape: harness: proceed condition: write after end', async (t) => {
     ]);
     
     t.equal(error.message, `☝️ Looks like 'async' operator called without 'await'`);
+    t.end();
+});
+
+test('supertape: harness: no readableObjectMode, since it breaks console.log', (t) => {
+    const reporter = {
+        test: () => '',
+    };
+    
+    const Transform = stub();
+    
+    createHarness(reporter, {
+        Transform,
+    });
+    
+    const {args} = Transform;
+    const [[arg]] = args;
+    const result = keys(arg);
+    const expected = [
+        'writableObjectMode',
+        'transform',
+    ];
+    
+    t.deepEqual(result, expected);
     t.end();
 });

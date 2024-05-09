@@ -1,12 +1,11 @@
 'use strict';
 
-const {Transform} = require('stream');
+const {Transform: _Transform} = require('stream');
 const {assign} = Object;
 
-module.exports.createHarness = (reporter) => {
+module.exports.createHarness = (reporter, {Transform = _Transform} = {}) => {
     const prepared = prepare(reporter);
     const stream = new Transform({
-        readableObjectMode: true,
         writableObjectMode: true,
         
         transform(chunk, encoding, callback) {
