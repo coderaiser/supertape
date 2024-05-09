@@ -4,6 +4,6 @@ import {
     mergeESLintConfigs,
 } from '@putout/eslint-flat';
 
-const config = await mergeESLintConfigs('./packages');
+const config = await mergeESLintConfigs(import.meta.url, 'packages');
 
 export default createESLintConfig([safeAlign, config]);
