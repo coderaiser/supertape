@@ -5,11 +5,16 @@ import {createIsStop} from './is-stop.mjs';
 import {createFormatter} from './formatter.mjs';
 import {parseArgs} from '../lib/cli/parse-args.js';
 import cli from '../lib/cli.js';
+import {
+    overrideConsoleError,
+    overrideConsoleLog,
+} from '../lib/worker/create-console-log.js';
 
 const {
     worker,
     parentPort,
     workerData,
+    isMaster,
 } = createCommunication(process.argv);
 
 const args = parseArgs(process.argv.slice(2));
@@ -23,13 +28,22 @@ const {
 const workerFormatter = createFormatter(parentPort);
 const isStop = createIsStop(parentPort);
 
-if (worker)
+if (isMaster()) {
     subscribe({
         name: args.format,
         exit,
         worker,
         stdout,
     });
+} else {
+    overrideConsoleLog(parentPort, {
+        console,
+    });
+    
+    overrideConsoleError(parentPort, {
+        console,
+    });
+}
 
 export default await cli({
     stdout,

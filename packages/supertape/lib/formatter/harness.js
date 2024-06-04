@@ -1,6 +1,7 @@
 'use strict';
 
 const {Transform: _Transform} = require('node:stream');
+
 const {assign} = Object;
 
 module.exports.createHarness = (reporter, {Transform = _Transform} = {}) => {

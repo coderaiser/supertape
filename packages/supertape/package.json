@@ -51,6 +51,7 @@
     "@supertape/formatter-time": "^1.0.0",
     "@supertape/operator-stub": "^3.0.0",
     "cli-progress": "^3.8.2",
+    "flatted": "^3.3.1",
     "fullstore": "^3.0.0",
     "glob": "^10.3.10",
     "jest-diff": "^29.0.1",
@@ -88,7 +89,7 @@
     "pullout": "^5.0.1",
     "putout": "^35.0.0",
     "runsome": "^1.0.0",
-    "try-catch": "^3.0.0",
+    "try-catch": "^3.0.1",
     "typescript": "^5.1.6"
   },
   "license": "MIT",
