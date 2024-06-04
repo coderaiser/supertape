@@ -32,7 +32,6 @@
     "supertape"
   ],
   "devDependencies": {
-    "@babel/core": "^7.12.9",
     "c8": "^9.0.0",
     "eslint": "^9.1.1",
     "eslint-plugin-putout": "^22.0.0",
