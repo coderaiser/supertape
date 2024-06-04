@@ -205,7 +205,7 @@ test('supertape: format: progress bar: skip', async (t) => {
       1..0
       # tests 0
       # pass 0
-      # ⚠️  skip 1
+      # ⚠️ skip 1
       
       # ✅ ok
     `;
@@ -255,7 +255,7 @@ test('supertape: format: progress bar: skip: webstorm', async (t) => {
       1..0
       # tests 0
       # pass 0
-      # ⚠️skip 1
+      # ⚠️ skip 1
       
       # ✅ ok
     `;

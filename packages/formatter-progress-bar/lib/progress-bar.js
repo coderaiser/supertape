@@ -201,8 +201,5 @@ function _createProgress({total, color, test}) {
 }
 
 function formatSkip(skiped) {
-    const {TERMINAL_EMULATOR} = process.env;
-    const spaces = /JetBrains/.test(TERMINAL_EMULATOR) ? '' : '  ';
-    
-    return `# ${WARNING}${spaces}skip ${skiped}`;
+    return `# ${WARNING} skip ${skiped}`;
 }
