@@ -1,3 +1,12 @@
+2024.06.04, v10.6.1
+
+feature:
+- 9113041 supertape: @supertape/formatter-progress-bar v6.0.0
+- a61477a formatter-progress-bar: get rid of WebStorm hacks
+- 342cda0 supertape: check-dts v0.8.0
+- adfb128 supertape: husky v9.0.11
+- c6f3052 supertape: @putout/eslint-flat v2.0.0
+
 2024.05.09, v10.6.0
 
 feature:
