@@ -128,7 +128,7 @@ export const end = ({barStore, out}) => ({count, passed, failed, skiped}) => {
         out(`# ❌ fail ${failed}`);
     
     if (!failed)
-        out('# ✅ ok');
+        out(formatOk());
     
     out('');
     out('');
@@ -198,6 +198,13 @@ function _createProgress({total, color, test}) {
     });
     
     return bar;
+}
+
+function formatOk() {
+    const {TERMINAL_EMULATOR} = process.env;
+    const spaces = /JetBrains/.test(TERMINAL_EMULATOR) ? ' ' : '';
+    
+    return `# ✅ ${spaces}ok`;
 }
 
 function formatSkip(skiped) {

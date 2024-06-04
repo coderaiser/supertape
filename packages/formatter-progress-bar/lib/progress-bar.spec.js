@@ -257,7 +257,7 @@ test('supertape: format: progress bar: skip: webstorm', async (t) => {
       # pass 0
       # ⚠️ skip 1
       
-      # ✅ ok
+      # ✅  ok
     `;
     
     t.equal(result, expected);
