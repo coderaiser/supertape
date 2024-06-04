@@ -26,7 +26,6 @@ const isStop = createIsStop(parentPort);
 if (worker)
     subscribe({
         name: args.format,
-        quiet: args.quiet,
         exit,
         worker,
         stdout,

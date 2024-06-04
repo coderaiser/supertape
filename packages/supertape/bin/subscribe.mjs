@@ -5,12 +5,11 @@ const {createHarness} = harnessCreator;
 
 const resolveFormatter = async (name) => await import(`@supertape/formatter-${name}`);
 
-export async function subscribe({name, quiet, exit, worker, stdout}) {
+export async function subscribe({name, exit, worker, stdout}) {
     const {isStop} = keyPress();
     const harness = createHarness(await resolveFormatter(name));
     
-    if (!quiet)
-        harness.pipe(stdout);
+    harness.pipe(stdout);
     
     worker.on('exit', (code) => {
         exit(code);
