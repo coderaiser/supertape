@@ -35,7 +35,6 @@ test('supertape: format: progress bar', async (t) => {
     };
     
     const failMessage = 'progress bar: fail';
-    
     const {CI} = env;
     
     env.CI = 1;
@@ -128,7 +127,15 @@ test('supertape: format: progress bar: success', async (t) => {
     
     const message = 'progress bar: success';
     
-    env.CI = 1;
+    const {
+        CI,
+        TERMINAL_EMULATOR,
+    } = env;
+    
+    updateEnv({
+        CI: 1,
+        TERMINAL_EMULATOR: 'JetBrains-JediTerm',
+    });
     
     const {
         run,
@@ -145,7 +152,10 @@ test('supertape: format: progress bar: success', async (t) => {
         run(),
     ]);
     
-    env.CI = 1;
+    updateEnv({
+        CI,
+        TERMINAL_EMULATOR,
+    });
     
     const expected = montag`
       TAP version 13
@@ -154,7 +164,7 @@ test('supertape: format: progress bar: success', async (t) => {
       # tests 1
       # pass 1
       
-      # ✅ ok
+      # ✅  ok
     ` + '\n';
     
     t.equal(result, expected);
@@ -271,10 +281,15 @@ test('supertape: format: progress bar: color', async (t) => {
     };
     
     const message = 'progress-bar: color';
-    const {SUPERTAPE_PROGRESS_BAR_COLOR} = env;
+    
+    const {
+        SUPERTAPE_PROGRESS_BAR_COLOR,
+        TERMINAL_EMULATOR,
+    } = env;
     
     updateEnv({
         SUPERTAPE_PROGRESS_BAR_COLOR: 'red',
+        TERMINAL_EMULATOR: undefined,
     });
     
     const {
@@ -294,6 +309,7 @@ test('supertape: format: progress bar: color', async (t) => {
     
     updateEnv({
         SUPERTAPE_PROGRESS_BAR_COLOR,
+        TERMINAL_EMULATOR,
     });
     
     const expected = montag`
@@ -317,10 +333,14 @@ test('supertape: format: progress bar: color: hash', async (t) => {
     };
     
     const message = 'progress-bar: color';
-    const {SUPERTAPE_PROGRESS_BAR_COLOR} = env;
+    const {
+        SUPERTAPE_PROGRESS_BAR_COLOR,
+        TERMINAL_EMULATOR,
+    } = env;
     
     updateEnv({
-        SUPERTAPE_PROGRESS_BAR_COLOR: 'undefined',
+        SUPERTAPE_PROGRESS_BAR_COLOR: undefined,
+        TERMINAL_EMULATOR: undefined,
     });
     
     const {
@@ -340,6 +360,7 @@ test('supertape: format: progress bar: color: hash', async (t) => {
     
     updateEnv({
         SUPERTAPE_PROGRESS_BAR_COLOR,
+        TERMINAL_EMULATOR,
     });
     
     const expected = montag`
@@ -358,7 +379,6 @@ test('supertape: format: progress bar: color: hash', async (t) => {
 
 test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t) => {
     const {SUPERTAPE_PROGRESS_BAR} = env;
-    
     const {_isCI} = global;
     
     global._isCI = 1;
@@ -527,9 +547,11 @@ test('supertape: format: progress bar: no stack', async (t) => {
 
 function updateEnv(env) {
     for (const [name, value] of Object.entries(env)) {
-        if (value === 'undefined')
-            delete process.env[name];
-        else
+        if (value) {
             process.env[name] = value;
+            continue;
+        }
+        
+        delete process.env[name];
     }
 }
