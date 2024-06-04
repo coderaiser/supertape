@@ -36,7 +36,7 @@
     "check-dts": "^0.7.0",
     "eslint": "^9.1.1",
     "eslint-plugin-putout": "^22.0.0",
-    "husky": "^6.0.0",
+    "husky": "^9.0.11",
     "lerna": "^6.0.1",
     "madrun": "^10.0.0",
     "putout": "^35.0.0",
@@ -47,6 +47,8 @@
   "engines": {
     "node": ">=18"
   },
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {}
 }
