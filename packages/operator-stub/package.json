@@ -38,7 +38,7 @@
   ],
   "devDependencies": {
     "c8": "^9.0.0",
-    "check-dts": "^0.7.0",
+    "check-dts": "^0.8.0",
     "eslint": "^9.1.1",
     "eslint-plugin-putout": "^22.0.0",
     "madrun": "^10.0.0",
