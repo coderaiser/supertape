@@ -2,7 +2,6 @@ import keyPress from '@putout/cli-keypress';
 import harnessCreator from '../lib/formatter/harness.js';
 
 const {createHarness} = harnessCreator;
-
 const resolveFormatter = async (name) => await import(`@supertape/formatter-${name}`);
 
 export async function subscribe({name, exit, worker, stdout}) {
