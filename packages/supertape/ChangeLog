@@ -1,3 +1,11 @@
+2024.06.04, v10.7.0
+
+feature:
+- dcb4dfb supertape: add ability to use console.log in worker mode
+- 188ab81 @supertape/formatter-progress-bar: add comment
+- 79a0e2f supertape: rm unused quiet
+- 5f3d825 @putout/formatter-progress-bar: ✅ ok in WebStorm
+
 2024.06.04, v10.6.1
 
 feature:
