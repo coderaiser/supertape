@@ -74,6 +74,61 @@ test('supertape: format: progress bar', async (t) => {
     t.end();
 });
 
+test('supertape: format: progress bar: comment', async (t) => {
+    const successFn = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const successMessage = 'progress bar: success';
+    
+    const failFn = (t) => {
+        t.comment('second');
+        t.ok(false);
+        t.end();
+    };
+    
+    const failMessage = 'progress bar: fail';
+    const {CI} = env;
+    
+    env.CI = 1;
+    
+    const {
+        run,
+        test,
+        stream,
+    } = await createTest({
+        formatter: progressBar,
+    });
+    
+    test(successMessage, successFn);
+    test(failMessage, failFn);
+    
+    const [result] = await Promise.all([
+        pull(stream, 11),
+        run(),
+    ]);
+    
+    env.CI = CI;
+    
+    const expected = montag`
+        TAP version 13
+        # second
+        
+        # progress bar: fail
+        ❌ not ok 2 should be truthy
+          ---
+            operator: ok
+            expected: |-
+              true
+            result: |-
+              false
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: format: progress bar: diff', async (t) => {
     const fn = (t) => {
         t.equal(1, 2);

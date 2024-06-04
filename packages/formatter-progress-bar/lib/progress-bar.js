@@ -49,6 +49,9 @@ export function createFormatter(bar) {
             out,
             store,
         }),
+        comment: comment({
+            out,
+        }),
         end: end({
             barStore,
             out,
@@ -108,6 +111,10 @@ export const fail = ({out, store}) => ({at, count, message, operator, result, ex
     
     out('  ...');
     out('');
+};
+
+export const comment = ({out}) => ({message}) => {
+    out(`# ${message}`);
 };
 
 export const end = ({barStore, out}) => ({count, passed, failed, skiped}) => {
