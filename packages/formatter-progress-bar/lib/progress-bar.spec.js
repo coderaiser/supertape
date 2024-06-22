@@ -1,3 +1,4 @@
+import process from 'node:process';
 import montag from 'montag';
 import pullout from 'pullout';
 import {
@@ -5,7 +6,6 @@ import {
     stub,
     createTest,
 } from 'supertape';
-import process from 'node:process';
 import * as progressBar from './progress-bar.js';
 
 const {env} = process;

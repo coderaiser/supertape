@@ -1,3 +1,4 @@
+import process from 'node:process';
 import montag from 'montag';
 import chalk from 'chalk';
 import pullout from 'pullout';
@@ -6,7 +7,6 @@ import {
     stub,
     createTest,
 } from 'supertape';
-import process from 'node:process';
 import * as time from './time.js';
 
 const {env} = process;

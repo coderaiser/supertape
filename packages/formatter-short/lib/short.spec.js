@@ -1,7 +1,7 @@
+import process from 'node:process';
 import montag from 'montag';
 import pullout from 'pullout';
 import {test, createTest} from 'supertape';
-import process from 'node:process';
 import * as shortFormatter from './short.js';
 
 const pull = async (stream, i = 9) => {

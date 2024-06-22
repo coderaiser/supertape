@@ -1,9 +1,9 @@
 import {Writable} from 'node:stream';
+import process from 'node:process';
 import cliProgress from 'cli-progress';
 import chalk from 'chalk';
 import fullstore from 'fullstore';
 import {isCI} from 'ci-info';
-import process from 'node:process';
 import {Timer} from 'timer-node';
 import once from 'once';
 
