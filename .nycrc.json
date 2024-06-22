@@ -3,7 +3,8 @@
     "all": true,
     "exclude": [
         "**/lib/**/{fixture,*.spec.{js,mjs}}",
-        ".*",
+        "**/.*",
+        "**/*.ts",
         "**/packages/supertape/bin/*.mjs",
         "**/*.config.*"
     ],
