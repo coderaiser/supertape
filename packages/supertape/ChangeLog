@@ -1,3 +1,11 @@
+2024.07.03, v10.7.1
+
+fix:
+- cfc859b supertape: subscribe: empty
+
+feature:
+- 14f15d6 supertape: c8 v10.1.2
+
 2024.06.04, v10.7.0
 
 feature:
