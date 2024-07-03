@@ -5,7 +5,8 @@
         ".*",
         "{bin,lib}/**/{fixture,*.spec.{js,mjs}}",
         "bin/**/*.mjs",
-        "**/*.config.*"
+        "**/*.config.*",
+        "**/*.ts"
     ],
     "branches": 100,
     "lines": 100,

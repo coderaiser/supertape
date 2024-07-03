@@ -9,6 +9,7 @@ import {
 
 const one = (fn) => (a) => fn(a);
 
+const maybeParse = (a) => a && parse(a);
 const {createHarness} = harnessCreator;
 const resolveFormatter = async (name) => await import(`@supertape/formatter-${name}`);
 
@@ -39,18 +40,18 @@ export async function subscribe({name, exit, worker, stdout}) {
     });
 }
 
-function consoleLog({message}) {
+export function consoleLog({message, logger = console}) {
     const messages = message
         .split(SPLITTER)
-        .map(one(parse));
+        .map(one(maybeParse));
     
-    console.log(...messages);
+    logger.log(...messages);
 }
 
-function consoleError({message}) {
+export function consoleError({message, logger = console}) {
     const messages = message
         .split(SPLITTER)
-        .map(one(parse));
+        .map(one(maybeParse));
     
-    console.error(...messages);
+    logger.error(...messages);
 }
