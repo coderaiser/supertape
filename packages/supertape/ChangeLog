@@ -1,3 +1,10 @@
+2024.07.19, v10.7.2
+
+feature:
+- 887fe8b supertape: glob v11.0.0
+- 4b44c46 supertape: putout v36.0.2
+- 5f38549 supertape: @putout/cli-validate-args v2.0.0
+
 2024.07.03, v10.7.1
 
 fix:
