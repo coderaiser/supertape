@@ -41,7 +41,7 @@
   "dependencies": {
     "@cloudcmd/stub": "^4.0.0",
     "@putout/cli-keypress": "^2.0.0",
-    "@putout/cli-validate-args": "^1.0.1",
+    "@putout/cli-validate-args": "^2.0.0",
     "@supertape/engine-loader": "^2.0.0",
     "@supertape/formatter-fail": "^3.0.0",
     "@supertape/formatter-json-lines": "^2.0.0",
