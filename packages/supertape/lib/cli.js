@@ -86,6 +86,7 @@ async function cli({argv, cwd, stdout, isStop, workerFormatter}) {
     }
     
     const {validateArgs} = await import('@putout/cli-validate-args');
+    
     const error = await validateArgs(args, [
         ...yargsOptions.boolean,
         ...yargsOptions.string,
