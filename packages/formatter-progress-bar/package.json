@@ -11,7 +11,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git://github.com/coderaiser/supertape.git"
+    "url": "git+https://github.com/coderaiser/supertape.git"
   },
   "scripts": {
     "test": "madrun test",
