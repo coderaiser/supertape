@@ -1,3 +1,9 @@
+2024.12.04, v10.8.0
+
+feature:
+- 2716d90 supertape: eslint-plugin-putout v23.2.0
+- d251291 supertape: format: improve support
+
 2024.08.22, v10.7.3
 
 fix:
