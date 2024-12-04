@@ -72,3 +72,32 @@ test('supertape: format: parseAt: less then 4', (t) => {
     t.match(error.message, expected);
     t.end();
 });
+
+test('supertape: format: parseAt: looks like empty', (t) => {
+    const stack = montag`
+        Error: ☝️Looks like provided fixture cannot be parsed: 'const foo1 =
+            // comment
+            <T, >() => () => 1;
+        
+        const foo1 =
+            // sdf
+            5'
+            at run (operators.mjs:272:33)
+            at Object.print (operators.mjs:207:9)
+            at comment.spec.js:322:7
+            at module.exports (try-to-catch.js:7:29)
+            at runOneTest (run-tests.js:165:45)
+            at async runTests (run-tests.js:83:9)
+            at async module.exports (run-tests.js:37:16)
+            at async EventEmitter.<anonymous> (supertape.js:85:24)
+      `;
+    
+    const result = parseAt(stack, {
+        reason: 'user',
+    });
+    
+    const expected = `Error: ☝️Looks like provided fixture cannot be parsed: 'const foo1 =`;
+    
+    t.match(result, expected);
+    t.end();
+});

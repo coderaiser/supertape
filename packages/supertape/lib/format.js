@@ -11,6 +11,9 @@ module.exports.parseAt = (stack, {reason}) => {
     if (lines.length === 1)
         return stack;
     
+    if (lines.length > 10 && lines[0].startsWith('Error: '))
+        return lines[0];
+    
     const line = lines[reason === 'user' ? REASON_USER : REASON_EXCEPTION];
     
     if (!line)
