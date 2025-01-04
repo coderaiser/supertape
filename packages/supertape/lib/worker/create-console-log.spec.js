@@ -1,13 +1,13 @@
 'use strict';
 
 const {test, stub} = require('supertape');
+
+const {stringify} = require('flatted');
 const {
     overrideConsoleLog,
     CONSOLE_LOG,
     overrideConsoleError,
 } = require('./create-console-log');
-
-const {stringify} = require('flatted');
 
 test('supertape: worker: create-console-log', (t) => {
     const log = stub();

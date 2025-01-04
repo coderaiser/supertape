@@ -4,10 +4,10 @@ const process = require('node:process');
 const {once} = require('node:events');
 const {Transform} = require('node:stream');
 
-const {test, stub} = require('..');
 const montag = require('montag');
 const {reRequire} = require('mock-require');
 const pullout = require('pullout');
+const {test, stub} = require('..');
 
 const pull = async (stream, end = -2) => {
     const output = await pullout(await stream);

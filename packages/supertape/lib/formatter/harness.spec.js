@@ -1,8 +1,8 @@
 'use strict';
 
-const {stub} = require('supertape');
 const {once} = require('node:events');
 const {Transform} = require('node:stream');
+const {stub} = require('supertape');
 
 const test = require('../..');
 const {createHarness} = require('./harness');

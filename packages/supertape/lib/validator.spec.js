@@ -2,9 +2,9 @@
 
 const tryCatch = require('try-catch');
 
+const mockRequire = require('mock-require');
 const {stub, test} = require('..');
 
-const mockRequire = require('mock-require');
 const {getAt} = require('./validator');
 
 const {stopAll, reRequire} = mockRequire;
