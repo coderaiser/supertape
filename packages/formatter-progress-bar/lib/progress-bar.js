@@ -214,6 +214,4 @@ function formatOk() {
     return `# ✅ ${spaces}ok`;
 }
 
-function formatSkip(skiped) {
-    return `# ${WARNING} skip ${skiped}`;
-}
+const formatSkip = (skiped) => `# ${WARNING} skip ${skiped}`;

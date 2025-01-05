@@ -1048,11 +1048,9 @@ test('supertape: createTest: formatter', async (t) => {
     t.end();
 });
 
-function createStream() {
-    return new Transform({
-        transform(chunk, encoding, callback) {
-            this.push(chunk);
-            callback();
-        },
-    });
-}
+const createStream = () => new Transform({
+    transform(chunk, encoding, callback) {
+        this.push(chunk);
+        callback();
+    },
+});

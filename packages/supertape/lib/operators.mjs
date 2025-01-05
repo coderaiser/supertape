@@ -4,7 +4,10 @@ import {formatOutput, parseAt} from './format.js';
 
 const {entries} = Object;
 const isAsync = (a) => a[Symbol.toStringTag] === 'AsyncFunction';
-const encode = (a) => a.replace(')', '\\)').replace('(', '\\(');
+
+const encode = (a) => a
+    .replace(')', '\\)')
+    .replace('(', '\\(');
 
 const maybeRegExp = (a) => {
     if (!isStr(a))
