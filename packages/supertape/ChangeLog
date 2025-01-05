@@ -1,3 +1,9 @@
+2025.01.05, v10.9.0
+
+feature:
+- a2b5dcd supertape: worker: add support of Error
+- 7d8c672 supertape: putout v37.8.2
+
 2024.12.04, v10.8.0
 
 feature:
