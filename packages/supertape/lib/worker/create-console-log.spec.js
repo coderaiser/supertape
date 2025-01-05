@@ -202,3 +202,31 @@ test('supertape: worker: create-console-log: postMessage: simple object', (t) =>
     t.calledWith(postMessage, [arg]);
     t.end();
 });
+
+test('supertape: worker: create-console-log: postMessage: error', (t) => {
+    const log = stub();
+    const consoleStub = {
+        log,
+    };
+    
+    const postMessage = stub();
+    
+    const parentPort = {
+        postMessage,
+    };
+    
+    overrideConsoleLog(parentPort, {
+        console: consoleStub,
+    });
+    
+    consoleStub.log(Error('hello'));
+    
+    const arg = [
+        CONSOLE_LOG, {
+            message: '["Error: hello"]',
+        },
+    ];
+    
+    t.calledWith(postMessage, [arg]);
+    t.end();
+});

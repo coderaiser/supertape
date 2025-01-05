@@ -1,6 +1,7 @@
 'use strict';
 
 const {stringify} = require('flatted');
+const isError = (a) => a instanceof Error;
 const SPLITTER = '>[supertape-splitter]<';
 const CONSOLE_LOG = 'console:log';
 const CONSOLE_ERROR = 'console:error';
@@ -34,8 +35,14 @@ module.exports.overrideConsoleError = (parentPort, {console = global.console} = 
 const createConsoleMethod = (type, parentPort) => (...messages) => {
     const prepared = [];
     
-    for (const message of messages)
+    for (const message of messages) {
+        if (isError(message)) {
+            prepared.push(stringify(message.toString()));
+            continue;
+        }
+        
         prepared.push(stringify(message));
+    }
     
     parentPort.postMessage([
         type, {
