@@ -228,6 +228,14 @@ test('supertape: operators: match: not RegExp and String', (t) => {
     t.end();
 });
 
+test('supertape: operators: match: ^', (t) => {
+    const {match} = operators;
+    const {is} = match('^ hello', '^ hello');
+    
+    t.ok(is);
+    t.end();
+});
+
 test('supertape: operators: match: encode', (t) => {
     const {match} = operators;
     const line = '&quot;&gt;&lt;svg onload=alert(3);&gt;';

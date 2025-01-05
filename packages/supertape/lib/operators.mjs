@@ -6,6 +6,7 @@ const {entries} = Object;
 const isAsync = (a) => a[Symbol.toStringTag] === 'AsyncFunction';
 
 const encode = (a) => a
+    .replace('^', '\\^')
     .replace(')', '\\)')
     .replace('(', '\\(');
 
