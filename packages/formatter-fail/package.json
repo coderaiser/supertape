@@ -23,7 +23,7 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
-    "@supertape/formatter-tap": "^3.0.3",
+    "@supertape/formatter-tap": "^4.0.0",
     "fullstore": "^3.0.0"
   },
   "keywords": [
