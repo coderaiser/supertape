@@ -1,3 +1,17 @@
+2025.03.23, v11.0.2
+
+feature:
+- 6aea862 supertape: @supertape/formatter-tap v3.0.3
+- d1eece2 supertape: @supertape/formatter-short v3.0.0
+- bea1d5d supertape: @supertape/formatter-progress-bar v7.0.0
+- ef58c41 supertape: @supertape/formatter-time v2.0.0
+- 3ced88c @supertape/formatter-time: drop support of node < 20
+- 17a464a @supertape/formatter-tap: drop support of node < 20
+- 2858384 @supertape/formatter-short: drop support of node < 20
+- 3a45986 @supertape/progress-bar: drop support of node < 20
+- 232c211 supertape: skiped -> skipped
+- 8d43809 @supertape/formatter-json-lines: drop support of node < 20
+
 2025.03.23, v11.0.1
 
 feature:
