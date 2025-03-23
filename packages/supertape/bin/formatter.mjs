@@ -50,12 +50,12 @@ export const createFormatter = (parentPort) => {
         }]);
     });
     
-    formatter.on('end', ({count, passed, failed, skiped}) => {
+    formatter.on('end', ({count, passed, failed, skipped}) => {
         parentPort.postMessage(['end', {
             count,
             passed,
             failed,
-            skiped,
+            skipped,
         }]);
     });
     

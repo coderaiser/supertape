@@ -63,13 +63,13 @@ module.exports.createFormatter = async (name) => {
         });
     });
     
-    formatter.on('end', ({count, passed, failed, skiped}) => {
+    formatter.on('end', ({count, passed, failed, skipped}) => {
         harness.write({
             type: 'end',
             count,
             passed,
             failed,
-            skiped,
+            skipped,
         });
     });
     

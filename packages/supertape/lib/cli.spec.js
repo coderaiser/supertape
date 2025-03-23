@@ -286,7 +286,7 @@ test('supertape: cli: fail', async (t) => {
     t.end();
 });
 
-test('supertape: cli: exit: skiped', async (t) => {
+test('supertape: cli: exit: skipped', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
     const argv = [name, name];
     
@@ -313,7 +313,7 @@ test('supertape: cli: exit: skiped', async (t) => {
             exit,
         }),
         wait(emit, 'end', {
-            skiped: 1,
+            skipped: 1,
         }),
     ]);
     
@@ -324,7 +324,7 @@ test('supertape: cli: exit: skiped', async (t) => {
     t.end();
 });
 
-test('supertape: cli: exit: skiped: disabled', async (t) => {
+test('supertape: cli: exit: skipped: disabled', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
     const argv = [name, name];
     
@@ -350,7 +350,7 @@ test('supertape: cli: exit: skiped: disabled', async (t) => {
             exit,
         }),
         wait(emit, 'end', {
-            skiped: 1,
+            skipped: 1,
         }),
     ]);
     

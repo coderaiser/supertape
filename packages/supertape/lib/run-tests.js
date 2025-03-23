@@ -37,22 +37,22 @@ module.exports = async (tests, {formatter, operators, isStop}) => {
         return await runTests(onlyTests, {
             formatter,
             operators,
-            skiped: tests.length - onlyTests.length,
+            skipped: tests.length - onlyTests.length,
             isStop,
         });
     
     const notSkipedTests = tests.filter(notSkip);
-    const skiped = tests.filter(isSkip).length;
+    const skipped = tests.filter(isSkip).length;
     
     return await runTests(notSkipedTests, {
         formatter,
         operators,
-        skiped,
+        skipped,
         isStop,
     });
 };
 
-async function runTests(tests, {formatter, operators, skiped, isStop}) {
+async function runTests(tests, {formatter, operators, skipped, isStop}) {
     const count = fullstore(0);
     const failed = fullstore(0);
     const passed = fullstore(0);
@@ -106,14 +106,14 @@ async function runTests(tests, {formatter, operators, skiped, isStop}) {
         count: count(),
         failed: failed(),
         passed: passed(),
-        skiped,
+        skipped,
     });
     
     return {
         count: count(),
         failed: failed(),
         passed: passed(),
-        skiped,
+        skipped,
     };
 }
 

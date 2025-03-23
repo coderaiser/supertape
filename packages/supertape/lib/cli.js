@@ -52,10 +52,10 @@ module.exports = async ({argv, cwd, stdout, stderr, exit, isStop, workerFormatte
         failed,
         code,
         message,
-        skiped,
+        skipped,
     } = result;
     
-    if (Number(SUPERTAPE_CHECK_SKIPED) && skiped)
+    if (Number(SUPERTAPE_CHECK_SKIPED) && skipped)
         return exit(SKIPED);
     
     if (failed)

@@ -1041,7 +1041,7 @@ test('supertape: createTest: formatter', async (t) => {
     
     const expected = montag`
         {"count":1,"total":1,"failed":0,"test":"hello: world"}
-        {"count":1,"passed":1,"failed":0,"skiped":0
+        {"count":1,"passed":1,"failed":0,"skipped":0
     `;
     
     t.equal(result, expected);
