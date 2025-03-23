@@ -127,7 +127,7 @@ export const fail = ({out, store}) => ({at, count, message, operator, result, ex
     out('');
 };
 
-export const end = ({barStore, out}) => ({count, passed, failed, skiped}) => {
+export const end = ({barStore, out}) => ({count, passed, failed, skipped}) => {
     barStore().stop();
     
     out('');
@@ -136,8 +136,8 @@ export const end = ({barStore, out}) => ({count, passed, failed, skiped}) => {
     out(`# tests ${count}`);
     out(`# pass ${passed}`);
     
-    if (skiped)
-        out(`# ⚠️  skip ${skiped}`);
+    if (skipped)
+        out(`# ⚠️  skip ${skipped}`);
     
     out('');
     
