@@ -6,7 +6,7 @@ export default {
     'test': () => `tape --check-scopes --check-assertions-count '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/{bin,lib}/**/*.spec.{js,mjs}'`,
     'test:dts': () => 'cd packages/supertape && check-dts',
     'test:tap': () => `tape '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
-    'test:fail': async () => `${await run('test')} -f fail`,
+    'test:fail': async () => `"${await run('test')}" -f fail`,
     'test:slow': () => 'lerna run test',
     'coverage:long': async () => `c8 ${await run('test')}`,
     'coverage': async () => `c8 ${await run('test')}`,
