@@ -84,7 +84,7 @@ test('supertape: format: json-lines: skip', async (t) => {
         count: 0,
         passed: 0,
         failed: 0,
-        skiped: 1,
+        skipped: 1,
     };
     
     t.deepEqual(parsed, expected);
@@ -154,7 +154,7 @@ test('supertape: format: json-lines: comment', async (t) => {
         count: 2,
         failed: 1,
         passed: 1,
-        skiped: 0,
+        skipped: 0,
     }];
     
     t.deepEqual(parsed, expected);

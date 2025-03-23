@@ -32,12 +32,12 @@ export const fail = ({at, count, message, operator, result, expected, output, er
     });
 };
 
-export const end = ({count, passed, failed, skiped}) => {
+export const end = ({count, passed, failed, skipped}) => {
     out({
         count,
         passed,
         failed,
-        skiped,
+        skipped,
     });
     
     return out();

@@ -19,7 +19,7 @@ supertape --format json-lines lib
 {"count":1,"total":3,"failed":0,"test":"supertape: format: json-lines"}
 {"count":2,"total":3,"failed":0,"test":"supertape: format: json-lines: skip"}
 {"count":3,"total":3,"failed":0,"test":"supertape: format: json-lines: comment"}
-{"count":3,"passed":3,"failed":0,"skiped":0}
+{"count":3,"passed":3,"failed":0,"skipped":0}
 ```
 
 ## License
