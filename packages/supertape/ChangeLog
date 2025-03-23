@@ -1,3 +1,9 @@
+2025.03.23, v11.0.1
+
+feature:
+- f645aac supertape: supertape v11.0.0
+- 834c4fc supertape: glob v11.0.1
+
 2025.03.23, v11.0.0
 
 feature:
