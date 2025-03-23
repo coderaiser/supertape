@@ -38,7 +38,7 @@ export const fail = ({at, count, message, operator, result, expected, output}) =
     return out();
 };
 
-export const end = ({count, passed, failed, skiped}) => {
+export const end = ({count, passed, failed, skipped}) => {
     const out = createOutput();
     
     out('');
@@ -47,8 +47,8 @@ export const end = ({count, passed, failed, skiped}) => {
     out(`# tests ${count}`);
     out(`# pass ${passed}`);
     
-    if (skiped)
-        out(`# skip ${skiped}`);
+    if (skipped)
+        out(`# skip ${skipped}`);
     
     if (failed)
         out(`# fail ${failed}`);
