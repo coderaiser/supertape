@@ -1,9 +1,7 @@
-import {safeAlign} from 'eslint-plugin-putout/config';
-import {
-    createESLintConfig,
-    mergeESLintConfigs,
-} from '@putout/eslint-flat';
+import {safeAlign} from 'eslint-plugin-putout';
+import {mergeESLintConfigs} from '@putout/eslint-flat';
+import {defineConfig} from 'eslint/config';
 
 const config = await mergeESLintConfigs(import.meta.url, 'packages');
 
-export default createESLintConfig([safeAlign, config]);
+export default defineConfig([safeAlign, config]);
