@@ -43,7 +43,7 @@
     "@putout/cli-keypress": "^2.0.0",
     "@putout/cli-validate-args": "^2.0.0",
     "@supertape/engine-loader": "^2.0.0",
-    "@supertape/formatter-fail": "^3.0.0",
+    "@supertape/formatter-fail": "^4.0.0",
     "@supertape/formatter-json-lines": "^2.0.0",
     "@supertape/formatter-progress-bar": "^7.0.0",
     "@supertape/formatter-short": "^3.0.0",
