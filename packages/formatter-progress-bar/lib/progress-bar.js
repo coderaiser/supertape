@@ -117,7 +117,7 @@ export const comment = ({out}) => ({message}) => {
     out(`# ${message}`);
 };
 
-export const end = ({barStore, out}) => ({count, passed, failed, skiped}) => {
+export const end = ({barStore, out}) => ({count, passed, failed, skipped}) => {
     barStore().stop();
     
     out('');
@@ -126,8 +126,8 @@ export const end = ({barStore, out}) => ({count, passed, failed, skiped}) => {
     out(`# tests ${count}`);
     out(`# pass ${passed}`);
     
-    if (skiped)
-        out(formatSkip(skiped));
+    if (skipped)
+        out(formatSkip(skipped));
     
     out('');
     
@@ -214,4 +214,4 @@ function formatOk() {
     return `# ✅ ${spaces}ok`;
 }
 
-const formatSkip = (skiped) => `# ${WARNING} skip ${skiped}`;
+const formatSkip = (skipped) => `# ${WARNING} skip ${skipped}`;
