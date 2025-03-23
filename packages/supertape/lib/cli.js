@@ -27,7 +27,9 @@ const removeDuplicates = (a) => Array.from(new Set(a));
 
 const filesCount = fullstore(0);
 
-const {SUPERTAPE_CHECK_SKIPED = '0'} = process.env;
+const {
+    SUPERTAPE_CHECK_SKIPED = '0',
+} = process.env;
 
 module.exports = async ({argv, cwd, stdout, stderr, exit, isStop, workerFormatter}) => {
     isStop = isStop || keypress().isStop;
