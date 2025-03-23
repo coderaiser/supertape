@@ -1,3 +1,11 @@
+2025.03.23, v11.0.3
+
+feature:
+- 5a9a17c supertape: @supertape/formatter-tap v4.0.0
+- 3ea01c2 supertape: @supertape/formatter-fail v4.0.0
+- a246a25 @supertape/formatter-fail: drop support of node < 20
+- 3c62551 @supertape/formatter-fail: @supertape/formatter-tap v4.0.0
+
 2025.03.23, v11.0.2
 
 feature:
