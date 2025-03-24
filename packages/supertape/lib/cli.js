@@ -19,7 +19,7 @@ const {
     WAS_STOP,
     UNHANDLED,
     INVALID_OPTION,
-    SKIPED,
+    SKIPPED,
 } = require('./exit-codes');
 
 const isExclude = (a) => !a.includes('node_modules');
@@ -28,7 +28,7 @@ const removeDuplicates = (a) => Array.from(new Set(a));
 const filesCount = fullstore(0);
 
 const {
-    SUPERTAPE_CHECK_SKIPED = '0',
+    SUPERTAPE_CHECK_SKIPPED = '0',
 } = process.env;
 
 module.exports = async ({argv, cwd, stdout, stderr, exit, isStop, workerFormatter}) => {
@@ -55,8 +55,8 @@ module.exports = async ({argv, cwd, stdout, stderr, exit, isStop, workerFormatte
         skipped,
     } = result;
     
-    if (Number(SUPERTAPE_CHECK_SKIPED) && skipped)
-        return exit(SKIPED);
+    if (Number(SUPERTAPE_CHECK_SKIPPED) && skipped)
+        return exit(SKIPPED);
     
     if (failed)
         return exit(FAIL);

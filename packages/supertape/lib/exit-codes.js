@@ -5,7 +5,7 @@ const FAIL = 1;
 const WAS_STOP = 2;
 const UNHANDLED = 3;
 const INVALID_OPTION = 4;
-const SKIPED = 5;
+const SKIPPED = 5;
 
 module.exports = {
     OK,
@@ -13,5 +13,5 @@ module.exports = {
     WAS_STOP,
     UNHANDLED,
     INVALID_OPTION,
-    SKIPED,
+    SKIPPED,
 };

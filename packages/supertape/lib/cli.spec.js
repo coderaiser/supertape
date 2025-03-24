@@ -17,7 +17,7 @@ const test = require('./supertape.js');
 const {
     OK,
     WAS_STOP,
-    SKIPED,
+    SKIPPED,
     UNHANDLED,
 } = require('./exit-codes');
 
@@ -303,7 +303,7 @@ test('supertape: cli: exit: skipped', async (t) => {
         run,
     });
     
-    process.env.SUPERTAPE_CHECK_SKIPED = '1';
+    process.env.SUPERTAPE_CHECK_SKIPPED = '1';
     mockRequire('..', test);
     
     const emit = emitter.emit.bind(emitter);
@@ -318,9 +318,9 @@ test('supertape: cli: exit: skipped', async (t) => {
     ]);
     
     stopAll();
-    delete process.env.SUPERTAPE_CHECK_SKIPED;
+    delete process.env.SUPERTAPE_CHECK_SKIPPED;
     
-    t.calledWith(exit, [SKIPED], 'should call exit with SKIPED');
+    t.calledWith(exit, [SKIPPED], 'should call exit with SKIPPED');
     t.end();
 });
 

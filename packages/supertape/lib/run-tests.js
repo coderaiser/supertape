@@ -41,10 +41,10 @@ module.exports = async (tests, {formatter, operators, isStop}) => {
             isStop,
         });
     
-    const notSkipedTests = tests.filter(notSkip);
+    const notSkippedTests = tests.filter(notSkip);
     const skipped = tests.filter(isSkip).length;
     
-    return await runTests(notSkipedTests, {
+    return await runTests(notSkippedTests, {
         formatter,
         operators,
         skipped,

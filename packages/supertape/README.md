@@ -282,16 +282,16 @@ test('lib: diff', (t) => {
 | 2    | `WAS_STOP` | test was halted by user |
 | 3    | `UNHANDLED`| unhandled exception occurred |
 | 4    | `INVALID_OPTION`| wrong option provided |
-| 5    | `SKIPED` | works only with `SUPERTAPE_CHECK_SKIPED` env variable when skipped files 1 and more |
+| 5    | `SKIPPED` | works only with `SUPERTAPE_CHECK_SKIPPED` env variable when skipped files 1 and more |
 
 Here is how exit code can look like:
 
 ```js
-import {SKIPED} from 'supertape/exit-codes';
+import {SKIPPED} from 'supertape/exit-codes';
 
 const env = {
-    ESCOVER_SUCCESS_EXIT_CODE: SKIPED,
-    SUPERTAPE_CHECK_SKIPED: 1,
+    ESCOVER_SUCCESS_EXIT_CODE: SKIPPED,
+    SUPERTAPE_CHECK_SKIPPED: 1,
 };
 
 export default {
