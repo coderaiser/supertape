@@ -406,9 +406,9 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
     const isStop = stub();
     
     const {createStream} = reRequire('..');
-    mockRequire('@putout/cli-keypress', stub().returns({
+    const keypress = stub().returns({
         isStop,
-    }));
+    });
     
     assign(test, {
         init,
@@ -416,10 +416,10 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
         createStream,
     });
     
-    mockRequire('..', test);
-    
     await runCli({
         argv,
+        keypress,
+        supertape: test,
     });
     
     stopAll();
@@ -449,9 +449,9 @@ test('supertape: bin: cli: --check-assertions-count', async (t) => {
     const isStop = stub();
     
     const {createStream} = reRequire('..');
-    mockRequire('@putout/cli-keypress', stub().returns({
+    const keypress = stub().returns({
         isStop,
-    }));
+    });
     
     assign(test, {
         init,
@@ -459,13 +459,11 @@ test('supertape: bin: cli: --check-assertions-count', async (t) => {
         createStream,
     });
     
-    mockRequire('..', test);
-    
     await runCli({
         argv,
+        supertape: test,
+        keypress,
     });
-    
-    stopAll();
     
     const expected = [{
         format: 'progress-bar',
@@ -491,10 +489,9 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
     const run = stub();
     const isStop = stub();
     
-    const {createStream} = reRequire('..');
-    mockRequire('@putout/cli-keypress', stub().returns({
+    const keypress = stub().returns({
         isStop,
-    }));
+    });
     
     assign(test, {
         init,
@@ -502,12 +499,12 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
         createStream,
     });
     
-    mockRequire('..', test);
-    
     process.env.SUPERTAPE_CHECK_DUPLICATES = '0';
     reRequire('./cli/parse-args');
     await runCli({
         argv,
+        keypress,
+        supertape: test,
     });
     delete process.env.SUPERTAPE_CHECK_DUPLICATES;
     
@@ -539,9 +536,9 @@ test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
     const isStop = stub();
     
     const {createStream} = reRequire('..');
-    mockRequire('@putout/cli-keypress', stub().returns({
+    const keypress = stub().returns({
         isStop,
-    }));
+    });
     
     assign(test, {
         init,
@@ -549,11 +546,11 @@ test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
         createStream,
     });
     
-    mockRequire('..', test);
-    
     process.env.SUPERTAPE_CHECK_ASSERTIONS_COUNT = '1';
     await runCli({
         argv,
+        supertape: test,
+        keypress,
     });
     delete process.env.SUPERTAPE_CHECK_ASSERTIONS_COUNT;
     
@@ -584,9 +581,9 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
     const isStop = stub();
     
     const {createStream} = reRequire('..');
-    mockRequire('@putout/cli-keypress', stub().returns({
+    const keypress = stub().returns({
         isStop,
-    }));
+    });
     
     assign(test, {
         init,
@@ -594,11 +591,11 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
         createStream,
     });
     
-    mockRequire('..', test);
-    
     process.env.SUPERTAPE_CHECK_DUPLICATES = '1';
     await runCli({
         argv,
+        supertape: test,
+        keypress,
     });
     delete process.env.SUPERTAPE_CHECK_DUPLICATES;
     
@@ -628,10 +625,9 @@ test('supertape: bin: cli: check-duplicates: -d', async (t) => {
     const run = stub();
     const isStop = stub();
     
-    const {createStream} = reRequire('..');
-    mockRequire('@putout/cli-keypress', stub().returns({
+    const keypress = stub().returns({
         isStop,
-    }));
+    });
     
     assign(test, {
         init,
@@ -639,13 +635,11 @@ test('supertape: bin: cli: check-duplicates: -d', async (t) => {
         createStream,
     });
     
-    mockRequire('..', test);
-    
     await runCli({
         argv,
+        keypress,
+        supertape: test,
     });
-    
-    stopAll();
     
     const expected = [{
         format: 'progress-bar',
@@ -678,9 +672,9 @@ test('supertape: bin: cli: format: apply last', async (t) => {
     const isStop = stub();
     
     const {createStream} = reRequire('..');
-    mockRequire('@putout/cli-keypress', stub().returns({
+    const keypress = stub().returns({
         isStop,
-    }));
+    });
     
     assign(test, {
         init,
@@ -688,13 +682,11 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         createStream,
     });
     
-    mockRequire('..', test);
-    
     await runCli({
         argv,
+        keypress,
+        supertape: test,
     });
-    
-    stopAll();
     
     const expected = [{
         format: 'fail',
@@ -732,18 +724,17 @@ test('supertape: cli: isStop', async (t) => {
     const exit = stub();
     const isStop = stub().returns(true);
     
-    mockRequire('@putout/cli-keypress', stub().returns({
+    const keypress = stub().returns({
         isStop,
-    }));
+    });
     
     reRequire('./supertape.js');
     
     await runCli({
         exit,
         argv,
+        keypress,
     });
-    
-    stopAll();
     
     t.calledWith(exit, [WAS_STOP]);
     t.end();
@@ -784,6 +775,8 @@ async function runCli(options) {
         cwd = __dirname,
         exit = stub(),
         workerFormatter = null,
+        keypress,
+        supertape,
     } = options;
     
     const cli = reRequire('./cli');
@@ -795,6 +788,8 @@ async function runCli(options) {
         cwd,
         exit,
         workerFormatter,
+        keypress,
+        supertape,
     });
     
     return [error, cli];

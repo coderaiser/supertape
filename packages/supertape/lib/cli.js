@@ -8,11 +8,11 @@ const {pathToFileURL} = require('node:url');
 const glob = require('glob');
 const fullstore = require('fullstore');
 const tryToCatch = require('try-to-catch');
-const keypress = require('@putout/cli-keypress');
+const {keypress: _keypress} = require('@putout/cli-keypress');
 
 const {parseArgs, yargsOptions} = require('./cli/parse-args');
 
-const supertape = require('..');
+const _supertape = require('..');
 const {
     OK,
     FAIL,
@@ -31,10 +31,22 @@ const {
     SUPERTAPE_CHECK_SKIPPED = '0',
 } = process.env;
 
-module.exports = async ({argv, cwd, stdout, stderr, exit, isStop, workerFormatter}) => {
-    isStop = isStop || keypress().isStop;
+module.exports = async (overrides = {}) => {
+    const {
+        argv,
+        cwd,
+        stdout,
+        stderr,
+        exit,
+        workerFormatter,
+        keypress = _keypress,
+        supertape = _supertape,
+    } = overrides;
+    
+    const isStop = overrides.isStop || keypress().isStop;
     
     const [error, result] = await tryToCatch(cli, {
+        supertape,
         argv,
         cwd,
         stdout,
@@ -55,6 +67,9 @@ module.exports = async ({argv, cwd, stdout, stderr, exit, isStop, workerFormatte
         skipped,
     } = result;
     
+    if (isStop())
+        return exit(WAS_STOP);
+    
     if (Number(SUPERTAPE_CHECK_SKIPPED) && skipped)
         return exit(SKIPPED);
     
@@ -66,13 +81,10 @@ module.exports = async ({argv, cwd, stdout, stderr, exit, isStop, workerFormatte
         return exit(code);
     }
     
-    if (isStop())
-        return exit(WAS_STOP);
-    
     return exit(OK);
 };
 
-async function cli({argv, cwd, stdout, isStop, workerFormatter}) {
+async function cli({argv, cwd, stdout, isStop, workerFormatter, supertape}) {
     const args = parseArgs(argv);
     
     if (args.version) {
