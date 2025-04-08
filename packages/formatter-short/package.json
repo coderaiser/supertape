@@ -36,7 +36,7 @@
     "montag": "^1.0.0",
     "nodemon": "^3.0.1",
     "pullout": "^5.0.1",
-    "putout": "^39.0.11",
+    "putout": "^40.0.0",
     "supertape": "^11.0.0"
   },
   "license": "MIT",
