@@ -1,3 +1,8 @@
+2025.05.28, v11.1.2
+
+fix:
+- 20f21ff supertape: run-tests: timeout
+
 2025.05.28, v11.1.1
 
 feature:
