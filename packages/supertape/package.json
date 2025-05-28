@@ -61,7 +61,7 @@
     "strip-ansi": "^7.0.0",
     "try-to-catch": "^3.0.0",
     "wraptile": "^3.0.0",
-    "yargs-parser": "^21.0.0"
+    "yargs-parser": "^22.0.0"
   },
   "keywords": [
     "function",
