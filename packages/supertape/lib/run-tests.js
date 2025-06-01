@@ -6,12 +6,12 @@ const tryToCatch = require('try-to-catch');
 const isDebug = require('./is-debug');
 
 const {createValidator} = require('./validator');
-const isString = (a) => typeof a === 'string';
+
 const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
 const isSkip = ({skip}) => skip;
 const notSkip = ({skip}) => !skip;
-const parseTime = (a) => isString(a) ? 1 : a;
+const parseTime = (a) => a === 'undefined' ? 1 : a;
 
 const getInitOperators = async () => await import('./operators.mjs');
 
@@ -193,3 +193,5 @@ async function runOneTest(options) {
         failed: failed(),
     });
 }
+
+module.exports.parseTime = parseTime;

@@ -7,6 +7,7 @@ const montag = require('montag');
 const mockRequire = require('mock-require');
 const pullout = require('pullout');
 
+const {parseTime} = require('./run-tests');
 const {test, stub} = require('..');
 
 const {reRequire, stopAll} = mockRequire;
@@ -903,6 +904,22 @@ test('supertape: runTests: is debug', async (t) => {
         
         # ok
     `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: runTests: parseTimeundefined', (t) => {
+    const result = parseTime('undefined');
+    const expected = 1;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: runTests: parseTime', (t) => {
+    const result = parseTime('1000');
+    const expected = '1000';
     
     t.equal(result, expected);
     t.end();
