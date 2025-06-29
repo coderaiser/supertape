@@ -55,6 +55,7 @@
     "fullstore": "^3.0.0",
     "glob": "^11.0.1",
     "jest-diff": "^30.0.3",
+    "json-with-bigint": "^3.4.4",
     "once": "^1.4.0",
     "resolve": "^1.17.0",
     "stacktracey": "^2.1.7",

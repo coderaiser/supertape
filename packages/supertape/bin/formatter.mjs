@@ -1,4 +1,5 @@
 import {EventEmitter} from 'node:events';
+import {JSONStringify} from 'json-with-bigint';
 
 export const createFormatter = (parentPort) => {
     const formatter = new EventEmitter();
@@ -43,8 +44,8 @@ export const createFormatter = (parentPort) => {
             count,
             message,
             operator,
-            result: JSON.stringify(result),
-            expected: JSON.stringify(expected),
+            result: JSONStringify(result),
+            expected: JSONStringify(expected),
             output,
             errorStack,
         }]);

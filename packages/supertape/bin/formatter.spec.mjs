@@ -48,3 +48,36 @@ test('supertape: bin: formatter: comment', (t) => {
     t.calledWith(postMessage, expected);
     t.end();
 });
+
+test('supertape: bin: formatter: fail', (t) => {
+    const postMessage = stub();
+    const parentPort = {
+        postMessage,
+    };
+    
+    const formatter = createFormatter(parentPort);
+    
+    const emit = formatter.emit.bind(formatter);
+    emit('test:fail', {
+        count: 1,
+        result: 1n,
+        expected: 2,
+        message: 'hello',
+    });
+    
+    const expected = [
+        ['fail', {
+            at: undefined,
+            count: 1,
+            errorStack: undefined,
+            expected: '2',
+            message: 'hello',
+            operator: undefined,
+            output: undefined,
+            result: '1',
+        }],
+    ];
+    
+    t.calledWith(postMessage, expected);
+    t.end();
+});
