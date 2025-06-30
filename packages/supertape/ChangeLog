@@ -1,3 +1,8 @@
+2025.07.01, v11.3.0
+
+feature:
+- ac5a7a9 supertape: improve support of node v24.3
+
 2025.06.29, v11.2.0
 
 feature:
