@@ -1,4 +1,9 @@
 {
+    "rules": {
+        "nodejs/declare": ["on", {
+            "dismiss": ["setTimeout"]
+        }]
+    },
     "match": {
         "*.md": {
             "remove-unreachable-code": "off"
