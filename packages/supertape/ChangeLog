@@ -1,3 +1,10 @@
+2025.12.10, v11.4.0
+
+feature:
+- ddf8b4c supertape: eslint-plugin-putout v29.0.2
+- 6b28156 supertape: strip-ansi -> stripVTControlCharacters
+- 45968d5 supertape: putout v41.0.2
+
 2025.09.18, v11.3.1
 
 feature:
