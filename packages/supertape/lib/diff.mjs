@@ -1,5 +1,5 @@
+import {stripVTControlCharacters} from 'node:util';
 import {diff} from 'jest-diff';
-import strip from 'strip-ansi';
 import {formatOutput, addSpaces} from './format.js';
 
 export default (a, b) => {
@@ -15,7 +15,7 @@ export default (a, b) => {
             .slice(3)
             .join('\n');
     
-    if (strip(diffed) === 'Compared values have no visual difference.')
+    if (stripVTControlCharacters(diffed) === 'Compared values have no visual difference.')
         return '';
     
     const output = [

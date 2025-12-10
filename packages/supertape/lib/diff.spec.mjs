@@ -1,4 +1,4 @@
-import strip from 'strip-ansi';
+import {stripVTControlCharacters} from 'node:util';
 import test from './supertape.js';
 import diff from './diff.mjs';
 
@@ -14,7 +14,7 @@ test('supertape: diff', (t) => {
 });
 
 test('supertape: diff: no Array', (t) => {
-    const result = strip(diff(['hello'], []));
+    const result = stripVTControlCharacters(diff(['hello'], []));
     const expected = `
       diff: |-
       - [
@@ -28,7 +28,7 @@ test('supertape: diff: no Array', (t) => {
 });
 
 test('supertape: diff: no Object', (t) => {
-    const result = strip(diff({a: 'b'}, {}));
+    const result = stripVTControlCharacters(diff({a: 'b'}, {}));
     
     const expected = `
       diff: |-
