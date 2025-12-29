@@ -7,7 +7,7 @@ import {isCI} from 'ci-info';
 import {Timer} from 'timer-node';
 import once from 'once';
 
-global._isCI = isCI;
+globalThis._isCI = isCI;
 
 const OK = '👌';
 const YELLOW = '#218bff';
@@ -185,7 +185,7 @@ const defaultStreamOptions = {
 const getStream = ({total} = defaultStreamOptions) => {
     const is = total >= SUPERTAPE_TIME_MIN;
     
-    if (is && !global._isCI || SUPERTAPE_TIME === '1')
+    if (is && !globalThis._isCI || SUPERTAPE_TIME === '1')
         return stderr;
     
     return new Writable();

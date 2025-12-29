@@ -434,9 +434,9 @@ test('supertape: format: progress bar: color: hash', async (t) => {
 
 test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t) => {
     const {SUPERTAPE_PROGRESS_BAR} = env;
-    const {_isCI} = global;
+    const {_isCI} = globalThis;
     
-    global._isCI = 1;
+    globalThis._isCI = 1;
     
     updateEnv({
         SUPERTAPE_PROGRESS_BAR: '0',
@@ -450,7 +450,7 @@ test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t
         SUPERTAPE_PROGRESS_BAR,
     });
     
-    global._isCI = _isCI;
+    globalThis._isCI = _isCI;
     
     t.notEqual(stream, process.stderr);
     t.end();
@@ -459,9 +459,9 @@ test('supertape: format: progress bar: getStream: no SUPERTAPE_PROGRESS_BAR', (t
 test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR', (t) => {
     const {SUPERTAPE_PROGRESS_BAR} = env;
     
-    const {_isCI} = global;
+    const {_isCI} = globalThis;
     
-    global._isCI = false;
+    globalThis._isCI = false;
     
     updateEnv({
         SUPERTAPE_PROGRESS_BAR: '1',
@@ -475,7 +475,7 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR', (t) =
         SUPERTAPE_PROGRESS_BAR,
     });
     
-    global._isCI = _isCI;
+    globalThis._isCI = _isCI;
     
     t.equal(stream, process.stderr);
     t.end();
@@ -491,7 +491,7 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR, no CI'
         SUPERTAPE_PROGRESS_BAR: '1',
     });
     
-    delete global._isCI;
+    delete globalThis._isCI;
     
     const stream = progressBar._getStream();
     
@@ -499,7 +499,7 @@ test('supertape: format: progress bar: getStream: SUPERTAPE_PROGRESS_BAR, no CI'
         SUPERTAPE_PROGRESS_BAR,
     });
     
-    global._isCI = CI;
+    globalThis._isCI = CI;
     
     t.equal(stream, process.stderr);
     t.end();
@@ -553,7 +553,7 @@ test('supertape: format: progress bar: no stack', async (t) => {
         SUPERTAPE_PROGRESS_BAR_STACK: '0',
     });
     
-    global._isCI = true;
+    globalThis._isCI = true;
     const {
         run,
         test,

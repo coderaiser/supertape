@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import fullstore from 'fullstore';
 import {isCI} from 'ci-info';
 
-global._isCI = isCI;
+globalThis._isCI = isCI;
 
 const OK = '👌';
 const WARNING = '⚠️';
@@ -175,7 +175,7 @@ const defaultStreamOptions = {
 const getStream = ({total} = defaultStreamOptions) => {
     const is = total >= SUPERTAPE_PROGRESS_BAR_MIN;
     
-    if (is && !global._isCI || SUPERTAPE_PROGRESS_BAR === '1')
+    if (is && !globalThis._isCI || SUPERTAPE_PROGRESS_BAR === '1')
         return stderr;
     
     return new Writable();

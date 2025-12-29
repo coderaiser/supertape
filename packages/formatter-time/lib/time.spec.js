@@ -303,9 +303,9 @@ test('supertape: format: time: color: hash', async (t) => {
 test('supertape: format: time: getStream: no SUPERTAPE_TIME', (t) => {
     const {SUPERTAPE_TIME} = env;
     
-    const {_isCI} = global;
+    const {_isCI} = globalThis;
     
-    global._isCI = 1;
+    globalThis._isCI = 1;
     
     updateEnv({
         SUPERTAPE_TIME: '0',
@@ -319,7 +319,7 @@ test('supertape: format: time: getStream: no SUPERTAPE_TIME', (t) => {
         SUPERTAPE_TIME,
     });
     
-    global._isCI = _isCI;
+    globalThis._isCI = _isCI;
     
     t.notEqual(stream, process.stderr);
     t.end();
@@ -328,9 +328,9 @@ test('supertape: format: time: getStream: no SUPERTAPE_TIME', (t) => {
 test('supertape: format: time: getStream: SUPERTAPE_TIME', (t) => {
     const {SUPERTAPE_TIME} = env;
     
-    const {_isCI} = global;
+    const {_isCI} = globalThis;
     
-    global._isCI = false;
+    globalThis._isCI = false;
     
     updateEnv({
         SUPERTAPE_TIME: '1',
@@ -344,7 +344,7 @@ test('supertape: format: time: getStream: SUPERTAPE_TIME', (t) => {
         SUPERTAPE_TIME,
     });
     
-    global._isCI = _isCI;
+    globalThis._isCI = _isCI;
     
     t.equal(stream, process.stderr);
     t.end();
@@ -357,7 +357,7 @@ test('supertape: format: time: getStream: SUPERTAPE_TIME, no CI', (t) => {
         SUPERTAPE_TIME: '1',
     });
     
-    delete global._isCI;
+    delete globalThis._isCI;
     
     const stream = time._getStream();
     
@@ -365,7 +365,7 @@ test('supertape: format: time: getStream: SUPERTAPE_TIME, no CI', (t) => {
         SUPERTAPE_TIME,
     });
     
-    global._isCI = CI;
+    globalThis._isCI = CI;
     
     t.equal(stream, process.stderr);
     t.end();
@@ -420,7 +420,7 @@ test('supertape: format: time: no stack', async (t) => {
         SUPERTAPE_TIME_STACK: '0',
     });
     
-    global._isCI = true;
+    globalThis._isCI = true;
     const {
         run,
         test,
