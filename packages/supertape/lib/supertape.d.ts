@@ -1,6 +1,6 @@
 import {OperatorStub} from '@supertape/operator-stub';
-import {stub, Stub} from '@cloudcmd/stub';
 
+export {Stub, stub} from '@cloudcmd/stub';
 type OperationBaseResult = {
     is: boolean;
     expected: unknown;
@@ -55,8 +55,6 @@ declare function extend(customOperator: CustomOperator): typeof test;
 export {
     test,
     Test,
-    stub,
-    Stub,
     extend,
     OperationResult,
 };

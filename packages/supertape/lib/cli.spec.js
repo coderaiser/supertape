@@ -167,7 +167,7 @@ test('supertape: bin: cli: files count', async (t) => {
     mockRequire('./supertape', test);
     
     const emit = emitter.emit.bind(emitter);
-    const [[error, cli]] = await Promise.all([
+    const [[, cli]] = await Promise.all([
         runCli({
             argv,
         }),
@@ -232,7 +232,7 @@ test('supertape: bin: cli: node_modules', async (t) => {
     mockRequire('./supertape', test);
     
     const emit = emitter.emit.bind(emitter);
-    const [[error, cli]] = await Promise.all([
+    const [[, cli]] = await Promise.all([
         runCli({
             argv,
         }),

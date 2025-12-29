@@ -64,6 +64,17 @@ test('supertape: operators: returns', (t) => {
     checkAssertionsCount: false,
 });
 
+test('supertape: operators: notOk: fn', (t) => {
+    const {notOk} = operators;
+    const {result} = notOk(noop);
+    const expected = noop.toString();
+    
+    t.equal(result, expected);
+    t.end();
+}, {
+    checkAssertionsCount: false,
+});
+
 test('supertape: operators: extendOperators: async: returns', async (t) => {
     const extensions = {
         transformCode: (t) => async (a, b) => {

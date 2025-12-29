@@ -47,7 +47,12 @@ const validateRegExp = (regexp) => {
     return null;
 };
 
-const {stringify} = JSON;
+const stringify = (a) => {
+    if (isFn(a))
+        return a.toString();
+    
+    return JSON.stringify(a);
+};
 
 function match(result, regexp, message = 'should match') {
     const error = validateRegExp(regexp);

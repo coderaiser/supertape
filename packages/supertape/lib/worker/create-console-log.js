@@ -10,7 +10,7 @@ module.exports.CONSOLE_ERROR = CONSOLE_ERROR;
 module.exports.CONSOLE_LOG = CONSOLE_LOG;
 module.exports.SPLITTER = SPLITTER;
 
-module.exports.overrideConsoleLog = (parentPort, {console = global.console} = {}) => {
+module.exports.overrideConsoleLog = (parentPort, {console = globalThis.console} = {}) => {
     const {log} = console;
     
     console.log = createConsoleMethod(CONSOLE_LOG, parentPort);
@@ -21,7 +21,7 @@ module.exports.overrideConsoleLog = (parentPort, {console = global.console} = {}
     };
 };
 
-module.exports.overrideConsoleError = (parentPort, {console = global.console} = {}) => {
+module.exports.overrideConsoleError = (parentPort, {console = globalThis.console} = {}) => {
     const {error} = console;
     
     console.error = createConsoleMethod(CONSOLE_ERROR, parentPort);
