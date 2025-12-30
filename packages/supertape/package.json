@@ -89,7 +89,7 @@
     "pullout": "^5.0.1",
     "putout": "^41.0.2",
     "runsome": "^1.0.0",
-    "try-catch": "^3.0.1",
+    "try-catch": "^4.0.2",
     "typescript": "^5.1.6"
   },
   "license": "MIT",
