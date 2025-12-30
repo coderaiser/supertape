@@ -23,7 +23,7 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
-    "try-catch": "^3.0.0"
+    "try-catch": "^4.0.2"
   },
   "keywords": [
     "operator",
@@ -46,7 +46,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "publishConfig": {
     "access": "public"
