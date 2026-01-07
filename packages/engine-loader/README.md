@@ -1,9 +1,9 @@
 # @supertape/engine-loader [![NPM version][NPMIMGURL]][NPMURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage Status][CoverageIMGURL]][CoverageURL]
 
 [NPMIMGURL]: https://img.shields.io/npm/v/supertape.svg?style=flat&longCache=true
-[BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/supertape/master.svg?style=flat&longCache=true
+[BuildStatusIMGURL]: https://github.com/coderaiser/supertape/workflows/Node%20CI/badge.svg
 [NPMURL]: https://npmjs.org/package/supertape "npm"
-[BuildStatusURL]: https://travis-ci.org/coderaiser/supertape "Build Status"
+[BuildStatusURL]: https://github.com/coderaiser/supertape/actions?query=workflow%3A%22Node+CI%22
 [CoverageURL]: https://coveralls.io/github/coderaiser/supertape?branch=master
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
 
