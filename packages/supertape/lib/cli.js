@@ -17,6 +17,7 @@ const {
 } = require('./cli/parse-args');
 
 const _supertape = require('..');
+
 const {
     OK,
     FAIL,
