@@ -82,19 +82,14 @@ test('supertape: bin: cli: glob: a couple', async (t) => {
         'world',
     ];
     
-    const sync = stub().returns([]);
-    
-    mockRequire('glob', {
-        sync,
-    });
+    const globSync = stub().returns([]);
     
     await runCli({
         argv,
+        globSync,
     });
     
-    stopAll();
-    
-    const [[first], [second]] = sync.args;
+    const [[first], [second]] = globSync.args;
     
     t.deepEqual([first, second], ['hello', 'world'], 'should call glob.sync on every iteration');
     t.end();
