@@ -1,3 +1,13 @@
+2026.01.07, v12.0.1
+
+fix:
+- fe9757a @putout/engine-loader: drop support of node < 22
+
+feature:
+- cc993cd supertape: @supertape/engine-loader v4.0.0
+- c3bc060 supertape: redlint v5.0.2
+- 3336186 supertape: madrun v12.1.0
+
 2026.01.04, v12.0.0
 
 feature:
