@@ -97,6 +97,7 @@ async function cli(overrides) {
         supertape,
         globSync,
     } = overrides;
+    
     const args = parseArgs(argv);
     
     if (args.version) {
