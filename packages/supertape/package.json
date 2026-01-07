@@ -42,7 +42,7 @@
     "@cloudcmd/stub": "^4.0.0",
     "@putout/cli-keypress": "^3.0.0",
     "@putout/cli-validate-args": "^2.0.0",
-    "@supertape/engine-loader": "^3.0.0",
+    "@supertape/engine-loader": "^4.0.0",
     "@supertape/formatter-fail": "^4.0.0",
     "@supertape/formatter-json-lines": "^2.0.0",
     "@supertape/formatter-progress-bar": "^7.0.0",
