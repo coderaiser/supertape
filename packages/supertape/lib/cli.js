@@ -5,10 +5,11 @@ const {resolve: resolvePath} = require('node:path');
 const {once} = require('node:events');
 const {pathToFileURL} = require('node:url');
 
-const glob = require('glob');
 const fullstore = require('fullstore');
 const {tryToCatch} = require('try-to-catch');
 const {keypress: _keypress} = require('@putout/cli-keypress');
+
+const {sync: _globSync} = require('glob');
 
 const {parseArgs, yargsOptions} = require('./cli/parse-args');
 
@@ -41,6 +42,7 @@ module.exports = async (overrides = {}) => {
         workerFormatter,
         keypress = _keypress,
         supertape = _supertape,
+        globSync = _globSync,
     } = overrides;
     
     const isStop = overrides.isStop || keypress().isStop;
@@ -53,6 +55,7 @@ module.exports = async (overrides = {}) => {
         exit,
         isStop,
         workerFormatter,
+        globSync,
     });
     
     if (error) {
@@ -84,7 +87,16 @@ module.exports = async (overrides = {}) => {
     return exit(OK);
 };
 
-async function cli({argv, cwd, stdout, isStop, workerFormatter, supertape}) {
+async function cli(overrides) {
+    const {
+        argv,
+        cwd,
+        stdout,
+        isStop,
+        workerFormatter,
+        supertape,
+        globSync,
+    } = overrides;
     const args = parseArgs(argv);
     
     if (args.version) {
@@ -118,9 +130,7 @@ async function cli({argv, cwd, stdout, isStop, workerFormatter, supertape}) {
     const allFiles = [];
     
     for (const arg of args._) {
-        const files = glob
-            .sync(arg)
-            .filter(isExclude);
+        const files = globSync(arg).filter(isExclude);
         
         allFiles.push(...files);
     }

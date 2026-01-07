@@ -65,19 +65,14 @@ test('supertape: cli: -v', async (t) => {
 
 test('supertape: bin: cli: glob', async (t) => {
     const argv = ['hello'];
-    const sync = stub().returns([]);
-    
-    mockRequire('glob', {
-        sync,
-    });
+    const globSync = stub().returns([]);
     
     await runCli({
         argv,
+        globSync,
     });
     
-    stopAll();
-    
-    t.calledWith(sync, ['hello']);
+    t.calledWith(globSync, ['hello']);
     t.end();
 });
 
@@ -777,6 +772,7 @@ async function runCli(options) {
         workerFormatter = null,
         keypress,
         supertape,
+        globSync,
     } = options;
     
     const cli = reRequire('./cli');
@@ -790,6 +786,7 @@ async function runCli(options) {
         workerFormatter,
         keypress,
         supertape,
+        globSync,
     });
     
     return [error, cli];
