@@ -2,7 +2,7 @@
 
 const fullstore = require('fullstore');
 const wraptile = require('wraptile');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const isDebug = require('./is-debug');
 
 const {createValidator} = require('./validator');

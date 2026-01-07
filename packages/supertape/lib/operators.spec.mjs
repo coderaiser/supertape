@@ -1,7 +1,7 @@
 import {once, EventEmitter} from 'node:events';
 import stub from '@cloudcmd/stub';
 import currify from 'currify';
-import tryCatch from 'try-catch';
+import {tryCatch} from 'try-catch';
 import test from './supertape.js';
 import {initOperators, operators} from './operators.mjs';
 

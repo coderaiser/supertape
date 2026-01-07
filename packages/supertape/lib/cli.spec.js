@@ -9,7 +9,7 @@ const {readFile} = require('node:fs/promises');
 
 const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const pullout = require('pullout');
 const wait = require('@iocmd/wait');
 

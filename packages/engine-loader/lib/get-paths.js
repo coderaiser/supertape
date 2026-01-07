@@ -1,5 +1,5 @@
 import {createRequire} from 'node:module';
-import tryCatch from 'try-catch';
+import {tryCatch} from 'try-catch';
 
 const {resolve} = createRequire(import.meta.url);
 

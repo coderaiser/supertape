@@ -7,7 +7,7 @@ const {pathToFileURL} = require('node:url');
 
 const glob = require('glob');
 const fullstore = require('fullstore');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const {keypress: _keypress} = require('@putout/cli-keypress');
 
 const {parseArgs, yargsOptions} = require('./cli/parse-args');

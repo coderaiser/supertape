@@ -1,5 +1,5 @@
 import {test} from 'supertape';
-import tryToCatch from 'try-to-catch';
+import {tryToCatch} from 'try-to-catch';
 import {loadOperators} from './loader.js';
 
 test('supertape: engine: loader', async (t) => {
