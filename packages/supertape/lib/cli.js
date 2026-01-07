@@ -11,7 +11,10 @@ const {keypress: _keypress} = require('@putout/cli-keypress');
 
 const {sync: _globSync} = require('glob');
 
-const {parseArgs, yargsOptions} = require('./cli/parse-args');
+const {
+    parseArgs,
+    getYargsOptions,
+} = require('./cli/parse-args');
 
 const _supertape = require('..');
 const {
@@ -47,7 +50,7 @@ module.exports = async (overrides = {}) => {
     
     const isStop = overrides.isStop || keypress().isStop;
     
-    const [error, result] = await tryToCatch(cli, {
+    const [error, result] = await tryToCatch(_cli, {
         supertape,
         argv,
         cwd,
@@ -87,7 +90,7 @@ module.exports = async (overrides = {}) => {
     return exit(OK);
 };
 
-async function cli(overrides) {
+async function _cli(overrides) {
     const {
         argv,
         cwd,
@@ -114,9 +117,11 @@ async function cli(overrides) {
     
     const {validateArgs} = await import('@putout/cli-validate-args');
     
+    const {boolean, string} = getYargsOptions();
+    
     const error = await validateArgs(args, [
-        ...yargsOptions.boolean,
-        ...yargsOptions.string,
+        ...boolean,
+        ...string,
     ]);
     
     if (error)
