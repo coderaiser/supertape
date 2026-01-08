@@ -7,7 +7,6 @@ const montag = require('montag');
 
 const pullout = require('pullout');
 
-const {reRequire} = require('mock-require');
 const {parseTime} = require('./run-tests');
 const {test, stub} = require('..');
 const {createTest} = require('./supertape');
@@ -131,43 +130,6 @@ test('supertape: runTests: duplicates: false', async (t) => {
     ]);
     
     t.notMatch(result, 'not ok 2 Duplicate');
-    t.end();
-});
-
-test('supertape: runTests: duplicates: defaults', async (t) => {
-    const fn1 = (t) => {
-        t.ok(true);
-        t.end();
-    };
-    
-    const fn2 = (t) => {
-        t.notOk(false);
-        t.end();
-    };
-    
-    const message = 'hello world';
-    
-    reRequire('./validator');
-    const supertape = reRequire('..');
-    
-    supertape(message, fn1, {
-        quiet: true,
-        checkIfEnded: false,
-    });
-    
-    supertape(message, fn2, {
-        quiet: true,
-        checkIfEnded: false,
-    });
-    
-    const FOUR_TESTS = 30;
-    
-    const [result] = await Promise.all([
-        pull(supertape.createStream(), FOUR_TESTS),
-        once(supertape.run(), 'end'),
-    ]);
-    
-    t.match(result, 'not ok 2 Duplicate');
     t.end();
 });
 

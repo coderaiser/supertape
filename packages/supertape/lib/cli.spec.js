@@ -13,7 +13,7 @@ const {tryToCatch} = require('try-to-catch');
 const pullout = require('pullout');
 const wait = require('@iocmd/wait');
 
-const cli = require('./cli');
+const {reRequire} = require('mock-require');
 const test = require('./supertape.js');
 const {createStream: _createStream} = require('..');
 
@@ -793,6 +793,8 @@ async function runCli(options) {
         supertape,
         globSync,
     } = options;
+    
+    const cli = reRequire('./cli');
     
     const [error] = await tryToCatch(cli, {
         argv,
