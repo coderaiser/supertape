@@ -1,8 +1,8 @@
 'use strict';
 
-const process = require('node:process');
 const {PassThrough} = require('node:stream');
 
+const {env} = require('node:process');
 const stub = require('@cloudcmd/stub');
 
 const once = require('once');
@@ -11,20 +11,32 @@ const {maybeOnce} = require('./maybe-once');
 const options = require('../supertape.json');
 
 const {getAt, setValidations} = require('./validator');
-const _createFormatter = require('./formatter').createFormatter;
 
 const {createEmitter: _createEmitter} = require('./emitter.mjs');
-
-const createFormatter = once(_createFormatter);
-const createEmitter = once(_createEmitter);
+const _createFormatter = require('./formatter').createFormatter;
 
 const {assign} = Object;
+const createEmitter = once(_createEmitter);
+const createFormatter = once(_createFormatter);
 
-// 5ms ought to be enough for anybody
-const {
-    SUPERTAPE_LOAD_LOOP_TIMEOUT = 5,
-    SUPERTAPE_TIMEOUT = 3000,
-} = process.env;
+const createExtend = (test) => (extensions) => {
+    const extendedTest = getExtend(test, extensions);
+    
+    assign(extendedTest, {
+        test: extendedTest,
+        stub,
+    });
+    
+    extendedTest.only = getExtend(test, extensions, {
+        only: true,
+    });
+    
+    extendedTest.skip = getExtend(test, extensions, {
+        skip: true,
+    });
+    
+    return extendedTest;
+};
 
 let mainEmitter;
 
@@ -35,7 +47,7 @@ const getOperators = once(async () => {
     return await loadOperators(operators);
 });
 
-const defaultOptions = {
+const getDefaultOptions = () => ({
     skip: false,
     only: false,
     extensions: {},
@@ -48,8 +60,8 @@ const defaultOptions = {
     checkIfEnded: true,
     checkAssertionsCount: true,
     checkScopes: true,
-    timeout: SUPERTAPE_TIMEOUT,
-};
+    timeout: env.SUPERTAPE_TIMEOUT || 3000,
+});
 
 module.exports = test;
 
@@ -80,7 +92,7 @@ module.exports.createTest = async (testOptions = {}) => {
     
     const stream = new PassThrough();
     const emitter = _createEmitter({
-        ...defaultOptions,
+        ...getDefaultOptions(),
         ...testOptions,
         readyFormatter,
         stream,
@@ -100,6 +112,7 @@ module.exports.createTest = async (testOptions = {}) => {
     assign(fn, {
         stream,
         ...test,
+        extend: createExtend(fn),
         test: fn,
         run: () => {
             emitter.emit('run');
@@ -126,7 +139,7 @@ function test(message, fn, options = {}, overrides = {}) {
         workerFormatter,
         timeout,
     } = {
-        ...defaultOptions,
+        ...getDefaultOptions(),
         ...initedOptions,
         ...options,
     };
@@ -187,7 +200,7 @@ test.only = (message, fn, options) => {
     });
 };
 
-const getExtend = (extensions, type) => (message, fn, options) => {
+const getExtend = (test, extensions, type) => (message, fn, options) => {
     return test(message, fn, {
         extensions,
         ...options,
@@ -198,27 +211,15 @@ const getExtend = (extensions, type) => (message, fn, options) => {
 test.stub = stub;
 test.test = test;
 
-test.extend = (extensions) => {
-    const extendedTest = getExtend(extensions);
-    
-    assign(extendedTest, {
-        test: extendedTest,
-        stub,
-    });
-    
-    extendedTest.only = getExtend(extensions, {
-        only: true,
-    });
-    
-    extendedTest.skip = getExtend(extensions, {
-        skip: true,
-    });
-    
-    return extendedTest;
-};
+test.extend = createExtend(test);
 
 const loop = maybeOnce(({emitter, tests}) => {
     let previousCount = 0;
+    
+    // 5ms ought to be enough for anybody
+    const {
+        SUPERTAPE_LOAD_LOOP_TIMEOUT = 5,
+    } = env;
     
     (function loop() {
         if (previousCount === tests.length) {

@@ -11,6 +11,7 @@ const {reRequire} = require('mock-require');
 const {parseTime} = require('./run-tests');
 const {test, stub} = require('..');
 const {createTest} = require('./supertape');
+const {disableOnce, enableOnce} = require('./maybe-once');
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
@@ -389,7 +390,7 @@ test('supertape: runTests: a couple t.end()', async (t) => {
 test('supertape: runTests: assertions after t.end(): async', async (t) => {
     const fn = async (t) => {
         t.end();
-        return await t.equal(1, 1, 'should transform code');
+        return await t.asyncOperator('hello', 'hello');
     };
     
     const message = 'hello world';
@@ -399,7 +400,13 @@ test('supertape: runTests: assertions after t.end(): async', async (t) => {
         run,
     } = await createTest();
     
-    test(message, fn, {
+    const superTest = test.extend({
+        asyncOperator: (t) => async (a, b) => {
+            return await t.equal(a, b, 'should transform code');
+        },
+    });
+    
+    superTest(message, fn, {
         quiet: true,
         checkIfEnded: true,
     });
@@ -429,14 +436,19 @@ test('supertape: runTests: fail: at', async (t) => {
     
     const message = 'hello world';
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    test(message, fn, {
         quiet: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 6),
-        once(supertape.run(), 'end'),
+        pull(stream, 6),
+        run(),
     ]);
     
     const expected = montag`
@@ -459,21 +471,23 @@ test('supertape: runTests: fail: timeout: SUPERTAPE_TIMEOUT', async (t) => {
     };
     
     const message = 'hello world';
-    
     const {SUPERTAPE_TIMEOUT} = process.env;
     
     process.env.SUPERTAPE_TIMEOUT = 1;
     
-    reRequire('./run-tests');
-    const supertape = reRequire('..');
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    supertape(message, fn, {
+    test(message, fn, {
         quiet: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
-        once(supertape.run(), 'end'),
+        pull(stream, 5),
+        run(),
     ]);
     
     const expected = montag`
@@ -498,15 +512,20 @@ test('supertape: runTests: fail: timeout', async (t) => {
     
     const message = 'hello world';
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    test(message, fn, {
         quiet: true,
         timeout: 1,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
-        once(supertape.run(), 'end'),
+        pull(stream, 5),
+        run(),
     ]);
     
     const expected = montag`
@@ -529,14 +548,19 @@ test('supertape: runTests: equal', async (t) => {
     
     const message = 'hello: world';
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    test(message, fn, {
         quiet: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(supertape.run(), 'end'),
+        pull(stream),
+        run(),
     ]);
     
     const expected = montag`
@@ -562,17 +586,21 @@ test('supertape: runTests: not equal', async (t) => {
     };
     
     const message = 'hello world';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    test(message, fn, {
         quiet: true,
     });
     
     const BEFORE_DIFF = 6;
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), BEFORE_DIFF),
-        once(supertape.run(), 'end'),
+        pull(stream, BEFORE_DIFF),
+        run(),
     ]);
     
     const expected = montag`
@@ -596,16 +624,21 @@ test('supertape: runTests: not deepEqual', async (t) => {
     
     const message = 'hello world';
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    test(message, fn, {
         quiet: true,
     });
     
     const BEFORE_DIFF = 6;
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), BEFORE_DIFF),
-        once(supertape.run(), 'end'),
+        pull(stream, BEFORE_DIFF),
+        run(),
     ]);
     
     const expected = montag`
@@ -629,15 +662,20 @@ test('supertape: runTests: comment', async (t) => {
     
     const message = 'hello: world';
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    test(message, fn, {
         quiet: true,
         checkAssertionsCount: false,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(supertape.run(), 'end'),
+        pull(stream),
+        run(),
     ]);
     
     const expected = montag`
@@ -663,14 +701,19 @@ test('supertape: runTests: crash', async (t) => {
     
     const message = 'hello world';
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    test(message, fn, {
         quiet: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 3),
-        once(supertape.run(), 'end'),
+        pull(stream, 3),
+        run(),
     ]);
     
     const expected = montag`
@@ -690,15 +733,19 @@ test('supertape: runTests: pass', async (t) => {
     };
     
     const message = 'hello: world';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    test(message, fn, {
         quiet: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(supertape.run(), 'end'),
+        pull(stream),
+        run(),
     ]);
     
     const expected = montag`
@@ -724,15 +771,19 @@ test('supertape: runTests: pass: unnamed', async (t) => {
     };
     
     const message = 'hello: world';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    test(message, fn, {
         quiet: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(supertape.run(), 'end'),
+        pull(stream),
+        run(),
     ]);
     
     const expected = montag`
@@ -766,18 +817,27 @@ test('supertape: runTests: isStop', async (t) => {
     const message2 = 'bye: world';
     const isStop = stub().returns(true);
     
-    const supertape = reRequire('..');
-    supertape(message1, fn1, {
-        quiet: true,
+    disableOnce();
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
         isStop,
     });
     
-    supertape(message2, fn2);
+    test(message1, fn1, {
+        quiet: true,
+    });
+    
+    test(message2, fn2);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(supertape.run(), 'end'),
+        pull(stream),
+        run(),
     ]);
+    
+    enableOnce();
     
     const expected = montag`
         TAP version 13
@@ -810,15 +870,19 @@ test('supertape: runTests: not equal, but deepEqual', async (t) => {
     };
     
     const message = 'hello world';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    test(message, fn, {
         quiet: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 6),
-        once(supertape.run(), 'end'),
+        pull(stream, 6),
+        run(),
     ]);
     
     const expected = montag`
