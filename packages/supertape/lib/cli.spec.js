@@ -797,6 +797,7 @@ test('supertape: cli: validation', async (t) => {
     ];
     
     const write = stub();
+    
     const stderr = {
         write,
     };
