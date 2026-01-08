@@ -13,7 +13,7 @@ const {tryToCatch} = require('try-to-catch');
 const pullout = require('pullout');
 const wait = require('@iocmd/wait');
 
-const {reRequire} = require('mock-require');
+const cli = require('./cli');
 const test = require('./supertape.js');
 const {createStream: _createStream} = require('..');
 
@@ -23,6 +23,8 @@ const {
     SKIPPED,
     UNHANDLED,
 } = require('./exit-codes');
+
+const {enableOnce, disableOnce} = require('./maybe-once');
 
 const {assign} = Object;
 
@@ -178,17 +180,38 @@ test('supertape: cli: success', async (t) => {
         'tap',
     ];
     
-    const supertape = reRequire('./supertape');
+    disableOnce();
     const exit = stub();
+    const emitter = new EventEmitter();
+    
+    const supertape = stub();
+    const init = stub();
+    const run = stub().returns(emitter);
+    
+    assign(supertape, {
+        init,
+        run,
+        createStream,
+    });
+    
+    const emit = emitter.emit.bind(emitter);
     
     supertape.init({
         quiet: true,
     });
     
-    await runCli({
-        argv,
-        exit,
-    });
+    await Promise.all([
+        runCli({
+            argv,
+            exit,
+            supertape,
+        }),
+        wait(emit, 'end', {
+            failed: 0,
+        }),
+    ]);
+    
+    enableOnce();
     
     t.calledWith(exit, [OK], 'should call exit with 0');
     t.end();
@@ -213,6 +236,7 @@ test('supertape: bin: cli: node_modules', async (t) => {
     
     const emit = emitter.emit.bind(emitter);
     
+    disableOnce();
     const [[, cli]] = await Promise.all([
         runCli({
             argv,
@@ -222,6 +246,8 @@ test('supertape: bin: cli: node_modules', async (t) => {
             failed: 0,
         }),
     ]);
+    
+    enableOnce();
     
     const result = cli._filesCount();
     const expected = 0;
@@ -282,8 +308,10 @@ test('supertape: cli: exit: skipped', async (t) => {
     });
     
     process.env.SUPERTAPE_CHECK_SKIPPED = '1';
+    disableOnce();
     
     const emit = emitter.emit.bind(emitter);
+    
     await Promise.all([
         runCli({
             argv,
@@ -296,6 +324,7 @@ test('supertape: cli: exit: skipped', async (t) => {
     ]);
     
     delete process.env.SUPERTAPE_CHECK_SKIPPED;
+    enableOnce();
     
     t.calledWith(exit, [SKIPPED], 'should call exit with SKIPPED');
     t.end();
@@ -627,7 +656,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         'fail',
     ];
     
-    const test = stub();
+    const supertape = stub();
     const init = stub();
     const run = stub();
     const isStop = stub();
@@ -636,7 +665,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         isStop,
     });
     
-    assign(test, {
+    assign(supertape, {
         init,
         run,
         createStream: _createStream,
@@ -645,7 +674,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
     await runCli({
         argv,
         keypress,
-        supertape: test,
+        supertape,
     });
     
     const expected = [{
@@ -667,11 +696,15 @@ test('supertape: bin: cli: invalid file', async (t) => {
     const name = join(__dirname, 'fixture/invalid.js');
     const argv = [name];
     const exit = stub();
+    const supertape = stub();
     
+    disableOnce();
     await runCli({
         exit,
         argv,
+        supertape,
     });
+    enableOnce();
     
     t.calledWith(exit, [UNHANDLED]);
     t.end();
@@ -688,13 +721,34 @@ test('supertape: cli: isStop', async (t) => {
         isStop,
     });
     
-    reRequire('./supertape.js');
+    globalThis.onceDisabled = true;
     
-    await runCli({
-        exit,
-        argv,
-        keypress,
+    const emitter = new EventEmitter();
+    
+    const supertape = stub();
+    const init = stub();
+    const run = stub().returns(emitter);
+    
+    assign(supertape, {
+        init,
+        run,
+        createStream: _createStream,
     });
+    
+    const emit = emitter.emit.bind(emitter);
+    
+    await Promise.all([
+        runCli({
+            exit,
+            argv,
+            keypress,
+            supertape,
+        }),
+        wait(emit, 'end', {
+            failed: 0,
+        }),
+    ]);
+    globalThis.onceDisabled = true;
     
     t.calledWith(exit, [WAS_STOP]);
     t.end();
@@ -739,8 +793,6 @@ async function runCli(options) {
         supertape,
         globSync,
     } = options;
-    
-    const cli = reRequire('./cli');
     
     const [error] = await tryToCatch(cli, {
         argv,

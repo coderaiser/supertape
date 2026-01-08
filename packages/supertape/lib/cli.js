@@ -1,10 +1,10 @@
 'use strict';
 
-const process = require('node:process');
 const {resolve: resolvePath} = require('node:path');
 const {once} = require('node:events');
 const {pathToFileURL} = require('node:url');
 
+const {env} = require('node:process');
 const fullstore = require('fullstore');
 const {tryToCatch} = require('try-to-catch');
 const {keypress: _keypress} = require('@putout/cli-keypress');
@@ -27,14 +27,9 @@ const {
     SKIPPED,
 } = require('./exit-codes');
 
-const isExclude = (a) => !a.includes('node_modules');
-const removeDuplicates = (a) => Array.from(new Set(a));
-
 const filesCount = fullstore(0);
-
-const {
-    SUPERTAPE_CHECK_SKIPPED = '0',
-} = process.env;
+const removeDuplicates = (a) => Array.from(new Set(a));
+const isExclude = (a) => !a.includes('node_modules');
 
 module.exports = async (overrides = {}) => {
     const {
@@ -48,6 +43,10 @@ module.exports = async (overrides = {}) => {
         supertape = _supertape,
         globSync = _globSync,
     } = overrides;
+    
+    const {
+        SUPERTAPE_CHECK_SKIPPED = '0',
+    } = env;
     
     const isStop = overrides.isStop || keypress().isStop;
     
@@ -166,6 +165,8 @@ async function _cli(overrides) {
     
     const files = removeDuplicates(allFiles);
     
+    filesCount(files.length);
+    
     if (!files.length)
         return OK;
     
@@ -175,8 +176,6 @@ async function _cli(overrides) {
     for (const file of files) {
         resolvedNames.push(pathToFileURL(resolvePath(cwd, file)));
     }
-    
-    filesCount(files.length);
     
     for (const resolved of resolvedNames)
         await import(resolved);

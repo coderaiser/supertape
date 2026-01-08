@@ -5,7 +5,9 @@ const {EventEmitter} = require('node:events');
 const {PassThrough} = require('node:stream');
 
 const stub = require('@cloudcmd/stub');
+
 const once = require('once');
+const {maybeOnce} = require('./maybe-once');
 
 const options = require('../supertape.json');
 
@@ -245,7 +247,7 @@ test.extend = (extensions) => {
     return extendedTest;
 };
 
-const loop = once(({emitter, tests}) => {
+const loop = maybeOnce(({emitter, tests}) => {
     let previousCount = 0;
     
     (function loop() {
@@ -261,22 +263,6 @@ const loop = once(({emitter, tests}) => {
 });
 
 module.exports.run = () => {
-    if (!mainEmitter)
-        return fakeEmitter();
-    
     mainEmitter.emit('loop');
-    
     return mainEmitter;
 };
-
-function fakeEmitter() {
-    const emitter = new EventEmitter();
-    
-    process.nextTick(() => {
-        emitter.emit('end', {
-            failed: 0,
-        });
-    });
-    
-    return emitter;
-}

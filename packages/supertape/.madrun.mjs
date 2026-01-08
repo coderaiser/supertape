@@ -7,7 +7,7 @@ const env = {
 export default {
     'test': () => [env, `bin/tracer.mjs '{bin,lib}/**/*.spec.{js,mjs}'`],
     'test:dts': () => 'check-dts test/*.ts',
-    'watch:test': async () => `nodemon -w lib -w test -x "${await cutEnv('test')}"`,
+    
     'lint': () => 'putout .',
     'fresh:lint': () => run('lint', '--fresh'),
     'lint:fresh': () => run('lint', '--fresh'),
@@ -15,4 +15,5 @@ export default {
     'coverage': async () => [env, `c8 ${await cutEnv('test')}`],
     'report': () => 'c8 report --reporter=lcov',
     'wisdom': () => run(['lint', 'test:dts', 'coverage']),
+    'watch:test': async () => [env, `nodemon -w bin -w lib -w test -x "${await cutEnv('test')} -f tap"`],
 };
