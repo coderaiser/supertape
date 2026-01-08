@@ -113,26 +113,22 @@ test('supertape: runTests: duplicates: false', async (t) => {
         t.end();
     };
     
-    const message = 'hello world';
+    const message = 'hello: world';
     
-    reRequire('./validator');
-    const supertape = reRequire('..');
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    supertape(message, fn1, {
-        quiet: true,
-        checkDuplicates: false,
-    });
-    
-    supertape(message, fn2, {
-        quiet: true,
-        checkDuplicates: false,
-    });
+    test(message, fn1);
+    test(message, fn2);
     
     const FOUR_TESTS = 30;
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), FOUR_TESTS),
-        once(supertape.run(), 'end'),
+        pull(stream, FOUR_TESTS),
+        run(),
     ]);
     
     t.notMatch(result, 'not ok 2 Duplicate');
@@ -870,6 +866,7 @@ test('supertape: runTests: not equal, but deepEqual', async (t) => {
     };
     
     const message = 'hello world';
+    
     const {
         test,
         stream,
