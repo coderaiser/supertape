@@ -91,6 +91,7 @@ test('supertape: runTests: duplicates', async (t) => {
     });
     
     const FOUR_TESTS = 30;
+    
     const [result] = await Promise.all([
         pull(stream, FOUR_TESTS),
         run(),
