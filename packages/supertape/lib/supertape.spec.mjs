@@ -1,4 +1,9 @@
-import test, {extend, stub} from './supertape.mjs';
+import {once} from 'node:events';
+import test, {
+    extend,
+    stub,
+    run,
+} from './supertape.mjs';
 
 const extendedTest = extend({
     superOk: (operator) => (a) => {
@@ -17,6 +22,20 @@ test('supertape: mjs: default: calledWith', (t) => {
     fn('hello');
     
     t.calledWith(fn, ['hello']);
+    t.end();
+});
+
+test('supertape: run', async (t) => {
+    const emitter = run({
+        fake: true,
+    });
+    
+    const [result] = await once(emitter, 'end');
+    const expected = {
+        failed: 0,
+    };
+    
+    t.deepEqual(result, expected);
     t.end();
 });
 

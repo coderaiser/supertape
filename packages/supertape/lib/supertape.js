@@ -234,18 +234,15 @@ const loop = maybeOnce(({emitter, tests}) => {
     })();
 });
 
-module.exports.run = () => {
-    /* c8 ignore start */
-    if (!mainEmitter)
+module.exports.run = ({fake} = {}) => {
+    if (!mainEmitter || fake)
         return fakeEmitter();
     
-    /* c8 ignore end */
     mainEmitter.emit('loop');
     
     return mainEmitter;
 };
 
-/* c8 ignore start */
 function fakeEmitter() {
     const emitter = new EventEmitter();
     
@@ -256,5 +253,4 @@ function fakeEmitter() {
     });
     
     return emitter;
-} /* c8 ignore end */
-
+}
