@@ -70,26 +70,30 @@ test('supertape: runTests: duplicates', async (t) => {
     
     const message = 'hello world';
     
-    reRequire('./validator');
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        quiet: false,
+    });
     
-    const supertape = reRequire('..');
-    supertape(message, fn1, {
+    test(message, fn1, {
         quiet: true,
         checkDuplicates: true,
         checkIfEnded: false,
     });
     
-    supertape(message, fn2, {
+    test(message, fn2, {
         quiet: true,
         checkDuplicates: true,
         checkIfEnded: false,
     });
     
     const FOUR_TESTS = 30;
-    
     const [result] = await Promise.all([
-        pull(supertape.createStream(), FOUR_TESTS),
-        once(supertape.run(), 'end'),
+        pull(stream, FOUR_TESTS),
+        run(),
     ]);
     
     t.match(result, 'not ok 2 Duplicate');
