@@ -1,3 +1,8 @@
+2026.01.08, v12.0.6
+
+feature:
+- 563cd9e supertape: --dry-run
+
 2026.01.08, v12.0.5
 
 fix:
