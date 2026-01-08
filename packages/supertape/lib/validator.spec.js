@@ -1,64 +1,37 @@
 'use strict';
 
 const {tryCatch} = require('try-catch');
-
-const mockRequire = require('mock-require');
 const {stub, test} = require('..');
 
-const {getAt} = require('./validator');
-
-const {stopAll, reRequire} = mockRequire;
+const {
+    getAt,
+    createValidator,
+    setValidations,
+} = require('./validator');
 
 test('supertape: validator: getAt', (t) => {
-    const message = 'hello';
-    const checkDuplicates = true;
     const StackTracey = stub().returns({
         items: [],
     });
     
-    mockRequire('stacktracey', StackTracey);
-    
-    const {getAt} = reRequire('./validator');
-    getAt({
-        message,
-        checkDuplicates,
-    });
-    
     const result = getAt({
-        message,
-        checkDuplicates,
+        StackTracey,
     });
-    
-    stopAll();
     
     t.equal(result, '');
     t.end();
 });
 
 test('supertape: validator: getAt: duplicate', (t) => {
-    const message = 'hello';
-    const checkDuplicates = true;
+    getAt();
     
-    getAt({
-        message,
-        checkDuplicates,
-    });
-    
-    const result = getAt({
-        message,
-        checkDuplicates,
-    });
+    const result = getAt();
     
     t.match(result, 'at');
     t.end();
 });
 
 test('supertape: validator: checkScopes', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const current = {
         message: 'hello world',
         at: 'at',
@@ -86,11 +59,6 @@ test('supertape: validator: checkScopes', (t) => {
 });
 
 test('supertape: validator: checkScopes: @', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const current = {
         message: '@putout/eslint: create-plugin',
         at: 'at',
@@ -114,11 +82,6 @@ test('supertape: validator: checkScopes: @', (t) => {
 });
 
 test('supertape: validator: checkScopes: +', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const current = {
         message: '+hello: world',
         at: 'at',
@@ -142,11 +105,6 @@ test('supertape: validator: checkScopes: +', (t) => {
 });
 
 test('supertape: validator: checkAssertionsCount', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const current = {
         message: 'hello world',
         at: 'at',
@@ -179,11 +137,6 @@ test('supertape: validator: checkAssertionsCount', (t) => {
 });
 
 test('supertape: validator: checkAssertionsCount: disabled', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const current = {
         message: 'hello world',
         at: 'at',
@@ -213,11 +166,6 @@ test('supertape: validator: checkAssertionsCount: disabled', (t) => {
 });
 
 test('supertape: validator: checkAssertionsCount: ok', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const current = {
         message: 'hello world',
         at: 'at',
@@ -247,11 +195,6 @@ test('supertape: validator: checkAssertionsCount: ok', (t) => {
 });
 
 test('supertape: validator: checkScopes: valid', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const current = {
         message: 'hello: world',
         at: 'at',
@@ -275,11 +218,6 @@ test('supertape: validator: checkScopes: valid', (t) => {
 });
 
 test('supertape: validator: checkScopes: nested: valid', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const message = 'hello: world: and: more';
     const current = {
         message,
@@ -304,11 +242,6 @@ test('supertape: validator: checkScopes: nested: valid', (t) => {
 });
 
 test('supertape: validator: checkScopes: nested: slash', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const message = 'travis/set-node-versions: report: is function';
     const current = {
         message,
@@ -333,11 +266,6 @@ test('supertape: validator: checkScopes: nested: slash', (t) => {
 });
 
 test('supertape: validator: checkScopes: cannot find message', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const current = {
         message: 'hello: world',
         at: 'at',
@@ -361,11 +289,6 @@ test('supertape: validator: checkScopes: cannot find message', (t) => {
 });
 
 test('supertape: validator: no validations', (t) => {
-    const {
-        createValidator,
-        setValidations,
-    } = reRequire('./validator');
-    
     const current = {
         message: 'hello world',
         at: 'at',

@@ -1,7 +1,7 @@
 'use strict';
 
 const once = require('once');
-const StackTracey = require('stacktracey');
+const _StackTracey = require('stacktracey');
 const getDuplicatesMessage = ([, a]) => a;
 
 const getMessage = ({message, at, validations}) => [
@@ -71,11 +71,19 @@ module.exports.createValidator = ({tests}) => (msg, options) => {
     return [];
 };
 
-module.exports.getAt = () => getFileName();
-
 const CALLS_FROM_TEST = 3;
 
-function getFileName() {
+module.exports.getAt = (overrides = {}) => {
+    const {
+        StackTracey = _StackTracey,
+    } = overrides;
+    
+    return getFileName({
+        StackTracey,
+    });
+};
+
+function getFileName({StackTracey}) {
     const {items} = new StackTracey(Error());
     
     for (const {beforeParse, file} of items.slice(CALLS_FROM_TEST)) {
