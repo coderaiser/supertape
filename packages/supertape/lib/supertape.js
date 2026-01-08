@@ -1,8 +1,9 @@
 'use strict';
 
+const {EventEmitter} = require('node:events');
+const process = require('node:process');
 const {PassThrough} = require('node:stream');
 
-const {env} = require('node:process');
 const stub = require('@cloudcmd/stub');
 
 const once = require('once');
@@ -14,7 +15,7 @@ const {getAt, setValidations} = require('./validator');
 
 const {createEmitter: _createEmitter} = require('./emitter.mjs');
 const _createFormatter = require('./formatter').createFormatter;
-
+const {env} = process;
 const {assign} = Object;
 const createEmitter = once(_createEmitter);
 const createFormatter = once(_createFormatter);
@@ -234,6 +235,26 @@ const loop = maybeOnce(({emitter, tests}) => {
 });
 
 module.exports.run = () => {
+    /* c8 ignore start */
+    if (!mainEmitter)
+        return fakeEmitter();
+    
+    /* c8 ignore end */
     mainEmitter.emit('loop');
+    
     return mainEmitter;
 };
+
+/* c8 ignore start */
+function fakeEmitter() {
+    const emitter = new EventEmitter();
+    
+    process.nextTick(() => {
+        emitter.emit('end', {
+            failed: 0,
+        });
+    });
+    
+    return emitter;
+}/* c8 ignore end */
+

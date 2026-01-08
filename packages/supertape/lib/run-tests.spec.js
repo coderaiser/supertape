@@ -11,7 +11,6 @@ const {reRequire} = require('mock-require');
 const {parseTime} = require('./run-tests');
 const {test, stub} = require('..');
 const {createTest} = require('./supertape');
-const {disableOnce, enableOnce} = require('./maybe-once');
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
@@ -813,7 +812,6 @@ test('supertape: runTests: isStop', async (t) => {
     const message2 = 'bye: world';
     const isStop = stub().returns(true);
     
-    disableOnce();
     const {
         test,
         stream,
@@ -832,8 +830,6 @@ test('supertape: runTests: isStop', async (t) => {
         pull(stream),
         run(),
     ]);
-    
-    enableOnce();
     
     const expected = montag`
         TAP version 13
