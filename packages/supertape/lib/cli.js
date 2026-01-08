@@ -159,16 +159,15 @@ async function _cli(overrides) {
         workerFormatter,
     });
     
-    const stream = await supertape.createStream();
-    
-    stream.pipe(stdout);
-    
     const files = removeDuplicates(allFiles);
     
     filesCount(files.length);
     
     if (!files.length)
         return OK;
+    
+    const stream = await supertape.createStream();
+    stream.pipe(stdout);
     
     const resolvedNames = [];
     
@@ -177,8 +176,9 @@ async function _cli(overrides) {
         resolvedNames.push(pathToFileURL(resolvePath(cwd, file)));
     }
     
-    for (const resolved of resolvedNames)
-        await import(resolved);
+    if (!args.dryRun)
+        for (const resolved of resolvedNames)
+            await import(resolved);
     
     const [result] = await once(supertape.run(), 'end');
     

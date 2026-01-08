@@ -33,6 +33,7 @@ const getYargsOptions = () => {
             'check-scopes',
             'check-assertions-count',
             'worker',
+            'dry-run',
         ],
         alias: {
             version: 'v',

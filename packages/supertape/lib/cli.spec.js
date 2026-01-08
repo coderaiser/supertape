@@ -13,9 +13,9 @@ const {tryToCatch} = require('try-to-catch');
 const pullout = require('pullout');
 const wait = require('@iocmd/wait');
 
-const {reRequire} = require('mock-require');
 const test = require('./supertape.js');
 const {createStream: _createStream} = require('..');
+const cli = require('./cli');
 
 const {
     OK,
@@ -25,6 +25,7 @@ const {
 } = require('./exit-codes');
 
 const {enableOnce, disableOnce} = require('./maybe-once');
+const {createTest} = require('./supertape');
 
 const {assign} = Object;
 
@@ -101,7 +102,11 @@ test('supertape: bin: cli: glob: a couple', async (t) => {
 
 test('supertape: bin: cli: run', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, name];
+    const argv = [
+        name,
+        name,
+        '--dry-run',
+    ];
     
     const supertape = stub();
     const init = stub();
@@ -138,7 +143,11 @@ test('supertape: bin: cli: run: not test', async (t) => {
 
 test('supertape: bin: cli: files count', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, name];
+    const argv = [
+        name,
+        name,
+        '--dry-run',
+    ];
     
     const emitter = new EventEmitter();
     
@@ -178,17 +187,20 @@ test('supertape: cli: success', async (t) => {
         name,
         '-f',
         'tap',
+        '--dry-run',
     ];
     
-    disableOnce();
     const exit = stub();
     const emitter = new EventEmitter();
     
-    const supertape = stub();
     const init = stub();
     const run = stub().returns(emitter);
     
-    assign(supertape, {
+    const test = createTest({
+        quiet: true,
+    });
+    
+    assign(test, {
         init,
         run,
         createStream,
@@ -196,22 +208,16 @@ test('supertape: cli: success', async (t) => {
     
     const emit = emitter.emit.bind(emitter);
     
-    supertape.init({
-        quiet: true,
-    });
-    
     await Promise.all([
         runCli({
             argv,
             exit,
-            supertape,
+            supertape: test,
         }),
         wait(emit, 'end', {
             failed: 0,
         }),
     ]);
-    
-    enableOnce();
     
     t.calledWith(exit, [OK], 'should call exit with 0');
     t.end();
@@ -258,7 +264,11 @@ test('supertape: bin: cli: node_modules', async (t) => {
 
 test('supertape: cli: fail', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, name];
+    const argv = [
+        name,
+        name,
+        '--dry-run',
+    ];
     
     const init = stub();
     const exit = stub();
@@ -292,7 +302,11 @@ test('supertape: cli: fail', async (t) => {
 
 test('supertape: cli: exit: skipped', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, name];
+    const argv = [
+        name,
+        name,
+        '--dry-run',
+    ];
     
     const init = stub();
     const exit = stub();
@@ -332,7 +346,11 @@ test('supertape: cli: exit: skipped', async (t) => {
 
 test('supertape: cli: exit: skipped: disabled', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, name];
+    const argv = [
+        name,
+        name,
+        '--dry-run',
+    ];
     
     const init = stub();
     const exit = stub();
@@ -402,21 +420,22 @@ test('supertape: cli: -h', async (t) => {
 
 test('supertape: bin: cli: --check-duplicates', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, '-d'];
+    const argv = [name, '-d', '--dry-run'];
     
-    const test = stub();
     const init = stub();
-    const run = stub();
     const isStop = stub();
     
     const keypress = stub().returns({
         isStop,
     });
     
+    const test = createTest({
+        quiet: true,
+    });
+    
     assign(test, {
         init,
-        run,
-        createStream: _createStream,
+        createStream: stub().returns(test.stream),
     });
     
     await runCli({
@@ -442,21 +461,22 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
 
 test('supertape: bin: cli: --check-assertions-count', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, '-a'];
+    const argv = [name, '-a', '--dry-run'];
     
-    const test = stub();
     const init = stub();
-    const run = stub();
     const isStop = stub();
     
     const keypress = stub().returns({
         isStop,
     });
     
+    const test = createTest({
+        quiet: true,
+    });
+    
     assign(test, {
         init,
-        run,
-        createStream: _createStream,
+        createStream: stub().returns(test.stream),
     });
     
     await runCli({
@@ -482,21 +502,22 @@ test('supertape: bin: cli: --check-assertions-count', async (t) => {
 
 test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name];
+    const argv = [name, '-a', '--dry-run'];
     
-    const test = stub();
     const init = stub();
-    const run = stub();
-    const isStop = stub();
+    const isStop = stub().returns(true);
     
     const keypress = stub().returns({
         isStop,
     });
     
+    const test = createTest({
+        quiet: false,
+    });
+    
     assign(test, {
         init,
-        run,
-        createStream,
+        createStream: stub().returns(test.stream),
     });
     
     process.env.SUPERTAPE_CHECK_DUPLICATES = '0';
@@ -524,21 +545,23 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
 
 test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name];
+    const argv = [name, '--dry-run'];
     
-    const test = stub();
     const init = stub();
-    const run = stub();
-    const isStop = stub();
+    const isStop = stub().returns(true);
     
     const keypress = stub().returns({
         isStop,
     });
     
+    const test = createTest({
+        quiet: true,
+    });
+    
     assign(test, {
         init,
-        run,
-        createStream: _createStream,
+        run: stub(),
+        createStream: stub().returns(test.stream),
     });
     
     process.env.SUPERTAPE_CHECK_ASSERTIONS_COUNT = '1';
@@ -566,21 +589,24 @@ test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
 
 test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, enable env', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, '--no-check-duplicates'];
+    const argv = [name, '--no-check-duplicates', '--dry-run'];
     
-    const test = stub();
     const init = stub();
-    const run = stub();
     const isStop = stub();
     
     const keypress = stub().returns({
         isStop,
     });
     
+    disableOnce();
+    const test = createTest({
+        quiet: true,
+    });
+    
     assign(test, {
         init,
-        run,
-        createStream: _createStream,
+        run: stub(),
+        createStream: stub().returns(test.stream),
     });
     
     process.env.SUPERTAPE_CHECK_DUPLICATES = '1';
@@ -588,6 +614,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
         argv,
         supertape: test,
         keypress,
+        isStop: stub().returns(true),
     });
     delete process.env.SUPERTAPE_CHECK_DUPLICATES;
     
@@ -608,7 +635,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
 
 test('supertape: bin: cli: check-duplicates: -d', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, '-d'];
+    const argv = [name, '-d', '--dry-run'];
     
     const test = stub();
     const init = stub();
@@ -654,6 +681,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
         'tap',
         '-f',
         'fail',
+        '--dry-run',
     ];
     
     const supertape = stub();
@@ -694,7 +722,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
 
 test('supertape: bin: cli: invalid file', async (t) => {
     const name = join(__dirname, 'fixture/invalid.js');
-    const argv = [name];
+    const argv = [name, '--dry-run'];
     const exit = stub();
     const supertape = stub();
     
@@ -712,7 +740,12 @@ test('supertape: bin: cli: invalid file', async (t) => {
 
 test('supertape: cli: isStop', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, '-f', 'json-lines'];
+    const argv = [
+        name,
+        '-f',
+        'json-lines',
+        '--dry-run',
+    ];
     
     const exit = stub();
     const isStop = stub().returns(true);
@@ -756,7 +789,12 @@ test('supertape: cli: isStop', async (t) => {
 
 test('supertape: cli: validation', async (t) => {
     const name = join(__dirname, 'fixture/cli.js');
-    const argv = [name, '--forma', 'json-lines'];
+    const argv = [
+        name,
+        '--forma',
+        'json-lines',
+        '--dry-run',
+    ];
     
     const write = stub();
     const stderr = {
@@ -793,8 +831,6 @@ async function runCli(options) {
         supertape,
         globSync,
     } = options;
-    
-    const cli = reRequire('./cli');
     
     const [error] = await tryToCatch(cli, {
         argv,
