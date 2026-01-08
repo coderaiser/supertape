@@ -1,13 +1,13 @@
 'use strict';
 
-const process = require('node:process');
 const {once} = require('node:events');
-const {Transform} = require('node:stream');
 
 const montag = require('montag');
 const {reRequire} = require('mock-require');
 const pullout = require('pullout');
+
 const {test, stub} = require('..');
+const {createTest} = require('./supertape.js');
 
 const pull = async (stream, end = -2) => {
     const output = await pullout(await stream);
@@ -736,41 +736,28 @@ test('supertape: extensions: extend: stub', async (t) => {
 });
 
 test('supertape: quiet: false', async (t) => {
-    const extensions = {
-        transformCode: (t) => (a, b) => {
-            return t.equal(a + 1, b, 'should transform code');
-        },
-    };
-    
     const fn = (t) => {
         t.transformCode(0, 1);
         t.end();
     };
     
     const message = 'hello';
-    const {stdout} = process;
-    
-    Object.defineProperty(process, 'stdout', {
-        value: createStream(),
-        writable: false,
-    });
-    
-    const supertape = reRequire('..');
-    const extendedTape = supertape.extend(extensions);
-    
-    const emitter = extendedTape.skip(message, fn, {
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
         quiet: false,
     });
     
-    const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(emitter, 'end'),
-    ]);
-    
-    Object.defineProperty(process, 'stdout', {
-        value: stdout,
-        writable: false,
+    test(message, fn, {
+        skip: true,
     });
+    
+    const [result] = await Promise.all([
+        pull(stream),
+        run(),
+    ]);
     
     const expected = montag`
         TAP version 13
@@ -1046,11 +1033,4 @@ test('supertape: createTest: formatter', async (t) => {
     
     t.equal(result, expected);
     t.end();
-});
-
-const createStream = () => new Transform({
-    transform(chunk, encoding, callback) {
-        this.push(chunk);
-        callback();
-    },
 });

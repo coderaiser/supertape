@@ -1,7 +1,6 @@
 'use strict';
 
 const process = require('node:process');
-const {EventEmitter} = require('node:events');
 const {PassThrough} = require('node:stream');
 
 const stub = require('@cloudcmd/stub');
@@ -12,14 +11,14 @@ const {maybeOnce} = require('./maybe-once');
 const options = require('../supertape.json');
 
 const {getAt, setValidations} = require('./validator');
-const runTests = require('./run-tests');
 const _createFormatter = require('./formatter').createFormatter;
-const createFormatter = once(_createFormatter);
 
+const {createEmitter: _createEmitter} = require('./emitter.mjs');
+
+const createFormatter = once(_createFormatter);
 const createEmitter = once(_createEmitter);
 
 const {assign} = Object;
-const {stdout} = process;
 
 // 5ms ought to be enough for anybody
 const {
@@ -52,60 +51,6 @@ const defaultOptions = {
     timeout: SUPERTAPE_TIMEOUT,
 };
 
-function _createEmitter(overrides = {}) {
-    const {
-        quiet,
-        stream = stdout,
-        format,
-        getOperators,
-        isStop,
-        readyFormatter,
-        workerFormatter,
-    } = overrides;
-    
-    const tests = [];
-    const emitter = new EventEmitter();
-    
-    emitter.on('test', (message, fn, {skip, only, extensions, at, validations, timeout}) => {
-        tests.push({
-            message,
-            fn,
-            skip,
-            only,
-            extensions,
-            at,
-            validations,
-            timeout,
-        });
-    });
-    
-    emitter.on('loop', () => {
-        loop({
-            emitter,
-            tests,
-        });
-    });
-    
-    emitter.on('run', async () => {
-        const {harness, formatter} = readyFormatter || await createFormatter(format);
-        
-        if (!quiet)
-            harness.pipe(stream);
-        
-        const operators = await getOperators();
-        
-        const result = await runTests(tests, {
-            formatter: workerFormatter || formatter,
-            operators,
-            isStop,
-        });
-        
-        emitter.emit('end', result);
-    });
-    
-    return emitter;
-}
-
 module.exports = test;
 
 const initedOptions = {
@@ -125,7 +70,12 @@ const createStream = async () => {
 
 module.exports.createStream = createStream;
 module.exports.createTest = async (testOptions = {}) => {
-    const {format = 'tap', formatter} = testOptions;
+    const {
+        format = 'tap',
+        formatter,
+        isDebug,
+    } = testOptions;
+    
     const readyFormatter = await _createFormatter(formatter || format);
     
     const stream = new PassThrough();
@@ -134,6 +84,9 @@ module.exports.createTest = async (testOptions = {}) => {
         ...testOptions,
         readyFormatter,
         stream,
+        loop,
+        createFormatter,
+        isDebug,
     });
     
     const fn = (message, fn, options = {}) => {
@@ -194,11 +147,13 @@ function test(message, fn, options = {}, overrides = {}) {
     });
     
     const emitter = options.emitter || createEmitter({
+        loop,
         format,
         quiet,
         getOperators,
         isStop,
         workerFormatter,
+        createFormatter,
     });
     
     mainEmitter = emitter;

@@ -4,13 +4,13 @@ const process = require('node:process');
 const {once, EventEmitter} = require('node:events');
 
 const montag = require('montag');
-const mockRequire = require('mock-require');
+
 const pullout = require('pullout');
 
+const {reRequire} = require('mock-require');
 const {parseTime} = require('./run-tests');
 const {test, stub} = require('..');
-
-const {reRequire, stopAll} = mockRequire;
+const {createTest} = require('./supertape');
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
@@ -28,15 +28,17 @@ test('supertape: runTests', async (t) => {
     };
     
     const message = 'hello world';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
-        quiet: true,
-    });
+    test(message, fn);
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(supertape.run(), 'end'),
+        pull(stream),
+        run(),
     ]);
     
     const expected = montag`
@@ -820,21 +822,23 @@ test('supertape: runTests: is debug', async (t) => {
     };
     
     const message = 'hello: world';
+    const isDebug = stub().returns(true);
     
-    mockRequire('./is-debug', true);
-    reRequire('./run-tests');
-    
-    const supertape = reRequire('..');
-    supertape(message, fn, {
-        quiet: true,
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
+        quiet: false,
+        isDebug,
     });
     
-    const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(supertape.run(), 'end'),
-    ]);
+    test(message, fn);
     
-    stopAll();
+    const [result] = await Promise.all([
+        pull(stream),
+        run(),
+    ]);
     
     const expected = montag`
         TAP version 13

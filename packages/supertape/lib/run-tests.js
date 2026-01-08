@@ -20,7 +20,7 @@ const DEBUG_TIME = 3000 * 1000;
 const doTimeout = (time, value, {isDebug}) => {
     let stop;
     
-    if (isDebug)
+    if (isDebug())
         time = DEBUG_TIME;
     
     const promise = new Promise((resolve) => {
@@ -47,6 +47,7 @@ module.exports = async (tests, overrides = {}) => {
             operators,
             skipped: tests.length - onlyTests.length,
             isStop,
+            isDebug,
         });
     
     const notSkippedTests = tests.filter(notSkip);
