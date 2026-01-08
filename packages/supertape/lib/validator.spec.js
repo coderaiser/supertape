@@ -312,6 +312,34 @@ test('supertape: validator: no validations', (t) => {
     t.end();
 });
 
+test('supertape: validator: checkDuplicates', (t) => {
+    const current = {
+        message: 'hello world',
+        at: 'at',
+        validations: {
+            checkDuplicates: false,
+        },
+    };
+    
+    const tests = [current, current];
+    
+    setValidations({
+        checkScopes: false,
+        checkDuplicates: true,
+    });
+    
+    const validate = createValidator({
+        tests,
+    });
+    
+    const result = validate('hello world');
+    
+    const expected = [];
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
 test('supertape: validator: no node_modules', (t) => {
     const items = [{
         beforeParse: 'at getDuplicatesMessage (/node_modules/supertape/lib/supertape.js:113:37)',
