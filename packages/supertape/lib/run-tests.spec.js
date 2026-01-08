@@ -187,22 +187,25 @@ test('supertape: runTests: duplicates: not match', async (t) => {
     
     const message = 'hello world';
     
-    const supertape = reRequire('..');
-    supertape(message, fn1, {
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    test(message, fn1, {
         quiet: true,
         checkDuplicates: true,
     });
     
-    supertape(message, fn2, {
+    test(message, fn2, {
         quiet: true,
         checkDuplicates: true,
     });
-    
-    const FOUR_TESTS = 30;
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), FOUR_TESTS),
-        once(supertape.run(), 'end'),
+        pull(stream),
+        run(),
     ]);
     
     t.notMatch(result, 'not ok 4 Duplicate');
