@@ -220,21 +220,25 @@ test('supertape: runTests: no duplicates', async (t) => {
     };
     
     const message = 'hello world';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    test(message, fn, {
         quiet: true,
         checkDuplicates: true,
     });
     
-    supertape('something else', fn, {
+    test('something else', fn, {
         quiet: true,
         checkDuplicates: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream()),
-        once(supertape.run(), 'end'),
+        pull(stream),
+        run(),
     ]);
     
     t.notMatch(result, 'Duplicate message at');
@@ -249,14 +253,19 @@ test('supertape: runTests: fail', async (t) => {
     
     const message = 'hello world';
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    test(message, fn, {
         quiet: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
-        once(supertape.run(), 'end'),
+        pull(stream, 5),
+        run(),
     ]);
     
     const expected = montag`
@@ -278,18 +287,20 @@ test('supertape: runTests: checkAssertionsCount: no assertions', async (t) => {
     
     const message = 'hello: world';
     
-    reRequire('once');
-    reRequire('./run-tests.js');
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    const supertape = reRequire('..');
-    supertape(message, fn, {
+    test(message, fn, {
         quiet: true,
         checkAssertionsCount: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
-        once(supertape.run(), 'end'),
+        pull(stream, 5),
+        run(),
     ]);
     
     const expected = montag`
@@ -311,18 +322,20 @@ test('supertape: runTests: assertions after t.end()', async (t) => {
     };
     
     const message = 'hello world';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    reRequire('once');
-    const supertape = reRequire('..');
-    
-    supertape(message, fn, {
+    test(message, fn, {
         quiet: true,
         checkIfEnded: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
-        once(supertape.run(), 'end'),
+        pull(stream, 5),
+        run(),
     ]);
     
     const expected = montag`
@@ -345,18 +358,20 @@ test('supertape: runTests: a couple t.end()', async (t) => {
     };
     
     const message = 'hello world';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    reRequire('once');
-    const supertape = reRequire('..');
-    
-    supertape(message, fn, {
+    test(message, fn, {
         quiet: true,
         checkIfEnded: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
-        once(supertape.run(), 'end'),
+        pull(stream, 5),
+        run(),
     ]);
     
     const expected = montag`
