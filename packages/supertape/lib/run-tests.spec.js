@@ -389,28 +389,24 @@ test('supertape: runTests: a couple t.end()', async (t) => {
 test('supertape: runTests: assertions after t.end(): async', async (t) => {
     const fn = async (t) => {
         t.end();
-        await t.asyncOperator('hello', 'hello');
+        return await t.equal(1, 1, 'should transform code');
     };
     
     const message = 'hello world';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
     
-    reRequire('once');
-    const supertape = reRequire('..');
-    
-    const superTest = supertape.extend({
-        asyncOperator: (t) => async (a, b) => {
-            return await t.equal(a, b, 'should transform code');
-        },
-    });
-    
-    superTest(message, fn, {
+    test(message, fn, {
         quiet: true,
         checkIfEnded: true,
     });
     
     const [result] = await Promise.all([
-        pull(supertape.createStream(), 5),
-        once(supertape.run(), 'end'),
+        pull(stream, 5),
+        run(),
     ]);
     
     const expected = montag`
