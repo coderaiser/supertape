@@ -3,7 +3,7 @@
 const fullstore = require('fullstore');
 const wraptile = require('wraptile');
 const {tryToCatch} = require('try-to-catch');
-const isDebug = require('./is-debug');
+const _isDebug = require('./is-debug');
 
 const {createValidator} = require('./validator');
 
@@ -17,7 +17,7 @@ const getInitOperators = async () => await import('./operators.mjs');
 
 const DEBUG_TIME = 3000 * 1000;
 
-const doTimeout = (time, value) => {
+const doTimeout = (time, value, {isDebug}) => {
     let stop;
     
     if (isDebug)
@@ -31,7 +31,14 @@ const doTimeout = (time, value) => {
     return [promise, stop];
 };
 
-module.exports = async (tests, {formatter, operators, isStop}) => {
+module.exports = async (tests, overrides = {}) => {
+    const {
+        formatter,
+        operators,
+        isStop,
+        isDebug = _isDebug,
+    } = overrides;
+    
     const onlyTests = tests.filter(isOnly);
     
     if (onlyTests.length)
@@ -50,10 +57,19 @@ module.exports = async (tests, {formatter, operators, isStop}) => {
         operators,
         skipped,
         isStop,
+        isDebug,
     });
 };
 
-async function runTests(tests, {formatter, operators, skipped, isStop}) {
+async function runTests(tests, overrides = {}) {
+    const {
+        formatter,
+        operators,
+        skipped,
+        isStop,
+        isDebug,
+    } = overrides;
+    
     const count = fullstore(0);
     const failed = fullstore(0);
     const passed = fullstore(0);
@@ -95,7 +111,7 @@ async function runTests(tests, {formatter, operators, skipped, isStop}) {
             getValidationMessage,
             validations,
             timeout,
-            
+            isDebug,
             extensions: {
                 ...operators,
                 ...extensions,
@@ -134,6 +150,7 @@ async function runOneTest(options) {
         getValidationMessage,
         validations,
         timeout,
+        isDebug,
     } = options;
     
     const isReturn = fullstore(false);
@@ -162,7 +179,10 @@ async function runOneTest(options) {
     });
     
     if (!isReturn()) {
-        const [timer, stopTimer] = doTimeout(timeout, ['timeout']);
+        const [timer, stopTimer] = doTimeout(timeout, ['timeout'], {
+            isDebug,
+        });
+        
         const [error] = await Promise.race([tryToCatch(fn, t), timer]);
         
         stopTimer();

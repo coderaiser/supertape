@@ -52,7 +52,17 @@ const defaultOptions = {
     timeout: SUPERTAPE_TIMEOUT,
 };
 
-function _createEmitter({quiet, stream = stdout, format, getOperators, isStop, readyFormatter, workerFormatter}) {
+function _createEmitter(overrides = {}) {
+    const {
+        quiet,
+        stream = stdout,
+        format,
+        getOperators,
+        isStop,
+        readyFormatter,
+        workerFormatter,
+    } = overrides;
+    
     const tests = [];
     const emitter = new EventEmitter();
     
@@ -146,7 +156,7 @@ module.exports.createTest = async (testOptions = {}) => {
     return fn;
 };
 
-function test(message, fn, options = {}) {
+function test(message, fn, options = {}, overrides = {}) {
     const {
         run,
         quiet,
@@ -168,6 +178,8 @@ function test(message, fn, options = {}) {
         ...options,
     };
     
+    const {StackTracey} = overrides;
+    
     const validations = {
         checkDuplicates,
         checkScopes,
@@ -177,7 +189,10 @@ function test(message, fn, options = {}) {
     
     setValidations(validations);
     
-    const at = getAt();
+    const at = getAt({
+        StackTracey,
+    });
+    
     const emitter = options.emitter || createEmitter({
         format,
         quiet,

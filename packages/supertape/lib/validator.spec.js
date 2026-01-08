@@ -311,3 +311,30 @@ test('supertape: validator: no validations', (t) => {
     t.deepEqual(result, expected);
     t.end();
 });
+
+test('supertape: validator: no node_modules', (t) => {
+    const items = [{
+        beforeParse: 'at getDuplicatesMessage (/node_modules/supertape/lib/supertape.js:113:37)',
+        file: '/node_modules/supertape/lib/supertape.js',
+    }, {
+        beforeParse: 'at test (/node_modules/supertape/lib/supertape.js:144:31)',
+        file: '/node_modules/supertape/lib/supertape.js',
+    }, {
+        beforeParse: 'at only (/node_modules/supertape/lib/supertape.js:144:31)',
+        file: '/node_modules/supertape/lib/supertape.js',
+    }, {
+        beforeParse: 'at Object.<anonymous> (/Users/coderaiser/putout/packages/traverse/lib/traverse.spec.js:123:1)',
+        file: '/Users/coderaiser/putout/packages/traverse/lib/traverse.spec.js',
+    }];
+    
+    const StackTracey = stub().returns({
+        items,
+    });
+    
+    const result = getAt({
+        StackTracey,
+    });
+    
+    t.notMatch(result, 'node_modules');
+    t.end();
+});
