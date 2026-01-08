@@ -256,5 +256,5 @@ function fakeEmitter() {
     });
     
     return emitter;
-}/* c8 ignore end */
+} /* c8 ignore end */
 
