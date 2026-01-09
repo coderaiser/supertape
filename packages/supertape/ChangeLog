@@ -1,3 +1,8 @@
+2026.01.09, v12.0.9
+
+fix:
+- 07e4f3d supertape: readme: require -> import
+
 2026.01.09, v12.0.8
 
 feature:
