@@ -226,6 +226,7 @@ Extend base assertions with more:
 
 ```js
 import {extend} from 'supertape';
+
 const test = extend({
     transform: (operator) => (a, b, message = 'should transform') => {
         const {is, output} = operator.equal(a + 1, b - 1);
