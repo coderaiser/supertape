@@ -426,6 +426,7 @@ test('supertape: extensions', async (t) => {
     };
     
     const message = 'tape: ext';
+    
     const {
         test,
         stream,
@@ -470,6 +471,7 @@ test('supertape: extensions: extend', async (t) => {
     };
     
     const message = 'tape: extend';
+    
     const {
         test,
         stream,
@@ -514,6 +516,7 @@ test('supertape: extensions: extend: no return', async (t) => {
     };
     
     const message = 'extend: no return';
+    
     const {
         test,
         stream,
@@ -552,6 +555,7 @@ test('supertape: extensions: extend: return function', async (t) => {
     };
     
     const message = 'return: fn';
+    
     const {
         test,
         stream,
@@ -590,6 +594,7 @@ test('supertape: extensions: extend: async', async (t) => {
     };
     
     const message = 'extend: async';
+    
     const {
         test,
         stream,
@@ -634,6 +639,7 @@ test('supertape: extensions: extend: only', async (t) => {
     };
     
     const message = 'supertape: extend: only';
+    
     const {
         test,
         stream,
@@ -678,6 +684,7 @@ test('supertape: extensions: extend: skip', async (t) => {
     };
     
     const message = 'hello';
+    
     const {
         test,
         stream,
@@ -685,6 +692,7 @@ test('supertape: extensions: extend: skip', async (t) => {
     } = await createTest();
     
     const extendedTape = test.extend(extensions);
+    
     extendedTape.skip(message, fn);
     
     const [result] = await Promise.all([
@@ -720,6 +728,7 @@ test('supertape: extensions: extend: test', async (t) => {
     };
     
     const message = 'tape: extend';
+    
     const {
         test,
         stream,
@@ -764,6 +773,7 @@ test('supertape: extensions: extend: stub', async (t) => {
     };
     
     const message = 'tape: extend';
+    
     const {
         test,
         stream,
@@ -872,6 +882,7 @@ test('supertape: destructuring test: only', async (t) => {
     
     const message1 = 'world: only';
     const message2 = 'hello: only';
+    
     const {
         test,
         stream,
