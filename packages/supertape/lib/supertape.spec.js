@@ -1,9 +1,6 @@
 'use strict';
 
-const {once} = require('node:events');
-
 const montag = require('montag');
-const {reRequire} = require('mock-require');
 const pullout = require('pullout');
 
 const {
@@ -157,7 +154,7 @@ test('supertape: stack strace: exception', async (t) => {
     const [, lineCurrent] = current.split(':');
     
     const result = Number(lineAt);
-    const expected = Number(lineCurrent) - 11;
+    const expected = Number(lineCurrent) - 8;
     
     t.equal(result, expected, 'line numbers should equal');
     t.end();
@@ -960,31 +957,30 @@ test('supertape: duplicate', async (t) => {
         t.end();
     };
     
-    const message = 'hello';
-    const supertape = reRequire('..');
-    
-    supertape.init({
-        run: false,
-        quiet: true,
+    const message = 'a: b';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest({
         checkIfEnded: false,
+        run: false,
     });
     
-    supertape(message, fn);
-    supertape(message, fn);
-    
-    const stream = supertape.createStream();
-    
-    const [result] = await Promise.all([
-        pull(stream, 62),
-        once(supertape.run(), 'end'),
-    ]);
+    test(message, fn);
+    test(message, fn);
     
     const expected = montag`
         TAP version 13
-        # hello
+        # a: b
         ok 1 should equal
         not ok 2 Duplicate at
     `;
+    
+    const [result] = await Promise.all([
+        pull(stream, expected.length),
+        run(),
+    ]);
     
     t.equal(result, expected);
     t.end();
@@ -998,7 +994,6 @@ test('supertape: createTest', async (t) => {
     
     const message = 'hello: world';
     
-    const {createTest} = reRequire('..');
     const {
         test,
         stream,
@@ -1040,7 +1035,6 @@ test('supertape: createTest: operator returns', async (t) => {
     
     const message = 'hello: world';
     
-    const {createTest} = reRequire('..');
     const {
         test,
         stream,
@@ -1068,7 +1062,6 @@ test('supertape: createTest: formatter', async (t) => {
     
     const message = 'hello: world';
     
-    const {createTest} = reRequire('..');
     const {
         test,
         run,

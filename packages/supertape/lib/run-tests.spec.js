@@ -56,50 +56,6 @@ test('supertape: runTests', async (t) => {
     t.end();
 });
 
-test('supertape: runTests: duplicates', async (t) => {
-    const fn1 = (t) => {
-        t.ok(true);
-        t.end();
-    };
-    
-    const fn2 = (t) => {
-        t.notOk(false);
-        t.end();
-    };
-    
-    const message = 'hello world';
-    
-    const {
-        test,
-        stream,
-        run,
-    } = await createTest({
-        quiet: false,
-    });
-    
-    test(message, fn1, {
-        quiet: true,
-        checkDuplicates: true,
-        checkIfEnded: false,
-    });
-    
-    test(message, fn2, {
-        quiet: true,
-        checkDuplicates: true,
-        checkIfEnded: false,
-    });
-    
-    const FOUR_TESTS = 30;
-    
-    const [result] = await Promise.all([
-        pull(stream, FOUR_TESTS),
-        run(),
-    ]);
-    
-    t.match(result, 'not ok 2 Duplicate');
-    t.end();
-});
-
 test('supertape: runTests: duplicates: false', async (t) => {
     const fn1 = (t) => {
         t.ok(true);

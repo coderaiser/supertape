@@ -83,7 +83,6 @@
     "eslint-plugin-putout": "^29.0.2",
     "find-up": "^8.0.0",
     "madrun": "^12.1.0",
-    "mock-require": "^3.0.2",
     "montag": "^1.0.0",
     "nodemon": "^3.0.1",
     "pullout": "^5.0.1",
