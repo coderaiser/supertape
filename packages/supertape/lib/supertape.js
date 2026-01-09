@@ -8,13 +8,26 @@ const stub = require('@cloudcmd/stub');
 
 const once = require('once');
 const {maybeOnce} = require('./maybe-once');
-
 const options = require('../supertape.json');
-
 const {getAt, setValidations} = require('./validator');
 
 const {createEmitter: _createEmitter} = require('./emitter.mjs');
+
 const _createFormatter = require('./formatter').createFormatter;
+const createOnly = (test) => (message, fn, options) => {
+    return test(message, fn, {
+        ...options,
+        only: true,
+    });
+};
+
+const createSkip = (test) => (message, fn, options) => {
+    return test(message, fn, {
+        ...options,
+        skip: true,
+    });
+};
+
 const {env} = process;
 const {assign} = Object;
 const createEmitter = once(_createEmitter);
@@ -115,6 +128,8 @@ module.exports.createTest = async (testOptions = {}) => {
         ...test,
         extend: createExtend(fn),
         test: fn,
+        only: createOnly(fn),
+        skip: createSkip(fn),
         run: () => {
             emitter.emit('run');
         },
@@ -187,19 +202,8 @@ function test(message, fn, options = {}, overrides = {}) {
     return emitter;
 }
 
-test.skip = (message, fn, options) => {
-    return test(message, fn, {
-        ...options,
-        skip: true,
-    });
-};
-
-test.only = (message, fn, options) => {
-    return test(message, fn, {
-        ...options,
-        only: true,
-    });
-};
+test.skip = createSkip(test);
+test.only = createOnly(test);
 
 const getExtend = (test, extensions, type) => (message, fn, options) => {
     return test(message, fn, {
