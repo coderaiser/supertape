@@ -14,6 +14,14 @@
         },
         "*.js": {
             "nodejs/convert-esm-to-commonjs": "on"
+        },
+        "*.spec.*": {
+            "tape/remove-skip": ["on", {
+                "exclude": ["test.skip(__identifier, __identifier, __c)"]
+            }],
+            "tape/remove-only": ["on", {
+                "exclude": ["test.only(__identifier, __identifier)"]
+            }]
         }
     },
     "ignore": ["test"]

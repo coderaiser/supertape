@@ -3,7 +3,10 @@ import stub from '@cloudcmd/stub';
 import currify from 'currify';
 import {tryCatch} from 'try-catch';
 import test from './supertape.js';
-import {initOperators, operators} from './operators.mjs';
+import {
+    initOperators,
+    operators,
+} from './operators.mjs';
 
 const noop = () => {};
 const {stringify} = JSON;

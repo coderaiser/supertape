@@ -54,6 +54,45 @@ test('supertape: equal', async (t) => {
     t.end();
 });
 
+test('supertape: run: option', async (t) => {
+    const fn = (t) => {
+        t.equal(1, 1);
+        t.end();
+    };
+    
+    const message = 'hello: world';
+    
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    test(message, fn, {
+        run: true,
+    });
+    
+    const [result] = await Promise.all([
+        pull(stream),
+        run(),
+    ]);
+    
+    const expected = montag`
+        TAP version 13
+        # hello: world
+        ok 1 should equal
+        
+        1..1
+        # tests 1
+        # pass 1
+        
+        # ok
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('supertape: stack trace', async (t) => {
     const fn = (t) => {
         t.equal(1, 2);
@@ -118,7 +157,7 @@ test('supertape: stack strace: exception', async (t) => {
     const [, lineCurrent] = current.split(':');
     
     const result = Number(lineAt);
-    const expected = Number(lineCurrent) + 28;
+    const expected = Number(lineCurrent) - 11;
     
     t.equal(result, expected, 'line numbers should equal');
     t.end();
@@ -305,7 +344,7 @@ test('supertape: skip', async (t) => {
         run,
     } = await createTest();
     
-    test(message, fn, {
+    test.skip(message, fn, {
         quiet: true,
     });
     
@@ -349,7 +388,7 @@ test('supertape: only', async (t) => {
         run,
     } = await createTest();
     
-    test(message1, fn1);
+    test.only(message1, fn1);
     test(message2, fn2);
     
     const [result] = await Promise.all([
@@ -387,7 +426,6 @@ test('supertape: extensions', async (t) => {
     };
     
     const message = 'tape: ext';
-    
     const {
         test,
         stream,
@@ -432,7 +470,6 @@ test('supertape: extensions: extend', async (t) => {
     };
     
     const message = 'tape: extend';
-    
     const {
         test,
         stream,
@@ -477,7 +514,6 @@ test('supertape: extensions: extend: no return', async (t) => {
     };
     
     const message = 'extend: no return';
-    
     const {
         test,
         stream,
@@ -504,7 +540,27 @@ test('supertape: extensions: extend: no return', async (t) => {
 });
 
 test('supertape: extensions: extend: return function', async (t) => {
-    const {stream, run} = await createTest();
+    const extensions = {
+        transformCode: (t) => (a, b) => () => {
+            t.equal(a + 1, b, 'should transform code');
+        },
+    };
+    
+    const fn = (t) => {
+        t.transformCode(0, 1);
+        t.end();
+    };
+    
+    const message = 'return: fn';
+    const {
+        test,
+        stream,
+        run,
+    } = await createTest();
+    
+    const extendedTape = test.extend(extensions);
+    
+    extendedTape(message, fn);
     
     const expected = montag`
         TAP version 13
@@ -534,7 +590,6 @@ test('supertape: extensions: extend: async', async (t) => {
     };
     
     const message = 'extend: async';
-    
     const {
         test,
         stream,
@@ -579,7 +634,6 @@ test('supertape: extensions: extend: only', async (t) => {
     };
     
     const message = 'supertape: extend: only';
-    
     const {
         test,
         stream,
@@ -624,7 +678,6 @@ test('supertape: extensions: extend: skip', async (t) => {
     };
     
     const message = 'hello';
-    
     const {
         test,
         stream,
@@ -632,7 +685,6 @@ test('supertape: extensions: extend: skip', async (t) => {
     } = await createTest();
     
     const extendedTape = test.extend(extensions);
-    
     extendedTape.skip(message, fn);
     
     const [result] = await Promise.all([
@@ -668,7 +720,6 @@ test('supertape: extensions: extend: test', async (t) => {
     };
     
     const message = 'tape: extend';
-    
     const {
         test,
         stream,
@@ -713,7 +764,6 @@ test('supertape: extensions: extend: stub', async (t) => {
     };
     
     const message = 'tape: extend';
-    
     const {
         test,
         stream,
@@ -822,7 +872,6 @@ test('supertape: destructuring test: only', async (t) => {
     
     const message1 = 'world: only';
     const message2 = 'hello: only';
-    
     const {
         test,
         stream,
