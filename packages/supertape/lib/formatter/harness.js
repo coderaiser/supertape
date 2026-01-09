@@ -1,10 +1,8 @@
-'use strict';
-
-const {Transform: _Transform} = require('node:stream');
+import {Transform as _Transform} from 'node:stream';
 
 const {assign} = Object;
 
-module.exports.createHarness = (reporter, {Transform = _Transform} = {}) => {
+export const createHarness = (reporter, {Transform = _Transform} = {}) => {
     const prepared = prepare(reporter);
     const stream = new Transform({
         writableObjectMode: true,

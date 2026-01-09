@@ -12,9 +12,6 @@
             "tape/remove-only": "off",
             "tape/remove-skip": "off"
         },
-        "*.js": {
-            "nodejs/convert-esm-to-commonjs": "on"
-        },
         "*.spec.*": {
             "tape/remove-skip": ["on", {
                 "exclude": ["test.skip(__identifier, __identifier, __c)"]

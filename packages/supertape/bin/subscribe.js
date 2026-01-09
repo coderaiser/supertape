@@ -1,6 +1,6 @@
 import {keypress} from '@putout/cli-keypress';
 import {parse} from 'flatted';
-import harnessCreator from '../lib/formatter/harness.js';
+import * as harnessCreator from '../lib/formatter/harness.js';
 import {
     SPLITTER,
     CONSOLE_LOG,

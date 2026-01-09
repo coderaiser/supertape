@@ -1,5 +1,5 @@
 import {test, stub} from 'supertape';
-import {consoleLog, consoleError} from './subscribe.mjs';
+import {consoleLog, consoleError} from './subscribe.js';
 
 test('supertype: subscribe: consoleLog', (t) => {
     const log = stub();

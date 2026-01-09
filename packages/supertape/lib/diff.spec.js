@@ -1,6 +1,6 @@
 import {stripVTControlCharacters} from 'node:util';
 import test from './supertape.js';
-import diff from './diff.mjs';
+import diff from './diff.js';
 
 const noop = () => {};
 

@@ -1,16 +1,14 @@
-'use strict';
+import once from 'once';
 
-const once = require('once');
-
-module.exports.enableOnce = () => {
+export const enableOnce = () => {
     globalThis.onceDisabled = false;
 };
 
-module.exports.disableOnce = () => {
+export const disableOnce = () => {
     globalThis.onceDisabled = true;
 };
 
-module.exports.maybeOnce = (fn) => {
+export const maybeOnce = (fn) => {
     const onced = once(fn);
     
     return (...a) => {

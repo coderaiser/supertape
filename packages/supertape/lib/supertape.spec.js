@@ -1,13 +1,10 @@
-'use strict';
-
-const montag = require('montag');
-const pullout = require('pullout');
-
-const {
+import montag from 'montag';
+import pullout from 'pullout';
+import {
     test,
     stub,
     createTest,
-} = require('./supertape.js');
+} from './supertape.js';
 
 const pull = async (stream, end = -2) => {
     const output = await pullout(await stream);
@@ -1086,3 +1083,4 @@ test('supertape: createTest: formatter', async (t) => {
     t.equal(result, expected);
     t.end();
 });
+

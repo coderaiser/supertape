@@ -1,12 +1,11 @@
-'use strict';
+import process from 'node:process';
+import yargsParser from 'yargs-parser';
 
-const process = require('node:process');
-const yargsParser = require('yargs-parser');
 const {isArray} = Array;
 const maybeFirst = (a) => isArray(a) ? a.pop() : a;
 const maybeArray = (a) => isArray(a) ? a : [a];
 
-const getYargsOptions = () => {
+export const getYargsOptions = () => {
     const {
         SUPERTAPE_CHECK_DUPLICATES = '1',
         SUPERTAPE_CHECK_SCOPES = '1',
@@ -57,8 +56,6 @@ const getYargsOptions = () => {
     return yargsOptions;
 };
 
-module.exports.getYargsOptions = getYargsOptions;
-
-module.exports.parseArgs = (argv) => {
+export const parseArgs = (argv) => {
     return yargsParser(argv, getYargsOptions());
 };

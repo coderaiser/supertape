@@ -1,10 +1,7 @@
-'use strict';
-
-const {tryCatch} = require('try-catch');
-const montag = require('montag');
-
-const test = require('./supertape');
-const {parseAt} = require('./format');
+import {tryCatch} from 'try-catch';
+import montag from 'montag';
+import test from './supertape.js';
+import {parseAt} from './format.js';
 
 test('supertape: format', (t) => {
     const stack = `Error: ENOENT: no such file or directory, open '/abc'`;
@@ -101,3 +98,4 @@ test('supertape: format: parseAt: looks like empty', (t) => {
     t.match(result, expected);
     t.end();
 });
+

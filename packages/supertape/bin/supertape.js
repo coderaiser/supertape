@@ -1,8 +1,8 @@
 import process from 'node:process';
-import {createCommunication} from './communication.mjs';
-import {subscribe} from './subscribe.mjs';
-import {createIsStop} from './is-stop.mjs';
-import {createFormatter} from './formatter.mjs';
+import {createCommunication} from './communication.js';
+import {subscribe} from './subscribe.js';
+import {createIsStop} from './is-stop.js';
+import {createFormatter} from './formatter.js';
 import {parseArgs} from '../lib/cli/parse-args.js';
 import cli from '../lib/cli.js';
 import {

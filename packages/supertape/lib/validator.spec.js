@@ -1,13 +1,10 @@
-'use strict';
-
-const {tryCatch} = require('try-catch');
-const {stub, test} = require('..');
-
-const {
+import {tryCatch} from 'try-catch';
+import {stub, test} from './supertape.js';
+import {
     getAt,
     createValidator,
     setValidations,
-} = require('./validator');
+} from './validator.js';
 
 test('supertape: validator: getAt', (t) => {
     const StackTracey = stub().returns({

@@ -3,7 +3,7 @@
 import process from 'node:process';
 import {Worker} from 'node:worker_threads';
 import {parseArgs} from '../lib/cli/parse-args.js';
-import {subscribe} from './subscribe.mjs';
+import {subscribe} from './subscribe.js';
 
 const {
     cwd,
@@ -15,11 +15,11 @@ const args = parseArgs(process.argv.slice(2));
 const write = stdout.write.bind(stdout);
 
 if (!args.worker) {
-    await import('./supertape.mjs');
+    await import('./supertape.js');
     exit();
 }
 
-const slave = new URL('./supertape.mjs', import.meta.url);
+const slave = new URL('./supertape.js', import.meta.url);
 
 const worker = new Worker(slave, {
     workerData: process.argv,

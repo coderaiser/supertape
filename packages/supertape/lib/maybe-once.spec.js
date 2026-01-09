@@ -1,7 +1,5 @@
-'use strict';
-
-const {test} = require('supertape');
-const {maybeOnce} = require('./maybe-once.js');
+import {test} from 'supertape';
+import {maybeOnce} from './maybe-once.js';
 
 test('supertape: maybe-once', (t) => {
     let i = 0;
@@ -32,3 +30,4 @@ test('supertape: maybe-once: once disabled', (t) => {
     t.equal(result, 3);
     t.end();
 });
+

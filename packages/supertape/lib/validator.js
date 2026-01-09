@@ -1,7 +1,6 @@
-'use strict';
+import once from 'once';
+import _StackTracey from 'stacktracey';
 
-const once = require('once');
-const _StackTracey = require('stacktracey');
 const getDuplicatesMessage = ([, a]) => a;
 
 const getMessage = ({message, at, validations}) => [
@@ -39,7 +38,7 @@ const findByMessage = (msg, tests) => {
     return getMessages(tests).filter(compareMessage(msg));
 };
 
-module.exports.setValidations = ({checkDuplicates, checkScopes, checkAssertionsCount}) => {
+export const setValidations = ({checkDuplicates, checkScopes, checkAssertionsCount}) => {
     assign(validations, {
         checkDuplicates,
         checkScopes,
@@ -49,7 +48,7 @@ module.exports.setValidations = ({checkDuplicates, checkScopes, checkAssertionsC
 
 const isValidationEnabled = (a) => values(a).filter(Boolean).length;
 
-module.exports.createValidator = ({tests}) => (msg, options) => {
+export const createValidator = ({tests}) => (msg, options) => {
     if (!isValidationEnabled(validations))
         return [];
     
@@ -73,7 +72,7 @@ module.exports.createValidator = ({tests}) => (msg, options) => {
 
 const CALLS_FROM_TEST = 3;
 
-module.exports.getAt = (overrides = {}) => {
+export const getAt = (overrides = {}) => {
     const {
         StackTracey = _StackTracey,
     } = overrides;

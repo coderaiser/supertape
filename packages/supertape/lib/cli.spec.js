@@ -1,32 +1,33 @@
-'use strict';
-
-const process = require('node:process');
-const {join, dirname} = require('node:path');
-
-const {Transform} = require('node:stream');
-const {EventEmitter} = require('node:events');
-const {readFile} = require('node:fs/promises');
-
-const stub = require('@cloudcmd/stub');
-
-const {tryToCatch} = require('try-to-catch');
-const pullout = require('pullout');
-const wait = require('@iocmd/wait');
-
-const test = require('./supertape.js');
-const {createStream: _createStream} = require('..');
-const cli = require('./cli');
-
-const {
+import {fileURLToPath} from 'node:url';
+import process from 'node:process';
+import {join, dirname} from 'node:path';
+import {Transform} from 'node:stream';
+import {EventEmitter} from 'node:events';
+import {readFile} from 'node:fs/promises';
+import stub from '@cloudcmd/stub';
+import {tryToCatch} from 'try-to-catch';
+import pullout from 'pullout';
+import wait from '@iocmd/wait';
+import test, {
+    createTest,
+    createStream as _createStream,
+} from './supertape.js';
+import cli, {_filesCount} from './cli.js';
+import {
     OK,
     WAS_STOP,
     SKIPPED,
     UNHANDLED,
-} = require('./exit-codes');
+} from './exit-codes.js';
+import {enableOnce, disableOnce} from './maybe-once.js';
+import info from '../package.json' with {
+    type: 'json',
+};
 
-const {enableOnce, disableOnce} = require('./maybe-once');
-const {createTest} = require('./supertape');
+const {version} = info;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const {assign} = Object;
 
 test('supertape: cli: -r', async (t) => {
@@ -52,7 +53,6 @@ test('supertape: cli: -r', async (t) => {
 });
 
 test('supertape: cli: -v', async (t) => {
-    const {version} = require('../package');
     const argv = ['-v'];
     const stdout = createStream();
     
@@ -101,7 +101,7 @@ test('supertape: bin: cli: glob: a couple', async (t) => {
 });
 
 test('supertape: bin: cli: run', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [
         name,
         name,
@@ -128,7 +128,7 @@ test('supertape: bin: cli: run', async (t) => {
 });
 
 test('supertape: bin: cli: run: not test', async (t) => {
-    const name = join(__dirname, 'fixture/not-test.js');
+    const name = new URL('fixture/not-test.js', import.meta.url).pathname;
     const argv = [name];
     
     const supertape = stub();
@@ -142,7 +142,7 @@ test('supertape: bin: cli: run: not test', async (t) => {
 });
 
 test('supertape: bin: cli: files count', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [
         name,
         name,
@@ -163,7 +163,7 @@ test('supertape: bin: cli: files count', async (t) => {
     
     const emit = emitter.emit.bind(emitter);
     
-    const [[, cli]] = await Promise.all([
+    await Promise.all([
         runCli({
             argv,
             supertape,
@@ -173,7 +173,7 @@ test('supertape: bin: cli: files count', async (t) => {
         }),
     ]);
     
-    const result = cli._filesCount();
+    const result = _filesCount();
     const expected = 1;
     
     t.equal(result, expected, 'should process 1 file');
@@ -181,7 +181,7 @@ test('supertape: bin: cli: files count', async (t) => {
 });
 
 test('supertape: cli: success', async (t) => {
-    const name = join(__dirname, 'fixture/cli-success.js');
+    const name = new URL('fixture/cli-success.js', import.meta.url).pathname;
     const argv = [
         name,
         name,
@@ -243,7 +243,7 @@ test('supertape: bin: cli: node_modules', async (t) => {
     const emit = emitter.emit.bind(emitter);
     
     disableOnce();
-    const [[, cli]] = await Promise.all([
+    await Promise.all([
         runCli({
             argv,
             supertape,
@@ -255,7 +255,7 @@ test('supertape: bin: cli: node_modules', async (t) => {
     
     enableOnce();
     
-    const result = cli._filesCount();
+    const result = _filesCount();
     const expected = 0;
     
     t.equal(result, expected, 'should not process node_modules');
@@ -263,7 +263,7 @@ test('supertape: bin: cli: node_modules', async (t) => {
 });
 
 test('supertape: cli: fail', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [
         name,
         name,
@@ -301,7 +301,7 @@ test('supertape: cli: fail', async (t) => {
 });
 
 test('supertape: cli: exit: skipped', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [
         name,
         name,
@@ -345,7 +345,7 @@ test('supertape: cli: exit: skipped', async (t) => {
 });
 
 test('supertape: cli: exit: skipped: disabled', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [
         name,
         name,
@@ -419,7 +419,7 @@ test('supertape: cli: -h', async (t) => {
 });
 
 test('supertape: bin: cli: --check-duplicates', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [name, '-d', '--dry-run'];
     
     const init = stub();
@@ -460,7 +460,7 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
 });
 
 test('supertape: bin: cli: --check-assertions-count', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [name, '-a', '--dry-run'];
     
     const init = stub();
@@ -501,7 +501,7 @@ test('supertape: bin: cli: --check-assertions-count', async (t) => {
 });
 
 test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [name, '-a', '--dry-run'];
     
     const init = stub();
@@ -544,7 +544,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
 });
 
 test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [name, '--dry-run'];
     
     const init = stub();
@@ -588,7 +588,7 @@ test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
 });
 
 test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, enable env', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [name, '--no-check-duplicates', '--dry-run'];
     
     const init = stub();
@@ -634,7 +634,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
 });
 
 test('supertape: bin: cli: check-duplicates: -d', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [name, '-d', '--dry-run'];
     
     const test = stub();
@@ -674,7 +674,7 @@ test('supertape: bin: cli: check-duplicates: -d', async (t) => {
 });
 
 test('supertape: bin: cli: format: apply last', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [
         name,
         '-f',
@@ -721,7 +721,7 @@ test('supertape: bin: cli: format: apply last', async (t) => {
 });
 
 test('supertape: bin: cli: invalid file', async (t) => {
-    const name = join(__dirname, 'fixture/invalid.js');
+    const name = new URL('fixture/invalid.js', import.meta.url).pathname;
     const argv = [name, '--dry-run'];
     const exit = stub();
     const supertape = stub();
@@ -739,7 +739,7 @@ test('supertape: bin: cli: invalid file', async (t) => {
 });
 
 test('supertape: cli: isStop', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [
         name,
         '-f',
@@ -788,7 +788,7 @@ test('supertape: cli: isStop', async (t) => {
 });
 
 test('supertape: cli: validation', async (t) => {
-    const name = join(__dirname, 'fixture/cli.js');
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
     const argv = [
         name,
         '--forma',

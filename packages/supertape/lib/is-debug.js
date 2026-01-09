@@ -1,6 +1,5 @@
-'use strict';
+import process from 'node:process';
 
-const process = require('node:process');
 const argv = process.execArgv.join();
 
-module.exports = () => argv.includes('inspect') || argv.includes('debug');
+export default () => argv.includes('inspect') || argv.includes('debug');

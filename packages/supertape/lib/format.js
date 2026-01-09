@@ -1,11 +1,9 @@
-'use strict';
-
-const addSpaces = (a) => `      ${a}`;
+export const addSpaces = (a) => `      ${a}`;
 
 const REASON_USER = 3;
 const REASON_EXCEPTION = 1;
 
-module.exports.parseAt = (stack, {reason}) => {
+export const parseAt = (stack, {reason}) => {
     const lines = cutMockImport(stack).split('\n');
     
     if (lines.length === 1)
@@ -22,8 +20,7 @@ module.exports.parseAt = (stack, {reason}) => {
     return line.trim();
 };
 
-module.exports.addSpaces = addSpaces;
-module.exports.formatOutput = (str) => {
+export const formatOutput = (str) => {
     return str
         .split('\n')
         .map(addSpaces)

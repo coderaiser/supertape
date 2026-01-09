@@ -1,19 +1,16 @@
-'use strict';
+import {EventEmitter} from 'node:events';
+import process from 'node:process';
+import {PassThrough} from 'node:stream';
+import stub from '@cloudcmd/stub';
+import once from 'once';
+import {maybeOnce} from './maybe-once.js';
+import options from '../supertape.json' with {
+    type: 'json',
+};
+import {getAt, setValidations} from './validator.js';
+import {createEmitter as _createEmitter} from './emitter.js';
+import {createFormatter as _createFormatter} from './formatter/index.js';
 
-const {EventEmitter} = require('node:events');
-const process = require('node:process');
-const {PassThrough} = require('node:stream');
-
-const stub = require('@cloudcmd/stub');
-
-const once = require('once');
-const {maybeOnce} = require('./maybe-once');
-const options = require('../supertape.json');
-const {getAt, setValidations} = require('./validator');
-
-const {createEmitter: _createEmitter} = require('./emitter.mjs');
-
-const _createFormatter = require('./formatter').createFormatter;
 const createOnly = (test) => (message, fn, options) => {
     return test(message, fn, {
         ...options,
@@ -77,25 +74,24 @@ const getDefaultOptions = () => ({
     timeout: env.SUPERTAPE_TIMEOUT || 3000,
 });
 
-module.exports = test;
+export default test;
 
 const initedOptions = {
     format: 'tap',
 };
 
-module.exports.init = (options) => {
+export const init = (options) => {
     assign(initedOptions, options);
 };
 
-const createStream = async () => {
+export const createStream = async () => {
     const {format} = initedOptions;
     const {harness} = await createFormatter(format);
     
     return harness;
 };
 
-module.exports.createStream = createStream;
-module.exports.createTest = async (testOptions = {}) => {
+export const createTest = async (testOptions = {}) => {
     const {
         format = 'tap',
         formatter,
@@ -217,6 +213,7 @@ test.stub = stub;
 test.test = test;
 
 test.extend = createExtend(test);
+export const {extend} = test;
 
 const loop = maybeOnce(({emitter, tests}) => {
     let previousCount = 0;
@@ -238,7 +235,7 @@ const loop = maybeOnce(({emitter, tests}) => {
     })();
 });
 
-module.exports.run = ({fake} = {}) => {
+export const run = ({fake} = {}) => {
     if (!mainEmitter || fake)
         return fakeEmitter();
     
@@ -258,3 +255,15 @@ function fakeEmitter() {
     
     return emitter;
 }
+
+assign(test, {
+    init,
+    createStream,
+    stub,
+    run,
+});
+
+export {
+    test,
+    stub,
+};

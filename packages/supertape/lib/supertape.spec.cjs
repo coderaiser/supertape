@@ -1,9 +1,12 @@
-import {once} from 'node:events';
-import test, {
+'use strict';
+
+const {once} = require('node:events');
+const test = require('./supertape.cjs');
+const {
     extend,
     stub,
     run,
-} from './supertape.mjs';
+} = test;
 
 const extendedTest = extend({
     superOk: (operator) => (a) => {

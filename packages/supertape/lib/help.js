@@ -1,7 +1,8 @@
-'use strict';
+import bin from '../help.json' with {
+    type: 'json',
+};
 
-module.exports.help = () => {
-    const bin = require('../help.json');
+export const help = () => {
     const usage = 'Usage: supertape [options] [path]';
     const result = [usage, 'Options'];
     
@@ -11,3 +12,4 @@ module.exports.help = () => {
     
     return result.join('\n') + '\n';
 };
+

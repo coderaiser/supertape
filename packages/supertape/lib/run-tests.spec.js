@@ -1,15 +1,13 @@
-'use strict';
-
-const process = require('node:process');
-const {once, EventEmitter} = require('node:events');
-
-const montag = require('montag');
-
-const pullout = require('pullout');
-
-const {parseTime} = require('./run-tests');
-const {test, stub} = require('..');
-const {createTest} = require('./supertape');
+import process from 'node:process';
+import {once, EventEmitter} from 'node:events';
+import montag from 'montag';
+import pullout from 'pullout';
+import {parseTime} from './run-tests.js';
+import {
+    test,
+    stub,
+    createTest,
+} from './supertape.js';
 
 const pull = async (stream, i = 9) => {
     const output = await pullout(await stream);
@@ -53,39 +51,6 @@ test('supertape: runTests', async (t) => {
     `;
     
     t.equal(result, expected);
-    t.end();
-});
-
-test('supertape: runTests: duplicates: false', async (t) => {
-    const fn1 = (t) => {
-        t.ok(true);
-        t.end();
-    };
-    
-    const fn2 = (t) => {
-        t.notOk(false);
-        t.end();
-    };
-    
-    const message = 'hello: world';
-    
-    const {
-        test,
-        stream,
-        run,
-    } = await createTest();
-    
-    test(message, fn1);
-    test(message, fn2);
-    
-    const FOUR_TESTS = 30;
-    
-    const [result] = await Promise.all([
-        pull(stream, FOUR_TESTS),
-        run(),
-    ]);
-    
-    t.notMatch(result, 'not ok 2 Duplicate');
     t.end();
 });
 

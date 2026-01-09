@@ -3,7 +3,7 @@ import {run} from 'madrun';
 const dirs = ['packages'];
 
 export default {
-    'test': () => `tape --check-scopes --check-assertions-count '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/{bin,lib}/**/*.spec.{js,mjs}'`,
+    'test': () => `tape --check-scopes --check-assertions-count '${dirs}/*/test/*.{js,cjs}' '${dirs}/*/{bin,lib}/**/*.spec.*'`,
     'test:tap': () => `tape '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
     'test:fail': async () => `"${await run('test')}" -f fail`,
     'test:slow': () => 'lerna run test',
@@ -19,7 +19,7 @@ export default {
     'fresh:lint': () => run('lint:fresh'),
     'fresh': () => run(['lint:memory', 'coverage']),
     'lint': () => `putout . --rulesdir rules`,
-    'prelint': () => 'redlint scan',
+    'prelint': () => 'redlint fix',
     'lint:mark': () => 'putout **/*.md',
     'memory': () => run('lint:fresh', '-f memory'),
     'fix:lint': () => run('lint', '--fix'),

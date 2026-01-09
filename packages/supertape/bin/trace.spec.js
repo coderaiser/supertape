@@ -1,6 +1,6 @@
 import {test, stub} from 'supertape';
 import {tryCatch} from 'try-catch';
-import {createTrace} from './trace.mjs';
+import {createTrace} from './trace.js';
 
 test('supertape: bin: trace: parentPort', (t) => {
     const data = {};

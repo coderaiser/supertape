@@ -1,37 +1,32 @@
-'use strict';
-
-const {resolve: resolvePath} = require('node:path');
-const {once} = require('node:events');
-const {pathToFileURL} = require('node:url');
-
-const {env} = require('node:process');
-const fullstore = require('fullstore');
-const {tryToCatch} = require('try-to-catch');
-const {keypress: _keypress} = require('@putout/cli-keypress');
-
-const {sync: _globSync} = require('glob');
-
-const {
+import {pathToFileURL} from 'node:url';
+import {resolve as resolvePath} from 'node:path';
+import {once} from 'node:events';
+import {env} from 'node:process';
+import {createRequire} from 'node:module';
+import fullstore from 'fullstore';
+import {tryToCatch} from 'try-to-catch';
+import {keypress as _keypress} from '@putout/cli-keypress';
+import {sync as _globSync} from 'glob';
+import {
     parseArgs,
     getYargsOptions,
-} = require('./cli/parse-args');
-
-const _supertape = require('..');
-
-const {
+} from './cli/parse-args.js';
+import _supertape from './supertape.js';
+import {
     OK,
     FAIL,
     WAS_STOP,
     UNHANDLED,
     INVALID_OPTION,
     SKIPPED,
-} = require('./exit-codes');
+} from './exit-codes.js';
 
+const require = createRequire(import.meta.url);
 const filesCount = fullstore(0);
 const removeDuplicates = (a) => Array.from(new Set(a));
 const isExclude = (a) => !a.includes('node_modules');
 
-module.exports = async (overrides = {}) => {
+export default async (overrides = {}) => {
     const {
         argv,
         cwd,
@@ -185,4 +180,4 @@ async function _cli(overrides) {
     return result;
 }
 
-module.exports._filesCount = filesCount;
+export const _filesCount = filesCount;

@@ -1,11 +1,9 @@
-'use strict';
+import {once} from 'node:events';
+import {Transform} from 'node:stream';
+import {stub} from 'supertape';
+import test from '../../lib/supertape.js';
+import {createHarness} from './harness.js';
 
-const {once} = require('node:events');
-const {Transform} = require('node:stream');
-const {stub} = require('supertape');
-
-const test = require('../..');
-const {createHarness} = require('./harness');
 const {keys} = Object;
 
 test('supertape: harness: proceed condition', (t) => {
@@ -85,3 +83,4 @@ test('supertape: harness: no readableObjectMode, since it breaks console.log', (
     t.deepEqual(result, expected);
     t.end();
 });
+

@@ -4,23 +4,23 @@
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "📼 Supertape simplest high speed test runner with superpowers",
   "homepage": "http://github.com/coderaiser/supertape",
+  "type": "module",
   "main": "./lib/supertape.js",
   "exports": {
     ".": {
       "node": {
-        "require": "./lib/supertape.js",
-        "import": "./lib/supertape.mjs"
+        "require": "./lib/supertape.cjs",
+        "import": "./lib/supertape.js"
       },
       "default": "./lib/supertape.js"
     },
-    "./bin/supertape": "./bin/supertape.mjs",
+    "./bin/supertape": "./bin/supertape.js",
     "./cli": "./lib/cli.js",
     "./exit-codes": "./lib/exit-codes.js"
   },
-  "type": "commonjs",
   "bin": {
-    "tape": "bin/tracer.mjs",
-    "supertape": "bin/tracer.mjs"
+    "tape": "bin/tracer.js",
+    "supertape": "bin/tracer.js"
   },
   "repository": {
     "type": "git",

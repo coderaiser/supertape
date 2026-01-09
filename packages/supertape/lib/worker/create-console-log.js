@@ -1,16 +1,12 @@
-'use strict';
+import {stringify} from 'flatted';
 
-const {stringify} = require('flatted');
 const isError = (a) => a instanceof Error;
-const SPLITTER = '>[supertape-splitter]<';
-const CONSOLE_LOG = 'console:log';
-const CONSOLE_ERROR = 'console:error';
 
-module.exports.CONSOLE_ERROR = CONSOLE_ERROR;
-module.exports.CONSOLE_LOG = CONSOLE_LOG;
-module.exports.SPLITTER = SPLITTER;
+export const SPLITTER = '>[supertape-splitter]<';
+export const CONSOLE_LOG = 'console:log';
+export const CONSOLE_ERROR = 'console:error';
 
-module.exports.overrideConsoleLog = (parentPort, {console = globalThis.console} = {}) => {
+export const overrideConsoleLog = (parentPort, {console = globalThis.console} = {}) => {
     const {log} = console;
     
     console.log = createConsoleMethod(CONSOLE_LOG, parentPort);
@@ -21,7 +17,7 @@ module.exports.overrideConsoleLog = (parentPort, {console = globalThis.console} 
     };
 };
 
-module.exports.overrideConsoleError = (parentPort, {console = globalThis.console} = {}) => {
+export const overrideConsoleError = (parentPort, {console = globalThis.console} = {}) => {
     const {error} = console;
     
     console.error = createConsoleMethod(CONSOLE_ERROR, parentPort);
@@ -51,4 +47,4 @@ const createConsoleMethod = (type, parentPort) => (...messages) => {
     ]);
 };
 
-module.exports._createConsoleLog = createConsoleMethod;
+export const _createConsoleLog = createConsoleMethod;

@@ -1,12 +1,10 @@
-'use strict';
-
-const {EventEmitter} = require('node:events');
-const {createHarness} = require('./harness');
+import {EventEmitter} from 'node:events';
+import {createHarness} from './harness.js';
 
 const resolveFormatter = async (name) => await import(`@supertape/formatter-${name}`);
 const isString = (a) => typeof a === 'string';
 
-module.exports.createFormatter = async (name) => {
+export const createFormatter = async (name) => {
     const formatter = new EventEmitter();
     const harness = createHarness(!isString(name) ? name : await resolveFormatter(name));
     

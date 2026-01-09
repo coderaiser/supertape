@@ -1,5 +1,5 @@
 import {isDeepStrictEqual} from 'node:util';
-import diff from './diff.mjs';
+import diff from './diff.js';
 import {formatOutput, parseAt} from './format.js';
 
 const {entries} = Object;

@@ -1,5 +1,5 @@
-import {createFormatter} from './formatter.mjs';
-import {test, stub} from '../lib/supertape.mjs';
+import {createFormatter} from './formatter.js';
+import {test, stub} from '../lib/supertape.js';
 
 test('supertape: bin: formatter: success', (t) => {
     const postMessage = stub();

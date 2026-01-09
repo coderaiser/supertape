@@ -1,19 +1,17 @@
-'use strict';
-
-const fullstore = require('fullstore');
-const wraptile = require('wraptile');
-const {tryToCatch} = require('try-to-catch');
-const _isDebug = require('./is-debug');
-
-const {createValidator} = require('./validator');
+import fullstore from 'fullstore';
+import wraptile from 'wraptile';
+import {tryToCatch} from 'try-to-catch';
+import _isDebug from './is-debug.js';
+import {createValidator} from './validator.js';
 
 const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
 const isSkip = ({skip}) => skip;
 const notSkip = ({skip}) => !skip;
-const parseTime = (a) => a === 'undefined' ? 1 : a;
 
-const getInitOperators = async () => await import('./operators.mjs');
+export const parseTime = (a) => a === 'undefined' ? 1 : a;
+
+const getInitOperators = async () => await import('./operators.js');
 
 const DEBUG_TIME = 3000 * 1000;
 
@@ -31,7 +29,7 @@ const doTimeout = (time, value, {isDebug}) => {
     return [promise, stop];
 };
 
-module.exports = async (tests, overrides = {}) => {
+export default async (tests, overrides = {}) => {
     const {
         formatter,
         operators,
@@ -214,5 +212,3 @@ async function runOneTest(options) {
         failed: failed(),
     });
 }
-
-module.exports.parseTime = parseTime;
