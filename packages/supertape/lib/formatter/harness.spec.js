@@ -83,4 +83,3 @@ test('supertape: harness: no readableObjectMode, since it breaks console.log', (
     t.deepEqual(result, expected);
     t.end();
 });
-

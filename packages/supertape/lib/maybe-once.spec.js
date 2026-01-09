@@ -30,4 +30,3 @@ test('supertape: maybe-once: once disabled', (t) => {
     t.equal(result, 3);
     t.end();
 });
-

@@ -227,4 +227,3 @@ test('supertape: worker: create-console-log: postMessage: error', (t) => {
     t.calledWith(postMessage, [arg]);
     t.end();
 });
-

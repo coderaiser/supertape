@@ -1083,4 +1083,3 @@ test('supertape: createTest: formatter', async (t) => {
     t.equal(result, expected);
     t.end();
 });
-

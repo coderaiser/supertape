@@ -12,4 +12,3 @@ export const help = () => {
     
     return result.join('\n') + '\n';
 };
-

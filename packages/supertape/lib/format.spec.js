@@ -98,4 +98,3 @@ test('supertape: format: parseAt: looks like empty', (t) => {
     t.match(result, expected);
     t.end();
 });
-
