@@ -225,7 +225,7 @@ Generate a new test that will be skipped over.
 Extend base assertions with more:
 
 ```js
-const {extend} = require('supertape');
+import {extend} from 'supertape';
 const test = extend({
     transform: (operator) => (a, b, message = 'should transform') => {
         const {is, output} = operator.equal(a + 1, b - 1);
@@ -246,7 +246,7 @@ test('assertion', (t) => {
 ## Example
 
 ```js
-const test = require('supertape');
+import {test} from 'supertape';
 
 test('lib: arguments', async (t) => {
     throw Error('hello');
