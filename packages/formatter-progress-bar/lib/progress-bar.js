@@ -2,7 +2,7 @@ import {Writable} from 'node:stream';
 import process from 'node:process';
 import cliProgress from 'cli-progress';
 import chalk from 'chalk';
-import fullstore from 'fullstore';
+import {fullstore} from 'fullstore';
 import {isCI} from 'ci-info';
 
 globalThis._isCI = isCI;

@@ -1,4 +1,4 @@
-import fullstore from 'fullstore';
+import {fullstore} from 'fullstore';
 import wraptile from 'wraptile';
 import {tryToCatch} from 'try-to-catch';
 import _isDebug from './is-debug.js';

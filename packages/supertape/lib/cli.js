@@ -3,7 +3,7 @@ import {resolve as resolvePath} from 'node:path';
 import {once} from 'node:events';
 import {env} from 'node:process';
 import {createRequire} from 'node:module';
-import fullstore from 'fullstore';
+import {fullstore} from 'fullstore';
 import {tryToCatch} from 'try-to-catch';
 import {keypress as _keypress} from '@putout/cli-keypress';
 import {sync as _globSync} from 'glob';

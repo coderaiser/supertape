@@ -6,7 +6,7 @@ export {
     end,
 } from '@supertape/formatter-tap';
 
-import fullstore from 'fullstore';
+import {fullstore} from 'fullstore';
 
 const testStore = fullstore();
 

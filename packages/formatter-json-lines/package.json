@@ -23,7 +23,7 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
-    "fullstore": "^3.0.0"
+    "fullstore": "^4.0.0"
   },
   "keywords": [
     "formatter",
