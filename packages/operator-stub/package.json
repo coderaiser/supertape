@@ -26,7 +26,7 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
-    "@cloudcmd/stub": "^4.0.0"
+    "@cloudcmd/stub": "^5.0.0"
   },
   "keywords": [
     "operator",
