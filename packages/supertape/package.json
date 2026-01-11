@@ -45,7 +45,7 @@
     "@supertape/engine-loader": "^4.0.0",
     "@supertape/formatter-fail": "^5.0.0",
     "@supertape/formatter-json-lines": "^2.0.0",
-    "@supertape/formatter-progress-bar": "^7.0.0",
+    "@supertape/formatter-progress-bar": "^8.0.0",
     "@supertape/formatter-short": "^3.0.0",
     "@supertape/formatter-tap": "^4.0.0",
     "@supertape/formatter-time": "^3.0.0",
