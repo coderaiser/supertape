@@ -1,3 +1,8 @@
+2026.01.11, v12.0.11
+
+feature:
+- 9ad83d4 supertape: @supertape/formatter-json-lines v3.0.0
+
 2026.01.11, v12.0.10
 
 feature:
