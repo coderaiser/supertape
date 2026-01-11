@@ -4,7 +4,8 @@
     "exclude": [
         ".*",
         "{bin,lib}/**/{fixture,*.spec.{js,mjs}}",
-        "**/*.config.*"
+        "**/*.config.*",
+        "**/*.ts"
     ],
     "branches": 100,
     "lines": 100,

@@ -1,6 +1,7 @@
 import {stub, Stub} from '@cloudcmd/stub';
 import {test, Test} from 'supertape';
 
+// THROWS Type 'Stub' is not assignable to type 'string'.
 const a: string = stub();
 
 const fn: Stub = stub();
