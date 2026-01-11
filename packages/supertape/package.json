@@ -39,7 +39,7 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
-    "@cloudcmd/stub": "^4.0.0",
+    "@cloudcmd/stub": "^5.0.0",
     "@putout/cli-keypress": "^4.0.0",
     "@putout/cli-validate-args": "^2.0.0",
     "@supertape/engine-loader": "^4.0.0",
