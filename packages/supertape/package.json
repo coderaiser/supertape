@@ -48,7 +48,7 @@
     "@supertape/formatter-progress-bar": "^7.0.0",
     "@supertape/formatter-short": "^3.0.0",
     "@supertape/formatter-tap": "^4.0.0",
-    "@supertape/formatter-time": "^2.0.0",
+    "@supertape/formatter-time": "^3.0.0",
     "@supertape/operator-stub": "^3.0.0",
     "cli-progress": "^3.8.2",
     "flatted": "^3.3.1",
