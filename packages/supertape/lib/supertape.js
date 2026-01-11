@@ -1,7 +1,7 @@
 import {EventEmitter} from 'node:events';
 import process from 'node:process';
 import {PassThrough} from 'node:stream';
-import stub from '@cloudcmd/stub';
+import {stub} from '@cloudcmd/stub';
 import once from 'once';
 import {maybeOnce} from './maybe-once.js';
 import options from '../supertape.json' with {

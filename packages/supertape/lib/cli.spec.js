@@ -4,7 +4,7 @@ import {join, dirname} from 'node:path';
 import {Transform} from 'node:stream';
 import {EventEmitter} from 'node:events';
 import {readFile} from 'node:fs/promises';
-import stub from '@cloudcmd/stub';
+import {stub} from '@cloudcmd/stub';
 import {tryToCatch} from 'try-to-catch';
 import pullout from 'pullout';
 import wait from '@iocmd/wait';
