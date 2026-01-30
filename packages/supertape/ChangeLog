@@ -1,3 +1,10 @@
+2026.01.30, v12.1.0
+
+feature:
+- f2571a1 supertape: loader: css: add
+- 51beb80 supertape: eslint-plugin-putout v30.0.1
+- 151528e supertape: @putout/eslint-flat v4.0.0
+
 2026.01.11, v12.0.12
 
 feature:
