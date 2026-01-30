@@ -9,6 +9,9 @@ export const match = {
     '*.spec.*': {
         'node/no-extraneous-import': 'off',
     },
+    '**/register.js': {
+        'n/no-unsupported-features/node-builtins': 'off',
+    },
 };
 
 export default defineConfig([safeAlign, matchToFlat(match)]);

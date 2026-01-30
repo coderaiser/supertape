@@ -5,6 +5,9 @@
         }]
     },
     "match": {
+        "register.spec.js": {
+            "esm/remove-empty-import": "off"
+        },
         "*.md": {
             "remove-unreachable-code": "off"
         },

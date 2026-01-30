@@ -28,6 +28,12 @@
   ```js
   t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
   ```
+  
+- ability to test files that imports css with:
+
+```sh
+NODE_OPTIONS="--import supertape/css" tape '{bin,lib}/**/*.spec.*'
+```
 
 📼 **Supertape** doesn't contain:
 
