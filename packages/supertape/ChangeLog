@@ -1,3 +1,9 @@
+2026.01.30, v12.2.0
+
+feature:
+- 7a5e1c7 supertape: defineEnv: add
+- 6d023b5 supertape: simplify exports
+
 2026.01.30, v12.1.0
 
 feature:
