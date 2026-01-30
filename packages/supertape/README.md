@@ -42,6 +42,22 @@
 NODE_OPTIONS="--import supertape/css" tape '{bin,lib}/**/*.spec.*'
 ```
 
+Or in 🏎️[`madrun`](https://github.com/coderaiser/madrun):
+
+```js
+import {run, defineEnv} from 'supertape/env';
+
+const testEnv = defineEnv({
+    timeout: 7000,
+    css: true,
+});
+
+export default {
+    test: () => [testEnv, `tape 'lib/**/*.spec.js'`],
+    coverage: async () => [testEnv, `c8 ${await run('test')}`],
+};
+```
+
 📼 **Supertape** doesn't contain:
 
 - assertion aliases, making the available operators far more concise
