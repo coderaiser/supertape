@@ -1,7 +1,6 @@
-'use strict';
+import {once} from 'node:events';
+import {test} from './supertape.js';
 
-const {once} = require('node:events');
-const test = require('./supertape.cjs');
 const {
     extend,
     stub,

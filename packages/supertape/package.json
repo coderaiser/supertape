@@ -7,13 +7,7 @@
   "type": "module",
   "main": "./lib/supertape.js",
   "exports": {
-    ".": {
-      "node": {
-        "require": "./lib/supertape.cjs",
-        "import": "./lib/supertape.js"
-      },
-      "default": "./lib/supertape.js"
-    },
+    ".": "./lib/supertape.js",
     "./bin/supertape": "./bin/supertape.js",
     "./cli": "./lib/cli.js",
     "./exit-codes": "./lib/exit-codes.js",
