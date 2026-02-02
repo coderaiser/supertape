@@ -52,6 +52,7 @@
     "glob": "^13.0.0",
     "jest-diff": "^30.0.3",
     "json-with-bigint": "^3.4.4",
+    "just-snake-case": "^3.2.0",
     "once": "^1.4.0",
     "resolve": "^1.17.0",
     "stacktracey": "^2.1.7",

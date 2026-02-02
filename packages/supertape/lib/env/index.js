@@ -1,8 +1,18 @@
 import process from 'node:process';
+import justSnakeCase from 'just-snake-case';
 
+const isBool = (a) => typeof a === 'boolean';
 const {entries} = Object;
+
 const addLoader = (a) => {
     return `"${a} --import supertape/css"`;
+};
+
+const parseValue = (a) => {
+    if (isBool(a))
+        return a ? 1 : 0;
+    
+    return a;
 };
 
 export const defineEnv = (config, overrides = {}) => {
@@ -16,9 +26,9 @@ export const defineEnv = (config, overrides = {}) => {
             continue;
         }
         
-        const name = `SUPERTAPE_${key.toUpperCase()}`;
+        const name = `SUPERTAPE_${justSnakeCase(key).toUpperCase()}`;
         
-        result[name] = value;
+        result[name] = parseValue(value);
     }
     
     return result;
