@@ -10,7 +10,7 @@ export const parseAt = (stack, {reason}) => {
         return stack;
     
     if (lines.length > 10 && lines[0].startsWith('Error: '))
-        return lines[0];
+        return lines[REASON_USER] || lines[0];
     
     const line = lines[reason === 'user' ? REASON_USER : REASON_EXCEPTION];
     

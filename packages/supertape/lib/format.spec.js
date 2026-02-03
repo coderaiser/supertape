@@ -98,3 +98,28 @@ test('supertape: format: parseAt: looks like empty', (t) => {
     t.match(result, expected);
     t.end();
 });
+
+test('supertape: format: parseAt: long', (t) => {
+    const stack = montag`
+      Error: should call register
+          at run (file:///Users/coderaiser/cloudcmd/node_modules/supertape/lib/operators.js:281:33)
+          at Object.calledWith (file:///Users/coderaiser/cloudcmd/node_modules/supertape/lib/operators.js:216:9)
+          at file:///Users/coderaiser/cloudcmd/client/sw/register.spec.js:87:7
+          at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+          at async /Users/coderaiser/cloudcmd/node_modules/auto-globals/lib/auto-globals.js:128:5
+          at async tryToCatch (file:///Users/coderaiser/cloudcmd/node_modules/try-to-catch/lib/try-to-catch.js:7:23)
+          at async runOneTest (file:///Users/coderaiser/cloudcmd/node_modules/supertape/lib/run-tests.js:185:25)
+          at async runTests (file:///Users/coderaiser/cloudcmd/node_modules/supertape/lib/run-tests.js:99:9)
+          at async default (file:///Users/coderaiser/cloudcmd/node_modules/supertape/lib/run-tests.js:54:12)
+          at async EventEmitter.<anonymous> (file:///Users/coderaiser/cloudcmd/node_modules/supertape/lib/emitter.js:50:24)
+      `;
+    
+    const result = parseAt(stack, {
+        reason: 'user',
+    });
+    
+    const expected = ` at file:///Users/coderaiser/cloudcmd/client/sw/register.spec.js:87:7`;
+    
+    t.match(result, expected);
+    t.end();
+});
