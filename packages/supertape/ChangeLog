@@ -1,3 +1,8 @@
+2026.02.03, v12.4.0
+
+feature:
+- 84129f0 supertape: format: at on long stack traces
+
 2026.02.02, v12.3.0
 
 feature:
