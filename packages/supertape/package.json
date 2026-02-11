@@ -76,7 +76,7 @@
     "c8": "^10.1.2",
     "check-dts": "^0.9.0",
     "currify": "^4.0.0",
-    "eslint": "^9.1.1",
+    "eslint": "^10.0.0",
     "eslint-plugin-putout": "^30.0.1",
     "find-up": "^8.0.0",
     "madrun": "^12.1.0",

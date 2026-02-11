@@ -33,7 +33,7 @@
   "devDependencies": {
     "c8": "^10.1.2",
     "check-dts": "^0.9.0",
-    "eslint": "^9.1.1",
+    "eslint": "^10.0.0",
     "eslint-plugin-putout": "^30.0.1",
     "husky": "^9.0.11",
     "madrun": "^12.1.0",
