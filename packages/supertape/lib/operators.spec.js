@@ -239,6 +239,14 @@ test('supertape: operators: match: not RegExp and String', (t) => {
     t.end();
 });
 
+test('supertape: operators: match: RegExp: couple braces', (t) => {
+    const {match} = operators;
+    const {is} = match('hello())', 'hello())');
+    
+    t.ok(is);
+    t.end();
+});
+
 test('supertape: operators: match: ^', (t) => {
     const {match} = operators;
     const {is} = match('^ hello', '^ hello');

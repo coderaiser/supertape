@@ -1,21 +1,10 @@
 import {isDeepStrictEqual} from 'node:util';
 import diff from './diff.js';
 import {formatOutput, parseAt} from './format.js';
+import {maybeRegExp} from './maybe-regexp.js';
 
 const {entries} = Object;
 const isAsync = (a) => a[Symbol.toStringTag] === 'AsyncFunction';
-
-const encode = (a) => a
-    .replace('^', '\\^')
-    .replace(')', '\\)')
-    .replace('(', '\\(');
-
-const maybeRegExp = (a) => {
-    if (!isStr(a))
-        return a;
-    
-    return RegExp(encode(a));
-};
 
 const isFn = (a) => typeof a === 'function';
 const isStr = (a) => typeof a === 'string';
