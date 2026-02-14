@@ -48,5 +48,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "@putout/plugin-sort-ignore": "^1.0.0"
+  }
 }
