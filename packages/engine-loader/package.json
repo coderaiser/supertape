@@ -35,7 +35,7 @@
   "devDependencies": {
     "@supertape/operator-stub": "*",
     "c8": "^11.0.0",
-    "eslint": "^10.0.0",
+    "eslint": "^10.0.2",
     "eslint-plugin-putout": "^30.0.1",
     "madrun": "^13.0.0",
     "mock-require": "^3.0.2",
