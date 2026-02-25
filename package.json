@@ -31,7 +31,7 @@
     "prepare": "madrun prepare"
   },
   "devDependencies": {
-    "c8": "^10.1.2",
+    "c8": "^11.0.0",
     "check-dts": "^0.9.0",
     "eslint": "^10.0.0",
     "eslint-plugin-putout": "^30.0.1",
