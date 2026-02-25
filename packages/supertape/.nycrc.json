@@ -2,11 +2,11 @@
     "check-coverage": true,
     "all": true,
     "exclude": [
+        "**/*.config.*",
+        "**/*.ts",
         ".*",
         "{bin,lib}/**/{fixture,*.spec.*}",
-        "bin/**/*.js",
-        "**/*.config.*",
-        "**/*.ts"
+        "bin/**/*.js"
     ],
     "branches": 100,
     "lines": 100,

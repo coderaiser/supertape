@@ -1,8 +1,10 @@
 *.swp
-node_modules
-.nyc_output
-yarn-error.log
-.*.swp
+*.log
+*.lock
 
-coverage
+.nyc_output
+.*.swp
 .idea
+
+node_modules
+coverage

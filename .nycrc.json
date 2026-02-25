@@ -2,11 +2,11 @@
     "check-coverage": true,
     "all": true,
     "exclude": [
-        "**/lib/**/{fixture,*.spec.*}",
-        "**/.*",
         "**/*.ts",
-        "**/packages/supertape/bin/*.js",
-        "**/*.config.*"
+        "**/*.config.*",
+        "**/.*",
+        "**/lib/**/{fixture,*.spec.*}",
+        "**/packages/supertape/bin/*.js"
     ],
     "branches": 100,
     "lines": 100,
