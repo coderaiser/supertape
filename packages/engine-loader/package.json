@@ -34,13 +34,13 @@
   ],
   "devDependencies": {
     "@supertape/operator-stub": "*",
-    "c8": "^11.0.0",
     "eslint": "^10.0.2",
     "eslint-plugin-putout": "^31.0.1",
     "madrun": "^13.0.0",
     "mock-require": "^3.0.2",
     "nodemon": "^3.0.1",
     "putout": "^42.0.17",
+    "superc8": "^12.0.0",
     "supertape": "^12.0.0",
     "try-to-catch": "^4.0.0"
   },
