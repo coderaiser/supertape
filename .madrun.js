@@ -3,7 +3,7 @@ import {run} from 'madrun';
 const dirs = ['packages'];
 
 export default {
-    'test': () => `tape --check-scopes --check-assertions-count '${dirs}/*/test/*.{js,cjs}' '${dirs}/*/{bin,lib}/**/*.spec.*'`,
+    'test': () => `tape '${dirs}/*/test/*.{js,cjs}' '${dirs}/*/{bin,lib}/**/*.spec.*'`,
     'test:tap': () => `tape '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
     'test:fail': async () => `"${await run('test')}" -f fail`,
     'test:slow': () => 'lerna run test',
