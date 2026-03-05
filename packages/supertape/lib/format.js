@@ -1,9 +1,8 @@
 export const addSpaces = (a) => `      ${a}`;
 
 const REASON_USER = 3;
-const REASON_EXCEPTION = 1;
 
-export const parseAt = (stack, {reason}) => {
+export const parseAt = (stack) => {
     const lines = stack.split('\n');
     
     if (lines.length === 1)
@@ -12,7 +11,7 @@ export const parseAt = (stack, {reason}) => {
     if (lines.length > 10 && lines[0].startsWith('Error: '))
         return lines[REASON_USER] || lines[0];
     
-    const line = lines[reason === 'user' ? REASON_USER : REASON_EXCEPTION];
+    const line = lines[REASON_USER];
     
     if (!line)
         throw Error(`☝️ Looks like 'async' operator called without 'await': ${stack}`);
