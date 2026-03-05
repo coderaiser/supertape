@@ -95,10 +95,16 @@ function getFileName({StackTracey}) {
         if (callee === 'test.skip')
             continue;
         
+        if (file.includes('supertape.js'))
+            continue;
+        
         return beforeParse;
     }
     
-    return '';
+    if (!items.length)
+        return '';
+    
+    return items.at(-1).beforeParse;
 }
 
 function checkAssertionsCount(msg, filtered, options) {
