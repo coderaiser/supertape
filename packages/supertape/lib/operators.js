@@ -268,7 +268,6 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
     incFailed();
     
     const errorStack = stack || Error(message).stack;
-    const reason = stack ? 'exception' : 'user';
     
     formatter.emit('test:fail', {
         count: count(),
@@ -278,8 +277,8 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
         expected,
         output,
         errorStack: formatOutput(errorStack),
-        at: at || parseAt(errorStack, {
-            reason,
+        at: at || parseAt(Error().stack, {
+            reason: 'user',
         }),
     });
 }

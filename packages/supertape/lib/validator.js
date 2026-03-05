@@ -85,8 +85,14 @@ export const getAt = (overrides = {}) => {
 function getFileName({StackTracey}) {
     const {items} = new StackTracey(Error());
     
-    for (const {beforeParse, file} of items.slice(CALLS_FROM_TEST)) {
+    for (const {callee, beforeParse, file} of items.slice(CALLS_FROM_TEST)) {
         if (file.includes('node_modules'))
+            continue;
+        
+        if (callee === 'test.only')
+            continue;
+        
+        if (callee === 'test.skip')
             continue;
         
         return beforeParse;

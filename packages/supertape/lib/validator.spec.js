@@ -363,3 +363,73 @@ test('supertape: validator: no node_modules', (t) => {
     t.notMatch(result, 'node_modules');
     t.end();
 });
+
+test('supertape: validator: getFilename: test.only', (t) => {
+    const items = [{
+        beforeParse: 'at getFileName (file:///Users/coderaiser/supertape/packages/supertape/lib/validator.js:86:37)',
+        callee: 'getFileName',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/validator.js',
+    }, {
+        beforeParse: 'at getAt (file:///Users/coderaiser/supertape/packages/supertape/lib/validator.js:80:12)',
+        callee: 'getAt',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/validator.js',
+    }, {
+        beforeParse: 'at test (file:///Users/coderaiser/supertape/packages/supertape/lib/supertape.js:170:16)',
+        callee: 'test',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/supertape.js',
+    }, {
+        beforeParse: 'at test.only (file:///Users/coderaiser/supertape/packages/supertape/lib/supertape.js:15:12)',
+        callee: 'test.only',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/supertape.js',
+    }, {
+        beforeParse: 'at file:///Users/coderaiser/supertape/packages/supertape/lib/supertape.spec.js:122:6',
+        callee: '',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/supertape.spec.js',
+    }];
+    
+    const StackTracey = stub().returns({
+        items,
+    });
+    
+    const result = getAt({
+        StackTracey,
+    });
+    
+    t.match(result, 'supertape.spec.js');
+    t.end();
+});
+
+test('supertape: validator: getFilename: test.skip', (t) => {
+    const items = [{
+        beforeParse: 'at getFileName (file:///Users/coderaiser/supertape/packages/supertape/lib/validator.js:86:37)',
+        callee: 'getFileName',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/validator.js',
+    }, {
+        beforeParse: 'at getAt (file:///Users/coderaiser/supertape/packages/supertape/lib/validator.js:80:12)',
+        callee: 'getAt',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/validator.js',
+    }, {
+        beforeParse: 'at test (file:///Users/coderaiser/supertape/packages/supertape/lib/supertape.js:170:16)',
+        callee: 'test',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/supertape.js',
+    }, {
+        beforeParse: 'at test.only (file:///Users/coderaiser/supertape/packages/supertape/lib/supertape.js:15:12)',
+        callee: 'test.skip',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/supertape.js',
+    }, {
+        beforeParse: 'at file:///Users/coderaiser/supertape/packages/supertape/lib/supertape.spec.js:122:6',
+        callee: '',
+        file: '/Users/coderaiser/supertape/packages/supertape/lib/supertape.spec.js',
+    }];
+    
+    const StackTracey = stub().returns({
+        items,
+    });
+    
+    const result = getAt({
+        StackTracey,
+    });
+    
+    t.match(result, 'supertape.spec.js');
+    t.end();
+});
