@@ -1,3 +1,18 @@
+2026.03.05, v12.6.0
+
+fix:
+- 1e3671d supertape: exports: rm bin
+
+feature:
+- 833db3a supertape: get rid mock-mport support
+- aea8d47 supertape: superc8 v12.0.0
+- 4fecd4b supertape: redlint v6.1.1
+- 72d08d3 supertape: eslint-plugin-putout v31.0.1
+- 9aecf13 supertape: eslint v10.0.2
+- fcbcbae supertape: madrun v13.0.0
+- be85943 supertape: putout v42.0.17
+- 550cf35 supertape: c8 v11.0.0
+
 2026.02.11, v12.5.0
 
 feature:
