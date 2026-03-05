@@ -5,7 +5,7 @@ const env = {
 };
 
 export default {
-    'test': () => [env, `bin/tracer.js '{bin,lib}/**/*.spec.*'`],
+    'test': () => [env, `bin/tracer.js '{bin,lib}/**/*.spec.*' 'test/*.js'`],
     'test:dts': () => 'check-dts test/*.ts',
     
     'lint': () => 'putout .',

@@ -6,7 +6,8 @@
         "**/*.ts",
         ".*",
         "{bin,lib}/**/{fixture,*.spec.*}",
-        "bin/**/*.js"
+        "bin/**/*.js",
+        "test"
     ],
     "branches": 100,
     "lines": 100,

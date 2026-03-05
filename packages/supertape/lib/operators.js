@@ -271,7 +271,7 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
     
     formatter.emit('test:fail', {
         count: count(),
-        message,
+        message: String(message),
         operator: name,
         result,
         expected,
