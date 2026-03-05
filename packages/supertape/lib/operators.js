@@ -277,9 +277,7 @@ function run(name, {formatter, count, incCount, incPassed, incFailed}, testState
         expected,
         output,
         errorStack: formatOutput(errorStack),
-        at: at || parseAt(Error().stack, {
-            reason: 'user',
-        }),
+        at: at || parseAt(Error().stack),
     });
 }
 
