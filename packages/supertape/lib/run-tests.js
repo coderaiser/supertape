@@ -3,6 +3,7 @@ import wraptile from 'wraptile';
 import {tryToCatch} from 'try-to-catch';
 import _isDebug from './is-debug.js';
 import {createValidator} from './validator.js';
+import {isOnlyTests} from './is-only-tests.js';
 
 const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
@@ -39,7 +40,8 @@ export default async (tests, overrides = {}) => {
     
     const onlyTests = tests.filter(isOnly);
     
-    if (onlyTests.length)
+    if (onlyTests.length) {
+        isOnlyTests(true);
         return await runTests(onlyTests, {
             formatter,
             operators,
@@ -47,6 +49,7 @@ export default async (tests, overrides = {}) => {
             isStop,
             isDebug,
         });
+    }
     
     const notSkippedTests = tests.filter(notSkip);
     const skipped = tests.filter(isSkip).length;

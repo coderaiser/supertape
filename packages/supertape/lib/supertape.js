@@ -11,6 +11,8 @@ import {getAt, setValidations} from './validator.js';
 import {createEmitter as _createEmitter} from './emitter.js';
 import {createFormatter as _createFormatter} from './formatter/index.js';
 
+export {isOnlyTests} from './is-only-tests.js';
+
 const createOnly = (test) => (message, fn, options) => {
     return test(message, fn, {
         ...options,
