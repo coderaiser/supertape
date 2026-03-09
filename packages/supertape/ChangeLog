@@ -1,3 +1,8 @@
+2026.03.09, v12.10.1
+
+feature:
+- 02cb891 supertape: callWhenTestsEnds: exclude failed
+
 2026.03.09, v12.10.0
 
 feature:
