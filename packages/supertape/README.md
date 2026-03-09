@@ -9,6 +9,8 @@
 [CoverageIMGURL]: https://coveralls.io/repos/coderaiser/supertape/badge.svg?branch=master&service=github
 [MITLicenseURL]: https://opensource.org/licenses/MIT
 [MITLicenseIMGURL]: https://img.shields.io/badge/License-MIT-green.svg
+[DeepScanURL]: https://deepscan.io/dashboard#view=project&tid=16903&pid=20212&bid=545568
+[DeepScanIMGURL]: https://deepscan.io/api/teams/16903/projects/20212/branches/545568/badge/grade.svg
 
 [![supertape](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY.svg)](https://asciinema.org/a/Cgc3rDOfZAeDnJSxzEYpPfBMY)
 
