@@ -239,6 +239,13 @@ Here is Possible `options` similar to [Environment Variables](#environment-varia
 - `checkAssertionsCount`;
 - `timeout`;
 
+```js
+test('hello: world', (t) => {
+    t.equal('hello', 'world');
+    t.end();
+});
+```
+
 ### test.only(message, fn, options?)
 
 Like `test(name, cb)` except if you use `.only` this is the only test case
@@ -271,6 +278,26 @@ test('assertion', (t) => {
     t.transform(1, 3);
     t.end();
 });
+```
+
+### `isSkiptTests`
+
+When you need to know if there was `only` tests use:
+
+```js
+import {isOnlyTests} from 'supertape';
+
+isOnlyTests();
+```
+
+### `isOnlyTests`
+
+When you need to know if there was `skip` tests use:
+
+```js
+import {isSkipTests} from 'supertape';
+
+isSkipTests();
 ```
 
 ## Example
