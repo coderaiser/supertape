@@ -55,4 +55,5 @@ export declare function extend(operators: CustomOperator): TestFunction;
 
 export let isOnlyTests: () => boolean;
 export let isSkipTests: () => boolean;
+export let isFailTests: () => boolean;
 export let callWhenTestsEnds: (name: string, fn: () => number | void) => void;

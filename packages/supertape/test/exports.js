@@ -3,6 +3,7 @@ import {
     isOnlyTests,
     isSkipTests,
     callWhenTestsEnds,
+    isFailTests,
 } from 'supertape';
 import info from '../package.json' with {
     type: 'json',
@@ -30,6 +31,13 @@ test('supertape: exports: isOnlyTests', (t) => {
 
 test('supertape: exports: isSkipTests', (t) => {
     const result = isNumber(isSkipTests());
+    
+    t.ok(result);
+    t.end();
+});
+
+test('supertape: exports: isFailTests', (t) => {
+    const result = isNumber(isFailTests());
     
     t.ok(result);
     t.end();

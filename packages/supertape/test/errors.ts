@@ -7,6 +7,7 @@ import test, {
     OperationResult,
     isOnlyTests,
     isSkipTests,
+    isFailTests,
     callWhenTestsEnds,
 } from '../lib/supertape.js';
 
@@ -102,10 +103,12 @@ const x: number = isOnlyTests();
 
 // THROWS Type 'boolean' is not assignable to type 'number'.
 const y: number = isSkipTests();
-const f = (a: number) => a;
+//
+// THROWS Type 'boolean' is not assignable to type 'number'.
+const z: number = isFailTests();
+const f = (...a: number[]) => a;
 
-f(x);
-f(y);
+f(x, y, z);
 
 // THROWS Expected 2 arguments, but got 0.
 callWhenTestsEnds();

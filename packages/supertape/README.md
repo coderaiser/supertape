@@ -290,7 +290,7 @@ import {isOnlyTests} from 'supertape';
 isOnlyTests();
 ```
 
-### `isOnlyTests`
+### `isSkipTests`
 
 When you need to know if there was `skip` tests use:
 
@@ -298,6 +298,16 @@ When you need to know if there was `skip` tests use:
 import {isSkipTests} from 'supertape';
 
 isSkipTests();
+```
+
+### `isFailTests`
+
+When you need to know if there was `failed` tests use:
+
+```js
+import {isFailTests} from 'supertape';
+
+isFailTests();
 ```
 
 ### `callWhenTestsEnds`

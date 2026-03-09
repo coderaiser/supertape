@@ -14,6 +14,12 @@
     "./css": "./lib/loader/register.js",
     "./env": "./lib/env/index.js"
   },
+  "imports": {
+    "#call-when-tests-ends": "./lib/call-when-tests-ends/index.js",
+    "#is-only-tests": "./lib/call-when-tests-ends/is-only-tests.js",
+    "#is-skip-tests": "./lib/call-when-tests-ends/is-skip-tests.js",
+    "#is-fail-tests": "./lib/call-when-tests-ends/is-fail-tests.js"
+  },
   "bin": {
     "tape": "bin/tracer.js",
     "supertape": "bin/tracer.js"
