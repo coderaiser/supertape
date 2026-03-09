@@ -1,4 +1,4 @@
-import {type Test, extend} from 'supertape';
+import {Test, extend} from 'supertape';
 import * as strip from '../lib/strip.js';
 
 const test = extend(strip);
