@@ -5,12 +5,14 @@ import test, {
     Stub,
     extend,
     OperationResult,
+    isOnlyTests,
 } from '../lib/supertape.js';
 
 // THROWS Expected 2-3 arguments, but got 0
 test();
 
 test('hello', (t: Test) => {
+    // THROWS Property 'abc' does not exist on type 'Test'.
     t.abc();
     t.end();
 });
@@ -30,6 +32,7 @@ test('stub should be a function', (t) => {
 
 // THROWS Argument of type 'number' is not assignable to parameter of type 'string'.
 test.only(123, (t) => {
+    // THROWS Property 'abc' does not exist on type 'Test'.
     t.abc();
 });
 
@@ -63,15 +66,16 @@ test('hello', (t: Test) => {
 extend();
 
 const extendedTest = extend({
-    // THROWS Type 'string' is not assignable to type '(operator: Operator) => (...args: any[]) => OperationResult'.
+    // THROWS Type 'string' is not assignable to type 'OperatorFactory<OperatorFn>'.
     hello: 'world',
     
-    superFail: ({fail}) => (message) => fail(message),
+    superFail: (operator: Test) => (message: string) => operator.fail(message),
 });
 
 // THROWS Expected 2-3 arguments, but got 0.
 extendedTest();
 extendedTest('hello', (t) => {
+    // THROWS Property 'superFail' does not exist on type 'Test'.
     t.superFail('world');
 });
 
@@ -84,6 +88,15 @@ const testAsync = extend({
 });
 
 testAsync('hello', async (t) => {
+    // THROWS Property 'minify' does not exist on type 'Test'.
     await t.minify();
 });
 
+// THROWS Expected 0 arguments, but got 1
+isOnlyTests('ss');
+
+// THROWS Type 'boolean' is not assignable to type 'number'.
+const x: number = isOnlyTests();
+const f = (a: number) => a;
+
+f(x + 1);
