@@ -1,7 +1,7 @@
 import _process from 'node:process';
-import {isOnlyTests as _isOnlyTests} from './is-only-tests.js';
-import {isSkipTests as _isSkipTests} from './is-skip-tests.js';
-import {isFailTests as _isFailTests} from './is-fail-tests.js';
+import {isOnlyTests as _isOnlyTests} from '#is-only-tests';
+import {isSkipTests as _isSkipTests} from '#is-skip-tests';
+import {isFailTests as _isFailTests} from '#is-fail-tests';
 
 export function callWhenTestsEnds(name, fn, overrides = {}) {
     const {

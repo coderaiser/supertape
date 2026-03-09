@@ -1,6 +1,6 @@
 import {EventEmitter} from 'node:events';
 import test, {stub} from 'supertape';
-import {callWhenTestsEnds} from './index.js';
+import {callWhenTestsEnds} from '#call-when-tests-ends';
 
 test('supertape: call-when-tests-ends', (t) => {
     const process = new EventEmitter();
