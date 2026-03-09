@@ -1,3 +1,9 @@
+2026.03.09, v12.8.0
+
+feature:
+- 70e40c3 @supertape/operator-strip: add
+- e658dfb supertape: improve types
+
 2026.03.05, v12.7.0
 
 feature:
