@@ -1,10 +1,11 @@
 import {fullstore} from 'fullstore';
 import wraptile from 'wraptile';
 import {tryToCatch} from 'try-to-catch';
+import {isOnlyTests} from '#is-only-tests';
+import {isSkipTests} from '#is-skip-tests';
+import {isFailTests} from '#is-fail-tests';
 import _isDebug from './is-debug.js';
 import {createValidator} from './validator.js';
-import {isOnlyTests} from './is-only-tests.js';
-import {isSkipTests} from './is-skip-tests.js';
 
 const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
@@ -135,6 +136,8 @@ async function runTests(tests, overrides = {}) {
         passed: passed(),
         skipped,
     });
+    
+    isFailTests(failed());
     
     return {
         count: count(),

@@ -11,9 +11,10 @@ import {getAt, setValidations} from './validator.js';
 import {createEmitter as _createEmitter} from './emitter.js';
 import {createFormatter as _createFormatter} from './formatter/index.js';
 
-export {isOnlyTests} from './is-only-tests.js';
-export {isSkipTests} from './is-skip-tests.js';
-export {callWhenTestsEnds} from './call-when-tests-ends.js';
+export {isOnlyTests} from '#is-only-tests';
+export {isSkipTests} from '#is-skip-tests';
+export {isFailTests} from '#is-fail-tests';
+export {callWhenTestsEnds} from '#call-when-tests-ends';
 
 const createOnly = (test) => (message, fn, options) => {
     return test(message, fn, {
