@@ -2,12 +2,13 @@ import {
     test,
     isOnlyTests,
     isSkipTests,
+    callWhenTestsEnds,
 } from 'supertape';
 import info from '../package.json' with {
     type: 'json',
 };
 
-const isBool = (a) => typeof a === 'boolean';
+const isNumber = (a) => !Number.isNaN(a) && typeof a === 'number';
 
 const isFn = (a) => typeof a === 'function';
 
@@ -28,7 +29,14 @@ test('supertape: exports: isOnlyTests', (t) => {
 });
 
 test('supertape: exports: isSkipTests', (t) => {
-    const result = isBool(isSkipTests());
+    const result = isNumber(isSkipTests());
+    
+    t.ok(result);
+    t.end();
+});
+
+test('supertape: exports: callWhenTestsEnds', (t) => {
+    const result = isFn(callWhenTestsEnds);
     
     t.ok(result);
     t.end();

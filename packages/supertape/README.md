@@ -300,6 +300,18 @@ import {isSkipTests} from 'supertape';
 isSkipTests();
 ```
 
+### `callWhenTestsEnds`
+
+Call your function when tests ends (usually on 'process.exit')
+
+```js
+import {callWhenTestsEnds} from 'supertape';
+
+callWhenTestsEnds('TYPE_CHECK', () => {
+    console.log(`tests ends without 'skip' and 'only'`);
+});
+```
+
 ## Example
 
 ```js

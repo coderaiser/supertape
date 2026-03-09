@@ -1,3 +1,3 @@
 import {fullstore} from 'fullstore';
 
-export const isSkipTests = fullstore(false);
+export const isSkipTests = fullstore();

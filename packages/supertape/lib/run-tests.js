@@ -4,6 +4,7 @@ import {tryToCatch} from 'try-to-catch';
 import _isDebug from './is-debug.js';
 import {createValidator} from './validator.js';
 import {isOnlyTests} from './is-only-tests.js';
+import {isSkipTests} from './is-skip-tests.js';
 
 const inc = wraptile((store) => store(store() + 1));
 const isOnly = ({only}) => only;
@@ -41,11 +42,16 @@ export default async (tests, overrides = {}) => {
     const onlyTests = tests.filter(isOnly);
     
     if (onlyTests.length) {
-        isOnlyTests(true);
+        isOnlyTests(onlyTests.length);
+        
+        const skipped = tests.length - onlyTests.length;
+        
+        isSkipTests(skipped);
+        
         return await runTests(onlyTests, {
             formatter,
             operators,
-            skipped: tests.length - onlyTests.length,
+            skipped,
             isStop,
             isDebug,
         });
@@ -53,6 +59,8 @@ export default async (tests, overrides = {}) => {
     
     const notSkippedTests = tests.filter(notSkip);
     const skipped = tests.filter(isSkip).length;
+    
+    isSkipTests(skipped);
     
     return await runTests(notSkippedTests, {
         formatter,

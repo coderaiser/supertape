@@ -13,6 +13,7 @@ import {createFormatter as _createFormatter} from './formatter/index.js';
 
 export {isOnlyTests} from './is-only-tests.js';
 export {isSkipTests} from './is-skip-tests.js';
+export {callWhenTestsEnds} from './call-when-tests-ends.js';
 
 const createOnly = (test) => (message, fn, options) => {
     return test(message, fn, {

@@ -7,6 +7,7 @@ import test, {
     OperationResult,
     isOnlyTests,
     isSkipTests,
+    callWhenTestsEnds,
 } from '../lib/supertape.js';
 
 // THROWS Expected 2-3 arguments, but got 0
@@ -105,3 +106,10 @@ const f = (a: number) => a;
 
 f(x);
 f(y);
+
+// THROWS Expected 2 arguments, but got 0.
+callWhenTestsEnds();
+
+// THROWS Argument of type '(a: number) => number' is not assignable to parameter of type '() => number | void'.
+callWhenTestsEnds('hello', (a: number) => a);
+callWhenTestsEnds('hello', () => {});
