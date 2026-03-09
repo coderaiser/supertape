@@ -381,7 +381,6 @@ export default {
 };
 ```
 
-
 ## Example
 
 ```js
