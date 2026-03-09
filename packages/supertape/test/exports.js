@@ -10,7 +10,6 @@ import info from '../package.json' with {
 };
 
 const isNumber = (a) => !Number.isNaN(a) && typeof a === 'number';
-
 const isFn = (a) => typeof a === 'function';
 
 test('supertape: exports: bin', (t) => {
