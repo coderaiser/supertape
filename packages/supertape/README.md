@@ -280,7 +280,7 @@ test('assertion', (t) => {
 });
 ```
 
-### `isSkiptTests`
+### `isOnlyTests`
 
 When you need to know if there was `only` tests use:
 
