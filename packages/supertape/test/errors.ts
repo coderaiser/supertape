@@ -6,6 +6,7 @@ import test, {
     extend,
     OperationResult,
     isOnlyTests,
+    isSkipTests,
 } from '../lib/supertape.js';
 
 // THROWS Expected 2-3 arguments, but got 0
@@ -97,6 +98,10 @@ isOnlyTests('ss');
 
 // THROWS Type 'boolean' is not assignable to type 'number'.
 const x: number = isOnlyTests();
+
+// THROWS Type 'boolean' is not assignable to type 'number'.
+const y: number = isSkipTests();
 const f = (a: number) => a;
 
-f(x + 1);
+f(x);
+f(y);

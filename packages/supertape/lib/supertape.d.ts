@@ -54,3 +54,4 @@ export type CustomOperator = Record<string, OperatorFactory>;
 export declare function extend(operators: CustomOperator): TestFunction;
 
 export let isOnlyTests: () => boolean;
+export let isSkipTests: () => boolean;
