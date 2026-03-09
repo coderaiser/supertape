@@ -196,7 +196,7 @@ test('supertape: cli: success', async (t) => {
     const init = stub();
     const run = stub().returns(emitter);
     
-    const test = createTest({
+    const test = await createTest({
         quiet: true,
     });
     
@@ -429,7 +429,7 @@ test('supertape: bin: cli: --check-duplicates', async (t) => {
         isStop,
     });
     
-    const test = createTest({
+    const test = await createTest({
         quiet: true,
     });
     
@@ -470,7 +470,7 @@ test('supertape: bin: cli: --check-assertions-count', async (t) => {
         isStop,
     });
     
-    const test = createTest({
+    const test = await createTest({
         quiet: true,
     });
     
@@ -511,7 +511,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: env', async (t) => {
         isStop,
     });
     
-    const test = createTest({
+    const test = await createTest({
         quiet: false,
     });
     
@@ -554,7 +554,7 @@ test('supertape: bin: cli: SUPERTAPE_ASSERTIONS_COUNT: env', async (t) => {
         isStop,
     });
     
-    const test = createTest({
+    const test = await createTest({
         quiet: true,
     });
     
@@ -599,7 +599,7 @@ test('supertape: bin: cli: SUPERTAPE_CHECK_DUPLICATES: disabled with a flag, ena
     });
     
     disableOnce();
-    const test = createTest({
+    const test = await createTest({
         quiet: true,
     });
     
