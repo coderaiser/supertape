@@ -38,24 +38,24 @@ export type TestOptions = {
     timeout?: number;
 };
 
-export type TestFunction<T extends Test = Test> =
-    ((message: string, fn: (t: T) => void, options?: TestOptions) => void) & {
-        skip: TestFunction<T>;
-        only: TestFunction<T>;
-    };
+export type TestFunction<T extends Test = Test> = ((message: string, fn: (t: T) => void, options?: TestOptions) => void) & {
+    skip: TestFunction<T>;
+    only: TestFunction<T>;
+};
 
 export let test: TestFunction<Test>;
 
 export default test;
 
-export type OperatorFactory<
-    T extends (...args: any[]) => OperationResult = (...args: any[]) => OperationResult,
-> = (operator: Test) => T;
+export type OperatorFactory<T extends (...args: any[]) => OperationResult = (...args: any[]) => OperationResult> = (operator: Test) => T;
 
 export type CustomOperator = Record<string, OperatorFactory>;
 
 type OperatorsToMethods<T extends CustomOperator> = {
-    [K in keyof T]: T[K] extends (...args: any[]) => infer R ? R : never;
+    [K in keyof T]:
+    T[K] extends (...args: any[]) => infer R
+        ? R
+        : never;
 };
 
 export declare function extend<T extends CustomOperator>(operators: T): TestFunction<Test & OperatorsToMethods<T>>;
