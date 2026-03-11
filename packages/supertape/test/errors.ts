@@ -69,7 +69,7 @@ test('hello', (t: Test) => {
 extend();
 
 const extendedTest = extend({
-    // THROWS Type 'string' is not assignable to type 'OperatorFactory<OperatorFn>'.
+    // THROWS Type 'string' is not assignable to type 'OperatorFactory<(...args: any[]) => OperationResult>'.
     hello: 'world',
     
     superFail: (operator: Test) => (message: string) => operator.fail(message),
