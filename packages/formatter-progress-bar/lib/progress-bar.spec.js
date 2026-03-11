@@ -220,7 +220,8 @@ test('supertape: format: progress bar: success', async (t) => {
       # pass 1
       
       # ✅  ok
-    ` + '\n';
+    ` +
+        '\n';
     
     t.equal(result, expected);
     t.end();
@@ -375,7 +376,8 @@ test('supertape: format: progress bar: color', async (t) => {
       # pass 1
       
       # ✅ ok
-    ` + '\n';
+    ` +
+        '\n';
     
     t.equal(result, expected);
     t.end();
@@ -426,7 +428,8 @@ test('supertape: format: progress bar: color: hash', async (t) => {
       # pass 1
       
       # ✅ ok
-    ` + '\n';
+    ` +
+        '\n';
     
     t.equal(result, expected);
     t.end();

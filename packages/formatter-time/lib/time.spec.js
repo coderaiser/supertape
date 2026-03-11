@@ -156,7 +156,8 @@ test('supertape: format: time: success', async (t) => {
       # pass 1
       
       # ✅ ok
-    ` + '\n';
+    ` +
+        '\n';
     
     t.equal(result, expected);
     t.end();
@@ -248,7 +249,8 @@ test('supertape: format: time: color', async (t) => {
       # pass 1
       
       # ✅ ok
-    ` + '\n';
+    ` +
+        '\n';
     
     t.equal(result, expected);
     t.end();
@@ -294,7 +296,8 @@ test('supertape: format: time: color: hash', async (t) => {
       # pass 1
       
       # ✅ ok
-    ` + '\n';
+    ` +
+        '\n';
     
     t.equal(result, expected);
     t.end();
