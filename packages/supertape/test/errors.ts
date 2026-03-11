@@ -78,7 +78,6 @@ const extendedTest = extend({
 // THROWS Expected 2-3 arguments, but got 0.
 extendedTest();
 extendedTest('hello', (t) => {
-    // THROWS Property 'superFail' does not exist on type 'Test'.
     t.superFail('world');
 });
 
@@ -88,11 +87,17 @@ const minifyExtension = () => async (pass: () => Promise<OperationResult>) => {
 
 const testAsync = extend({
     minify: minifyExtension,
+    transform: (operator) => (a: number) => operator.equal(a, 1),
 });
 
 testAsync('hello', async (t) => {
-    // THROWS Property 'minify' does not exist on type 'Test'.
+    // THROWS Expected 1 arguments, but got 0.
     await t.minify();
+});
+
+testAsync.only('hello', (t) => {
+    // THROWS Expected 1 arguments, but got 0.
+    t.transform();
 });
 
 // THROWS Expected 0 arguments, but got 1

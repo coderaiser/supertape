@@ -38,22 +38,28 @@ export type TestOptions = {
     timeout?: number;
 };
 
-export interface TestFunction {
-    (message: string, fn: (t: Test) => void, options?: TestOptions): void;
-    skip: TestFunction;
-    only: TestFunction;
+export interface TestFunction<T extends Test = Test> {
+    (message: string, fn: (t: T) => void, options?: TestOptions): void;
+    skip: TestFunction<T>;
+    only: TestFunction<T>;
 }
-export let test: TestFunction;
+
+export let test: TestFunction<Test>;
 
 export default test;
 
-export type OperatorFactory<T extends OperatorFn = OperatorFn> = (operator: Operator) => T;
+export type OperatorFactory<T extends OperatorFn = OperatorFn> = (operator: Test) => T;
 
 export type CustomOperator = Record<string, OperatorFactory>;
 
-export declare function extend(operators: CustomOperator): TestFunction;
+type OperatorsToMethods<T extends CustomOperator> = {
+    [K in keyof T]: ReturnType<T[K]>;
+};
+
+export declare function extend<T extends CustomOperator>(operators: T): TestFunction<Test & OperatorsToMethods<T>>;
 
 export let isOnlyTests: () => boolean;
 export let isSkipTests: () => boolean;
 export let isFailTests: () => boolean;
+
 export let callWhenTestsEnds: (name: string, fn: () => number | void) => void;
