@@ -1,3 +1,9 @@
+2026.03.11, v12.10.2
+
+feature:
+- a04f888 supertape: types: improve inference of skyp/only
+- 0461099 supertape: callWhenTestsEnds: exclude failed
+
 2026.03.09, v12.10.1
 
 feature:
