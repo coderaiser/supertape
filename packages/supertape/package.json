@@ -8,7 +8,7 @@
   "main": "./lib/supertape.js",
   "exports": {
     ".": "./lib/supertape.js",
-    "./bin/supertape": "./bin/supertape.js",
+    "./bin/supertape": "./bin/tracer.js",
     "./cli": "./lib/cli.js",
     "./exit-codes": "./lib/exit-codes.js",
     "./css": "./lib/loader/register.js",
