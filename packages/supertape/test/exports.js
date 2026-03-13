@@ -15,7 +15,7 @@ const isFn = (a) => typeof a === 'function';
 test('supertape: exports: bin', (t) => {
     const {exports} = info;
     const result = exports['./bin/supertape'];
-    const expected = './bin/supertape.js';
+    const expected = './bin/tracer.js';
     
     t.equal(result, expected);
     t.end();
