@@ -1,3 +1,8 @@
+2026.03.14, v12.10.5
+
+fix:
+- 4acfaa1 supertape: diff: cut: Array -> Array [
+
 2026.03.13, v12.10.4
 
 fix:
