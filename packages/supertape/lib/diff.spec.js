@@ -1,4 +1,5 @@
 import {stripVTControlCharacters} from 'node:util';
+import montag from 'montag';
 import test from './supertape.js';
 import diff from './diff.js';
 
@@ -21,6 +22,24 @@ test('supertape: diff: no Array', (t) => {
       -   "hello",
       - ]
       + []
+    `.slice(1, -5);
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('supertape: diff: Array', (t) => {
+    const source = montag`
+        const maybeArray = () => 'hello';
+    `;
+    
+    const result = stripVTControlCharacters(diff([source], ['']));
+    const expected = `
+      diff: |-
+        [
+      -   "const maybeArray = () => 'hello';",
+      +   "",
+        ]
     `.slice(1, -5);
     
     t.equal(result, expected);
