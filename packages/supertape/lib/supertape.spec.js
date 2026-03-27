@@ -125,6 +125,7 @@ test('supertape: stack strace: exception', async (t) => {
     };
     
     const message = 'hello';
+    
     const {
         test,
         stream,
@@ -164,6 +165,7 @@ test('supertape: checkDuplicates: override', async (t) => {
     };
     
     const message = 'hello: world';
+    
     const {
         test,
         stream,
@@ -296,6 +298,7 @@ test('supertape: createStream', async (t) => {
     };
     
     const message = 'tape: stream';
+    
     const {
         test,
         stream,
@@ -332,6 +335,7 @@ test('supertape: skip', async (t) => {
     };
     
     const message = 'hello';
+    
     const {
         test,
         stream,
@@ -794,6 +798,7 @@ test('supertape: quiet: false', async (t) => {
     };
     
     const message = 'hello';
+    
     const {
         test,
         stream,
@@ -918,6 +923,7 @@ test('supertape: destructuring test: skip', async (t) => {
     };
     
     const message = 'hello';
+    
     const {
         test,
         stream,
@@ -955,6 +961,7 @@ test('supertape: duplicate', async (t) => {
     };
     
     const message = 'a: b';
+    
     const {
         test,
         stream,

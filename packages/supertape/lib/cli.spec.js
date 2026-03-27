@@ -37,6 +37,7 @@ test('supertape: cli: -r', async (t) => {
     ];
     
     const write = stub();
+    
     const stderr = {
         write,
     };

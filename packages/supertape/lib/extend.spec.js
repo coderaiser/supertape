@@ -33,6 +33,7 @@ test('supertape: run', async (t) => {
     });
     
     const [result] = await once(emitter, 'end');
+    
     const expected = {
         failed: 0,
     };

@@ -25,6 +25,7 @@ test('supertape: runTests', async (t) => {
     };
     
     const message = 'hello world';
+    
     const {
         test,
         stream,
@@ -99,6 +100,7 @@ test('supertape: runTests: no duplicates', async (t) => {
     };
     
     const message = 'hello world';
+    
     const {
         test,
         stream,
@@ -201,6 +203,7 @@ test('supertape: runTests: assertions after t.end()', async (t) => {
     };
     
     const message = 'hello world';
+    
     const {
         test,
         stream,
@@ -237,6 +240,7 @@ test('supertape: runTests: a couple t.end()', async (t) => {
     };
     
     const message = 'hello world';
+    
     const {
         test,
         stream,
@@ -272,6 +276,7 @@ test('supertape: runTests: assertions after t.end(): async', async (t) => {
     };
     
     const message = 'hello world';
+    
     const {
         test,
         stream,
@@ -464,6 +469,7 @@ test('supertape: runTests: not equal', async (t) => {
     };
     
     const message = 'hello world';
+    
     const {
         test,
         stream,
@@ -611,6 +617,7 @@ test('supertape: runTests: pass', async (t) => {
     };
     
     const message = 'hello: world';
+    
     const {
         test,
         stream,
@@ -649,6 +656,7 @@ test('supertape: runTests: pass: unnamed', async (t) => {
     };
     
     const message = 'hello: world';
+    
     const {
         test,
         stream,

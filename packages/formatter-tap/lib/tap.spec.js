@@ -69,6 +69,7 @@ test('supertape: format: tap: skip', async (t) => {
     };
     
     const message = 'success';
+    
     const {
         test,
         stream,

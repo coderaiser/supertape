@@ -34,6 +34,7 @@ test('supertape: diff: Array', (t) => {
     `;
     
     const result = stripVTControlCharacters(diff([source], ['']));
+    
     const expected = `
       diff: |-
         [

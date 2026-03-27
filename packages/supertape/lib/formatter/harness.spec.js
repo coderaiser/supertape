@@ -37,6 +37,7 @@ test('supertape: harness: proceed condition: write after end', async (t) => {
     };
     
     const input = createHarness(reporter);
+    
     const output = new Transform({
         transform(chunk, enc, callback) {
             callback();

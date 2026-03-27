@@ -163,6 +163,7 @@ function checkDuplicates(msg, filtered) {
         return [];
     
     processedList.add(first);
+    
     return [
         `Duplicate ${first}`,
         second,

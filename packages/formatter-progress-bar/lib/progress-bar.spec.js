@@ -287,6 +287,7 @@ test('supertape: format: progress bar: skip: webstorm', async (t) => {
     };
     
     const message = 'skip: success';
+    
     const {
         CI,
         TERMINAL_EMULATOR,
@@ -390,6 +391,7 @@ test('supertape: format: progress bar: color: hash', async (t) => {
     };
     
     const message = 'progress-bar: color';
+    
     const {
         SUPERTAPE_PROGRESS_BAR_COLOR,
         TERMINAL_EMULATOR,

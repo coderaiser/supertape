@@ -10,6 +10,7 @@ export const overrideConsoleLog = (parentPort, {console = globalThis.console} = 
     const {log} = console;
     
     console.log = createConsoleMethod(CONSOLE_LOG, parentPort);
+    
     return {
         getBackConsoleLog: () => {
             console.log = log;
@@ -21,6 +22,7 @@ export const overrideConsoleError = (parentPort, {console = globalThis.console} 
     const {error} = console;
     
     console.error = createConsoleMethod(CONSOLE_ERROR, parentPort);
+    
     return {
         getBackConsoleError: () => {
             console.error = error;

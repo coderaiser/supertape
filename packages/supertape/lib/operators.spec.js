@@ -16,6 +16,7 @@ test('supertape: operators: extendOperators', async (t) => {
     };
     
     const formatter = new EventEmitter();
+    
     const {transformCode} = initOperators(getStubs({
         formatter,
         extensions,
@@ -43,6 +44,7 @@ test('supertape: operators: extendOperators: curried promise', async (t) => {
     };
     
     const formatter = new EventEmitter();
+    
     const {transformCode} = initOperators(getStubs({
         formatter,
         extensions,
@@ -83,6 +85,7 @@ test('supertape: operators: extendOperators: async: returns', async (t) => {
     };
     
     const formatter = new EventEmitter();
+    
     const {transformCode} = initOperators(getStubs({
         formatter,
         extensions,

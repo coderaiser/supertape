@@ -199,6 +199,7 @@ function _createProgress({total, color, test}) {
     });
     
     const colorFn = getColorFn(color);
+    
     const bar = new cliProgress.SingleBar({
         format: `${colorFn('{bar}')} {percentage}% | {failed} | {count}/{total} | {time} | {test}`,
         barCompleteChar: '\u2588',

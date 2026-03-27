@@ -164,6 +164,7 @@ test('supertape: formatter: short: output', async (t) => {
     };
     
     const message = 'hello world';
+    
     const {
         test,
         stream,
