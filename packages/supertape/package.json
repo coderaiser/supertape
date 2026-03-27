@@ -79,7 +79,7 @@
   "devDependencies": {
     "@iocmd/wait": "^2.1.0",
     "@putout/eslint-flat": "^4.0.0",
-    "check-dts": "^0.9.0",
+    "check-dts": "^1.0.0",
     "currify": "^4.0.0",
     "eslint": "^10.0.2",
     "eslint-plugin-putout": "^31.0.1",
