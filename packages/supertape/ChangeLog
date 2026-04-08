@@ -1,3 +1,10 @@
+2026.04.08, v12.11.0
+
+feature:
+- 73acac3 supertape: operator: match: isObject -> isRegExp
+- b92a950 supertape: check-dts v1.0.0
+- a1befb1 supertape: typescript v6.0.2
+
 2026.03.14, v12.10.5
 
 fix:
