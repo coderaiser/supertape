@@ -3,12 +3,13 @@ import diff from './diff.js';
 import {formatOutput, parseAt} from './format.js';
 import {maybeRegExp} from './maybe-regexp.js';
 
+const isRegExp = (a) => a instanceof RegExp;
+
 const {entries} = Object;
 const isAsync = (a) => a[Symbol.toStringTag] === 'AsyncFunction';
 
 const isFn = (a) => typeof a === 'function';
 const isStr = (a) => typeof a === 'string';
-const isObj = (a) => typeof a === 'object';
 
 const end = () => {};
 
@@ -27,7 +28,7 @@ const notOk = (result, message = 'should be falsy') => ({
 });
 
 const validateRegExp = (regexp) => {
-    if (!isObj(regexp) && !isStr(regexp))
+    if (!isRegExp(regexp) && !isStr(regexp))
         return Error('regexp should be RegExp or String');
     
     if (!regexp)
