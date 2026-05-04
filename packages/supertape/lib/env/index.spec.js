@@ -1,7 +1,7 @@
 import {test} from 'supertape';
 import {defineEnv} from 'supertape/env';
 
-test('supertape: env: defineEnv', (t) => {
+test('supertape: env: defineEnv: css', (t) => {
     const NODE_OPTIONS = '--unhandled-rejections=strict';
     const env = {
         NODE_OPTIONS,
@@ -17,6 +17,28 @@ test('supertape: env: defineEnv', (t) => {
     const expected = {
         SUPERTAPE_TIMEOUT: 7000,
         NODE_OPTIONS: '"--unhandled-rejections=strict --import supertape/css"',
+    };
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
+test('supertape: env: defineEnv: jsx', (t) => {
+    const NODE_OPTIONS = '--unhandled-rejections=strict';
+    const env = {
+        NODE_OPTIONS,
+    };
+    
+    const result = defineEnv({
+        timeout: 7000,
+        jsx: true,
+    }, {
+        env,
+    });
+    
+    const expected = {
+        SUPERTAPE_TIMEOUT: 7000,
+        NODE_OPTIONS: '"--unhandled-rejections=strict --import supertape/jsx"',
     };
     
     t.deepEqual(result, expected);

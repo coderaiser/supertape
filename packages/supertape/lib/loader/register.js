@@ -1,5 +1,6 @@
-import {register} from 'node:module';
+import {registerHooks} from 'node:module';
+import * as cssLoaderUrl from './css.js';
+import * as jsxLoaderUrl from './jsx.js';
 
-const loaderUrl = new URL('./css.js', import.meta.url);
-
-register(loaderUrl);
+registerHooks(jsxLoaderUrl);
+registerHooks(cssLoaderUrl);

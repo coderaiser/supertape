@@ -1,5 +1,5 @@
 import {tryCatch} from 'try-catch';
-import montag from 'montag';
+import {montag} from 'montag';
 import test from './supertape.js';
 import {parseAt} from './format.js';
 

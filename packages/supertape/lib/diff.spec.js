@@ -1,5 +1,5 @@
 import {stripVTControlCharacters} from 'node:util';
-import montag from 'montag';
+import {montag} from 'montag';
 import test from './supertape.js';
 import diff from './diff.js';
 

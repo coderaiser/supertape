@@ -52,6 +52,7 @@
     "@supertape/formatter-tap": "^4.0.0",
     "@supertape/formatter-time": "^3.0.0",
     "@supertape/operator-stub": "^4.0.0",
+    "@swc/core": "^1.15.33",
     "cli-progress": "^3.8.2",
     "flatted": "^3.3.1",
     "fullstore": "^4.0.0",

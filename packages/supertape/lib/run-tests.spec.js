@@ -1,6 +1,6 @@
 import process from 'node:process';
 import {once, EventEmitter} from 'node:events';
-import montag from 'montag';
+import {montag} from 'montag';
 import pullout from 'pullout';
 import {parseTime} from './run-tests.js';
 import {
