@@ -1,5 +1,5 @@
 import process from 'node:process';
-import montag from 'montag';
+import {montag} from 'montag';
 import pullout from 'pullout';
 import {
     test,

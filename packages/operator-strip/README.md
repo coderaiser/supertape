@@ -24,7 +24,7 @@ Adds next operators to work with:
 ```js
 import {extend} from 'supertape';
 import strip from '@supertape/operator-strip';
-import montag from 'montag';
+import {montag} from 'montag';
 
 const test = extend(strip);
 
@@ -46,7 +46,7 @@ test('redlint: strip', (t) => {
 
 ```js
 import test, {strip} from 'supertape';
-import montag from 'montag';
+import {montag} from 'montag';
 
 test('function called with no args', (t) => {
     const expected = montag`

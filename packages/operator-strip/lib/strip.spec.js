@@ -1,6 +1,6 @@
 import {styleText} from 'node:util';
 import {extend} from 'supertape';
-import montag from 'montag';
+import {montag} from 'montag';
 import * as operator from './strip.js';
 
 const test = extend(operator);

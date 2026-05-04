@@ -60,7 +60,7 @@ export default {
 };
 ```
 
-or jsx: 
+or jsx:
 
 ```js
 import {run, defineEnv} from 'supertape/env';
