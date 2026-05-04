@@ -1,3 +1,10 @@
+2026.05.04, v12.12.0
+
+feature:
+- 05d90b1 supertape: montag v2.0.1
+- 5d1087f supertape: montag v2.0.1
+- 77cfae0 supertape: loader: jsx: add
+
 2026.04.08, v12.11.0
 
 feature:
