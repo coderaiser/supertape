@@ -1,0 +1,50 @@
+{
+  "name": "@supertape/laoder-css",
+  "version": "1.0.0",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "📼Supertape loader css",
+  "homepage": "http://github.com/coderaiser/supertape/tree/master/packages/loader-css",
+  "main": "./lib/register-css.js",
+  "release": false,
+  "tag": false,
+  "changelog": false,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coderaiser/supertape.git"
+  },
+  "scripts": {
+    "test": "madrun test",
+    "watch:test": "madrun watch:test",
+    "lint": "madrun lint",
+    "fix:lint": "madrun fix:lint",
+    "coverage": "madrun coverage",
+    "report": "madrun report",
+    "wisdom": "madrun wisdom"
+  },
+  "dependencies": {},
+  "keywords": [
+    "formatter",
+    "fail",
+    "supertape"
+  ],
+  "devDependencies": {
+    "@putout/eslint-flat": "^4.0.0",
+    "eslint": "^10.0.2",
+    "eslint-plugin-putout": "^31.0.1",
+    "madrun": "^13.0.0",
+    "montag": "^2.0.1",
+    "nodemon": "^3.0.1",
+    "pullout": "^5.0.1",
+    "putout": "^42.0.17",
+    "superc8": "^12.0.0",
+    "supertape": "^12.0.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
