@@ -7,14 +7,21 @@ const importFn = (a) => import(a);
 test('supertape: loader: register: jsx', async (t) => {
     const [error] = await tryToCatch(importFn, './fixture/register.jsx');
     
-    t.notOk(error);
+    t.match(error.message, 'react');
+    t.end();
+});
+
+test('supertape: loader: register: jsx: syntax error', async (t) => {
+    const [error] = await tryToCatch(importFn, './fixture/syntax-error.js');
+    
+    t.equal(error.message, 'Unexpected token');
     t.end();
 });
 
 test('supertape: loader: register: js', async (t) => {
     const [error] = await tryToCatch(importFn, './fixture/register.js');
     
-    t.notOk(error);
+    t.match(error.message, 'react');
     t.end();
 });
 

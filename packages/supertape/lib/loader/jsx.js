@@ -30,11 +30,12 @@ export function load(url, context, nextLoad) {
 }
 
 export function jsxToJs(source) {
-    const {code} = transformSync('__supertape.js', source, {
-        jsx: {
-            runtime: 'automatic',
-        },
+    const {errors, code} = transformSync('__supertape.js', source, {
+        lang: 'jsx',
     });
+    
+    if (errors.length)
+        throw Error(errors[0].message);
     
     return code;
 }
