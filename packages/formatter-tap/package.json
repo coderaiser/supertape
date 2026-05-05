@@ -37,7 +37,7 @@
     "pullout": "^5.0.1",
     "putout": "^42.0.17",
     "superc8": "^12.0.0",
-    "supertape": "^12.0.0"
+    "supertape": "^13.0.0"
   },
   "license": "MIT",
   "engines": {
