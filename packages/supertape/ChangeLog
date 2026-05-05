@@ -1,3 +1,8 @@
+2026.05.05, v13.0.0
+
+feature:
+- 3d3e63c supertape: move out loaders
+
 2026.05.05, v12.12.3
 
 fix:
