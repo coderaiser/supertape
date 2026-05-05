@@ -1,3 +1,8 @@
+2026.05.05, v12.12.2
+
+fix:
+- 6eb1de0 supertape: exports: jsx
+
 2026.05.05, v12.12.1
 
 feature:
