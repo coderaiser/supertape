@@ -1,3 +1,8 @@
+2026.05.05, v12.12.1
+
+feature:
+- 87d8ebc supertape: loader: jsx: @swc/transform -> oxc-transform
+
 2026.05.04, v12.12.0
 
 feature:
