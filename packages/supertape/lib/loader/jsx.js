@@ -1,4 +1,4 @@
-import {transformSync} from '@swc/core';
+import {transformSync} from 'oxc-transform';
 
 export function resolve(specifier, context, nextResolve) {
     if (specifier.endsWith('.jsx'))
@@ -11,7 +11,10 @@ export function resolve(specifier, context, nextResolve) {
 }
 
 export function load(url, context, nextLoad) {
-    if (url.endsWith('.jsx')) {
+    if (url.endsWith('.jsx') || url.endsWith('.js')) {
+        if (url.includes('node_modules'))
+            return nextLoad(url, context);
+        
         const {source} = nextLoad(url, {
             format: 'module',
         });
@@ -27,17 +30,9 @@ export function load(url, context, nextLoad) {
 }
 
 export function jsxToJs(source) {
-    const {code} = transformSync(source, {
-        jsc: {
-            parser: {
-                syntax: 'ecmascript',
-                jsx: true,
-            },
-            transform: {
-                react: {
-                    runtime: 'automatic',
-                },
-            },
+    const {code} = transformSync('__supertape.js', source, {
+        jsx: {
+            runtime: 'automatic',
         },
     });
     

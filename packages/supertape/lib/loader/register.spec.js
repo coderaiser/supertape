@@ -13,8 +13,21 @@ test('supertape: loader: register: css', async (t) => {
 
 test('supertape: loader: register: jsx', async (t) => {
     const [error] = await tryToCatch(importFn, './fixture/register.jsx');
-    const expected = 'react';
     
-    t.match(error.message, expected);
+    t.notOk(error);
+    t.end();
+});
+
+test('supertape: loader: register: js', async (t) => {
+    const [error] = await tryToCatch(importFn, './fixture/register.js');
+    
+    t.notOk(error);
+    t.end();
+});
+
+test('supertape: loader: register: js: external', async (t) => {
+    const {Time} = await import('./fixture/external.js');
+    
+    t.ok(typeof Time, 'function');
     t.end();
 });
