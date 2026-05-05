@@ -9,7 +9,7 @@ export const match = {
     '*.spec.*': {
         'node/no-extraneous-import': 'off',
     },
-    '**/register.js': {
+    '**/register*.js': {
         'n/no-unsupported-features/node-builtins': 'off',
     },
 };

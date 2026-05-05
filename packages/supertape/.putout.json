@@ -5,7 +5,7 @@
         }]
     },
     "match": {
-        "register.spec.js": {
+        "register*.js": {
             "esm/remove-empty-import": "off"
         },
         "*.md": {

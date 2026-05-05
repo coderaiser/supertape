@@ -48,3 +48,19 @@ test('supertape: exports: callWhenTestsEnds', (t) => {
     t.ok(result);
     t.end();
 });
+
+test('supertape: exports: css', async (t) => {
+    const cssExports = await import('supertape/css');
+    const cssLoader = await import('../lib/loader/register-css.js');
+    
+    t.equal(cssExports, cssLoader);
+    t.end();
+});
+
+test('supertape: exports: jsx', async (t) => {
+    const jsxExports = await import('supertape/jsx');
+    const jsxLoader = await import('../lib/loader/register-jsx.js');
+    
+    t.equal(jsxExports, jsxLoader);
+    t.end();
+});
