@@ -3,8 +3,8 @@ import {run} from 'madrun';
 const dirs = ['packages'];
 
 export default {
-    'test': () => `tape '${dirs}/*/test/*.{js,cjs}' '${dirs}/*/{bin,lib}/**/*.spec.*'`,
-    'test:tap': () => `tape '${dirs}/*/test/*.{js,mjs}' '${dirs}/*/lib/**/*.spec.{js,mjs}'`,
+    'test': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/{bin,lib}/**/*.spec.js'`,
+    'test:tap': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/lib/**/*.spec.js'`,
     'test:fail': async () => `"${await run('test')}" -f fail`,
     'test:slow': () => 'lerna run test',
     'coverage:long': async () => `c8 ${await run('test')}`,

@@ -296,6 +296,7 @@ Here is a list of built-int operators:
 | Package | Version |
 |--------|-------|
 | [`@supertape/operator-stub`](/packages/operator-stub) | [![npm](https://img.shields.io/npm/v/@supertape/operator-stub.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-stub) |
+| [`@supertape/operator-react`](/packages/operator-react) | [![npm](https://img.shields.io/npm/v/@supertape/operator-react.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-react) |
 | [`@supertape/operator-strip`](/packages/operator-strip) | [![npm](https://img.shields.io/npm/v/@supertape/operator-strip.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-strip) |
 
 ## Formatters

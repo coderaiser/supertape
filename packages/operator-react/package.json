@@ -1,0 +1,62 @@
+{
+  "name": "@supertape/operator-react",
+  "version": "1.0.0",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "supertape react operator",
+  "homepage": "http://github.com/coderaiser/supertape",
+  "main": "./lib/react.js",
+  "release": false,
+  "tag": false,
+  "changelog": false,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coderaiser/supertape.git"
+  },
+  "scripts": {
+    "test": "madrun test",
+    "test:dts": "madrun test:dts",
+    "watch:test": "madrun watch:test",
+    "lint": "madrun lint",
+    "fresh:lint": "madrun fresh:lint",
+    "lint:fresh": "madrun lint:fresh",
+    "fix:lint": "madrun fix:lint",
+    "coverage": "madrun coverage",
+    "report": "madrun report",
+    "wisdom": "madrun wisdom"
+  },
+  "dependencies": {
+    "@testing-library/react": "^16.3.2",
+    "react": "^19.2.6"
+  },
+  "keywords": [
+    "operator",
+    "react",
+    "function",
+    "tap",
+    "tape",
+    "testing"
+  ],
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "check-dts": "^1.0.0",
+    "eslint": "^10.0.2",
+    "eslint-plugin-putout": "^31.0.1",
+    "madrun": "^13.0.0",
+    "mock-require": "^3.0.2",
+    "montag": "^2.0.1",
+    "nodemon": "^3.0.1",
+    "putout": "^42.0.17",
+    "superc8": "^12.0.0",
+    "supertape": "^13.0.0",
+    "typescript": "^6.0.2"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
