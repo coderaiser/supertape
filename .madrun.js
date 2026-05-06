@@ -1,14 +1,17 @@
-import {run} from 'madrun';
+import {run, cutEnv} from 'madrun';
 
 const dirs = ['packages'];
+const env = {
+    NODE_OPTIONS: '"--unhandled-rejections=strict"',
+};
 
 export default {
-    'test': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/{bin,lib}/**/*.spec.js'`,
+    'test': () => [env, `tape '${dirs}/*/test/*.js' '${dirs}/*/{bin,lib}/**/*.spec.js'`],
     'test:tap': () => `tape '${dirs}/*/test/*.js' '${dirs}/*/lib/**/*.spec.js'`,
-    'test:fail': async () => `"${await run('test')}" -f fail`,
+    'test:fail': async () => [env, `"${await cutEnv('test')}" -f fail`],
     'test:slow': () => 'lerna run test',
-    'coverage:long': async () => `c8 ${await run('test')}`,
-    'coverage': async () => `c8 ${await run('test')}`,
+    'coverage:long': async () => [env, `c8 ${await cutEnv('test')}`],
+    'coverage': async () => [env, `c8 ${await cutEnv('test')}`],
     'coverage:tap': async () => `c8 ${await run('test:tap')}`,
     'coverage:slow': () => 'lerna run coverage',
     'lint:slow': () => 'lerna run --no-bail lint',

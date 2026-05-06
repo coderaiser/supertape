@@ -6,7 +6,8 @@
         "**/*.config.*",
         "**/.*",
         "**/lib/**/{fixture,*.spec.*}",
-        "**/packages/supertape/bin/*.js"
+        "**/packages/supertape/bin/*.js",
+        "packages/operator-react"
     ],
     "branches": 100,
     "lines": 100,
