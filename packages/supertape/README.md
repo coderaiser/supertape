@@ -41,7 +41,7 @@
 - ability to test files that imports css with:
 
 ```sh
-NODE_OPTIONS="--import supertape/css" tape '{bin,lib}/**/*.spec.*'
+NODE_OPTIONS="--import @supertape/loader-css" tape '{bin,lib}/**/*.spec.*'
 ```
 
 Or in 🏎️[`madrun`](https://github.com/coderaiser/madrun):
