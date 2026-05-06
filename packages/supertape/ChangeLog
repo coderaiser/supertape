@@ -1,3 +1,10 @@
+2026.05.06, v13.1.0
+
+feature:
+- c6c0441 supertape: loader-dom: add
+- 4f0c57a supertape: supertape v13.0.0
+- c3506f2 supertape: move out loaders
+
 2026.05.05, v13.0.0
 
 feature:
