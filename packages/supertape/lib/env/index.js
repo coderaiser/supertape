@@ -4,8 +4,7 @@ import justSnakeCase from 'just-snake-case';
 const isBool = (a) => typeof a === 'boolean';
 const {entries} = Object;
 
-const addCSSLoader = (a) => `"${a} --import @supertape/loader-css"`;
-const addJSXLoader = (a) => `"${a} --import @supertape/loader-jsx"`;
+const addLoader = (a) => `--import @supertape/loader-${a}`;
 
 const parseValue = (a) => {
     if (isBool(a))
@@ -18,15 +17,23 @@ export const defineEnv = (config, overrides = {}) => {
     const {env = process.env} = overrides;
     const {NODE_OPTIONS = ''} = env;
     const result = {};
+    let localEnv = NODE_OPTIONS;
     
     for (const [key, value] of entries(config)) {
         if (key === 'css' && value) {
-            result.NODE_OPTIONS = addCSSLoader(NODE_OPTIONS);
+            localEnv += ` ${addLoader('css')}`;
             continue;
         }
         
         if (key === 'jsx' && value) {
-            result.NODE_OPTIONS = addJSXLoader(NODE_OPTIONS);
+            localEnv += ` ${addLoader('jsx')}`;
+            
+            continue;
+        }
+        
+        if (key === 'dom' && value) {
+            localEnv += ` ${addLoader('dom')}`;
+            
             continue;
         }
         
@@ -34,6 +41,8 @@ export const defineEnv = (config, overrides = {}) => {
         
         result[name] = parseValue(value);
     }
+    
+    result.NODE_OPTIONS = `"${localEnv}"`;
     
     return result;
 };

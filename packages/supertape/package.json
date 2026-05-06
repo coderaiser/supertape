@@ -11,8 +11,6 @@
     "./bin/supertape": "./bin/tracer.js",
     "./cli": "./lib/cli.js",
     "./exit-codes": "./lib/exit-codes.js",
-    "./css": "./lib/loader/register-css.js",
-    "./jsx": "./lib/loader/register-jsx.js",
     "./env": "./lib/env/index.js"
   },
   "imports": {
