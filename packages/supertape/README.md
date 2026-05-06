@@ -76,6 +76,23 @@ export default {
 };
 ```
 
+or dom:
+
+```js
+import {run, defineEnv} from 'supertape/env';
+
+const testEnv = defineEnv({
+    timeout: 7000,
+    jsx: true,
+    dom: true,
+});
+
+export default {
+    test: () => [testEnv, `tape 'lib/**/*.spec.js'`],
+    coverage: async () => [testEnv, `c8 ${await run('test')}`],
+};
+```
+
 📼 **Supertape** doesn't contain:
 
 - assertion aliases, making the available operators far more concise
