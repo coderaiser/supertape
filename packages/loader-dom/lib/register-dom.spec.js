@@ -1,7 +1,7 @@
 import {test} from 'supertape';
 import './register-dom.js';
 
-test('supertape: loader: register: js: external', async (t) => {
+test('supertape: loader: register: dom', async (t) => {
     const {element} = await import('./fixture/dom.js');
     
     t.ok(element);

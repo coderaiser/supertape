@@ -7,7 +7,7 @@ const importFn = (a) => import(a);
 test('supertape: loader: register: jsx', async (t) => {
     const [error] = await tryToCatch(importFn, './fixture/register.jsx');
     
-    t.match(error.message, 'react');
+    t.notOk(error);
     t.end();
 });
 
@@ -21,7 +21,7 @@ test('supertape: loader: register: jsx: syntax error', async (t) => {
 test('supertape: loader: register: js', async (t) => {
     const [error] = await tryToCatch(importFn, './fixture/register.js');
     
-    t.match(error.message, 'react');
+    t.notOk(error);
     t.end();
 });
 
