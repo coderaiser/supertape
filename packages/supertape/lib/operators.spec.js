@@ -242,6 +242,14 @@ test('supertape: operators: match: not RegExp and String', (t) => {
     t.end();
 });
 
+test('supertape: operators: match: ]', (t) => {
+    const {match} = operators;
+    const {ok} = match('hello', '\u001B[38;2;244;67;54m');
+    
+    t.notOk(ok);
+    t.end();
+});
+
 test('supertape: operators: match: not RegExp, no String', (t) => {
     const {match} = operators;
     const {message} = match({}, {});
