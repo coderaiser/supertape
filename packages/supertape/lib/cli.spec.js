@@ -17,6 +17,7 @@ import {
     OK,
     WAS_STOP,
     SKIPPED,
+    FAIL,
     UNHANDLED,
 } from './exit-codes.js';
 import {enableOnce, disableOnce} from './maybe-once.js';
@@ -342,6 +343,51 @@ test('supertape: cli: exit: skipped', async (t) => {
     enableOnce();
     
     t.calledWith(exit, [SKIPPED], 'should call exit with SKIPPED');
+    t.end();
+});
+
+test('supertape: cli: exit: skipped: failed', async (t) => {
+    const name = new URL('fixture/cli.js', import.meta.url).pathname;
+    const argv = [
+        name,
+        name,
+        '--dry-run',
+    ];
+    
+    const init = stub();
+    const exit = stub();
+    
+    const supertape = stub();
+    const emitter = new EventEmitter();
+    const run = stub().returns(emitter);
+    
+    assign(supertape, {
+        init,
+        createStream,
+        run,
+    });
+    
+    process.env.SUPERTAPE_CHECK_SKIPPED = '1';
+    disableOnce();
+    
+    const emit = emitter.emit.bind(emitter);
+    
+    await Promise.all([
+        runCli({
+            argv,
+            exit,
+            supertape,
+        }),
+        wait(emit, 'end', {
+            skipped: 1,
+            failed: 1,
+        }),
+    ]);
+    
+    delete process.env.SUPERTAPE_CHECK_SKIPPED;
+    enableOnce();
+    
+    t.calledWith(exit, [FAIL], 'should call exit with SKIPPED');
     t.end();
 });
 

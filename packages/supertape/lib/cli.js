@@ -71,11 +71,11 @@ export default async (overrides = {}) => {
     if (isStop())
         return exit(WAS_STOP);
     
-    if (Number(SUPERTAPE_CHECK_SKIPPED) && skipped)
-        return exit(SKIPPED);
-    
     if (failed)
         return exit(FAIL);
+    
+    if (Number(SUPERTAPE_CHECK_SKIPPED) && skipped)
+        return exit(SKIPPED);
     
     if (code === INVALID_OPTION) {
         stderr.write(`${message}\n`);
