@@ -1,5 +1,5 @@
 import {createRequire} from 'node:module';
-import runsome from 'runsome';
+import {runsome} from 'runsome';
 import test from '../lib/supertape.js';
 
 const require = createRequire(import.meta.url);
