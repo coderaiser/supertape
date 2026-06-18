@@ -7,8 +7,6 @@ import {
     CONSOLE_ERROR,
 } from '../lib/worker/create-console-log.js';
 
-const one = (fn) => (a) => fn(a);
-
 const maybeParse = (a) => a && parse(a);
 const {createHarness} = harnessCreator;
 const resolveFormatter = async (name) => await import(`@supertape/formatter-${name}`);
@@ -43,7 +41,7 @@ export async function subscribe({name, exit, worker, stdout}) {
 export function consoleLog({message, logger = console}) {
     const messages = message
         .split(SPLITTER)
-        .map(one(maybeParse));
+        .map(maybeParse);
     
     logger.log(...messages);
 }
@@ -51,7 +49,7 @@ export function consoleLog({message, logger = console}) {
 export function consoleError({message, logger = console}) {
     const messages = message
         .split(SPLITTER)
-        .map(one(maybeParse));
+        .map(maybeParse);
     
     logger.error(...messages);
 }

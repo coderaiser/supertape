@@ -191,10 +191,12 @@ test('supertape: operator: stub: calledWith: deep equals', (t) => {
     
     fn(obj);
     
-    t.calledWith(fn, [{
+    const args = [{
         hello: 'world',
         f: noop,
-    }]);
+    }];
+    
+    t.calledWith(fn, args);
     t.end();
 });
 

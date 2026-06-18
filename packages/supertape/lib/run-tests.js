@@ -196,7 +196,10 @@ async function runOneTest(options) {
             isDebug,
         });
         
-        const [error] = await Promise.race([tryToCatch(fn, t), timer]);
+        const [error] = await Promise.race([
+            tryToCatch(fn, t),
+            timer,
+        ]);
         
         stopTimer();
         isEnded(false);

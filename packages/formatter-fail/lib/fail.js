@@ -1,12 +1,11 @@
 import * as tap from '@supertape/formatter-tap';
+import {fullstore} from 'fullstore';
 
 export {
     start,
     comment,
     end,
 } from '@supertape/formatter-tap';
-
-import {fullstore} from 'fullstore';
 
 const testStore = fullstore();
 
