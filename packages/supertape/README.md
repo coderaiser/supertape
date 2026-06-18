@@ -19,19 +19,13 @@
 📼 **Supertape** is a fast, minimal test runner with the soul of **tape**. It's designed to be as compatible as possible with **tape** while still having some key improvements, such as:
 
 - the ability to work with [ESM Modules](https://nodejs.org/api/esm.html) (take a look at [mock-import](https://github.com/coderaiser/mock-import) for mocking and 🎩[ESCover](https://github.com/coderaiser/escover) for coverage)
-
 - a number of [built-in pretty output formatters](#formatters)
-
 - the ability to [extend](#testextendextensions)
-
 - showing colored diff when using the [`t.equal()`](#tequalresult-any-expected-any-message-string) and [`t.deepEqual()`](#tdeepequalresult-any-expected-any-message-string) assertion operators
 
 - detailed stack traces for `async` functions
-
 - multiple [`test.only`'s](#testonlyname-cb)
-
 - [smart timeouts](#environment-variables) for long running tests 🏃‍♂️
-
 - more natural assertions: `expected, result` -> `result, expected`:
 
   ```js

@@ -1,7 +1,7 @@
 {
     "rules": {
         "nodejs/declare": ["on", {
-            "dismiss": ["setTimeout"]
+            "dismiss": ["setTimeout", "link"]
         }]
     },
     "match": {
