@@ -1,3 +1,8 @@
+2026.07.11, v13.4.1
+
+fix:
+- 7953d59 supertape: env: defineEnv: ts: --enable-source-maps
+
 2026.07.11, v13.4.0
 
 fix:
