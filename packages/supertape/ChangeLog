@@ -1,3 +1,12 @@
+2026.07.11, v13.3.0
+
+feature:
+- 2a006f1 @supertape/loader-ts: add
+- daee6da @supertape/loader-jsx: oxc-transform v0.139.0
+- 2010fcd @supertape/loader-jsx: oxc-transform v0.137.0
+- 2f5fce1 supertape: runsome v2.0.1
+- ef9f8a0 @supertape/loader-jsx: oxc-transform v0.136.0
+
 2026.05.08, v13.2.0
 
 feature:
