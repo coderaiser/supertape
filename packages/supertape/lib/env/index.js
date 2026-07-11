@@ -37,6 +37,12 @@ export const defineEnv = (config, overrides = {}) => {
             continue;
         }
         
+        if (key === 'ts' && value) {
+            localEnv += ` ${addLoader('ts')}`;
+            
+            continue;
+        }
+        
         const name = `SUPERTAPE_${justSnakeCase(key).toUpperCase()}`;
         
         result[name] = parseValue(value);

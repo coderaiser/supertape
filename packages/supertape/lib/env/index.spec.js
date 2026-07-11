@@ -83,3 +83,25 @@ test('supertape: env: defineEnv: options', (t) => {
     t.deepEqual(result, expected);
     t.end();
 });
+
+test('supertape: env: defineEnv: ts', (t) => {
+    const NODE_OPTIONS = '--unhandled-rejections=strict';
+    const env = {
+        NODE_OPTIONS,
+    };
+    
+    const result = defineEnv({
+        timeout: 7000,
+        ts: true,
+    }, {
+        env,
+    });
+    
+    const expected = {
+        SUPERTAPE_TIMEOUT: 7000,
+        NODE_OPTIONS: '"--unhandled-rejections=strict --import @supertape/loader-ts"',
+    };
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
