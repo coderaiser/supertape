@@ -1,3 +1,11 @@
+2026.07.11, v13.4.0
+
+fix:
+- efa4a94 @supertape/loader-ts: name
+
+feature:
+- 3c95be5 supertape: defineEnv: types
+
 2026.07.11, v13.3.0
 
 feature:
