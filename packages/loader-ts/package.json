@@ -23,7 +23,6 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
-    "oxc-transform": "^0.139.0",
     "reflect-metadata": "^0.2.2"
   },
   "keywords": [

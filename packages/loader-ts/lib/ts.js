@@ -18,7 +18,7 @@ export function load(url, context, nextLoad) {
         
         return {
             format: 'module',
-            source: tsToJs(String(source)),
+            source: tsToJs(url, String(source)),
             shortCircuit: true,
         };
     }
@@ -26,13 +26,17 @@ export function load(url, context, nextLoad) {
     return nextLoad(url, context);
 }
 
-export function tsToJs(source) {
+export function tsToJs(fileName, source) {
     const {outputText} = ts.transpileModule(source, {
+        fileName,
         compilerOptions: {
             module: ts.ModuleKind.ESM,
             target: ts.ScriptTarget.ES2026,
             experimentalDecorators: true,
             emitDecoratorMetadata: true,
+            sourceMap: true,
+            inlineSources: true,
+            inlineSourceMap: true,
         },
     });
     
