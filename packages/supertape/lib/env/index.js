@@ -39,6 +39,7 @@ export const defineEnv = (config, overrides = {}) => {
         
         if (key === 'ts' && value) {
             localEnv += ` ${addLoader('ts')}`;
+            localEnv += ` --enable-source-maps`;
             
             continue;
         }

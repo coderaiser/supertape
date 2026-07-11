@@ -99,7 +99,7 @@ test('supertape: env: defineEnv: ts', (t) => {
     
     const expected = {
         SUPERTAPE_TIMEOUT: 7000,
-        NODE_OPTIONS: '"--unhandled-rejections=strict --import @supertape/loader-ts"',
+        NODE_OPTIONS: '"--unhandled-rejections=strict --import @supertape/loader-ts --enable-source-maps"',
     };
     
     t.deepEqual(result, expected);
