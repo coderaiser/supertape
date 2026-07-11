@@ -23,11 +23,10 @@
 - detailed stack traces for `async` functions
 - multiple [`test.only`'s](#testonlyname-cb)
 - [smart timeouts](#environment-variables) for long running tests 🏃‍♂️
-- more natural assertions: `expected, result` -> `result, expected`:
-
-  ```js
+- more natural assertions: `expected, result` -> `result, expected`:```js
   t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
-  ```
+
+````
 - ability to generate tests with ♨️[**Speca**](https://github.com/coderaiser/speca)
 
 📼 **Supertape** doesn't contain:
@@ -45,17 +44,14 @@ You can use both **CommonJS** and **ESM**, here is **ESM** example:
 
 ```js
 import {test} from 'supertape';
-
 const sump = (a, b) => a + b;
-
 test('calc: sum', (t) => {
     const result = sum(1, 2);
     const expected = 3;
-    
     t.equal(result, expected);
     t.end();
 });
-```
+````
 
 ## Install
 
@@ -88,10 +84,7 @@ Options
 - `SUPERTAPE_LOAD_LOOP_TIMEOUT` - timeout for load tests, defaults to `5ms`, when mocha used as runner - `50ms` optimal;
 
 ```js
-test('tape: error', (t) => {
-    t.equal(error.code, 'ENOENT');
-    t.end();
-});
+t.equal(error.message, 'hello world', `expected error.message to be 'hello world'`);
 ```
 
 ## 🤷 How to migrate from **tape**?
@@ -124,8 +117,15 @@ and has auto fixable rule 🐊[`remove-useless-t-end`](https://github.com/codera
 #### ❌ Example of incorrect code
 
 ```js
-test('hello: world', (t) => {
-    t.end();
+import {test} from 'supertape';
+
+const sump = (a, b) => a + b;
+
+test('calc: sum', (t) => {
+    const result = sum(1, 2);
+    const expected = 3;
+    
+    t.equal(result, expected);
     t.end();
 });
 ```
@@ -133,7 +133,8 @@ test('hello: world', (t) => {
 #### ✅ Example of correct code
 
 ```js
-test('hello: world', (t) => {
+test('tape: error', (t) => {
+    t.equal(error.code, 'ENOENT');
     t.end();
 });
 ```
@@ -149,14 +150,13 @@ Check for duplicates in test messages. Can be disabled with:
 
 ```js
 test('hello: world', (t) => {
-    t.equal(1, 1);
+    t.end();
     t.end();
 });
 ```
 
 ```js
 test('hello: world', (t) => {
-    t.equal(2, 1);
     t.end();
 });
 ```
@@ -167,6 +167,31 @@ Check that test message are divided on groups by colons. Can be disabled with:
 
 - passing `--no-check-scopes` command line flag;
 - setting `SUPERTAPE_CHECK_SCOPES=0` env variable;
+
+#### ❌ Example of incorrect code
+
+```js
+test('hello: world', (t) => {
+    t.equal(1, 1);
+    t.end();
+});
+```
+
+#### ✅ Example of correct code
+
+```js
+test('hello: world', (t) => {
+    t.equal(2, 1);
+    t.end();
+});
+```
+
+### Check assertions count
+
+Check that test contains exactly one assertion. Can be disabled with:
+
+- passing `--no-check-assertions-count` command line flag;
+- setting `SUPERTAPE_CHECK_ASSERTIONS_COUNT=0` env variable;
 
 #### ❌ Example of incorrect code
 
@@ -182,41 +207,6 @@ test('hello', (t) => {
 ```js
 test('hello: world', (t) => {
     t.equal(1, 1);
-    t.end();
-});
-```
-
-### Check assertions count
-
-Check that test contains exactly one assertion. Can be disabled with:
-
-- passing `--no-check-assertions-count` command line flag;
-- setting `SUPERTAPE_CHECK_ASSERTIONS_COUNT=0` env variable;
-
-#### ❌ Example of incorrect code
-
-```js
-test('hello: no assertion', (t) => {
-    t.end();
-});
-
-test('hello: more then one assertion', (t) => {
-    t.equal(1, 1);
-    t.equal(2, 2);
-    t.end();
-});
-```
-
-#### ✅ Example of correct code
-
-```js
-test('hello: one', (t) => {
-    t.equal(1, 1);
-    t.end();
-});
-
-test('hello: two', (t) => {
-    t.equal(2, 2);
     t.end();
 });
 ```
@@ -294,7 +284,7 @@ To simplify the core of 📼 **Supertape**, other operators are maintained in se
 Here is a list of built-int operators:
 
 | Package | Version |
-|--------|-------|
+|---------|---------|
 | [`@supertape/operator-stub`](/packages/operator-stub) | [![npm](https://img.shields.io/npm/v/@supertape/operator-stub.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-stub) |
 | [`@supertape/operator-react`](/packages/operator-react) | [![npm](https://img.shields.io/npm/v/@supertape/operator-react.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-react) |
 | [`@supertape/operator-strip`](/packages/operator-strip) | [![npm](https://img.shields.io/npm/v/@supertape/operator-strip.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/operator-strip) |
@@ -304,7 +294,7 @@ Here is a list of built-int operators:
 There is a list of built-int `formatters` to customize output:
 
 | Package | Version |
-|--------|-------|
+|---------|---------|
 | [`@supertape/formatter-tap`](/packages/formatter-tap) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-tap.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-tap) |
 | [`@supertape/formatter-time`](/packages/formatter-time) | [![time](https://img.shields.io/npm/v/@supertape/formatter-time.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-time) |
 | [`@supertape/formatter-fail`](/packages/formatter-fail) | [![npm](https://img.shields.io/npm/v/@supertape/formatter-fail.svg?maxAge=86400)](https://www.npmjs.com/package/@supertape/formatter-fail) |
@@ -316,8 +306,7 @@ There is a list of built-int `formatters` to customize output:
 
 ### test(message: string, fn: (t: Test) => void, options?: TestOptions)
 
-Create a new test with `message` string.
-`fn(t)` fires with the new test object `t` once all preceding tests have
+Create a new test with `message` string.`fn(t)` fires with the new test object `t` once all preceding tests have
 finished. Tests execute serially.
 
 Here is Possible `options` similar to [Environment Variables](#environment-variables) but relates to one test:
@@ -338,6 +327,47 @@ be ignored.
 Extend base assertions with more:
 
 ```js
+test('hello: no assertion', (t) => {
+    t.end();
+});
+
+test('hello: more then one assertion', (t) => {
+    t.equal(1, 1);
+    t.equal(2, 2);
+    t.end();
+});
+```
+
+## 🚪Exit Codes
+
+📼**Supertape** can have one of next [exit codes](https://github.com/coderaiser/supertape/blob/master/packages/supertape/lib/exit-codes.js):
+
+| Code | Name             | Description                                                                          |
+|------|------------------|--------------------------------------------------------------------------------------|
+| 0    | `OK`             | no errors found                                                                      |
+| 1    | `FAIL`           | test failed                                                                          |
+| 2    | `WAS_STOP`       | test was halted by user                                                              |
+| 3    | `UNHANDLED`      | unhandled exception occurred                                                         |
+| 4    | `INVALID_OPTION` | wrong option provided                                                                |
+| 5    | `SKIPPED`        | works only with `SUPERTAPE_CHECK_SKIPPED` env variable when skipped files 1 and more |
+
+Here is how exit code can look like:
+
+```js
+test('hello: one', (t) => {
+    t.equal(1, 1);
+    t.end();
+});
+
+test('hello: two', (t) => {
+    t.equal(2, 2);
+    t.end();
+});
+```
+
+## Example
+
+```js
 const {extend} = require('supertape');
 const test = extend({
     transform: (operator) => (a, b, message = 'should transform') => {
@@ -354,62 +384,6 @@ test('assertion', (t) => {
     t.transform(1, 3);
     t.end();
 });
-```
-
-## 🚪Exit Codes
-
-📼**Supertape** can have one of next [exit codes](https://github.com/coderaiser/supertape/blob/master/packages/supertape/lib/exit-codes.js):
-
-| Code | Name | Description |
-|------|------|-----------------|
-| 0    | `OK` | no errors found |
-| 1    | `FAIL` | test failed |
-| 2    | `WAS_STOP` | test was halted by user |
-| 3    | `UNHANDLED`| unhandled exception occurred |
-| 4    | `INVALID_OPTION`| wrong option provided |
-| 5    | `SKIPPED` | works only with `SUPERTAPE_CHECK_SKIPPED` env variable when skipped files 1 and more |
-
-Here is how exit code can look like:
-
-```js
-import {SKIPPED} from 'supertape/exit-codes';
-
-const env = {
-    ESCOVER_SUCCESS_EXIT_CODE: SKIPPED,
-    SUPERTAPE_CHECK_SKIPPED: 1,
-};
-
-export default {
-    test: () => [env, `escover tape 'test/**/*.js' 'lib/**/*.spec.js'`],
-};
-```
-
-## Example
-
-```js
-const test = require('supertape');
-
-test('lib: arguments', async (t) => {
-    throw Error('hello');
-    // will call t.fail with an error
-    // will call t.end
-});
-
-test('lib: diff', (t) => {
-    t.equal({}, {hello: 'world'}, 'should equal');
-    t.end();
-});
-
-// output
-`
-- Expected
-+ Received
-
-- Object {}
-+ Object {
-+   "hello": "world",
-+ }
-`;
 ```
 
 ## License
