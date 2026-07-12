@@ -44,6 +44,13 @@ export const defineEnv = (config, overrides = {}) => {
             continue;
         }
         
+        if (key === 'nestjs' && value) {
+            localEnv += ` ${addLoader('nestjs')}`;
+            localEnv += ` --enable-source-maps`;
+            
+            continue;
+        }
+        
         const name = `SUPERTAPE_${justSnakeCase(key).toUpperCase()}`;
         
         result[name] = parseValue(value);

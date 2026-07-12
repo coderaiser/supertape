@@ -105,3 +105,25 @@ test('supertape: env: defineEnv: ts', (t) => {
     t.deepEqual(result, expected);
     t.end();
 });
+
+test('supertape: env: defineEnv: nestjs', (t) => {
+    const NODE_OPTIONS = '--unhandled-rejections=strict';
+    const env = {
+        NODE_OPTIONS,
+    };
+    
+    const result = defineEnv({
+        timeout: 7000,
+        nestjs: true,
+    }, {
+        env,
+    });
+    
+    const expected = {
+        SUPERTAPE_TIMEOUT: 7000,
+        NODE_OPTIONS: '"--unhandled-rejections=strict --import @supertape/loader-nestjs --enable-source-maps"',
+    };
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
