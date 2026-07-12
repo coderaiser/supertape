@@ -1,3 +1,9 @@
+2026.07.12, v13.4.2
+
+feature:
+- 6448d89 @supertape/loader-nestjs: add
+- faa0d65 @supertape/loader-ts: exports
+
 2026.07.11, v13.4.1
 
 fix:
