@@ -104,6 +104,15 @@ Here is [result example](https://github.com/coderaiser/cloudcmd/commit/74d56f795
 - ✅ [`add-newline-before-assertion`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-add-newline-before-assertion#readme)
 - ✅ [`add-newline-between-tests`](https://github.com/coderaiser/putout/tree/master/packages/eslint-plugin-putout/lib/tape-add-newline-between-tests#readme)
 
+## Loaders
+
+Use `defineEnv` to apply one of loaders:
+
+- [`css`](https://github.com/coderaiser/supertape/tree/master/packages/loader-dom#supertapeloader-css-);
+- [`dom`](https://github.com/coderaiser/supertape/tree/master/packages/loader-dom#supertapeloader-dom-);
+- [`ts`](https://github.com/coderaiser/supertape/tree/master/packages/loader-dom#supertapeloader-ts-);
+- [`nestjs`](https://github.com/coderaiser/supertape/tree/master/packages/loader-dom#supertapeloader-nestjs-);
+
 ## Validation checks
 
 To up the quality of your tests even higher, 📼**Supertape** has built-in checks.
