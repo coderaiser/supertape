@@ -5,6 +5,10 @@
   "description": "📼Supertape loader ts",
   "homepage": "http://github.com/coderaiser/supertape/tree/master/packages/loader-ts",
   "main": "./lib/register-ts.js",
+  "exports": {
+    ".": "./lib/register-ts.js",
+    "./ts": "./lib/ts.js"
+  },
   "release": false,
   "tag": false,
   "changelog": false,
