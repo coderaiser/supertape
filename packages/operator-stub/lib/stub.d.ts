@@ -6,18 +6,20 @@ type OperationResult = {
     actual: unknown;
     message: string;
 };
+type AnyStub = Stub<any, any>;
 
-export function stub(arg?: unknown): Stub;
+export function stub(arg?: unknown): AnyStub;
+
 export interface OperatorStub {
-    called: (fn: Stub, message?: string) => OperationResult;
-    notCalled: (fn: Stub, message?: string) => OperationResult;
-    calledWith: (fn: Stub, args: unknown[], message?: string) => OperationResult;
-    calledWithNoArgs: (fn: Stub, message?: string) => OperationResult;
-    calledCount: (fn: Stub, count: number, message?: string) => OperationResult;
-    calledOnce: (fn: Stub, message?: string) => OperationResult;
-    calledTwice: (fn: Stub, message?: string) => OperationResult;
-    calledWithNew: (fn: Stub, message?: string) => OperationResult;
-    calledBefore: (fn1: Stub, fn2: Stub, message?: string) => OperationResult;
-    calledAfter: (fn1: Stub, fn2: Stub, message?: string) => OperationResult;
-    calledInOrder: (fns: Stub[], message?: string) => OperationResult;
+    called: (fn: AnyStub, message?: string) => OperationResult;
+    notCalled: (fn: AnyStub, message?: string) => OperationResult;
+    calledWith: <Args extends unknown[]>(fn: Stub<Args, any>, args: Args, message?: string) => OperationResult;
+    calledWithNoArgs: (fn: AnyStub, message?: string) => OperationResult;
+    calledCount: (fn: AnyStub, count: number, message?: string) => OperationResult;
+    calledOnce: (fn: AnyStub, message?: string) => OperationResult;
+    calledTwice: (fn: AnyStub, message?: string) => OperationResult;
+    calledWithNew: (fn: AnyStub, message?: string) => OperationResult;
+    calledBefore: (fn1: AnyStub, fn2: AnyStub, message?: string) => OperationResult;
+    calledAfter: (fn1: AnyStub, fn2: AnyStub, message?: string) => OperationResult;
+    calledInOrder: (fns: AnyStub[], message?: string) => OperationResult;
 }

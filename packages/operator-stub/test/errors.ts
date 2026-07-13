@@ -1,7 +1,7 @@
 import {stub, Stub} from '@cloudcmd/stub';
 import {test, Test} from 'supertape';
 
-// THROWS Type 'Stub' is not assignable to type 'string'.
+// THROWS Type 'Stub<any[], void>' is not assignable to type 'string'.
 const a: string = stub();
 
 const fn: Stub = stub();
@@ -36,7 +36,7 @@ test('calledInOrder', (t: Test) => {
 });
 
 test('calledInOrder: not stub', (t: Test) => {
-    // THROWS Type 'FunctionConstructor' is not assignable to type 'Stub'.
+    // THROWS Type 'FunctionConstructor' is not assignable to type 'AnyStub'.
     t.calledInOrder([Function]);
     t.end();
 });
