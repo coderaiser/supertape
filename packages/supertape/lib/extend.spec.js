@@ -14,7 +14,10 @@ const extendedTest = extend({
 });
 
 test('supertape: mjs: default: equal', (t) => {
-    t.equal(1, 1);
+    const result = 1;
+    const expected = 1;
+    
+    t.equal(result, expected);
     t.end();
 });
 

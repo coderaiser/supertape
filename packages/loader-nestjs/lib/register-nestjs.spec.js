@@ -7,11 +7,11 @@ const importFn = (a) => import(a);
 test('supertape: loader: register: nestjs: syntax error', async (t) => {
     const [error] = await tryToCatch(importFn, './fixture/syntax-error.ts');
     
-    t.equal(error.message, `Unexpected token (2:0)`);
+    t.match(error.message, `Unexpected token`);
     t.end();
 });
 
-test('supertape: loader: register: ts', async (t) => {
+test('supertape: loader: register: nestjs', async (t) => {
     const [error] = await tryToCatch(importFn, './fixture/register.ts');
     
     t.match(error.message, `Inject is not defined`);

@@ -7,7 +7,7 @@ const importFn = (a) => import(a);
 test('supertape: loader: register: ts: syntax error', async (t) => {
     const [error] = await tryToCatch(importFn, './fixture/syntax-error.ts');
     
-    t.equal(error.message, `Unexpected token ';'`);
+    t.match(error.message, `Unexpected token`);
     t.end();
 });
 

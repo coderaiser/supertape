@@ -9,7 +9,9 @@ const run = runsome(name);
 
 test('supertape: bin: -v', (t) => {
     const {version} = require('../package.json');
+    const result = run('-v');
+    const expected = `v${version}`;
     
-    t.equal(run('-v'), `v${version}`);
+    t.equal(result, expected);
     t.end();
 });

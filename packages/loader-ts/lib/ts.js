@@ -19,7 +19,6 @@ export function load(url, context, nextLoad) {
         return {
             format: 'module',
             source: tsToJs(url, String(source)),
-            shortCircuit: true,
         };
     }
     
