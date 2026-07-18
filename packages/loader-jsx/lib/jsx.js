@@ -23,7 +23,6 @@ export function load(url, context, nextLoad) {
         return {
             format: 'module',
             source: jsxToJs(url, String(source)),
-            shortCircuit: true,
         };
     }
     
