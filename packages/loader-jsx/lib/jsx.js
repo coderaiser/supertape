@@ -1,3 +1,4 @@
+import {Buffer} from 'node:buffer';
 import {transformSync} from 'oxc-transform';
 
 export function resolve(specifier, context, nextResolve) {
@@ -21,7 +22,7 @@ export function load(url, context, nextLoad) {
         
         return {
             format: 'module',
-            source: jsxToJs(String(source)),
+            source: jsxToJs(url, String(source)),
             shortCircuit: true,
         };
     }
@@ -29,13 +30,22 @@ export function load(url, context, nextLoad) {
     return nextLoad(url, context);
 }
 
-export function jsxToJs(source) {
-    const {errors, code} = transformSync('__supertape.js', source, {
+export function jsxToJs(url, source) {
+    const {
+        errors,
+        code,
+        map,
+    } = transformSync(url, source, {
+        sourcemap: true,
         lang: 'jsx',
     });
     
     if (errors.length)
         throw Error(errors[0].message);
     
-    return code;
+    const mapBase64 = Buffer
+        .from(JSON.stringify(map))
+        .toString('base64');
+    
+    return `${code}\n//# sourceMappingURL=data:application/json;base64,${mapBase64}`;
 }
