@@ -1,3 +1,13 @@
+2026.07.19, v13.4.3
+
+fix:
+- af537c1 @supertape/loader-jsx: rm shirtCircuit
+- e9b7a72 @supertape/loader-jsx: add sourcemap
+
+feature:
+- c529b8d supertape: env: types: nestjs
+- 9741e79 @supertape/operator-stub: improve types
+
 2026.07.12, v13.4.2
 
 feature:
