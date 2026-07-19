@@ -5,6 +5,9 @@
         }]
     },
     "match": {
+        "test/*.ts": {
+            "remove-console": "off"
+        },
         "register*.js": {
             "esm/remove-empty-import": "off"
         },
