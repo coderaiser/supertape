@@ -38,9 +38,10 @@ export type TestOptions = {
     timeout?: number;
 };
 
-export type TestFunction<T extends Test = Test> = ((message: string, fn: (t: T) => void, options?: TestOptions) => void) & {
+type TestFunction<T extends Test = Test> = ((message: string, fn: (t: T) => void, options?: TestOptions) => void) & {
     skip: TestFunction<T>;
     only: TestFunction<T>;
+    extend<U extends CustomOperator>(operators: U): TestFunction<T & OperatorsToMethods<U>>;
 };
 
 export let test: TestFunction<Test>;

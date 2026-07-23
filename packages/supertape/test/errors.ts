@@ -121,3 +121,6 @@ callWhenTestsEnds();
 // THROWS Argument of type '(a: number) => number' is not assignable to parameter of type '() => number | void'.
 callWhenTestsEnds('hello', (a: number) => a);
 callWhenTestsEnds('hello', () => {});
+
+// THROWS Expected 1 arguments, but got 0.
+test.extend();
