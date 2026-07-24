@@ -122,5 +122,5 @@ callWhenTestsEnds();
 callWhenTestsEnds('hello', (a: number) => a);
 callWhenTestsEnds('hello', () => {});
 
-// THROWS Expected 1 arguments, but got 0.
-test.extend();
+// THROWS Argument of type 'number' is not assignable to parameter of type 'CustomOperator'.
+test.extend(1);

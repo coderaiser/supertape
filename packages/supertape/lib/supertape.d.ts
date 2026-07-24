@@ -41,7 +41,9 @@ export type TestOptions = {
 type TestFunction<T extends Test = Test> = ((message: string, fn: (t: T) => void, options?: TestOptions) => void) & {
     skip: TestFunction<T>;
     only: TestFunction<T>;
-    extend<U extends CustomOperator>(operators: U): TestFunction<T & OperatorsToMethods<U>>;
+    extend<U extends CustomOperator = {}>(
+        operators?: U,
+    ): TestFunction<T & OperatorsToMethods<U>>;
 };
 
 export let test: TestFunction<Test>;
