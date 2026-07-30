@@ -586,9 +586,8 @@ test('supertape: extensions: extend: async', async (t) => {
         },
     };
     
-    const fn = async (t) => {
-        await t.transformCode(0, 1);
-        t.end();
+    const fn = async ({transformCode}) => {
+        await transformCode(0, 1);
     };
     
     const message = 'extend: async';

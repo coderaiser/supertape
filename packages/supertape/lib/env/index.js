@@ -8,7 +8,7 @@ const addLoader = (a) => `--import @supertape/loader-${a}`;
 
 const parseValue = (a) => {
     if (isBool(a))
-        return a ? 1 : 0;
+        return Number(a);
     
     return a;
 };
