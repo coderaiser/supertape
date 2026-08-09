@@ -26,6 +26,8 @@ const filesCount = fullstore(0);
 const removeDuplicates = (a) => Array.from(new Set(a));
 const isExclude = (a) => !a.includes('node_modules');
 
+const resolveBeforeImportForWindows = ({cwd, file}) => pathToFileURL(resolvePath(cwd, file)))
+
 export default async (overrides = {}) => {
     const {
         argv,
@@ -166,9 +168,11 @@ async function _cli(overrides) {
     
     const resolvedNames = [];
     
-    // always resolve before import for windows
     for (const file of files) {
-        resolvedNames.push(pathToFileURL(resolvePath(cwd, file)));
+        resolvedNames.push(resolveBeforeImportForWindows({
+            cwd,
+            path,
+        }));
     }
     
     if (!args.dryRun)
