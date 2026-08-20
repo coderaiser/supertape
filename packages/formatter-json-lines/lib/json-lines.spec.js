@@ -1,3 +1,4 @@
+import process from 'node:process';
 import {montag} from 'montag';
 import pullout from 'pullout';
 import {test, createTest} from 'supertape';
@@ -158,5 +159,50 @@ test('supertape: format: json-lines: comment', async (t) => {
     }];
     
     t.deepEqual(parsed, expected);
+    t.end();
+});
+
+test('supertape: format: json-lines: SUPERTAPE_JSON_LINES_FAIL', async (t) => {
+    const successFn = (t) => {
+        t.ok(true);
+        t.end();
+    };
+    
+    const successMessage = 'json-lines: success';
+    
+    const tapFn = (t) => {
+        t.ok(false);
+        t.end();
+    };
+    
+    const tapMessage = 'json-lines: tap';
+    
+    const {SUPERTAPE_JSON_LINES_FAIL} = process.env;
+    
+    process.env.SUPERTAPE_JSON_LINES_FAIL = '1';
+    
+    const {
+        test,
+        run,
+        stream,
+    } = await createTest({
+        format: 'json-lines',
+    });
+    
+    test(successMessage, successFn);
+    test(tapMessage, tapFn);
+    
+    const [result] = await Promise.all([
+        pull(stream, 2),
+        run(),
+    ]);
+    
+    process.env.SUPERTAPE_JSON_LINES_FAIL = SUPERTAPE_JSON_LINES_FAIL;
+    
+    const expected = montag`
+      {"test":"json-lines: tap","at":"at tapFn
+    `;
+    
+    t.match(result, expected);
     t.end();
 });

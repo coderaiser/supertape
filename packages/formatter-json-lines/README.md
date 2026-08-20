@@ -22,6 +22,10 @@ supertape --format json-lines lib
 {"count":3,"passed":3,"failed":0,"skipped":0}
 ```
 
+## Env Variables
+
+- `SUPERTAPE_JSON_LINES_FAIL=1` - output only failed tests;
+
 ## License
 
 MIT

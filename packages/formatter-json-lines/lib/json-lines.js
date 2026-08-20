@@ -1,3 +1,4 @@
+import {env} from 'node:process';
 import {fullstore} from 'fullstore';
 
 const out = createOutput();
@@ -10,6 +11,11 @@ export const test = ({test}) => {
 const stringify = (a) => JSON.stringify(a) + '\n';
 
 export const testEnd = ({count, total, failed, test}) => {
+    const {SUPERTAPE_JSON_LINES_FAIL} = env;
+    
+    if (SUPERTAPE_JSON_LINES_FAIL)
+        return '';
+    
     return stringify({
         count,
         total,
