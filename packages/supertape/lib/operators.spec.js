@@ -2,6 +2,7 @@ import {once, EventEmitter} from 'node:events';
 import {stub} from '@cloudcmd/stub';
 import currify from 'currify';
 import {tryCatch} from 'try-catch';
+import {montag} from 'montag';
 import test from './supertape.js';
 import {initOperators, operators} from './operators.js';
 
@@ -51,7 +52,10 @@ test('supertape: operators: extendOperators: curried promise', async (t) => {
     }));
     
     const [error] = tryCatch(transformCode, 'a', 'a');
-    const expected = `☝️ Looks like test function returned Promise, but it was determined as not async function. Maybe the reason is 'curry', try to create to separate functions instead`;
+    
+    const expected = montag`
+        ☝️ Looks like test function returned Promise, but it was determined as not async function. Maybe the reason is 'curry', try to create to separate functions instead
+    `;
     
     t.equal(error?.message, expected);
     t.end();

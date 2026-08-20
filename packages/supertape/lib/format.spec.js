@@ -4,7 +4,10 @@ import test from './supertape.js';
 import {parseAt} from './format.js';
 
 test('supertape: format', (t) => {
-    const stack = `Error: ENOENT: no such file or directory, open '/abc'`;
+    const stack = montag`
+        Error: ENOENT: no such file or directory, open '/abc'
+    `;
+    
     const result = parseAt(stack);
     
     t.equal(result, stack);
@@ -47,7 +50,9 @@ test('supertape: format: parseAt: looks like empty', (t) => {
     
     const result = parseAt(stack);
     
-    const expected = `Error: ☝️Looks like provided fixture cannot be parsed: 'const foo1 =`;
+    const expected = montag`
+        Error: ☝️Looks like provided fixture cannot be parsed: 'const foo1 =
+    `;
     
     t.match(result, expected);
     t.end();
@@ -70,7 +75,9 @@ test('supertape: format: parseAt: long', (t) => {
     
     const result = parseAt(stack);
     
-    const expected = ` at file:///Users/coderaiser/cloudcmd/client/sw/register.spec.js:87:7`;
+    const expected = montag`
+         at file:///Users/coderaiser/cloudcmd/client/sw/register.spec.js:87:7
+    `;
     
     t.match(result, expected);
     t.end();
