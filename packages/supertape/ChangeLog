@@ -1,3 +1,11 @@
+2026.08.30, v13.5.2
+
+fix:
+- 5486897 supertape: env: --enable-source-maps
+
+feature:
+- 4c2ca7a @supertape/formatter-json-lines: SUPERTAPE_JSON_LINES_FAIL: add
+
 2026.07.24, v13.5.1
 
 fix:
