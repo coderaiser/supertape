@@ -27,6 +27,7 @@ export const defineEnv = (config, overrides = {}) => {
         
         if (key === 'jsx' && value) {
             localEnv += ` ${addLoader('jsx')}`;
+            localEnv += ` --enable-source-maps`;
             
             continue;
         }
