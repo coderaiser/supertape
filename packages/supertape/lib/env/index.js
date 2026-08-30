@@ -17,7 +17,7 @@ export const defineEnv = (config, overrides = {}) => {
     const {env = process.env} = overrides;
     const {NODE_OPTIONS = ''} = env;
     const result = {};
-    let localEnv = NODE_OPTIONS;
+    let localEnv = `${NODE_OPTIONS} --enable-source-maps`;
     
     for (const [key, value] of entries(config)) {
         if (key === 'css' && value) {
@@ -27,28 +27,21 @@ export const defineEnv = (config, overrides = {}) => {
         
         if (key === 'jsx' && value) {
             localEnv += ` ${addLoader('jsx')}`;
-            localEnv += ` --enable-source-maps`;
-            
             continue;
         }
         
         if (key === 'dom' && value) {
             localEnv += ` ${addLoader('dom')}`;
-            
             continue;
         }
         
         if (key === 'ts' && value) {
             localEnv += ` ${addLoader('ts')}`;
-            localEnv += ` --enable-source-maps`;
-            
             continue;
         }
         
         if (key === 'nestjs' && value) {
             localEnv += ` ${addLoader('nestjs')}`;
-            localEnv += ` --enable-source-maps`;
-            
             continue;
         }
         

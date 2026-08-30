@@ -16,7 +16,7 @@ test('supertape: env: defineEnv: css', (t) => {
     
     const expected = {
         SUPERTAPE_TIMEOUT: 7000,
-        NODE_OPTIONS: '"--unhandled-rejections=strict --import @supertape/loader-css"',
+        NODE_OPTIONS: '"--unhandled-rejections=strict --enable-source-maps --import @supertape/loader-css"',
     };
     
     t.deepEqual(result, expected);
@@ -38,7 +38,7 @@ test('supertape: env: defineEnv: jsx', (t) => {
     
     const expected = {
         SUPERTAPE_TIMEOUT: 7000,
-        NODE_OPTIONS: '"--unhandled-rejections=strict --import @supertape/loader-jsx --enable-source-maps"',
+        NODE_OPTIONS: '"--unhandled-rejections=strict --enable-source-maps --import @supertape/loader-jsx"',
     };
     
     t.deepEqual(result, expected);
@@ -61,7 +61,7 @@ test('supertape: env: defineEnv: dom', (t) => {
     
     const expected = {
         SUPERTAPE_TIMEOUT: 7000,
-        NODE_OPTIONS: '"--unhandled-rejections=strict --import @supertape/loader-jsx --enable-source-maps --import @supertape/loader-dom"',
+        NODE_OPTIONS: '"--unhandled-rejections=strict --enable-source-maps --import @supertape/loader-jsx --import @supertape/loader-dom"',
     };
     
     t.deepEqual(result, expected);
@@ -75,7 +75,7 @@ test('supertape: env: defineEnv: options', (t) => {
     });
     
     const expected = {
-        NODE_OPTIONS: `"--unhandled-rejections=strict"`,
+        NODE_OPTIONS: `"--unhandled-rejections=strict --enable-source-maps"`,
         SUPERTAPE_CHECK_ASSERTIONS_COUNT: 0,
         SUPERTAPE_CHECK_SCOPES: 1,
     };
@@ -99,7 +99,7 @@ test('supertape: env: defineEnv: ts', (t) => {
     
     const expected = {
         SUPERTAPE_TIMEOUT: 7000,
-        NODE_OPTIONS: '"--unhandled-rejections=strict --import @supertape/loader-ts --enable-source-maps"',
+        NODE_OPTIONS: '"--unhandled-rejections=strict --enable-source-maps --import @supertape/loader-ts"',
     };
     
     t.deepEqual(result, expected);
@@ -121,7 +121,7 @@ test('supertape: env: defineEnv: nestjs', (t) => {
     
     const expected = {
         SUPERTAPE_TIMEOUT: 7000,
-        NODE_OPTIONS: '"--unhandled-rejections=strict --import @supertape/loader-nestjs --enable-source-maps"',
+        NODE_OPTIONS: '"--unhandled-rejections=strict --enable-source-maps --import @supertape/loader-nestjs"',
     };
     
     t.deepEqual(result, expected);
