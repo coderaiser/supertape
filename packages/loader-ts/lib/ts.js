@@ -29,6 +29,7 @@ export function tsToJs(fileName, source) {
     const {outputText} = ts.transpileModule(source, {
         fileName,
         compilerOptions: {
+            jsx: ts.JsxEmit.ReactJSX,
             module: ts.ModuleKind.ESM,
             target: ts.ScriptTarget.ES2026,
             experimentalDecorators: true,

@@ -25,3 +25,11 @@ test('supertape: loader: register: ts: external', async (t) => {
     t.ok(typeof Time, 'function');
     t.end();
 });
+
+test('supertape: loader: register: tsx', async (t) => {
+    const [error] = await tryToCatch(importFn, './fixture/register.tsx');
+    const expected = 'Inject is not defined';
+    
+    t.equal(error.message, expected);
+    t.end();
+});
