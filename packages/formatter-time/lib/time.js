@@ -92,10 +92,12 @@ export const testEnd = ({barStore, clock, timerStore}) => ({count, total, failed
         total,
         test,
         failed: formatErrorsCount(failed),
-        time: !timer ? '' : getTime({
-            clock,
-            timer: timerStore(),
-        }),
+        time: !timer
+            ? ''
+            : getTime({
+                clock,
+                timer: timerStore(),
+            }),
     });
 };
 
