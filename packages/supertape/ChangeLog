@@ -1,3 +1,9 @@
+2026.09.02, v13.6.0
+
+feature:
+- 6b68b91 supertape: env: types: jsx
+- 292e4f3 @supertape/loader-ts: tsx
+
 2026.08.30, v13.5.2
 
 fix:
