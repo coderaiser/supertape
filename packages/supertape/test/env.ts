@@ -6,6 +6,7 @@ const testEnv = defineEnv({
 
 const {NODE_OPTIONS} = defineEnv({
     ts: true,
+    jsx: true,
 });
 
 console.log(testEnv, NODE_OPTIONS);

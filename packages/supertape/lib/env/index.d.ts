@@ -3,6 +3,7 @@ type Env = {
 };
 type Config = {
     ts?: boolean;
+    jsx?: boolean,
     css?: boolean;
     dom?: boolean;
     nestjs?: boolean;
