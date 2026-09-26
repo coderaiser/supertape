@@ -1,3 +1,13 @@
+2026.09.26, v13.6.1
+
+fix:
+- b70eb4d supertape: a pattern that matched nothing is not a green run
+
+feature:
+- eca459b @supertape/formatter-time: chalk v6.0.0
+- 143d101 @supertape/loader-jsx: oxc-transform v0.151.0
+- 84bae3b @supertape/formatter-progress-bar: chalk v6.0.0
+
 2026.09.02, v13.6.0
 
 feature:
