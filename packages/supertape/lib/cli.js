@@ -52,6 +52,7 @@ export default async (overrides = {}) => {
         argv,
         cwd,
         stdout,
+        stderr,
         exit,
         isStop,
         workerFormatter,
@@ -79,6 +80,9 @@ export default async (overrides = {}) => {
     if (Number(SUPERTAPE_CHECK_SKIPPED) && skipped)
         return exit(SKIPPED);
     
+    if (code === FAIL)
+        return exit(FAIL);
+    
     if (code === INVALID_OPTION) {
         stderr.write(`${message}\n`);
         return exit(code);
@@ -92,6 +96,7 @@ async function _cli(overrides) {
         argv,
         cwd,
         stdout,
+        stderr,
         isStop,
         workerFormatter,
         supertape,
@@ -131,12 +136,22 @@ async function _cli(overrides) {
         await import(module);
     
     const allFiles = [];
+    const notFound = [];
     
     for (const arg of args._) {
-        const files = globSync(arg).filter(isExclude);
+        const found = globSync(arg);
         
-        allFiles.push(...files);
+        // A pattern that matched nothing at all, as opposed to one whose matches
+        // were all filtered out - excluding node_modules is the second, and that
+        // is the exclusion working, not a miss.
+        if (!found.length)
+            notFound.push(arg);
+        
+        allFiles.push(...found.filter(isExclude));
     }
+    
+    if (notFound.length)
+        stderr.write(`No files matched: ${notFound.join(', ')}\n`);
     
     const {
         format,
@@ -160,8 +175,17 @@ async function _cli(overrides) {
     
     filesCount(files.length);
     
-    if (!files.length)
+    if (!files.length) {
+        // every pattern matched nothing, so there is no test run to report on and
+        // exiting 0 would pass a gate that checked nothing. No pattern at all is a
+        // different thing: nothing was asked for, so there is nothing to fail.
+        if (args._.length && notFound.length === args._.length)
+            return {
+                code: FAIL,
+            };
+        
         return OK;
+    }
     
     const stream = await supertape.createStream();
     stream.pipe(stdout);
