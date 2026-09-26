@@ -864,9 +864,11 @@ test('supertape: bin: cli: glob: nothing matched', async (t) => {
     const argv = ['nothing-*.spec.js'];
     const exit = stub();
     const write = stub();
+    
     const stderr = {
         write,
     };
+    
     const globSync = stub().returns([]);
     
     await runCli({
@@ -883,9 +885,11 @@ test('supertape: bin: cli: glob: nothing matched', async (t) => {
 test('supertape: bin: cli: glob: nothing matched: says which', async (t) => {
     const argv = ['nothing-*.spec.js'];
     const write = stub();
+    
     const stderr = {
         write,
     };
+    
     const globSync = stub().returns([]);
     
     await runCli({
@@ -907,13 +911,16 @@ test('supertape: bin: cli: glob: some matched, some did not', async (t) => {
         'missing-*.spec.js',
         '--dry-run',
     ];
+    
     const supertape = stub();
     const init = stub();
     const run = stub();
     const write = stub();
+    
     const stderr = {
         write,
     };
+    
     const globSync = (arg) => arg === 'found-*.spec.js' ? ['found.js'] : [];
     
     assign(supertape, {
@@ -939,6 +946,7 @@ test('supertape: bin: cli: glob: some matched, some did not', async (t) => {
 test('supertape: bin: cli: no arguments is not an error', async (t) => {
     const exit = stub();
     const write = stub();
+    
     const stderr = {
         write,
     };
