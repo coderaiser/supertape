@@ -1,3 +1,8 @@
+2026.09.27, v13.6.2
+
+fix:
+- 0fcc84e supertape: revert: a pattern that matched nothing is not a green run
+
 2026.09.26, v13.6.1
 
 fix:
