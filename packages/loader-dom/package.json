@@ -23,7 +23,7 @@
     "wisdom": "madrun wisdom"
   },
   "dependencies": {
-    "@happy-dom/global-registrator": "^20.9.0"
+    "@happy-dom/global-registrator": "^21.0.4"
   },
   "keywords": [
     "formatter",
